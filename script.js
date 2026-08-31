@@ -77,13 +77,6 @@ projectDialogs.forEach((dialog) => {
   });
 });
 
-const projectCarouselTrack = document.querySelector('.project-carousel-track');
-const archiveProjectCards = projectCarouselTrack ? [...projectCarouselTrack.children] : [];
-
-if (archiveProjectCards.length > 1) {
-  projectCarouselTrack.replaceChildren(...archiveProjectCards.reverse());
-}
-
 const projectCarousel = document.querySelector('[data-project-carousel]');
 const projectScrollControls = [...document.querySelectorAll('[data-project-scroll]')];
 
