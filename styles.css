@@ -99,8 +99,8 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .carousel-control { display: grid; width: 34px; height: 34px; place-items: center; padding: 0; border: 1px solid var(--line-strong); border-radius: 50%; background: transparent; color: var(--green-dark); cursor: pointer; font: 400 17px/1 var(--sans); transition: color .18s, background .18s, border-color .18s; }
 .carousel-control:hover:not(:disabled) { border-color: var(--green-dark); background: var(--green-dark); color: white; }
 .carousel-control:disabled { border-color: var(--line); color: #9aaa9d; cursor: default; }
-.project-carousel { overflow-x: auto; overscroll-behavior-inline: contain; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-color: var(--line-strong) transparent; scrollbar-width: thin; }
-.project-carousel-track { display: flex; gap: 20px; width: max-content; min-width: 100%; }
+.project-carousel { overflow-x: auto; overscroll-behavior-inline: contain; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-color: var(--line-strong) transparent; scrollbar-width: thin; direction: ltr; }
+.project-carousel-track { display: flex; justify-content: flex-start; gap: 20px; width: max-content; min-width: 100%; direction: ltr; }
 .project-carousel-card { flex: 0 0 min(360px, calc((1120px - 40px) / 3)); min-width: 0; scroll-snap-align: start; }
 .visual-label { position: absolute; z-index: 3; top: 17px; left: 18px; padding: 5px 7px; border: 1px solid #8aab98; color: var(--green-dark); background: rgb(255 255 255 / 68%); font: 500 9px/1 var(--mono); letter-spacing: .07em; }
 .visual-scarlet { display: grid; place-items: center; min-height: 406px; color: var(--green-dark); background: #e7f0e8; }
