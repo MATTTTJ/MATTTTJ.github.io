@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" role="img" aria-labelledby="title desc">
+  <title id="title">프로필 이미지 교체 영역</title>
+  <desc id="desc">밝은 연두색 배경의 추상 프로필 실루엣</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b9e9d2"/><stop offset="1" stop-color="#e9f8e8"/></linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2f765d"/><stop offset="1" stop-color="#48d1cc"/></linearGradient>
+  </defs>
+  <rect width="800" height="960" fill="url(#bg)"/>
+  <circle cx="640" cy="160" r="220" fill="#48d1cc" opacity=".22"/>
+  <circle cx="150" cy="780" r="250" fill="#a0d6b4" opacity=".65"/>
+  <path d="M0 750 C170 660 280 740 400 700 C540 653 690 675 800 600 V960 H0Z" fill="#fffef8" opacity=".76"/>
+  <circle cx="398" cy="347" r="152" fill="#f8d4b7"/>
+  <path d="M236 350 C230 174 335 122 457 169 C550 205 574 297 548 387 C508 329 464 274 380 266 C333 262 280 293 236 350Z" fill="#20382d"/>
+  <path d="M157 877 C178 637 284 560 399 560 C519 560 635 643 663 877Z" fill="url(#shirt)"/>
+  <path d="M276 594 C310 653 357 679 401 679 C447 679 493 652 528 594 L551 628 C512 718 462 760 401 760 C339 760 290 718 252 627Z" fill="#eff9f6"/>
+  <circle cx="346" cy="349" r="9" fill="#20382d"/><circle cx="454" cy="349" r="9" fill="#20382d"/>
+  <path d="M364 423 Q400 448 438 423" fill="none" stroke="#ba765d" stroke-width="8" stroke-linecap="round"/>
+  <text x="48" y="70" fill="#2f765d" font-family="monospace" font-size="20" letter-spacing="3">PROFILE IMAGE</text>
+  <text x="48" y="102" fill="#2f765d" font-family="monospace" font-size="12" letter-spacing="1">REPLACE WITH SELECTED PHOTO</text>
+</svg>
+
