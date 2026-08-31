@@ -90,7 +90,7 @@ const projectScrollControls = [...document.querySelectorAll('[data-project-scrol
 // 최신순 카드도 항상 왼쪽 첫 카드부터 시작합니다.
 // 브라우저의 스크롤 복원이 실행된 뒤에도 다시 초기화합니다.
 function resetProjectCarouselStart() {
-  projectCarousel?.scrollTo({ left: 0, behavior: 'instant' });
+  projectCarousel?.scrollTo({ left: 0, behavior: 'auto' });
 }
 
 resetProjectCarouselStart();
