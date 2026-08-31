@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="게임의 좋은 경험을 전투와 상호작용의 규칙으로 구현하는 게임 클라이언트 프로그래머 정지훈의 포트폴리오입니다."
+    />
+    <title>정지훈 | Game Client Programmer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="wordmark" href="#top" aria-label="정지훈 포트폴리오 처음으로">
+          <span class="wordmark-dot" aria-hidden="true"></span>
+          JIHOON JEONG
+        </a>
+        <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
+          <span class="sr-only">메뉴 열기</span>
+          <span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a class="nav-cta" href="https://github.com/MATTTTJ" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero section" id="top" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span aria-hidden="true">✦</span> GAME CLIENT PROGRAMMER</p>
+            <h1 id="hero-title">정지훈<span class="title-divider">|</span><br /><span class="role-line">Game Client</span><br />Programmer</h1>
+            <p class="hero-lead">
+              규칙과 시스템을 구현해, 플레이어가 오래 기억할 경험을 만드는 게임 프로그래머입니다.
+            </p>
+            <p class="hero-description">
+              C++와 Unreal Engine을 중심으로 전투·VFX·상호작용을 구현해 왔습니다. Direct3D 11로 렌더링과 이펙트 시스템의 구조를 이해했고,
+              Unreal Engine에서는 플레이어 액션과 전투 흐름을 설계·구현하며 이를 확장하고 있습니다.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#projects">프로젝트 보기 <span aria-hidden="true">↓</span></a>
+              <a class="button button-quiet" href="https://github.com/MATTTTJ" target="_blank" rel="noreferrer">GitHub 방문 <span aria-hidden="true">↗</span></a>
+            </div>
+            <dl class="hero-facts">
+              <div><dt>FOCUS</dt><dd>Gameplay · Combat · VFX</dd></div>
+              <div><dt>BASED IN</dt><dd>Seoul, KR</dd></div>
+            </dl>
+          </div>
+          <div class="hero-art" aria-label="정지훈 프로필 이미지 영역">
+            <div class="profile-frame">
+              <img src="assets/profile-photo.png" alt="야간 관람차 앞에 선 정지훈의 프로필 사진" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tint" id="about" aria-labelledby="about-title">
+        <div class="container split-heading">
+          <div>
+            <p class="eyebrow">01 / ABOUT</p>
+            <h2 id="about-title">좋은 플레이 경험을<br />시스템으로 완성합니다.</h2>
+          </div>
+          <div class="about-copy prose">
+            <p class="statement">게임의 좋은 경험은 탄탄한 규칙과 자연스러운 상호작용에서 출발한다고 믿습니다.</p>
+            <p>
+              무대 연출과 3D 기구 설계를 경험하며, 작은 요소도 전체 경험의 흐름 안에서 작동해야 한다는 감각을 익혔습니다. 이후 C++와 DirectX로
+              렌더링·이펙트 시스템의 기반을 만들고, Unreal Engine에서 플레이어 액션과 전투 흐름을 설계·구현하며 게임 클라이언트 프로그래머로
+              성장하고 있습니다.
+            </p>
+            <p>
+              저는 결과만 구현하는 데 그치지 않고, 팀이 이해하고 확장할 수 있는 구조를 남기는 것을 목표로 합니다.
+            </p>
+            <button class="about-more-button" type="button" data-dialog-open="about-dialog" aria-haspopup="dialog" aria-controls="about-dialog" aria-expanded="false">
+              More About Me <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="container">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">02 / SELECTED WORK</p>
+              <h2 id="projects-title">구현한 시스템이<br />플레이의 흐름이 되도록.</h2>
+            </div>
+            <p>역할과 문제, 구현 결과를 중심으로 정리한 프로젝트입니다.</p>
+          </div>
+
+          <div class="featured-project">
+            <article class="project-card project-featured">
+              <div class="project-visual visual-scarlet" aria-label="VFX 시스템과 보스 전투를 표현한 그래픽">
+                <div class="visual-label">DIRECT3D 11 / 2023</div>
+                <div class="visual-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+                <div class="visual-code" aria-hidden="true">VFX<br />SYSTEM<br /><strong>01</strong></div>
+                <div class="visual-caption" aria-hidden="true">KAREN BOSS / PHASE 01—02</div>
+              </div>
+              <div class="project-body">
+                <div class="project-topline"><span>01</span><span>TEAM / 6 PEOPLE</span></div>
+                <h3>Scarlet Strings <span>(copy)</span></h3>
+                <p class="project-role">VFX System &amp; Tool · Final Boss</p>
+                <p>
+                  Direct3D 11 기반 3D 팀 프로젝트에서 전투의 시각적 흐름을 만드는 VFX 시스템과 도구를 구현하고, 최종 보스 카렌의 1·2페이즈와 8개 패턴을 연결했습니다.
+                </p>
+                <ul class="tag-list" aria-label="사용 기술"><li>C++</li><li>Direct3D 11</li><li>HLSL</li><li>ImGui</li><li>VFX</li></ul>
+                <div class="project-card-actions">
+                  <button class="project-detail-button" type="button" data-project-dialog-open="scarlet-dialog" aria-haspopup="dialog" aria-controls="scarlet-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                  <a class="text-link" href="https://github.com/an004005/D3D11_TeamPortfolio" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="project-carousel-shell">
+            <div class="project-carousel-header">
+              <p class="carousel-label">PROJECT ARCHIVE / 08</p>
+              <div class="carousel-controls" aria-label="추가 프로젝트 이동">
+                <button class="carousel-control" type="button" data-project-scroll="previous" aria-label="이전 프로젝트"><span aria-hidden="true">←</span></button>
+                <button class="carousel-control" type="button" data-project-scroll="next" aria-label="다음 프로젝트"><span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+            <div class="project-carousel" data-project-carousel tabindex="0" aria-label="추가 프로젝트 목록">
+              <div class="project-carousel-track">
+                <article class="project-card project-carousel-card">
+                  <div class="project-visual visual-archive visual-cuphead" aria-label="CupHead 모작을 표현한 그래픽">
+                    <span class="visual-label">WINAPI / 2022.06 — 07</span>
+                    <span class="archive-visual-index" aria-hidden="true">02</span>
+                    <span class="archive-visual-title" aria-hidden="true">GAME<br />LOOP</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>02</span><span>PERSONAL</span></div>
+                    <h3>CupHead <span>(copy)</span></h3>
+                    <p class="project-role">2D Game Programming</p>
+                    <p>첫 게임 프로젝트로 입력·상태·렌더링을 연결해 하나의 플레이 사이클을 완성했습니다.</p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>C++11</li><li>Win32 API</li><li>GDI+</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="cuphead-dialog" aria-haspopup="dialog" aria-controls="cuphead-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <a class="text-link" href="https://youtu.be/Pyhla3B8orE?t=220" target="_blank" rel="noreferrer">영상 보기 <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card">
+                  <div class="project-visual visual-archive visual-minecraft" aria-label="Minecraft Dungeon 모작을 표현한 그래픽">
+                    <span class="visual-label">DIRECTX 9 / 2022.09 — 10</span>
+                    <span class="archive-visual-index" aria-hidden="true">03</span>
+                    <span class="archive-visual-title" aria-hidden="true">VFX<br />BOSS</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>03</span><span>COLLABORATIVE</span></div>
+                    <h3>Minecraft Dungeon <span>(copy)</span></h3>
+                    <p class="project-role">VFX · Multiplayer Boss</p>
+                    <p>이펙트와 파티클, 멀티플레이 보스 몬스터를 구현하며 협업 코드 흐름을 익혔습니다.</p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>C++11</li><li>DirectX 9</li><li>HLSL</li><li>ImGui</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="minecraft-dialog" aria-haspopup="dialog" aria-controls="minecraft-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <a class="text-link" href="https://github.com/an004005/SR_Minecraft_Dungeon" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card">
+                  <div class="project-visual visual-archive visual-gunfire" aria-label="Gunfire Reborn 모작을 표현한 그래픽">
+                    <span class="visual-label">DIRECTX 11 / 2022.12 — 2023.02</span>
+                    <span class="archive-visual-index" aria-hidden="true">04</span>
+                    <span class="archive-visual-title" aria-hidden="true">RENDER<br />FLOW</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>04</span><span>PERSONAL</span></div>
+                    <h3>Gunfire Reborn <span>(copy)</span></h3>
+                    <p class="project-role">Rendering Framework &amp; Tool</p>
+                    <p>렌더링 파이프라인을 바탕으로 맵·카메라·내비게이션 도구와 셰이더 기반 표현을 구성했습니다.</p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>C++</li><li>DirectX 11</li><li>HLSL</li><li>Assimp</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="gunfire-dialog" aria-haspopup="dialog" aria-controls="gunfire-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <a class="text-link" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card">
+                  <div class="project-visual visual-archive visual-fps" aria-label="FPSProject를 표현한 그래픽">
+                    <span class="visual-label">UNREAL ENGINE 5 / 2024.09 — 10</span>
+                    <span class="archive-visual-index" aria-hidden="true">05</span>
+                    <span class="archive-visual-title" aria-hidden="true">BP →<br />C++</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>05</span><span>PERSONAL</span></div>
+                    <h3>FPSProject</h3>
+                    <p class="project-role">Unreal Engine Learning Project</p>
+                    <p>Blueprint로 완성한 FPS 프로젝트를 C++로 전환하며 두 구현 방식의 연결을 검증했습니다.</p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>Unreal Engine 5</li><li>Blueprint</li><li>C++</li><li>FPS</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="fps-dialog" aria-haspopup="dialog" aria-controls="fps-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <a class="text-link" href="https://youtu.be/bZbnOSmpEqI" target="_blank" rel="noreferrer">영상 보기 <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card">
+                  <div class="project-visual visual-action" aria-label="플레이어 액션을 표현한 그래픽">
+                    <span class="visual-label">UNREAL ENGINE / 2024.11 — 2025.01</span>
+                    <div class="action-path" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                    <span class="action-title" aria-hidden="true">PLAYER<br /><em>ACTION</em></span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>06</span><span>PERSONAL</span></div>
+                    <h3>ProjectAction</h3>
+                    <p class="project-role">Gameplay Programmer</p>
+                    <p>
+                      블루프린트 프로토타입을 C++과 GAS로 확장해 플레이어 액션·애니메이션·인벤토리 UI를 구현한 개인 프로젝트입니다.
+                    </p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>Unreal Engine</li><li>C++</li><li>Blueprint</li><li>GAS</li><li>Animation</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="action-dialog" aria-haspopup="dialog" aria-controls="action-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <span class="text-link disabled" aria-label="기술 노트 공개 준비 중">기술 노트 공개 준비 중 <span aria-hidden="true">·</span></span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card project-card--collaboration">
+                  <div class="project-visual visual-archive visual-projecta" aria-label="ProjectA를 표현한 그래픽">
+                    <span class="visual-label">UNREAL ENGINE 5 / 2024.12 — 2025.03</span>
+                    <span class="archive-visual-index" aria-hidden="true">07</span>
+                    <span class="archive-visual-title" aria-hidden="true">COMBAT<br />STATE</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>07</span><span>COLLABORATIVE</span></div>
+                    <h3>ProjectA</h3>
+                    <p class="project-role">Combat Follow-up</p>
+                    <p>현업자와 함께한 사이드 프로젝트에서 전투 기획의 후속 구현과 트러블슈팅을 맡았습니다.</p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>Unreal Engine 5</li><li>Blueprint</li><li>Physics Animation</li><li>Combat</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="projecta-dialog" aria-haspopup="dialog" aria-controls="projecta-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <a class="text-link" href="https://youtu.be/qOcZ_jURWLo" target="_blank" rel="noreferrer">영상 보기 <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card">
+                  <div class="project-visual visual-archive visual-insurance" aria-label="우주보험 손해사정사를 표현한 그래픽">
+                    <span class="visual-label">UNREAL ENGINE 5 / 2025.04 — 05</span>
+                    <span class="archive-visual-index" aria-hidden="true">08</span>
+                    <span class="archive-visual-title" aria-hidden="true">CLIENT<br />BUILD</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>08</span><span>PROJECT</span></div>
+                    <h3>우주보험 손해사정사</h3>
+                    <p class="project-role">Client Implementation</p>
+                    <p>기획과 아트를 제외한 클라이언트 구현 전반을 맡아 게임 흐름을 구성한 프로젝트입니다.</p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>Unreal Engine 5</li><li>Blueprint</li><li>Client</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="insurance-dialog" aria-haspopup="dialog" aria-controls="insurance-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <a class="text-link" href="https://youtu.be/4GFmcsbyjHg" target="_blank" rel="noreferrer">영상 보기 <span aria-hidden="true">↗</span></a>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card project-carousel-card project-card--collaboration">
+                  <div class="project-visual visual-arpg" aria-label="Project_EL의 액션 RPG 전투를 표현한 그래픽">
+                    <span class="visual-label">UNREAL ENGINE / 2026.04 —</span>
+                    <div class="arpg-blade" aria-hidden="true"></div>
+                    <span class="arpg-title" aria-hidden="true">COMBAT<br />FLOW</span>
+                    <span class="wip-label">IN PROGRESS</span>
+                  </div>
+                  <div class="project-body">
+                    <div class="project-topline"><span>09</span><span>COLLABORATIVE / IN PROGRESS</span></div>
+                    <h3>Project_EL</h3>
+                    <p class="project-role">Combat System</p>
+                    <p class="project-trust-note">S사 · K사와 NDA 체결 협업 프로젝트</p>
+                    <p>
+                      출시를 준비 중인 팀 프로젝트에서 전투 시스템 구현을 맡고 있습니다. 현재 개발 중인 프로젝트이므로 공개 가능한 범위의 정보만 정리했습니다.
+                    </p>
+                    <ul class="tag-list" aria-label="사용 기술"><li>Unreal Engine</li><li>Blueprint</li><li>Combat System</li><li>SVN</li></ul>
+                    <div class="project-card-actions">
+                      <button class="project-detail-button" type="button" data-project-dialog-open="projectel-dialog" aria-haspopup="dialog" aria-controls="projectel-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
+                      <span class="text-link disabled" aria-label="프로젝트 공개 준비 중">프로젝트 공개 준비 중 <span aria-hidden="true">·</span></span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tint" id="skills" aria-labelledby="skills-title">
+        <div class="container skills-layout">
+          <div class="skills-heading">
+            <p class="eyebrow">03 / SKILLS</p>
+            <h2 id="skills-title">기반을 이해하고,<br />필요한 기술을 쌓습니다.</h2>
+          </div>
+          <div class="skill-list">
+            <article class="skill-row skill-core">
+              <div><p class="skill-index">01</p><h3>C++</h3></div>
+              <p>중</p>
+              <span class="meter" aria-label="C++ 숙련도 중"><i style="--fill: 68%"></i></span>
+            </article>
+            <article class="skill-row skill-core">
+              <div><p class="skill-index">02</p><h3>Unreal Engine</h3></div>
+              <p>중하</p>
+              <span class="meter" aria-label="Unreal Engine 숙련도 중하"><i style="--fill: 52%"></i></span>
+            </article>
+            <article class="skill-row">
+              <div><p class="skill-index">03</p><h3>Direct3D 11 · HLSL</h3></div>
+              <p class="skill-description">렌더링 구조와 셰이더 기반의 VFX 구현 경험</p>
+            </article>
+          </div>
+          <section class="skills-foundations" aria-labelledby="foundations-title">
+            <div>
+              <p class="eyebrow">FOUNDATIONS</p>
+              <h3 id="foundations-title">기본기는 별도 항목으로<br />계속 검증하고 있습니다.</h3>
+            </div>
+            <div class="foundation-content">
+              <ul class="foundation-list">
+                <li><strong>C++ Core</strong><span>포인터 · 객체지향 · 템플릿 · STL</span></li>
+                <li><strong>Data Structure</strong><span>스택 · 큐 · 그래프 · 트리 · 해시</span></li>
+                <li><strong>System &amp; Rendering</strong><span>WinAPI · 메모리 · DirectX 렌더링 흐름</span></li>
+              </ul>
+              <a class="skill-record-link" href="https://app.notion.com/p/364834e5c09e807db011c4796274a00b" target="_blank" rel="noreferrer"><span>STUDY RECORD</span> C++ 학습 기록 보기 <b aria-hidden="true">↗</b></a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="section timeline-section" aria-labelledby="timeline-title">
+        <div class="container">
+          <div class="timeline-intro">
+            <div>
+              <p class="eyebrow">04 / TIMELINE</p>
+              <h2 id="timeline-title">경험을 거쳐,<br />게임 개발을 이어 왔습니다.</h2>
+            </div>
+            <p>경력의 흐름은 간결하게, 게임 개발 과정은 월 단위로 자세히 정리했습니다.</p>
+          </div>
+
+          <section class="journey-summary" aria-labelledby="journey-summary-title">
+            <div class="journey-summary-heading">
+              <p class="eyebrow">01 / JOURNEY SUMMARY</p>
+              <h3 id="journey-summary-title">기존 경험을 기반으로<br />게임 개발의 방향을 만들었습니다.</h3>
+            </div>
+            <div class="journey-rails">
+              <section class="journey-rail" aria-labelledby="education-title">
+                <h4 id="education-title">EDUCATION</h4>
+                <ol>
+                  <li><time>2014.01 — 2018.04</time><p><strong>수원과학대학교</strong><span>건축과 입학 · 중퇴</span></p></li>
+                  <li><time>2018.06 — 2019.02</time><p><strong>학점은행제</strong><span>건축공학 학사</span></p></li>
+                  <li><time>2022.04 — 2023.09</time><p><strong>쥬신게임아카데미</strong><span>게임 클라이언트 과정</span></p></li>
+                  <li><time>2026.06 — 2027.02</time><p><strong>어소트락 게임 아카데미</strong><span>게임 개발 교육 과정</span></p></li>
+                </ol>
+              </section>
+              <section class="journey-rail" aria-labelledby="career-title">
+                <h4 id="career-title">CAREER</h4>
+                <ol>
+                  <li><time>2018.06 — 2019.08</time><p><strong>탑스테이지</strong><span>현장관리팀</span></p></li>
+                  <li><time>2020.11 — 2021.11</time><p><strong>월딘</strong><span>3D 기구 설계</span></p></li>
+                  <li><time>2021.11 — 2022.04</time><p><strong>LS엠트론</strong><span>하이테크센터 · 3D 기구 설계</span></p></li>
+                  <li><time>2025.11 — 2026.03</time><p><strong>브레드랩</strong><span>제과·제빵 생산</span></p></li>
+                </ol>
+              </section>
+            </div>
+          </section>
+
+          <section class="game-development-timeline" aria-labelledby="game-timeline-title">
+            <header class="game-timeline-heading">
+              <div>
+                <p class="eyebrow">02 / GAME DEVELOPMENT</p>
+                <h3 id="game-timeline-title">프로젝트를 이어가며<br />게임 개발의 흐름을 만들고 있습니다.</h3>
+              </div>
+              <p>프로젝트 사이의 시간도 개인 학습과 구현을 이어 온 게임 개발 과정으로 표시했습니다.</p>
+            </header>
+
+            <div class="game-timeline-scroll" tabindex="0" aria-label="2022년부터 2027년까지의 게임 개발 타임라인">
+              <div class="game-timeline-calendar">
+                <div class="game-ruler-header" aria-hidden="true">
+                  <span>YEAR</span>
+                  <div><p><b>&gt;&gt;</b> MONTH</p><ol><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li></ol></div>
+                </div>
+                <ol class="game-year-list">
+                  <li class="game-year-row"><time datetime="2022">2022</time><div class="game-year-tracks"><div class="game-year-track"><span class="game-period game-period--project game-period--short" style="--start: 7; --span: 1;" aria-label="CupHead 모작, 2022년 7월 1일부터 7월 25일, WinAPI"><strong>CupHead</strong><em>WinAPI</em></span><span class="game-period game-period--project" style="--start: 9; --span: 2;" aria-label="Minecraft Dungeon 모작, 2022년 9월 13일부터 10월 25일, DirectX9"><strong>Minecraft Dungeon</strong><em>DX9</em></span><span class="game-period game-period--project game-period--short" style="--start: 12; --span: 1;" aria-label="GunFire Reborn 모작, 2022년 12월 27일부터 2023년 2월 14일, DirectX11"><strong>Gunfire</strong><em>DX11</em></span></div><div class="game-year-track"><span class="game-period game-period--learning" style="--start: 4; --span: 9;"><strong>쥬신게임아카데미</strong><em>게임 클라이언트 과정</em></span></div></div></li>
+                  <li class="game-year-row"><time datetime="2023">2023</time><div class="game-year-tracks"><div class="game-year-track"><span class="game-period game-period--project" style="--start: 1; --span: 2;" aria-label="GunFire Reborn 모작, 2022년 12월 27일부터 2023년 2월 14일, DirectX11"><strong>Gunfire</strong><em>DX11</em></span></div><div class="game-year-track"><span class="game-period game-period--project" style="--start: 2; --span: 3;" aria-label="Scarlet Strings 모작, 2023년 2월 16일부터 4월 17일, DirectX11"><strong>Scarlet Strings</strong><em>DX11</em></span></div><div class="game-year-track"><span class="game-period game-period--learning" style="--start: 1; --span: 9;"><strong>쥬신게임아카데미</strong><em>게임 클라이언트 과정</em></span><span class="game-period game-period--continuity" style="--start: 10; --span: 3;"><strong>개인 학습 · 구현</strong></span></div></div></li>
+                  <li class="game-year-row"><time datetime="2024">2024</time><div class="game-year-tracks"><div class="game-year-track"><span class="game-period game-period--project game-period--short" style="--start: 9; --span: 1;" aria-label="FPSProject, 2024년 9월 1일부터 10월 1일, UE5 Blueprint에서 C++로 전환"><strong>FPSProject</strong><em>UE5 - BP → C++</em></span><span class="game-period game-period--project game-period--short" style="--start: 10; --span: 1;" aria-label="ProjectAction, 2024년 10월 2일부터 10월 21일, UE5 Blueprint"><strong>ProjectAction</strong><em>UE5 - BP</em></span><span class="game-period game-period--project" style="--start: 11; --span: 2;" aria-label="ProjectAction, 2024년 11월부터 2025년 1월까지, UE5 C++"><strong>ProjectAction</strong><em>UE5 - C++</em></span></div><div class="game-year-track"><span class="game-period game-period--project game-period--collaboration game-period--short" style="--start: 12; --span: 1;" aria-label="ProjectA, 현업 협업 프로젝트, 2024년 12월부터 2025년 3월까지, UE5 Blueprint"><strong>ProjectA</strong><em>UE5 - BP</em></span></div><div class="game-year-track"><span class="game-period game-period--continuity" style="--start: 1; --span: 12;"><strong>개인 학습 · 구현</strong><em>Unreal Engine 기반 개인 개발</em></span></div></div></li>
+                  <li class="game-year-row"><time datetime="2025">2025</time><div class="game-year-tracks"><div class="game-year-track"><span class="game-period game-period--project game-period--short" style="--start: 1; --span: 1;" aria-label="ProjectAction, 2024년 11월부터 2025년 1월까지, UE5 C++"><strong>ProjectAction</strong><em>UE5 - C++</em></span></div><div class="game-year-track"><span class="game-period game-period--project game-period--collaboration" style="--start: 1; --span: 3;" aria-label="ProjectA, 현업 협업 프로젝트, 2024년 12월부터 2025년 3월까지, UE5 Blueprint"><strong>ProjectA</strong><em>UE5 - BP</em></span><span class="game-period game-period--project" style="--start: 4; --span: 2;" aria-label="우주보험 손해사정사, 2025년 4월부터 5월까지, UE5 Blueprint"><strong>우주보험 손해사정사</strong><em>UE5 - BP</em></span></div><div class="game-year-track"><span class="game-period game-period--continuity" style="--start: 1; --span: 5;"><strong>개인 학습 · 구현</strong><em>게임 개발 흐름 유지</em></span></div></div></li>
+                  <li class="game-year-row"><time datetime="2026">2026</time><div class="game-year-tracks"><div class="game-year-track"><span class="game-period game-period--ongoing game-period--collaboration" style="--start: 4; --span: 5;" aria-label="Project_EL, 현업 협업 프로젝트, 2026년 4월부터 진행 중, UE5 Blueprint"><strong>Project_EL</strong><em>UE5 - BP</em></span></div><div class="game-year-track"><span class="game-period game-period--continuity" style="--start: 4; --span: 2;"><strong>개인 학습 · 구현</strong></span><span class="game-period game-period--learning" style="--start: 6; --span: 7;" aria-label="어소트락 게임 아카데미, 2026년 6월 8일부터 2027년 2월 16일"><strong>어소트락 게임 아카데미</strong><em>게임 개발 교육 과정</em></span></div></div></li>
+                  <li class="game-year-row"><time datetime="2027">2027</time><div class="game-year-tracks"><div class="game-year-track"><span class="game-period game-period--learning" style="--start: 1; --span: 2;" aria-label="어소트락 게임 아카데미, 2026년 6월 8일부터 2027년 2월 16일"><strong>어소트락</strong><em>게임 개발 교육</em></span></div></div></li>
+                </ol>
+              </div>
+            </div>
+            <p class="game-timeline-note">진한 초록 블록은 프로젝트를, 오프화이트 블록은 교육을, 민트 블록은 개인 학습·구현을 뜻합니다. 점선은 진행 중인 작업을, 노란 외곽선은 현업 협업 프로젝트를 의미합니다.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div>
+            <p class="eyebrow">MORE ABOUT ME</p>
+            <h2 id="about-dialog-title">More About Me</h2>
+          </div>
+          <button class="dialog-close" type="button" data-dialog-close aria-label="More About Me 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+
+        <div class="dialog-content">
+          <section class="about-story" aria-labelledby="about-me-title">
+            <div class="about-story-copy dialog-prose">
+              <p class="eyebrow">01 / ABOUT ME</p>
+              <h3 id="about-me-title">좋은 플레이 경험을<br />시스템으로 만듭니다.</h3>
+              <p>저는 게임의 좋은 경험을 전투와 상호작용의 규칙으로 구현하는 게임 클라이언트 프로그래머입니다. 무대 연출과 3D 기구 설계를 거치며 전체 흐름 안에서 요소를 설계하는 감각을 익혔고, 현재는 C++와 Unreal Engine으로 이를 플레이 가능한 시스템으로 구체화하고 있습니다.</p>
+              <p>저는 결과만 구현하는 데 그치지 않고, 팀이 이해하고 확장할 수 있는 구조를 남기는 것을 목표로 합니다.</p>
+            </div>
+            <figure class="about-media about-media-featured">
+              <span>IMAGE 01</span>
+              <figcaption>대표 사진 또는 작업 장면</figcaption>
+            </figure>
+          </section>
+
+          <section class="about-section" aria-labelledby="communication-title">
+            <div class="about-section-heading">
+              <p class="eyebrow">02 / COMMUNICATION</p>
+              <h3 id="communication-title">구현 순서와 책임을 맞춰<br />팀의 작업을 앞으로 움직입니다.</h3>
+            </div>
+            <div class="about-split">
+              <div class="dialog-prose">
+                <p>저는 팀원이 같은 목표와 구현 순서를 이해하도록 만들며 협업합니다. 프로젝트의 일정과 작업 순서를 공유하고, 필요한 질문과 회의로 합의점을 빠르게 찾습니다.</p>
+              </div>
+              <figure class="about-media">
+                <span>IMAGE 02</span>
+                <figcaption>프로젝트·협업 기록</figcaption>
+              </figure>
+            </div>
+            <div class="about-split about-split-reverse">
+              <figure class="about-media">
+                <span>IMAGE 03</span>
+                <figcaption>작업 과정 또는 회의 기록</figcaption>
+              </figure>
+              <div class="dialog-prose">
+                <p>팀 프로젝트에서는 FSM Controller와 ASM의 사용 흐름을 함께 정리해 작업 간 연결이 흔들리지 않도록 했습니다. 저는 역할과 기준을 미리 맞추는 일이 결과물의 완성도를 높인다고 믿습니다.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="about-section about-section-text" aria-labelledby="problem-title">
+            <p class="eyebrow">03 / PROBLEM-SOLVING</p>
+            <h3 id="problem-title">문제를 작은 조건으로 나누고,<br />동작으로 검증합니다.</h3>
+            <div class="dialog-prose">
+              <p>저는 복잡한 문제를 목표·제약·가설·확인할 동작으로 나눠 해결합니다. VFX 구현에서는 관리 계층과 ImGui 도구로 반복 조정의 문제를 줄였고, Unreal Engine에서는 블루프린트로 먼저 동작을 검증한 뒤 C++과 GAS 구조로 확장했습니다.</p>
+            </div>
+          </section>
+
+          <section class="about-section about-section-text" aria-labelledby="resource-title">
+            <p class="eyebrow">04 / RESOURCE MANAGEMENT</p>
+            <h3 id="resource-title">작업 시간과 시스템 비용을 함께 고려해<br />구현 범위를 정리합니다.</h3>
+            <div class="dialog-prose">
+              <p>저는 제한된 시간 안에서 반복 작업과 런타임 부담을 함께 줄일 수 있는 구조를 우선합니다. 파티클의 생명 주기와 그룹을 분리하고 데이터 중심 렌더링을 고민했으며, 일정이 촉박할 때는 블루프린트로 우선 검증한 후 안정적인 부분을 C++로 옮기는 방식으로 구현 범위를 관리했습니다.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="scarlet-dialog" aria-labelledby="scarlet-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div>
+            <p class="eyebrow">01 / PROJECT DETAIL</p>
+            <h2 id="scarlet-dialog-title">Scarlet Strings <span>(copy)</span></h2>
+          </div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="Scarlet Strings 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">VFX SYSTEM &amp; FINAL BOSS</p>
+              <h3>전투의 시각적 흐름을<br />시스템으로 연결했습니다.</h3>
+              <p>Direct3D 11 기반 3D 팀 프로젝트에서 VFX 시스템과 도구를 구현하고, 최종 보스 카렌의 1·2페이즈와 8개 패턴을 연결했습니다. 반복 조정이 필요한 이펙트 작업을 구조와 도구로 정리해 전투 연출의 일관성을 높이는 데 집중했습니다.</p>
+              <dl class="project-facts">
+                <div><dt>TYPE</dt><dd>3D Team Project</dd></div>
+                <div><dt>TEAM</dt><dd>6 People</dd></div>
+                <div><dt>ROLE</dt><dd>VFX System &amp; Tool · Final Boss</dd></div>
+                <div><dt>STACK</dt><dd>C++ · Direct3D 11 · HLSL · ImGui</dd></div>
+              </dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-scarlet">
+              <span class="detail-cover-label">VFX / BOSS FLOW</span>
+              <div class="detail-cover-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+              <figcaption>전투 장면 또는 VFX 도구 화면을 추가할 영역</figcaption>
+            </figure>
+          </section>
+
+          <section class="project-detail-section" aria-labelledby="scarlet-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p>
+            <h3 id="scarlet-implementation-title">반복되는 조정 작업을 줄이고,<br />보스 패턴에 안정적으로 연결했습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>VFX 관리 구조</h4><p>VFX Manager → Group → System 계층으로 이펙트를 관리해, 종류와 재생 흐름을 분리했습니다.</p></article>
+              <article><span>02</span><h4>조정 도구</h4><p>ImGui 기반 도구에서 Curve·Burst·충돌 파티클을 조정할 수 있게 해 반복 튜닝의 흐름을 정리했습니다.</p></article>
+              <article><span>03</span><h4>보스 전투 연결</h4><p>FSM Controller와 ASM을 활용해 카렌의 페이즈 전환과 8개 전투 패턴에 필요한 연출을 연결했습니다.</p></article>
+            </div>
+          </section>
+
+          <section class="project-detail-section project-detail-assets" aria-labelledby="scarlet-assets-title">
+            <div>
+              <p class="eyebrow">SCENES &amp; TOOLS</p>
+              <h3 id="scarlet-assets-title">전투 장면과 도구 이미지를<br />추가할 수 있도록 준비했습니다.</h3>
+              <p>보스 전투 영상, VFX 편집 화면, 패턴별 연출 이미지를 받으면 이 영역에 실제 작업 결과를 배치할 수 있습니다.</p>
+            </div>
+            <figure class="project-detail-media"><span>IMAGE 01</span><figcaption>보스 전투 또는 VFX 편집 화면</figcaption></figure>
+          </section>
+
+          <div class="project-detail-actions">
+            <a class="button button-primary" href="https://github.com/an004005/D3D11_TeamPortfolio" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a>
+            <span class="project-video-pending" aria-label="YouTube 데모 링크 준비 중">YouTube 데모 링크 준비 중</span>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="action-dialog" aria-labelledby="action-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div>
+            <p class="eyebrow">02 / PROJECT DETAIL</p>
+            <h2 id="action-dialog-title">ProjectAction</h2>
+          </div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="ProjectAction 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">GAMEPLAY PROGRAMMING</p>
+              <h3>검증한 플레이어 액션을<br />C++과 GAS로 확장했습니다.</h3>
+              <p>블루프린트로 프로토타입의 동작을 먼저 확인한 뒤, C++과 GAS를 기반으로 플레이어 액션·애니메이션·인벤토리 UI를 확장한 개인 프로젝트입니다. 기능을 먼저 작동시키고, 반복과 확장이 필요한 부분을 구조화하는 방식으로 개발했습니다.</p>
+              <dl class="project-facts">
+                <div><dt>TYPE</dt><dd>Personal Project</dd></div>
+                <div><dt>PERIOD</dt><dd>2024.11 — 2025.01</dd></div>
+                <div><dt>ROLE</dt><dd>Gameplay Programmer</dd></div>
+                <div><dt>STACK</dt><dd>Unreal Engine · C++ · Blueprint · GAS</dd></div>
+              </dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-action">
+              <span class="detail-cover-label">PLAYER ACTION</span>
+              <div class="detail-cover-path" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <figcaption>플레이어 액션 또는 UI 구현 화면을 추가할 영역</figcaption>
+            </figure>
+          </section>
+
+          <section class="project-detail-section" aria-labelledby="action-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p>
+            <h3 id="action-implementation-title">액션·애니메이션·UI를<br />하나의 플레이 흐름으로 만들었습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>GAS 기반 액션</h4><p>공격·회피·상태 변화를 능력 단위로 정리해 액션 확장을 위한 기반을 만들었습니다.</p></article>
+              <article><span>02</span><h4>애니메이션 연결</h4><p>Full Body IK와 애니메이션 상태를 플레이어 상호작용에 연결해 행동의 자연스러운 흐름을 구현했습니다.</p></article>
+              <article><span>03</span><h4>인벤토리 UI</h4><p>아이템 획득부터 인벤토리 UI까지의 기본 흐름을 구현해 플레이어 피드백을 연결했습니다.</p></article>
+            </div>
+          </section>
+
+          <section class="project-detail-section project-detail-assets" aria-labelledby="action-assets-title">
+            <div>
+              <p class="eyebrow">PLAYTEST &amp; UI</p>
+              <h3 id="action-assets-title">플레이 영상과 구현 이미지를<br />추가할 수 있도록 준비했습니다.</h3>
+              <p>액션 플레이 영상, 애니메이션 디버깅 화면, 인벤토리 UI 화면을 받으면 이 영역에 실제 작업 결과를 배치할 수 있습니다.</p>
+            </div>
+            <figure class="project-detail-media"><span>IMAGE 01</span><figcaption>플레이 영상 또는 인벤토리 UI 화면</figcaption></figure>
+          </section>
+
+          <div class="project-detail-actions">
+            <span class="project-video-pending" aria-label="YouTube 데모 링크 준비 중">YouTube 데모 링크 준비 중</span>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="cuphead-dialog" aria-labelledby="cuphead-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">02 / PROJECT DETAIL</p><h2 id="cuphead-dialog-title">CupHead <span>WinAPI</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="CupHead 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">2D GAME PROGRAMMING</p>
+              <h3>입력부터 렌더링까지,<br />첫 플레이 사이클을 만들었습니다.</h3>
+              <p>WinAPI 기반 2D 액션 프로젝트입니다. 구현 규모보다 입력, 상태 전환, 업데이트, 렌더링이 하나의 게임 루프로 자연스럽게 이어지도록 만드는 데 집중했습니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2022.06 — 07</dd></div><div><dt>ROLE</dt><dd>2D Game Programming</dd></div><div><dt>STACK</dt><dd>C++11 · Win32 API · GDI+</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive"><span class="detail-cover-label">GAME LOOP</span><figcaption>입력 · 상태 · 렌더링의 기본 흐름</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="cuphead-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p><h3 id="cuphead-implementation-title">작은 게임 한 편으로<br />클라이언트의 기초를 익혔습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>입력과 상태</h4><p>키보드 입력과 Switch 기반 상태 전환을 연결해 캐릭터의 기본 동작을 구성했습니다.</p></article>
+              <article><span>02</span><h4>게임 루프</h4><p>입력·업데이트·렌더링 순서를 분리해 프레임 단위의 플레이 흐름을 구현했습니다.</p></article>
+              <article><span>03</span><h4>2D 표현</h4><p>GDI+와 알파 블렌딩을 활용해 2D 오브젝트와 효과의 시각적 레이어를 구성했습니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/07.22Cuphead" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/Pyhla3B8orE?t=220" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="minecraft-dialog" aria-labelledby="minecraft-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">03 / PROJECT DETAIL</p><h2 id="minecraft-dialog-title">Minecraft Dungeon <span>DX9</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="Minecraft Dungeon 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">VFX &amp; BOSS</p>
+              <h3>보스 전투의 피드백을<br />이펙트와 행동으로 연결했습니다.</h3>
+              <p>DirectX9 협업 프로젝트에서 VFX, 환경 이펙트, 멀티플레이 보스 몬스터 구현을 맡았습니다. 플레이어가 전투 상황을 빠르게 이해할 수 있는 시각적 피드백에 집중했습니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Collaborative Project</dd></div><div><dt>PERIOD</dt><dd>2022.09 — 10</dd></div><div><dt>ROLE</dt><dd>VFX · Multiplayer Boss</dd></div><div><dt>STACK</dt><dd>C++11 · DirectX 9 · HLSL · ImGui</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive"><span class="detail-cover-label">VFX / BOSS</span><figcaption>파티클과 보스 행동을 연결한 전투 장면</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="minecraft-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p><h3 id="minecraft-implementation-title">전투의 순간을 더 읽기 쉽게<br />구현했습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>파티클 VFX</h4><p>Point Instance와 파티클 흐름을 활용해 공격과 환경 효과의 시각적 피드백을 구현했습니다.</p></article>
+              <article><span>02</span><h4>보스 행동</h4><p>멀티플레이 환경의 보스 몬스터 행동과 전투 연출을 연결했습니다.</p></article>
+              <article><span>03</span><h4>협업 기반</h4><p>팀 코드와 구현 방식을 함께 검토하며 기능의 연결 지점을 조율했습니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/an004005/SR_Minecraft_Dungeon" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/2nZiwh1as1g" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="gunfire-dialog" aria-labelledby="gunfire-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">04 / PROJECT DETAIL</p><h2 id="gunfire-dialog-title">Gunfire Reborn <span>DX11</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="Gunfire Reborn 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">RENDERING FRAMEWORK</p>
+              <h3>FPS 모작을 통해<br />렌더링 흐름과 도구를 다뤘습니다.</h3>
+              <p>DirectX11 기반 개인 프로젝트입니다. 외부 에셋을 게임에서 다루는 과정과 셰이더 표현, 맵·카메라 도구를 구현하며 렌더링 파이프라인을 학습했습니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2022.12 — 2023.02</dd></div><div><dt>ROLE</dt><dd>Rendering Framework &amp; Tool</dd></div><div><dt>STACK</dt><dd>C++ · DirectX 11 · HLSL · Assimp</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive"><span class="detail-cover-label">RENDER FLOW</span><figcaption>에셋 · 셰이더 · 도구를 연결한 개발 흐름</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="gunfire-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p><h3 id="gunfire-implementation-title">표현과 제작 흐름을 함께<br />만들었습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>에셋 파이프라인</h4><p>Assimp를 이용해 모델과 애니메이션 데이터를 읽고, 런타임에서 활용할 수 있도록 처리했습니다.</p></article>
+              <article><span>02</span><h4>맵·카메라 도구</h4><p>맵 배치와 카메라 조정에 필요한 도구를 구성해 반복 제작 과정을 줄였습니다.</p></article>
+              <article><span>03</span><h4>셰이더 표현</h4><p>HLSL로 UV 애니메이션, 외곽선, 그림자 맵 등 장면 표현에 필요한 효과를 적용했습니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/WVfP2w29bx8" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="fps-dialog" aria-labelledby="fps-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">05 / PROJECT DETAIL</p><h2 id="fps-dialog-title">FPSProject <span>UE5 · BP → C++</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="FPSProject 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">UE5 LEARNING PROJECT</p>
+              <h3>프로토타입을 만든 뒤,<br />C++ 구조로 다시 옮겼습니다.</h3>
+              <p>Blueprint로 FPS 전체 흐름을 먼저 완성하고, 핵심 로직을 C++로 전환한 개인 학습 프로젝트입니다. 빠른 검증과 유지보수 관점의 구현 차이를 비교하는 데 초점을 맞췄습니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.09 — 10</dd></div><div><dt>ROLE</dt><dd>UE Learning Project</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · C++</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive"><span class="detail-cover-label">BP → C++</span><figcaption>검증한 FPS 흐름을 C++로 재구성</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="fps-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p><h3 id="fps-implementation-title">두 구현 방식을 비교하며<br />구조의 필요를 확인했습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>Blueprint 프로토타입</h4><p>플레이에 필요한 기능을 빠르게 구현해 전체 흐름과 조작감을 먼저 검증했습니다.</p></article>
+              <article><span>02</span><h4>C++ 전환</h4><p>확장과 재사용이 필요한 핵심 로직을 C++로 옮기며 코드 구조를 정리했습니다.</p></article>
+              <article><span>03</span><h4>구현 방식 비교</h4><p>시각적 스크립팅의 장점과 코드 기반 구현이 필요한 지점을 직접 비교했습니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/bZbnOSmpEqI" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="projecta-dialog" aria-labelledby="projecta-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">07 / COLLABORATION</p><h2 id="projecta-dialog-title">ProjectA <span>UE5 · BP</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="ProjectA 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">COMBAT FOLLOW-UP</p>
+              <h3>현업자와의 협업 속에서<br />전투 기획을 구현으로 이었습니다.</h3>
+              <p>현업자와 함께한 사이드 프로젝트입니다. 전투 기획의 후속 구현을 맡아 공중 상태, 피격 반응, 물리 애니메이션처럼 전투 감각에 직접 영향을 주는 요소를 조정했습니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Collaborative Project</dd></div><div><dt>PERIOD</dt><dd>2024.12 — 2025.03</dd></div><div><dt>ROLE</dt><dd>Combat Follow-up</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · Physics Animation</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive project-detail-cover-collaboration"><span class="detail-cover-label">COLLABORATION</span><figcaption>현업 협업으로 전투 디테일을 조율한 과정</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="projecta-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p><h3 id="projecta-implementation-title">기획 의도를 플레이 감각으로<br />구체화했습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>공중 상태</h4><p>전투 중 공중에 떠 있는 상태가 자연스럽게 이어지도록 행동 흐름을 구현했습니다.</p></article>
+              <article><span>02</span><h4>피격 반응</h4><p>공중 피격 반응을 조정해 공격과 반응 사이의 리듬을 더 읽기 쉽게 만들었습니다.</p></article>
+              <article><span>03</span><h4>물리 애니메이션</h4><p>Physics Animation을 활용해 전투 상황에 맞는 캐릭터 반응을 다듬었습니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/qOcZ_jURWLo" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/yobtKPJkPzg" target="_blank" rel="noreferrer">추가 영상 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="insurance-dialog" aria-labelledby="insurance-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">08 / PROJECT DETAIL</p><h2 id="insurance-dialog-title">우주보험 손해사정사 <span>UE5 · BP</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="우주보험 손해사정사 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">CLIENT IMPLEMENTATION</p>
+              <h3>게임의 흐름을 잇는<br />클라이언트 구현을 맡았습니다.</h3>
+              <p>UE5 Blueprint 기반 프로젝트입니다. 기획과 아트를 제외한 게임 클라이언트 구현을 폭넓게 맡으며, 기능 단위가 실제 플레이 흐름으로 연결되도록 작업했습니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Project</dd></div><div><dt>PERIOD</dt><dd>2025.04 — 05</dd></div><div><dt>ROLE</dt><dd>Client Implementation</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive"><span class="detail-cover-label">CLIENT FLOW</span><figcaption>기능을 실제 게임 흐름으로 연결한 구현</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="insurance-implementation-title">
+            <p class="eyebrow">IMPLEMENTATION</p><h3 id="insurance-implementation-title">개별 기능이 아니라<br />플레이 흐름을 기준으로 구현했습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>게임 흐름 연결</h4><p>기획 의도를 플레이어가 경험하는 순서로 해석해 기능의 연결 지점을 구현했습니다.</p></article>
+              <article><span>02</span><h4>클라이언트 기능</h4><p>프로젝트에 필요한 게임 클라이언트 기능을 역할 단위로 나누어 구현했습니다.</p></article>
+              <article><span>03</span><h4>피드백 확인</h4><p>구현 결과를 반복 확인하며 플레이 중 끊기는 지점을 조정했습니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/4GFmcsbyjHg" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="project-dialog" id="projectel-dialog" aria-labelledby="projectel-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">09 / COLLABORATION</p><h2 id="projectel-dialog-title">Project_EL <span>UE5 · BP</span></h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="Project_EL 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <p class="eyebrow">COMBAT SYSTEM · IN PROGRESS</p>
+              <h3>협업 환경에서 전투 시스템을<br />계속 다듬고 있습니다.</h3>
+              <p>현업자와 함께 진행 중인 UE5 협업 프로젝트입니다. 공개 가능한 범위 안에서 전투 시스템 구현 경험과 협업 과정의 학습을 정리합니다.</p>
+              <dl class="project-facts"><div><dt>TYPE</dt><dd>Collaborative Project</dd></div><div><dt>PERIOD</dt><dd>2026.04 — Present</dd></div><div><dt>ROLE</dt><dd>Combat System</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · SVN</dd></div></dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover-archive project-detail-cover-collaboration"><span class="detail-cover-label">IN PROGRESS</span><figcaption>공개 가능한 범위의 작업 맥락</figcaption></figure>
+          </section>
+          <section class="project-detail-section" aria-labelledby="projectel-implementation-title">
+            <p class="eyebrow">WORK IN PROGRESS</p><h3 id="projectel-implementation-title">기능과 협업 방식을 함께<br />쌓아 가고 있습니다.</h3>
+            <div class="implementation-list">
+              <article><span>01</span><h4>전투 시스템</h4><p>프로젝트의 전투 경험에 필요한 시스템 구현을 맡아 세부 동작을 조정하고 있습니다.</p></article>
+              <article><span>02</span><h4>협업 환경</h4><p>SVN 기반의 공용 작업 흐름 안에서 변경 사항을 공유하고 기능을 연결합니다.</p></article>
+              <article><span>03</span><h4>공개 범위</h4><p>프로젝트 보안을 고려해 공개 가능한 내용과 작업 성과를 구분해 기록합니다.</p></article>
+            </div>
+          </section>
+          <div class="project-detail-actions"><span class="project-video-pending" aria-label="프로젝트 진행 중으로 상세 공개 준비 중">프로젝트 진행 중으로 상세 공개 준비 중</span></div>
+        </div>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>규칙을 구현해, 오래 기억되는 플레이를 만듭니다.</p>
+        <a href="https://github.com/MATTTTJ" target="_blank" rel="noreferrer">github.com/MATTTTJ <span aria-hidden="true">↗</span></a>
+        <p class="footer-meta">© <span id="year">2026</span> JIHOON JEONG</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
