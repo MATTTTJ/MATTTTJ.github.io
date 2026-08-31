@@ -57,7 +57,7 @@ h1, h2, h3 { letter-spacing: -.055em; }
 h1 { margin-bottom: 28px; font: 700 clamp(44px, 5.2vw, 70px)/1.18 var(--sans); }
 h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 
-.hero { min-height: calc(100svh - 76px); display: grid; align-items: center; padding-top: 94px; padding-bottom: 94px; background: linear-gradient(110deg, var(--canvas) 0%, var(--canvas) 64%, #f4f8f1 100%); }
+.hero { min-height: calc(100svh - 76px); display: grid; align-items: center; padding-top: 94px; padding-bottom: 94px; background: var(--canvas); }
 .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 88px; }
 .hero-copy { position: relative; }
 .title-divider { margin: 0 .13em; color: var(--mint); font-weight: 500; }
