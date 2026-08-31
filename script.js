@@ -86,6 +86,9 @@ if (archiveProjectCards.length > 1) {
 
 const projectCarousel = document.querySelector('[data-project-carousel]');
 const projectScrollControls = [...document.querySelectorAll('[data-project-scroll]')];
+
+// 최신순 카드도 항상 왼쪽 첫 카드부터 시작합니다.
+if (projectCarousel) projectCarousel.scrollLeft = 0;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function updateProjectScrollControls() {
