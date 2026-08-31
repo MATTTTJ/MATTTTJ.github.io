@@ -1,0 +1,138 @@
+const menuToggle = document.querySelector('.menu-toggle');
+const siteNav = document.querySelector('.site-nav');
+const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
+const aboutDialog = document.querySelector('#about-dialog');
+const dialogOpeners = [...document.querySelectorAll('[data-dialog-open="about-dialog"]')];
+const dialogClose = aboutDialog?.querySelector('[data-dialog-close]');
+let lastDialogTrigger;
+
+function closeMenu() {
+  if (!menuToggle || !siteNav) return;
+  menuToggle.setAttribute('aria-expanded', 'false');
+  siteNav.classList.remove('is-open');
+}
+
+menuToggle?.addEventListener('click', () => {
+  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  siteNav?.classList.toggle('is-open', !isOpen);
+});
+
+navLinks.forEach((link) => link.addEventListener('click', closeMenu));
+
+function openAboutDialog(trigger) {
+  if (!aboutDialog || aboutDialog.open) return;
+  lastDialogTrigger = trigger;
+  trigger.setAttribute('aria-expanded', 'true');
+  aboutDialog.scrollTop = 0;
+  aboutDialog.showModal();
+  dialogClose?.focus();
+}
+
+function closeAboutDialog() {
+  if (aboutDialog?.open) aboutDialog.close();
+}
+
+dialogOpeners.forEach((trigger) => trigger.addEventListener('click', () => openAboutDialog(trigger)));
+dialogClose?.addEventListener('click', closeAboutDialog);
+
+aboutDialog?.addEventListener('click', (event) => {
+  if (event.target === aboutDialog) closeAboutDialog();
+});
+
+aboutDialog?.addEventListener('close', () => {
+  lastDialogTrigger?.setAttribute('aria-expanded', 'false');
+  lastDialogTrigger?.focus();
+  lastDialogTrigger = undefined;
+});
+
+const projectDialogOpeners = [...document.querySelectorAll('[data-project-dialog-open]')];
+const projectDialogs = [...document.querySelectorAll('.project-dialog')];
+let lastProjectDialogTrigger;
+
+function openProjectDialog(trigger) {
+  const dialog = document.querySelector(`#${trigger.dataset.projectDialogOpen}`);
+  if (!(dialog instanceof HTMLDialogElement) || dialog.open) return;
+  lastProjectDialogTrigger = trigger;
+  trigger.setAttribute('aria-expanded', 'true');
+  dialog.scrollTop = 0;
+  dialog.showModal();
+  dialog.querySelector('[data-project-dialog-close]')?.focus();
+}
+
+function closeProjectDialog(dialog) {
+  if (dialog.open) dialog.close();
+}
+
+projectDialogOpeners.forEach((trigger) => trigger.addEventListener('click', () => openProjectDialog(trigger)));
+projectDialogs.forEach((dialog) => {
+  dialog.querySelector('[data-project-dialog-close]')?.addEventListener('click', () => closeProjectDialog(dialog));
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) closeProjectDialog(dialog);
+  });
+  dialog.addEventListener('close', () => {
+    lastProjectDialogTrigger?.setAttribute('aria-expanded', 'false');
+    lastProjectDialogTrigger?.focus();
+    lastProjectDialogTrigger = undefined;
+  });
+});
+
+const projectCarouselTrack = document.querySelector('.project-carousel-track');
+const archiveProjectCards = projectCarouselTrack ? [...projectCarouselTrack.children] : [];
+
+if (archiveProjectCards.length > 1) {
+  projectCarouselTrack.replaceChildren(...archiveProjectCards.reverse());
+}
+
+const projectCarousel = document.querySelector('[data-project-carousel]');
+const projectScrollControls = [...document.querySelectorAll('[data-project-scroll]')];
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function updateProjectScrollControls() {
+  if (!projectCarousel) return;
+  const maxScroll = Math.max(0, projectCarousel.scrollWidth - projectCarousel.clientWidth);
+  const atStart = projectCarousel.scrollLeft <= 1;
+  const atEnd = projectCarousel.scrollLeft >= maxScroll - 1;
+
+  projectScrollControls.forEach((control) => {
+    control.disabled = maxScroll <= 1 || (control.dataset.projectScroll === 'previous' ? atStart : atEnd);
+  });
+}
+
+function scrollProjects(direction) {
+  if (!projectCarousel) return;
+  const firstCard = projectCarousel.querySelector('.project-carousel-card');
+  const cardWidth = firstCard?.getBoundingClientRect().width || projectCarousel.clientWidth;
+  const gap = Number.parseFloat(getComputedStyle(projectCarousel.querySelector('.project-carousel-track')).gap) || 0;
+
+  projectCarousel.scrollBy({
+    left: direction * (cardWidth + gap),
+    behavior: reducedMotion.matches ? 'auto' : 'smooth',
+  });
+}
+
+projectScrollControls.forEach((control) => {
+  control.addEventListener('click', () => scrollProjects(control.dataset.projectScroll === 'next' ? 1 : -1));
+});
+projectCarousel?.addEventListener('scroll', updateProjectScrollControls, { passive: true });
+window.addEventListener('resize', updateProjectScrollControls);
+updateProjectScrollControls();
+
+const sections = navLinks
+  .map((link) => document.querySelector(link.getAttribute('href')))
+  .filter(Boolean);
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    const activeEntry = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!activeEntry) return;
+    navLinks.forEach((link) => {
+      link.classList.toggle('is-active', link.getAttribute('href') === `#${activeEntry.target.id}`);
+    });
+  },
+  { rootMargin: '-35% 0px -55% 0px', threshold: [0.05, 0.2, 0.5] },
+);
+
+sections.forEach((section) => sectionObserver.observe(section));
+document.querySelector('#year').textContent = String(new Date().getFullYear());
+
