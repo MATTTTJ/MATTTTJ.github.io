@@ -88,7 +88,18 @@ const projectCarousel = document.querySelector('[data-project-carousel]');
 const projectScrollControls = [...document.querySelectorAll('[data-project-scroll]')];
 
 // 최신순 카드도 항상 왼쪽 첫 카드부터 시작합니다.
-if (projectCarousel) projectCarousel.scrollLeft = 0;
+// 브라우저의 스크롤 복원이 실행된 뒤에도 다시 초기화합니다.
+function resetProjectCarouselStart() {
+  projectCarousel?.scrollTo({ left: 0, behavior: 'instant' });
+}
+
+resetProjectCarouselStart();
+window.addEventListener('load', () => {
+  requestAnimationFrame(() => {
+    resetProjectCarouselStart();
+    requestAnimationFrame(resetProjectCarouselStart);
+  });
+}, { once: true });
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function updateProjectScrollControls() {
