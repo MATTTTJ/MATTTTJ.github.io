@@ -202,7 +202,7 @@
                     <div class="project-topline"><span>05</span><span>PERSONAL</span></div>
                     <h3>FPSProject</h3>
                     <p class="project-role">Unreal Engine Learning Project</p>
-                    <p>Blueprint로 완성한 FPS 프로젝트를 C++로 전환하며 두 구현 방식의 연결을 검증했습니다.</p>
+                    <p>Blueprint로 Player·Target·UMG 흐름을 먼저 구현한 뒤 C++로 전환하며 두 구현 방식의 연결을 검증했습니다.</p>
                     <ul class="tag-list" aria-label="사용 기술"><li>Unreal Engine 5</li><li>Blueprint</li><li>C++</li><li>FPS</li></ul>
                     <div class="project-card-actions">
                       <button class="project-detail-button" type="button" data-project-dialog-open="fps-dialog" aria-haspopup="dialog" aria-controls="fps-dialog" aria-expanded="false">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
@@ -213,13 +213,13 @@
 
                 <article class="project-card project-carousel-card">
                   <div class="project-visual visual-action" aria-label="플레이어 액션을 표현한 그래픽">
-                    <span class="visual-label">UNREAL ENGINE / 2024.11 — 2025.01</span>
+                    <span class="visual-label">UNREAL ENGINE 5 / 2024.11 — 2025.01</span>
                     <div class="action-path" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
                     <span class="action-title" aria-hidden="true">PLAYER<br /><em>ACTION</em></span>
                   </div>
                   <div class="project-body">
                     <div class="project-topline"><span>06</span><span>PERSONAL</span></div>
-                    <h3>ProjectAction</h3>
+                    <h3>ProjectAction <span>UE5 · BP</span></h3>
                     <p class="project-role">Action Prototype &amp; UI</p>
                     <p>
                       Blueprint로 플레이어 액션·애니메이션·인벤토리 UI를 구현하며 조작과 피드백의 흐름을 검증한 개인 프로젝트입니다.
@@ -272,7 +272,7 @@
 
                 <article class="project-card project-carousel-card project-card--collaboration">
                   <div class="project-visual visual-arpg" aria-label="Project_EL의 액션 RPG 전투를 표현한 그래픽">
-                    <span class="visual-label">UNREAL ENGINE / 2026.04 —</span>
+                    <span class="visual-label">UNREAL ENGINE 5 / 2026.04 —</span>
                     <div class="arpg-blade" aria-hidden="true"></div>
                     <span class="arpg-title" aria-hidden="true">COMBAT<br />FLOW</span>
                     <span class="wip-label">IN PROGRESS</span>
@@ -536,7 +536,7 @@
         <header class="dialog-header">
           <div>
             <p class="eyebrow">02 / PROJECT DETAIL</p>
-            <h2 id="action-dialog-title">ProjectAction</h2>
+            <h2 id="action-dialog-title">ProjectAction <span>UE5 · BP</span></h2>
           </div>
           <button class="dialog-close" type="button" data-project-dialog-close aria-label="ProjectAction 상세 닫기"><span aria-hidden="true">×</span></button>
         </header>
@@ -608,7 +608,7 @@
             <div class="implementation-list">
               <article><span>01</span><h4>입력과 상태</h4><p>키보드 입력과 Switch 기반 상태 전환을 연결해 캐릭터의 기본 동작을 구성했습니다.</p></article>
               <article><span>02</span><h4>게임 루프</h4><p>입력·업데이트·렌더링 순서를 분리해 프레임 단위의 플레이 흐름을 구현했습니다.</p></article>
-              <article><span>03</span><h4>2D 표현</h4><p>GDI+와 알파 블렌딩을 활용해 2D 오브젝트와 효과의 시각적 레이어를 구성했습니다.</p></article>
+              <article><span>03</span><h4>충돌 판정</h4><p>AABB와 Line 기반의 충돌 판정을 적용해 2D 오브젝트 간 접촉을 처리했습니다.</p></article>
             </div>
           </section>
           <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/07.22Cuphead" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/Pyhla3B8orE?t=220" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
@@ -635,7 +635,7 @@
           <section class="project-detail-section" aria-labelledby="minecraft-implementation-title">
             <p class="eyebrow">IMPLEMENTATION</p><h3 id="minecraft-implementation-title">전투의 순간을 더 읽기 쉽게<br />구현했습니다.</h3>
             <div class="implementation-list">
-              <article><span>01</span><h4>파티클 VFX</h4><p>Point Instance와 파티클 흐름을 활용해 공격과 환경 효과의 시각적 피드백을 구현했습니다.</p></article>
+              <article><span>01</span><h4>파티클 VFX</h4><p>Point Instancing과 파티클 흐름을 활용해 공격과 환경 효과의 시각적 피드백을 구현했습니다.</p></article>
               <article><span>02</span><h4>보스 행동</h4><p>멀티플레이 환경의 보스 몬스터 행동과 전투 연출을 연결했습니다.</p></article>
               <article><span>03</span><h4>협업 기반</h4><p>팀 코드와 구현 방식을 함께 검토하며 기능의 연결 지점을 조율했습니다.</p></article>
             </div>
@@ -665,8 +665,8 @@
             <p class="eyebrow">IMPLEMENTATION</p><h3 id="gunfire-implementation-title">표현과 제작 흐름을 함께<br />만들었습니다.</h3>
             <div class="implementation-list">
               <article><span>01</span><h4>에셋 파이프라인</h4><p>Assimp를 이용해 모델과 애니메이션 데이터를 읽고, 런타임에서 활용할 수 있도록 처리했습니다.</p></article>
-              <article><span>02</span><h4>맵·카메라 도구</h4><p>맵 배치와 카메라 조정에 필요한 도구를 구성해 반복 제작 과정을 줄였습니다.</p></article>
-              <article><span>03</span><h4>셰이더 표현</h4><p>HLSL로 UV 애니메이션, 외곽선, 그림자 맵 등 장면 표현에 필요한 효과를 적용했습니다.</p></article>
+              <article><span>02</span><h4>시야 최적화</h4><p>카메라 시야 밖 모델의 렌더링을 줄이는 Frustum Culling을 적용해 장면 처리 흐름을 정리했습니다.</p></article>
+              <article><span>03</span><h4>렌더링 경로</h4><p>Deferred Shading과 Cascade Shadow Map을 적용하고, HLSL로 장면 표현에 필요한 효과를 구현했습니다.</p></article>
             </div>
           </section>
           <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/WVfP2w29bx8" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
@@ -693,7 +693,7 @@
           <section class="project-detail-section" aria-labelledby="fps-implementation-title">
             <p class="eyebrow">IMPLEMENTATION</p><h3 id="fps-implementation-title">두 구현 방식을 비교하며<br />구조의 필요를 확인했습니다.</h3>
             <div class="implementation-list">
-              <article><span>01</span><h4>Blueprint 프로토타입</h4><p>플레이에 필요한 기능을 빠르게 구현해 전체 흐름과 조작감을 먼저 검증했습니다.</p></article>
+              <article><span>01</span><h4>Blueprint 프로토타입</h4><p>Player·Target·UMG를 먼저 구현해 전체 흐름과 조작감을 빠르게 검증했습니다.</p></article>
               <article><span>02</span><h4>C++ 전환</h4><p>확장과 재사용이 필요한 핵심 로직을 C++로 옮기며 코드 구조를 정리했습니다.</p></article>
               <article><span>03</span><h4>구현 방식 비교</h4><p>시각적 스크립팅의 장점과 코드 기반 구현이 필요한 지점을 직접 비교했습니다.</p></article>
             </div>
