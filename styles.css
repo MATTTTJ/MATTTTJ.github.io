@@ -445,7 +445,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .project-detail-cover--image,
 .project-detail-media--image { color: white; background: #213c31; }
 .project-detail-cover--image > img,
-.project-detail-media--image > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.project-detail-media--image > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #1b3127; }
 .project-detail-cover--image::before {
   inset: 0;
   z-index: 1;
