@@ -12,11 +12,12 @@ python -m http.server 4173
 
 ## 실제 이미지 교체
 
-현재 Hero에는 `assets/profile-photo.png`를 사용하고 있습니다. 사진을 교체할 때는 같은 파일명을 유지하거나, `index.html`의 이미지 경로와 대체 텍스트를 함께 바꾸면 됩니다.
+프로필 사진은 용도별로 두 파일을 사용합니다.
 
-```html
-<img src="assets/profile-photo.png" alt="정지훈 프로필 사진" />
-```
+- 메인 Hero: `assets/profile-photo-hero.png` — 세로 프레임에 맞춘 크롭본
+- More About Me: `assets/profile-photo-original.jpg` — 원본 비율을 유지해 표시
+
+사진을 교체할 때는 해당 파일과 `index.html`의 이미지 경로·대체 텍스트를 함께 갱신합니다.
 
 프로젝트 카드도 실제 게임 화면이나 YouTube 영상 URL이 준비되면, 해당 카드의 시각 영역과 하단 링크를 교체해 연결할 수 있습니다.
 
