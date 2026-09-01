@@ -185,7 +185,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .project-facts div { display: grid; gap: 5px; }
 .project-facts dt { color: var(--green); font: 500 10px/1.2 var(--mono); letter-spacing: .1em; }
 .project-facts dd { margin: 0; color: var(--ink); font: 500 13px/1.55 var(--kr); word-break: keep-all; }
-.project-detail-cover { position: relative; display: flex; flex-direction: column; justify-content: end; aspect-ratio: .86; min-height: 340px; margin: 0; padding: 20px; overflow: hidden; border: 1px solid var(--line); }
+.project-detail-cover { position: relative; z-index: 0; display: flex; flex-direction: column; justify-content: end; aspect-ratio: .86; min-height: 340px; margin: 0; padding: 20px; overflow: hidden; border: 1px solid var(--line); }
 .project-detail-cover-scarlet { color: var(--green-dark); background: #e7f0e8; }
 .project-detail-cover-scarlet::before { content: ""; position: absolute; inset: 14%; border: 1px solid #9dbba7; background-image: linear-gradient(#c9dbce 1px, transparent 1px), linear-gradient(90deg, #c9dbce 1px, transparent 1px); background-size: 28px 28px; }
 .detail-cover-label, .project-detail-cover figcaption { position: relative; z-index: 2; }
@@ -204,7 +204,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .implementation-list p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; word-break: keep-all; }
 .project-detail-assets { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, .82fr); gap: 58px; align-items: center; }
 .project-detail-assets h3 { margin-bottom: 17px; }
-.project-detail-media { position: relative; display: flex; flex-direction: column; justify-content: end; min-height: 250px; margin: 0; padding: 20px; overflow: hidden; border: 1px solid var(--line); background: #f3f7f1; }
+.project-detail-media { position: relative; z-index: 0; display: flex; flex-direction: column; justify-content: end; min-height: 250px; margin: 0; padding: 20px; overflow: hidden; border: 1px solid var(--line); background: #f3f7f1; }
 .project-detail-media::before { content: ""; position: absolute; inset: 17px; border: 1px solid #d5e3d7; }
 .project-detail-media::after { content: ""; position: absolute; top: 32px; left: 32px; width: 24px; border-top: 1px solid var(--green); }
 .project-detail-media span, .project-detail-media figcaption { position: relative; z-index: 1; }.project-detail-media span { color: var(--green); font: 500 10px/1 var(--mono); letter-spacing: .08em; }.project-detail-media figcaption { margin-top: 7px; color: var(--muted); font-size: 13px; }
