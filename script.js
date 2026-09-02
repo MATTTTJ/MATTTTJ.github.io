@@ -1,4 +1,5 @@
 const menuToggle = document.querySelector('.menu-toggle');
+const menuToggleLabel = menuToggle?.querySelector('.sr-only');
 const siteNav = document.querySelector('.site-nav');
 const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
 const aboutDialog = document.querySelector('#about-dialog');
@@ -9,12 +10,14 @@ let lastDialogTrigger;
 function closeMenu() {
   if (!menuToggle || !siteNav) return;
   menuToggle.setAttribute('aria-expanded', 'false');
+  if (menuToggleLabel) menuToggleLabel.textContent = '메뉴 열기';
   siteNav.classList.remove('is-open');
 }
 
 menuToggle?.addEventListener('click', () => {
   const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
   menuToggle.setAttribute('aria-expanded', String(!isOpen));
+  if (menuToggleLabel) menuToggleLabel.textContent = isOpen ? '메뉴 열기' : '메뉴 닫기';
   siteNav?.classList.toggle('is-open', !isOpen);
 });
 
@@ -24,9 +27,9 @@ function openAboutDialog(trigger) {
   if (!aboutDialog || aboutDialog.open) return;
   lastDialogTrigger = trigger;
   trigger.setAttribute('aria-expanded', 'true');
-  aboutDialog.scrollTop = 0;
   aboutDialog.showModal();
-  dialogClose?.focus();
+  dialogClose?.focus({ preventScroll: true });
+  aboutDialog.scrollTop = 0;
 }
 
 function closeAboutDialog() {
@@ -55,9 +58,9 @@ function openProjectDialog(trigger) {
   if (!(dialog instanceof HTMLDialogElement) || dialog.open) return;
   lastProjectDialogTrigger = trigger;
   trigger.setAttribute('aria-expanded', 'true');
-  dialog.scrollTop = 0;
   dialog.showModal();
-  dialog.querySelector('[data-project-dialog-close]')?.focus();
+  dialog.querySelector('[data-project-dialog-close]')?.focus({ preventScroll: true });
+  dialog.scrollTop = 0;
 }
 
 function closeProjectDialog(dialog) {
@@ -97,6 +100,27 @@ establishProjectCarouselStart();
 window.addEventListener('load', establishProjectCarouselStart, { once: true });
 window.addEventListener('pageshow', establishProjectCarouselStart);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const motionImage = document.querySelector('[data-motion-src][data-motion-poster]');
+const motionToggle = document.querySelector('[data-motion-toggle]');
+
+function setMotionPlayback(shouldPlay) {
+  if (!(motionImage instanceof HTMLImageElement) || !(motionToggle instanceof HTMLButtonElement)) return;
+  const source = shouldPlay ? motionImage.dataset.motionSrc : motionImage.dataset.motionPoster;
+  if (source && motionImage.getAttribute('src') !== source) motionImage.setAttribute('src', source);
+  motionToggle.dataset.motionPlaying = String(shouldPlay);
+  motionToggle.textContent = shouldPlay ? '애니메이션 일시정지' : '애니메이션 재생';
+}
+
+if (motionImage instanceof HTMLImageElement && motionToggle instanceof HTMLButtonElement) {
+  motionToggle.hidden = false;
+  setMotionPlayback(!reducedMotion.matches);
+  motionToggle.addEventListener('click', () => {
+    setMotionPlayback(motionToggle.dataset.motionPlaying !== 'true');
+  });
+  reducedMotion.addEventListener?.('change', (event) => {
+    if (event.matches) setMotionPlayback(false);
+  });
+}
 
 function updateProjectScrollControls() {
   if (!projectCarousel) return;
