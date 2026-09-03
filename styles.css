@@ -485,6 +485,8 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .project-detail-media--image span,
 .project-detail-media--image figcaption { z-index: 2; color: white; text-shadow: 0 1px 12px rgb(0 0 0 / .45); }
 .project-detail-media--motion { width: min(100%, 800px); min-height: 0; aspect-ratio: 25 / 12; margin: 32px auto 0; }
+.case-study-media-row .project-detail-media--motion { width: 100%; margin-top: 0; }
+.projecta-motion-row .project-detail-media--motion { aspect-ratio: 2 / 1; }
 .motion-toggle { position: absolute; z-index: 3; top: 16px; right: 16px; min-height: 36px; padding: 0 12px; border: 1px solid rgb(255 255 255 / .72); border-radius: 2px; background: rgb(20 38 29 / .72); color: white; cursor: pointer; font: 600 11px/1 var(--kr); backdrop-filter: blur(4px); }
 .motion-toggle:hover { background: rgb(20 38 29 / .92); }
 .motion-toggle[hidden] { display: none; }

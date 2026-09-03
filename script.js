@@ -100,27 +100,45 @@ establishProjectCarouselStart();
 window.addEventListener('load', establishProjectCarouselStart, { once: true });
 window.addEventListener('pageshow', establishProjectCarouselStart);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const motionImage = document.querySelector('[data-motion-src][data-motion-poster]');
-const motionToggle = document.querySelector('[data-motion-toggle]');
+const motionImages = Array.from(document.querySelectorAll('[data-motion-src][data-motion-poster]'));
+const motionToggles = Array.from(document.querySelectorAll('[data-motion-toggle]'));
+const motionPlayers = [];
 
-function setMotionPlayback(shouldPlay) {
+function setMotionPlayback(motionImage, motionToggle, shouldPlay) {
   if (!(motionImage instanceof HTMLImageElement) || !(motionToggle instanceof HTMLButtonElement)) return;
   const source = shouldPlay ? motionImage.dataset.motionSrc : motionImage.dataset.motionPoster;
   if (source && motionImage.getAttribute('src') !== source) motionImage.setAttribute('src', source);
   motionToggle.dataset.motionPlaying = String(shouldPlay);
-  motionToggle.textContent = shouldPlay ? '애니메이션 일시정지' : '애니메이션 재생';
+  motionToggle.setAttribute('aria-pressed', String(shouldPlay));
+  motionToggle.textContent = shouldPlay ? '애니메이션 정지' : '애니메이션 재생';
 }
 
-if (motionImage instanceof HTMLImageElement && motionToggle instanceof HTMLButtonElement) {
+motionImages.forEach((motionImage) => {
+  if (!(motionImage instanceof HTMLImageElement) || !motionImage.id) return;
+  const motionToggle = motionToggles.find((toggle) => toggle.getAttribute('aria-controls') === motionImage.id);
+  if (!(motionToggle instanceof HTMLButtonElement)) return;
+
+  motionPlayers.push({ motionImage, motionToggle });
   motionToggle.hidden = false;
-  setMotionPlayback(!reducedMotion.matches);
+  const shouldAutoplay = motionImage.dataset.motionAutoplay !== 'false' && !reducedMotion.matches;
+  setMotionPlayback(motionImage, motionToggle, shouldAutoplay);
   motionToggle.addEventListener('click', () => {
-    setMotionPlayback(motionToggle.dataset.motionPlaying !== 'true');
+    const shouldPlay = motionToggle.dataset.motionPlaying !== 'true';
+    if (shouldPlay) {
+      motionPlayers.forEach((player) => {
+        if (player.motionImage !== motionImage) {
+          setMotionPlayback(player.motionImage, player.motionToggle, false);
+        }
+      });
+    }
+    setMotionPlayback(motionImage, motionToggle, shouldPlay);
   });
-  reducedMotion.addEventListener?.('change', (event) => {
-    if (event.matches) setMotionPlayback(false);
-  });
-}
+});
+
+reducedMotion.addEventListener?.('change', (event) => {
+  if (!event.matches) return;
+  motionPlayers.forEach(({ motionImage, motionToggle }) => setMotionPlayback(motionImage, motionToggle, false));
+});
 
 function updateProjectScrollControls() {
   if (!projectCarousel) return;
