@@ -138,7 +138,11 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .project-card .project-body > .project-trust-note { margin: -5px 0 15px; color: #63752f; font: 600 12px/1.45 var(--kr); letter-spacing: -.02em; }
 .project-body > p:not(.project-role) { margin-bottom: 21px; color: var(--muted); font-size: 15px; line-height: 1.85; word-break: keep-all; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }.tag-list li { padding: 4px 8px; border: 1px solid var(--line); border-radius: 2px; color: var(--green); font: 500 11px/1.35 var(--mono); }
-.project-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: auto; padding-top: 25px; border-top: 1px solid var(--line); }
+.project-card-actions { display: grid; align-content: start; gap: 12px; margin-top: auto; padding-top: 25px; border-top: 1px solid var(--line); }
+.project-card-actions .project-detail-button { justify-self: start; }
+.project-carousel-card .project-detail-button { width: 100%; }
+.project-external-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; min-height: 24px; }
+.project-external-links .text-link { align-self: auto; }
 .project-card--collaboration { border-color: #c9d96b; }.project-card--collaboration:hover { border-color: #9cac43; }.project-card--collaboration .project-topline span:last-child { color: #718136; }
 .project-detail-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 42px; padding: 0 15px; border: 1px solid var(--green-dark); border-radius: 3px; background: var(--green-dark); color: white; cursor: pointer; font: 600 14px/1 var(--kr); transition: color .18s, background .18s; }
 .project-detail-button:hover { background: var(--green); border-color: var(--green); }
