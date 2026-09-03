@@ -214,7 +214,8 @@
                     <div class="project-card-actions">
                       <button class="project-detail-button" type="button" data-project-dialog-open="action-cpp-dialog" aria-haspopup="dialog" aria-controls="action-cpp-dialog" aria-expanded="false" aria-label="ProjectAction C++ 프로젝트 상세 보기">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
                       <div class="project-external-links">
-                        <a class="text-link" href="https://youtu.be/iQV4XE5bHl8" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ 영상 새 탭에서 열기">영상 <span aria-hidden="true">↗</span></a>
+                        <a class="text-link" href="https://youtu.be/iQV4XE5bHl8" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ 영상 1 새 탭에서 열기">영상 1 <span aria-hidden="true">↗</span></a>
+                        <a class="text-link" href="https://youtu.be/kZmgv7uDXj4" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ 영상 2 새 탭에서 열기">영상 2 <span aria-hidden="true">↗</span></a>
                       </div>
                     </div>
                   </div>
@@ -275,6 +276,7 @@
                     <div class="project-card-actions">
                       <button class="project-detail-button" type="button" data-project-dialog-open="gunfire-dialog" aria-haspopup="dialog" aria-controls="gunfire-dialog" aria-expanded="false" aria-label="Gunfire Reborn 프로젝트 상세 보기">프로젝트 상세 보기 <span aria-hidden="true">→</span></button>
                       <div class="project-external-links">
+                        <a class="text-link" href="https://youtu.be/WVfP2w29bx8" target="_blank" rel="noreferrer" aria-label="Gunfire Reborn 영상 새 탭에서 열기">영상 <span aria-hidden="true">↗</span></a>
                         <a class="text-link" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer" aria-label="Gunfire Reborn GitHub 저장소 새 탭에서 열기">GitHub <span aria-hidden="true">↗</span></a>
                       </div>
                     </div>
@@ -652,7 +654,7 @@
             <h3>전투 상태와 인벤토리 정보가<br />플레이 화면에서 이어지게 했습니다.</h3>
             <p class="case-study-lead">UI를 별도 항목으로 분리해 전투 상태와 인벤토리 정보를 확인하는 화면 흐름을 정리했습니다. 현재 공개 자료로 확인되는 범위는 몬스터 1종 Behavior Tree, 플레이어 기본 콤보·공중 공격, Physics Animation입니다. 같은 액션 문제를 두 구조로 풀며 기술보다 상태와 생명주기의 소유권을 먼저 정해야 한다는 점을 배웠습니다.</p>
           </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/iQV4XE5bHl8" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/iQV4XE5bHl8" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ YouTube 데모 보기, 새 탭에서 열기">YouTube 데모 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/kZmgv7uDXj4" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ 추가 영상 보기, 새 탭에서 열기">추가 영상 보기 <span aria-hidden="true">↗</span></a></div>
         </div>
       </div>
     </dialog>
@@ -694,7 +696,7 @@
           <section class="case-study-section"><p class="eyebrow">01 / LOADING &amp; STATE</p><h3>대기 시간을 분리하고,<br />상태 전환은 확장 가능한 규칙으로 바꿨습니다.</h3><p class="case-study-lead">에셋과 프로토타입 생성은 로딩 스레드에서 처리하고, 메인 스레드와는 임계 영역으로 동기화했습니다. 캐릭터와 오브젝트의 행동은 단순 enum·switch 방식에서 Start·Tick·End를 갖는 상태 객체 흐름으로 확장했습니다.</p><div class="case-study-grid"><article class="case-study-card"><span>LOADING THREAD</span><h4>로딩과 플레이의 역할 분리</h4><p>로딩 중 생성할 컴포넌트와 게임 오브젝트 프로토타입을 별도 흐름에서 준비하고, 완료 시점에 정리 작업까지 이어지도록 구성했습니다.</p></article><article class="case-study-card"><span>CUSTOM FSM</span><h4>행동 전환을 함수로 관리</h4><p>람다·템플릿·Builder 패턴을 활용해 상태의 시작·갱신·종료를 분리했습니다. 각 상태는 자신이 전환 가능한 다음 상태를 판단하도록 설계했습니다.</p></article></div></section>
           <section class="case-study-section"><p class="eyebrow">02 / MOVEMENT &amp; NAVIGATION</p><h3>움직임이 끊기지 않도록,<br />애니메이션 전환과 이동 경로를 함께 다뤘습니다.</h3><p class="case-study-lead">상태가 바뀌어도 자세가 갑자기 튀지 않도록 뼈대 행렬을 보간했습니다. 맵 위 이동은 직접 생성한 폴리곤 셀을 기반으로 현재 위치를 찾고, 경계에서는 슬라이딩 벡터로 이동을 보정했습니다.</p><div class="case-study-grid"><div class="case-study-card"><span>ANIMATION LERP</span><ol class="case-study-list"><li><b>01</b><div><strong>Transform 보간</strong><p>스케일·위치는 선형 보간하고, 회전은 쿼터니언 slerp로 연결해 상태 전환의 이질감을 줄였습니다.</p></div></li><li><b>02</b><div><strong>전환 시간 제어</strong><p>상태가 바뀌는 순간이 아니라 정해진 보간 구간 안에서 포즈가 바뀌도록 해 이동과 공격의 연결을 다듬었습니다.</p></div></li></ol></div><div class="case-study-card"><span>NAVMESH</span><h4>약 1,800개 셀로 이동 범위 구성</h4><p>삼각형·사각형 셀의 선분을 이용해 위치를 탐색하고, 경계를 넘으려는 이동은 벽을 따라 미끄러지는 벡터로 보정했습니다. 충돌체는 DirectXCollision의 Sphere·AABB·OBB를 용도에 맞춰 사용했습니다.</p></div></div></section>
           <section class="case-study-section"><p class="eyebrow">03 / RENDERING</p><h3>보이는 범위와 빛의 처리 경로를 분리해,<br />장면 표현의 기준을 세웠습니다.</h3><p class="case-study-lead">Assimp로 모델과 애니메이션 데이터를 불러오고, 카메라 바깥 모델은 Frustum Culling으로 제외했습니다. Deferred Shading과 Cascade Shadow Map, HLSL 기반 효과를 적용하며 장면이 그려지는 순서와 각 패스의 역할을 확인했습니다.</p><div class="case-study-media-row"><figure class="project-detail-media project-detail-media--image"><img src="assets/projects/gunfire-debug.jpg" alt="Gunfire Reborn 모작의 충돌과 디버그 시각화 화면" loading="lazy" decoding="async" /><span>DEBUG VIEW</span><figcaption>이동·충돌 범위를 확인하는 디버그 화면</figcaption></figure><figure class="project-detail-media project-detail-media--image"><img src="assets/projects/gunfire-gameplay.jpg" alt="Gunfire Reborn 모작의 전투와 렌더링 결과 화면" loading="lazy" decoding="async" /><span>RENDER RESULT</span><figcaption>게임 화면에서 확인한 렌더링 결과</figcaption></figure></div><p class="case-study-note"><strong>배운 점.</strong> 게임 기능이 늘어날수록 로딩, 상태, 데이터, 렌더링을 한 덩어리로 보지 않고 각자의 책임과 연결 시점을 명확히 해야 한다는 기준을 갖게 됐습니다.</p></section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><span class="project-video-pending">구현 영상·툴 화면 정리 중</span></div>
+          <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer" aria-label="Gunfire Reborn GitHub 저장소 보기, 새 탭에서 열기">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/WVfP2w29bx8" target="_blank" rel="noreferrer" aria-label="Gunfire Reborn YouTube 데모 보기, 새 탭에서 열기">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
         </div>
       </div>
     </dialog>
