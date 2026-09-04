@@ -12,10 +12,10 @@ python -m http.server 4173
 
 ## 실제 이미지 교체
 
-프로필 사진은 용도별로 두 파일을 사용합니다.
+프로필 사진과 More About Me 자료는 용도별 폴더에서 관리합니다.
 
 - 메인 Hero: `assets/profile-photo-hero.jpg` — 메인용 600×800 프로필 사진
-- More About Me: `assets/profile-photo-original.jpg` — 원본 비율을 유지해 표시
+- More About Me: `assets/about/` — 개발 동기, 팀 프로젝트, 제작물 사진과 GIF
 
 사진을 교체할 때는 해당 파일과 `index.html`의 이미지 경로·대체 텍스트를 함께 갱신합니다.
 
