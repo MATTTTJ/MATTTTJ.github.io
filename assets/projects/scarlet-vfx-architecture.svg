@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">VFX Manager, Group, System 구조</title>
+  <desc id="desc">ImGui 편집에서 JSON 프리셋을 거쳐 VFX Manager로 연결되고, EffectGroup과 ParticleGroup을 통해 각각의 System으로 이어지는 구조</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#48755f"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="720" fill="#f2f6ef"/>
+  <text x="480" y="38" text-anchor="middle" fill="#48755f" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="3">AUTHORING DATA</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="234" y="58" width="220" height="70" rx="8" fill="#ffffff" stroke="#b6cbbb" stroke-width="3"/>
+    <text x="344" y="101" text-anchor="middle" fill="#203d30" font-size="24" font-weight="700">ImGui 편집</text>
+    <rect x="506" y="58" width="220" height="70" rx="8" fill="#ffffff" stroke="#b6cbbb" stroke-width="3"/>
+    <text x="616" y="101" text-anchor="middle" fill="#203d30" font-size="24" font-weight="700">JSON 프리셋</text>
+
+    <path d="M454 93 H493" fill="none" stroke="#48755f" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <path d="M616 128 V158 H480 V187" fill="none" stroke="#48755f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+
+    <rect x="254" y="198" width="452" height="110" rx="10" fill="#2d4f3f"/>
+    <text x="480" y="240" text-anchor="middle" fill="#ffffff" font-size="39" font-weight="700">VFX Manager</text>
+    <text x="480" y="272" text-anchor="middle" fill="#d7ebe3" font-size="25">원본 관리 · 이름 검색</text>
+    <text x="480" y="299" text-anchor="middle" fill="#d7ebe3" font-size="25">Group 복제 반환</text>
+
+    <path d="M480 308 V349 H240 V382" fill="none" stroke="#48755f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+    <path d="M480 349 H720 V382" fill="none" stroke="#48755f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+
+    <rect x="70" y="394" width="340" height="112" rx="10" fill="#d7ebe3" stroke="#48755f" stroke-width="3"/>
+    <text x="240" y="432" text-anchor="middle" fill="#203d30" font-size="33" font-weight="700">EffectGroup</text>
+    <text x="240" y="466" text-anchor="middle" fill="#48755f" font-size="26">최대 5개 System</text>
+    <text x="240" y="494" text-anchor="middle" fill="#48755f" font-size="26">Curve · 재생 시간</text>
+
+    <rect x="550" y="394" width="340" height="112" rx="10" fill="#d7ebe3" stroke="#48755f" stroke-width="3"/>
+    <text x="720" y="432" text-anchor="middle" fill="#203d30" font-size="33" font-weight="700">ParticleGroup</text>
+    <text x="720" y="466" text-anchor="middle" fill="#48755f" font-size="26">가변 System 구성</text>
+    <text x="720" y="494" text-anchor="middle" fill="#48755f" font-size="26">이름 기반 접근</text>
+
+    <path d="M240 506 V548" fill="none" stroke="#48755f" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)"/>
+    <path d="M720 506 V548" fill="none" stroke="#48755f" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <rect x="70" y="560" width="340" height="104" rx="10" fill="#ffffff" stroke="#b6cbbb" stroke-width="3"/>
+    <text x="240" y="602" text-anchor="middle" fill="#203d30" font-size="30" font-weight="700">EffectSystem</text>
+    <text x="240" y="640" text-anchor="middle" fill="#667b70" font-size="25">변환값 · 렌더링 데이터</text>
+
+    <rect x="550" y="560" width="340" height="104" rx="10" fill="#ffffff" stroke="#b6cbbb" stroke-width="3"/>
+    <text x="720" y="602" text-anchor="middle" fill="#203d30" font-size="30" font-weight="700">ParticleSystem</text>
+    <text x="720" y="640" text-anchor="middle" fill="#667b70" font-size="25">수명 · 정렬 · 렌더링</text>
+  </g>
+
+  <text x="480" y="701" text-anchor="middle" fill="#48755f" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="3">UPDATE · RENDER</text>
+</svg>

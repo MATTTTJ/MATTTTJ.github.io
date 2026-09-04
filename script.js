@@ -74,6 +74,7 @@ projectDialogs.forEach((dialog) => {
     if (event.target === dialog) closeProjectDialog(dialog);
   });
   dialog.addEventListener('close', () => {
+    resetDialogMotion(dialog);
     lastProjectDialogTrigger?.setAttribute('aria-expanded', 'false');
     lastProjectDialogTrigger?.focus();
     lastProjectDialogTrigger = undefined;
@@ -111,6 +112,14 @@ function setMotionPlayback(motionImage, motionToggle, shouldPlay) {
   motionToggle.dataset.motionPlaying = String(shouldPlay);
   motionToggle.setAttribute('aria-pressed', String(shouldPlay));
   motionToggle.textContent = shouldPlay ? '애니메이션 정지' : '애니메이션 재생';
+}
+
+function resetDialogMotion(dialog) {
+  dialog.querySelectorAll('[data-motion-src][data-motion-poster]').forEach((motionImage) => {
+    if (!(motionImage instanceof HTMLImageElement) || !motionImage.id) return;
+    const motionToggle = motionToggles.find((toggle) => toggle.getAttribute('aria-controls') === motionImage.id);
+    if (motionToggle instanceof HTMLButtonElement) setMotionPlayback(motionImage, motionToggle, false);
+  });
 }
 
 motionImages.forEach((motionImage) => {
