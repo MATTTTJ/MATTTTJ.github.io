@@ -126,25 +126,6 @@ projectDialogs.forEach((dialog) => {
   });
 });
 
-const projectCarousel = document.querySelector('[data-project-carousel]');
-const projectScrollControls = [...document.querySelectorAll('[data-project-scroll]')];
-
-// 최신순 카드도 항상 왼쪽 첫 카드부터 시작합니다.
-// 브라우저의 가로 스크롤 복원은 load 이후에도 발생할 수 있어 짧은 초기화 구간을 둡니다.
-function resetProjectCarouselStart() {
-  if (!projectCarousel) return;
-  projectCarousel.scrollLeft = 0;
-}
-
-function establishProjectCarouselStart() {
-  [0, 60, 240, 600].forEach((delay) => {
-    window.setTimeout(resetProjectCarouselStart, delay);
-  });
-}
-
-establishProjectCarouselStart();
-window.addEventListener('load', establishProjectCarouselStart, { once: true });
-window.addEventListener('pageshow', establishProjectCarouselStart);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const motionImages = Array.from(document.querySelectorAll('[data-motion-src][data-motion-poster]'));
 const motionToggles = Array.from(document.querySelectorAll('[data-motion-toggle]'));
@@ -193,36 +174,6 @@ reducedMotion.addEventListener?.('change', (event) => {
   if (!event.matches) return;
   motionPlayers.forEach(({ motionImage, motionToggle }) => setMotionPlayback(motionImage, motionToggle, false));
 });
-
-function updateProjectScrollControls() {
-  if (!projectCarousel) return;
-  const maxScroll = Math.max(0, projectCarousel.scrollWidth - projectCarousel.clientWidth);
-  const atStart = projectCarousel.scrollLeft <= 1;
-  const atEnd = projectCarousel.scrollLeft >= maxScroll - 1;
-
-  projectScrollControls.forEach((control) => {
-    control.disabled = maxScroll <= 1 || (control.dataset.projectScroll === 'previous' ? atStart : atEnd);
-  });
-}
-
-function scrollProjects(direction) {
-  if (!projectCarousel) return;
-  const firstCard = projectCarousel.querySelector('.project-carousel-card');
-  const cardWidth = firstCard?.getBoundingClientRect().width || projectCarousel.clientWidth;
-  const gap = Number.parseFloat(getComputedStyle(projectCarousel.querySelector('.project-carousel-track')).gap) || 0;
-
-  projectCarousel.scrollBy({
-    left: direction * (cardWidth + gap),
-    behavior: reducedMotion.matches ? 'auto' : 'smooth',
-  });
-}
-
-projectScrollControls.forEach((control) => {
-  control.addEventListener('click', () => scrollProjects(control.dataset.projectScroll === 'next' ? 1 : -1));
-});
-projectCarousel?.addEventListener('scroll', updateProjectScrollControls, { passive: true });
-window.addEventListener('resize', updateProjectScrollControls);
-updateProjectScrollControls();
 
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
