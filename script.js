@@ -49,6 +49,51 @@ aboutDialog?.addEventListener('close', () => {
   lastDialogTrigger = undefined;
 });
 
+const imageLightbox = document.querySelector('#image-lightbox');
+const imageLightboxImage = imageLightbox?.querySelector('.image-lightbox-image');
+const imageLightboxClose = imageLightbox?.querySelector('[data-image-lightbox-close]');
+const aboutImages = [...(aboutDialog?.querySelectorAll('img') || [])].filter((image) => image.alt && !image.closest('a, button'));
+let lastImageLightboxTrigger;
+
+function openImageLightbox(sourceImage) {
+  if (!(imageLightbox instanceof HTMLDialogElement) || !(imageLightboxImage instanceof HTMLImageElement) || imageLightbox.open) return;
+  lastImageLightboxTrigger = sourceImage;
+  imageLightboxImage.src = sourceImage.src;
+  imageLightboxImage.alt = sourceImage.alt;
+  imageLightbox.showModal();
+  imageLightboxClose?.focus({ preventScroll: true });
+}
+
+function closeImageLightbox() {
+  if (imageLightbox?.open) imageLightbox.close();
+}
+
+aboutImages.forEach((image) => {
+  image.classList.add('is-image-lightbox-trigger');
+  image.tabIndex = 0;
+  image.setAttribute('role', 'button');
+  image.setAttribute('aria-haspopup', 'dialog');
+  image.setAttribute('aria-controls', 'image-lightbox');
+  image.setAttribute('aria-label', `${image.alt || '사진'} 원본 보기`);
+  image.addEventListener('click', () => openImageLightbox(image));
+  image.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    openImageLightbox(image);
+  });
+});
+
+imageLightboxClose?.addEventListener('click', closeImageLightbox);
+imageLightbox?.addEventListener('click', (event) => {
+  if (event.target === imageLightbox) closeImageLightbox();
+});
+imageLightbox?.addEventListener('close', () => {
+  imageLightboxImage?.removeAttribute('src');
+  if (imageLightboxImage) imageLightboxImage.alt = '';
+  if (lastImageLightboxTrigger?.isConnected) lastImageLightboxTrigger.focus({ preventScroll: true });
+  lastImageLightboxTrigger = undefined;
+});
+
 const projectDialogOpeners = [...document.querySelectorAll('[data-project-dialog-open]')];
 const projectDialogs = [...document.querySelectorAll('.project-dialog')];
 let lastProjectDialogTrigger;
