@@ -139,8 +139,8 @@ function setMotionPlayback(motionImage, motionToggle, shouldPlay) {
   if (source && motionImage.getAttribute('src') !== source) motionImage.setAttribute('src', source);
   motionToggle.dataset.motionPlaying = String(shouldPlay);
   motionToggle.setAttribute('aria-pressed', String(shouldPlay));
-  const playLabel = motionToggle.dataset.motionPlayLabel || '애니메이션 재생';
-  const pauseLabel = motionToggle.dataset.motionPauseLabel || '애니메이션 정지';
+  const playLabel = motionToggle.dataset.motionPlayLabel || '재생';
+  const pauseLabel = motionToggle.dataset.motionPauseLabel || '정지';
   motionToggle.textContent = shouldPlay ? pauseLabel : playLabel;
 }
 
@@ -196,4 +196,3 @@ const sectionObserver = new IntersectionObserver(
 
 sections.forEach((section) => sectionObserver.observe(section));
 document.querySelector('#year').textContent = String(new Date().getFullYear());
-
