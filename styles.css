@@ -266,6 +266,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .game-year-row > time { align-self: start; display: flex; align-items: center; min-height: 31px; margin-top: 1px; padding: 0 0 0 10px; border-left: 2px solid #90b49a; color: #355646; font: 500 13px/1 var(--mono); letter-spacing: .04em; }
 .game-year-tracks { display: grid; gap: 6px; }
 .game-year-track { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); min-height: 34px; background-image: linear-gradient(to right, rgb(65 96 75 / .16) 1px, transparent 1px); background-position: right top; background-size: calc(100% / 12) 100%; }
+.game-year-track--half-month { grid-template-columns: repeat(24, minmax(0, 1fr)); }
 .game-period { z-index: 1; grid-column: var(--start) / span var(--span); display: flex; align-items: center; gap: 7px; min-width: 0; margin: 1px 2px; padding: 4px 9px; overflow: hidden; border: 1px solid #b8ccc0; border-radius: 3px; background: #fffdf7; box-shadow: 0 4px 9px rgb(66 91 73 / .09); white-space: nowrap; }
 .game-period strong { overflow: hidden; color: #263b31; font: 600 12px/1.2 var(--sans); letter-spacing: -.03em; text-overflow: ellipsis; }
 .game-period em { overflow: hidden; color: #607066; font: 500 11px/1.2 var(--sans); font-style: normal; text-overflow: ellipsis; }
@@ -273,10 +274,12 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .game-period--ongoing { border-color: #426b57; background: #527b64; }
 .game-period--continuity { border-color: #94bcad; border-style: solid; background: #bad8cc; }
 .game-period--ongoing { border-style: dashed; }
+.game-period--continuity.game-period--ongoing { border-color: #6f9f8b; background: #bad8cc; }
 .game-period--collaboration { border-color: #b68a20; border-width: 2px; background: #527b64; box-shadow: 0 0 0 1px #e7cf78, 0 4px 9px rgb(66 91 73 / .13); }
 .game-period--project strong,
 .game-period--ongoing strong,
 .game-period--collaboration strong { color: white; }
+.game-period--continuity.game-period--ongoing strong { color: #263b31; }
 .game-period--project em,
 .game-period--ongoing em,
 .game-period--collaboration em { color: rgb(255 255 255 / .72); }
@@ -685,6 +688,8 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .project-core-figure--ratio-8-5 .project-core-frame img { aspect-ratio: 8 / 5; }
 .project-core-figure--debug .project-core-frame img { aspect-ratio: 4 / 3; object-fit: contain; }
 .project-core-figure--motion-wide .project-core-frame img { height: auto; aspect-ratio: auto; object-fit: contain; }
+.project-core-figure--insurance-motion .project-core-frame { aspect-ratio: 400 / 232; }
+.project-core-figure--insurance-motion .project-core-frame img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
 .project-core-figure figcaption { padding-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.55; word-break: keep-all; }
 .project-core-list { display: grid; align-content: start; margin: 0; padding: 8px 26px; list-style: none; }
 .project-core-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 13px; padding: 18px 0; border-bottom: 1px solid var(--line); }
