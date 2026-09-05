@@ -137,7 +137,9 @@ function setMotionPlayback(motionImage, motionToggle, shouldPlay) {
   if (source && motionImage.getAttribute('src') !== source) motionImage.setAttribute('src', source);
   motionToggle.dataset.motionPlaying = String(shouldPlay);
   motionToggle.setAttribute('aria-pressed', String(shouldPlay));
-  motionToggle.textContent = shouldPlay ? '애니메이션 정지' : '애니메이션 재생';
+  const playLabel = motionToggle.dataset.motionPlayLabel || '애니메이션 재생';
+  const pauseLabel = motionToggle.dataset.motionPauseLabel || '애니메이션 정지';
+  motionToggle.textContent = shouldPlay ? pauseLabel : playLabel;
 }
 
 function resetDialogMotion(dialog) {
