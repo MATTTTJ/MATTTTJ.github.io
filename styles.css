@@ -167,14 +167,10 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .about-resource-layout { display: grid; grid-template-columns: minmax(0, 1.16fr) minmax(280px, .84fr); gap: 52px; align-items: start; }
 .about-gallery { display: grid; gap: 14px; min-width: 0; }
 .about-gallery--problem { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
-.about-communication { --communication-photo-width: 300px; }
-.about-communication .about-section-heading, .about-communication-flow { width: min(100%, 980px); margin-right: auto; margin-left: auto; }
-.about-communication-flow { display: grid; gap: 22px; }
-.about-communication-row { display: grid; gap: 44px; align-items: start; }
-.about-communication-row--intro { grid-template-columns: minmax(0, 1fr) var(--communication-photo-width); }
-.about-communication-row--closing { grid-template-columns: var(--communication-photo-width) minmax(0, 1fr); margin-top: 8px; }
+.about-communication-flow { display: grid; width: min(100%, 960px); gap: 22px; }
+.about-communication-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; align-items: start; }
 .about-communication-middle { max-width: none; }
-.about-communication-photo { width: var(--communication-photo-width); }
+.about-communication-photo { width: 100%; }
 .about-communication-photo--wide img { aspect-ratio: 12 / 5; object-position: center 35%; }
 .about-communication-photo--standard img { aspect-ratio: 4 / 3; object-position: center 32%; }
 .about-dialog img.is-image-lightbox-trigger { cursor: zoom-in; }
@@ -334,10 +330,6 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
   .about-section-heading { margin-bottom: 22px; }
   .about-visual-stack { grid-template-columns: 1fr; align-items: start; }
   .about-gallery--problem { grid-template-columns: 1fr; }
-  .about-communication .about-section-heading, .about-communication-flow { width: 100%; }
-  .about-communication-row { grid-template-columns: 1fr; gap: 16px; }
-  .about-communication-row--closing { margin-top: 3px; }
-  .about-communication-photo { width: min(100%, var(--communication-photo-width)); justify-self: center; }
   .about-rhythm { position: static; padding: 21px; }
   .about-photo-card figcaption { min-height: 0; font-size: 12px; }
   .about-media { min-height: 200px; aspect-ratio: auto; }
@@ -739,6 +731,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 }
 
 @media (max-width: 860px) {
+  .about-communication-row { grid-template-columns: 1fr; gap: 16px; }
   .project-core-layout,
   .project-core-layout--reverse { grid-template-columns: 1fr; }
   .project-core-figure,
