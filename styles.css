@@ -269,7 +269,6 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .game-period { z-index: 1; grid-column: var(--start) / span var(--span); display: flex; align-items: center; gap: 7px; min-width: 0; margin: 1px 2px; padding: 4px 9px; overflow: hidden; border: 1px solid #b8ccc0; border-radius: 3px; background: #fffdf7; box-shadow: 0 4px 9px rgb(66 91 73 / .09); white-space: nowrap; }
 .game-period strong { overflow: hidden; color: #263b31; font: 600 12px/1.2 var(--sans); letter-spacing: -.03em; text-overflow: ellipsis; }
 .game-period em { overflow: hidden; color: #607066; font: 500 11px/1.2 var(--sans); font-style: normal; text-overflow: ellipsis; }
-.game-period--learning { border-color: #c5d2c8; background: #fffdf7; }
 .game-period--project,
 .game-period--ongoing { border-color: #426b57; background: #527b64; }
 .game-period--continuity { border-color: #94bcad; border-style: solid; background: #bad8cc; }
