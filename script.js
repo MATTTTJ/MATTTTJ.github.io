@@ -30,6 +30,7 @@ function openAboutDialog(trigger) {
   aboutDialog.showModal();
   dialogClose?.focus({ preventScroll: true });
   aboutDialog.scrollTop = 0;
+  requestAnimationFrame(updateAboutReferenceControls);
 }
 
 function closeAboutDialog() {
@@ -47,6 +48,55 @@ aboutDialog?.addEventListener('close', () => {
   lastDialogTrigger?.setAttribute('aria-expanded', 'false');
   lastDialogTrigger?.focus();
   lastDialogTrigger = undefined;
+});
+
+const aboutReferenceSection = aboutDialog?.querySelector('#about-references');
+const aboutReferenceGallery = aboutDialog?.querySelector('#about-reference-gallery');
+const aboutReferenceControls = aboutDialog?.querySelector('.about-reference-controls');
+const aboutReferenceButtons = [...(aboutReferenceControls?.querySelectorAll('[data-about-gallery-step]') || [])];
+
+function updateAboutReferenceControls() {
+  if (!aboutReferenceGallery || !aboutReferenceControls) return;
+  const maxScroll = aboutReferenceGallery.scrollWidth - aboutReferenceGallery.clientWidth;
+  aboutReferenceControls.hidden = maxScroll <= 1;
+  aboutReferenceButtons.forEach((button) => {
+    const direction = Number(button.dataset.aboutGalleryStep);
+    button.disabled = direction < 0
+      ? aboutReferenceGallery.scrollLeft <= 1
+      : aboutReferenceGallery.scrollLeft >= maxScroll - 1;
+  });
+}
+
+function aboutReferenceScrollBehavior() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+}
+
+aboutReferenceButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    aboutReferenceGallery?.scrollBy({
+      left: Number(button.dataset.aboutGalleryStep) * aboutReferenceGallery.clientWidth * .85,
+      behavior: aboutReferenceScrollBehavior(),
+    });
+  });
+});
+aboutReferenceGallery?.addEventListener('scroll', updateAboutReferenceControls, { passive: true });
+window.addEventListener('resize', updateAboutReferenceControls);
+
+aboutDialog?.querySelectorAll('[data-about-reference]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const target = document.getElementById(link.hash.slice(1));
+    if (!target || !aboutReferenceGallery?.contains(target) || !aboutReferenceSection) return;
+    event.preventDefault();
+    const headerHeight = aboutDialog.querySelector('.dialog-header')?.offsetHeight || 0;
+    const top = aboutDialog.scrollTop
+      + aboutReferenceSection.getBoundingClientRect().top
+      - aboutDialog.getBoundingClientRect().top
+      - headerHeight - 20;
+    const behavior = aboutReferenceScrollBehavior();
+    aboutDialog.scrollTo({ top, behavior });
+    aboutReferenceGallery.scrollTo({ left: target.offsetLeft, behavior });
+    target.querySelector('img')?.focus({ preventScroll: true });
+  });
 });
 
 const imageLightbox = document.querySelector('#image-lightbox');
