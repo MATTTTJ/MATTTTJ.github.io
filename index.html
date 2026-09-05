@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260905-46" />
+    <link rel="stylesheet" href="styles.css?v=20260905-47" />
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -549,12 +549,12 @@
                     <section><h5>다음 공격으로 넘어가는 조건</h5><p>Anim Notify State가 시작되면 Controller에 콤보 입력 구간을 등록하고, 끝나면 비웁니다. 입력 시 현재 공격의 Tag와 이 구간을 확인해, 조건이 맞으면 진행 중인 Ability의 다음 Montage Section으로 넘깁니다. 콤보 입력으로 처리되지 않으면 입력에 대응하는 Ability를 실행합니다.</p></section>
                   </div>
                 </div>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-cpp-combo-registration.png" alt="Controller가 실행 중인 콤보의 Gameplay Tag와 Ability를 보관하는 BeginComboAction 코드" width="815" height="105" loading="lazy" decoding="async" /></div></figure></div>
+
                 <div class="project-technical-notes">
                   <section><h5>캐릭터마다 다른 입력</h5><p>이동은 Controller가 처리하고 공격·스킬은 Character에 두었습니다. CharacterBase에는 공통 기능을, IController 인터페이스에는 PlayerController와 AIController의 공통 호출을 정의했습니다.</p></section>
                   <section><h5>조종할 캐릭터가 바뀔 때</h5><p>캐릭터에 빙의하면 해당 BP에 설정한 시작 Ability와 입력 Ability를 부여합니다. 맵에 배치된 다른 플레이어 캐릭터를 조종해도 각 캐릭터에 구현한 명령을 실행하도록 구성했습니다.</p></section>
                 </div>
-                <details class="project-source-details"><summary>입력 데이터와 콤보 구간 코드</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-cpp-input-data.png" alt="Gameplay Tag로 Input Action을 찾는 C++ Data Asset 클래스" width="723" height="261" loading="lazy" decoding="async" /><img src="assets/projects/projectaction-cpp-combo-window.png" alt="Notify Begin과 End에서 Controller에 콤보 입력 구간을 등록하고 해제하는 코드" width="959" height="718" loading="lazy" decoding="async" /></div></details>
+                <details class="project-source-details"><summary>입력 데이터와 콤보 등록·구간 코드</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-cpp-input-data.png" alt="Gameplay Tag로 Input Action을 찾는 C++ Data Asset 클래스" width="723" height="261" loading="lazy" decoding="async" /><img src="assets/projects/projectaction-cpp-combo-registration.png" alt="Controller가 실행 중인 콤보의 Gameplay Tag와 Ability를 보관하는 BeginComboAction 코드" width="815" height="105" loading="lazy" decoding="async" /><img src="assets/projects/projectaction-cpp-combo-window.png" alt="Notify Begin과 End에서 Controller에 콤보 입력 구간을 등록하고 해제하는 코드" width="959" height="718" loading="lazy" decoding="async" /></div></details>
               </article>
               <article class="project-core-block">
                 <header class="project-core-heading"><span>02 / SNAPSHOT</span><h4>전환 직전의 포즈에서 다음 공격으로 블렌딩</h4><p>공격 전환 때 포즈가 튀는 문제를 해결하는 데 어려움을 겪었습니다. 다음 공격을 누르는 시점마다 Section이 바뀌는 프레임이 달라, 이전 동작과 다음 동작의 포즈가 맞지 않았습니다.</p></header>
@@ -713,7 +713,7 @@
                   <section><h5>발사에 맞춘 반동과 효과</h5><p>발사음과 캐릭터의 Montage를 재생하고 Controller의 Pitch·Yaw에 무작위 값을 더해 반동을 만듭니다. 이전 총구 효과가 남아 있으면 제거한 뒤 새 효과를 생성하고, 타이머로 제거하도록 했습니다.</p></section>
                   <section><h5>벽까지의 거리에 맞춘 레이저</h5><p>레이저가 켜져 있을 때 매 Tick Line Trace로 전방 충돌을 검사합니다. 충돌 지점까지의 거리로 레이저 길이를 줄이고, 충돌이 없으면 설정한 전체 길이를 사용합니다.</p></section>
                 </div>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/fps-firing-code.png" alt="잔탄 검사, 발사, 연사 예약, 발사음과 반동, 총구 효과 처리를 연결한 FireCPP 코드" width="1166" height="772" loading="lazy" decoding="async" /></div></figure></div>
+                <details class="project-source-details"><summary>발사 조건과 연사·반동 처리 코드</summary><div class="project-source-gallery"><img src="assets/projects/fps-firing-code.png" alt="잔탄 검사, 발사, 연사 예약, 발사음과 반동, 총구 효과 처리를 연결한 FireCPP 코드" width="1166" height="772" loading="lazy" decoding="async" /></div></details>
               </article>
             </div>
           </section>
