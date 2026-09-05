@@ -542,7 +542,7 @@
               <article class="project-core-block">
                 <header class="project-core-heading"><span>01 / INPUT &amp; GAS</span><h4>입력과 실행 중인 Ability 연결</h4><p>애니메이션과 전투 상태가 늘어나면서, 입력이 들어왔을 때 어떤 행동을 실행할 수 있는지 함께 관리할 필요가 있었습니다. C++ 버전에서는 GAS로 상태와 Ability를 관리하고, PlayerState가 ASC를 보유하도록 구성했습니다.</p></header>
                 <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--contain"><div class="project-core-frame"><img src="assets/projects/projectaction-cpp-ground-combat.png" alt="ProjectAction C++의 지상 콤보 공격 화면" loading="lazy" decoding="async" /></div></figure>
+                  <figure class="project-core-figure project-core-figure--motion-wide"><div class="project-core-frame"><img id="projectaction-cpp-combat-motion" src="assets/projects/projectaction-cpp-combat-poster.png" data-motion-src="assets/projects/projectaction-cpp-combat.gif" data-motion-poster="assets/projects/projectaction-cpp-combat-poster.png" data-motion-autoplay="false" width="640" height="360" alt="ProjectAction C++의 전투와 콤보 동작을 보여주는 플레이 영상" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="projectaction-cpp-combat-motion" hidden>재생</button></figure>
                   <div class="project-technical-notes">
                     <section><h5>입력 설정</h5><p>Gameplay Tag와 Input Action의 짝을 Data Asset에 저장했습니다. Enhanced Input Component를 상속한 컴포넌트가 이 설정을 읽어 입력 함수를 바인딩합니다.</p></section>
                     <section><h5>현재 공격 보관</h5><p>공격 Ability가 시작되면 Controller의 BeginComboAction에 Action Tag와 현재 Ability를 전달합니다. 다음 입력이 왔을 때 이어갈 공격을 이 정보로 찾습니다.</p></section>
