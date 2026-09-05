@@ -53,11 +53,13 @@ const imageLightbox = document.querySelector('#image-lightbox');
 const imageLightboxImage = imageLightbox?.querySelector('.image-lightbox-image');
 const imageLightboxClose = imageLightbox?.querySelector('[data-image-lightbox-close]');
 const aboutImages = [...(aboutDialog?.querySelectorAll('img') || [])].filter((image) => image.alt && !image.closest('a, button'));
+const projectImages = [...document.querySelectorAll('.project-dialog img')].filter((image) => image.alt && !image.closest('a, button'));
 let lastImageLightboxTrigger;
 
 function openImageLightbox(sourceImage) {
   if (!(imageLightbox instanceof HTMLDialogElement) || !(imageLightboxImage instanceof HTMLImageElement) || imageLightbox.open) return;
   lastImageLightboxTrigger = sourceImage;
+  imageLightbox.classList.toggle('image-lightbox--motion', /\.gif(?:[?#]|$)/i.test(sourceImage.src));
   imageLightboxImage.src = sourceImage.src;
   imageLightboxImage.alt = sourceImage.alt;
   imageLightbox.showModal();
@@ -68,7 +70,7 @@ function closeImageLightbox() {
   if (imageLightbox?.open) imageLightbox.close();
 }
 
-aboutImages.forEach((image) => {
+[...aboutImages, ...projectImages].forEach((image) => {
   image.classList.add('is-image-lightbox-trigger');
   image.tabIndex = 0;
   image.setAttribute('role', 'button');
