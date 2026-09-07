@@ -31,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260906-01" />
+    <link rel="stylesheet" href="styles.css?v=20260907-02" />
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -290,11 +290,11 @@
             <h3 id="foundations-title">FOUNDATIONS</h3>
             <div class="foundation-content">
               <ul class="foundation-list">
-                <li><strong>C++ Core</strong><span>포인터 · 객체지향 · 템플릿 · STL</span></li>
-                <li><strong>Data Structure</strong><span>스택 · 큐 · 그래프 · 트리 · 해시</span></li>
-                <li><strong>System &amp; Rendering</strong><span>WinAPI · 메모리 · Direct3D 11 · HLSL · 렌더링/VFX 흐름</span></li>
+                <li><strong>C/C++</strong><span>포인터 · 객체지향 · 템플릿 · STL</span></li>
+                <li><strong>자료구조·알고리즘</strong><span>컨테이너 · 정렬 · 재귀 · DFS/BFS</span></li>
+                <li><strong>CS·게임 설계</strong><span>컴퓨터 구조 · 운영체제 · 게임 설계 참고 도서</span></li>
               </ul>
-              <a class="skill-record-link" href="https://app.notion.com/p/364834e5c09e807db011c4796274a00b" target="_blank" rel="noreferrer"><span>STUDY RECORD</span> C++ 학습 기록 보기 <b aria-hidden="true">↗</b></a>
+              <a class="skill-record-link" href="https://app.notion.com/p/3cd834e5c09e8070be9bc9c30bead363?source=copy_link" target="_blank" rel="noreferrer"><span>STUDY RECORD</span> 기본기 학습 기록 보기 <b aria-hidden="true">↗</b></a>
             </div>
           </section>
         </div>
@@ -503,18 +503,67 @@
           <div><h2 id="scarlet-dialog-title">Scarlet Strings <span>· 모작</span></h2></div>
           <button class="dialog-close" type="button" data-project-dialog-close aria-label="Scarlet Strings 상세 닫기"><span aria-hidden="true">×</span></button>
         </header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
             <div class="project-detail-copy">
-
-              <h3>VFX 시스템과 제작 도구, 최종 보스 Karen의 전투 콘텐츠를 구현했습니다.</h3>
-              <p>ImGui·JSON 기반 제작 도구에서 VFX를 편집하고, Group으로 조합해 사용할 수 있도록 구현했습니다.</p>
-              <dl class="project-facts"><div><dt>TYPE</dt><dd>3D Team Project · 6 People</dd></div><div><dt>PERIOD</dt><dd>2023.02.16 — 04.17</dd></div><div><dt>ROLE</dt><dd>VFX System &amp; Tool · Final Boss</dd></div><div><dt>STACK</dt><dd>C++ · Direct3D 11 · HLSL · ImGui · JSON · PhysX</dd></div></dl>
-            </div>
+<h3>VFX 제작 도구와 최종 보스의 전투 패턴을 구현했습니다.</h3>
+<p>DirectX11로 Scarlet Strings를 모작한 6인 팀 프로젝트입니다. 이펙트·파티클 시스템과 제작 도구, 최종 보스 카렌의 전투 패턴을 맡았습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>3D Team Project · 6 People</dd></div><div><dt>PERIOD</dt><dd>2023.02.16 — 04.17</dd></div><div><dt>ROLE</dt><dd>VFX System &amp; Tool · Final Boss</dd></div><div><dt>STACK</dt><dd>C++ · Direct3D 11 · HLSL · ImGui · JSON · PhysX</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-scarlet project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/scarlet-karen-boss.jpg" alt="Karen 보스 체력 UI와 전투 연출이 보이는 실제 게임 화면" loading="lazy" decoding="async" /></figure>
           </section>
-<section class="case-study-section project-core-section"><p class="eyebrow">01 / REPRESENTATIVE CASES</p><h3>파티클 처리와 VFX 제작 구조</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>01 / PARTICLE LIFECYCLE</span><h4>파티클의 생성부터 버퍼 갱신까지</h4><p>한 연출 안에서도 입자마다 위치와 수명이 달라야 했습니다.<br class="sentence-break" />생성 간격과 한 번에 만들 개수를 정하고, Point·Mesh Particle의 데이터를 따로 갱신하도록 구현했습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/scarlet-particle-result.png" alt="Point·Mesh 파티클을 조합한 원형 VFX 결과" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>수명이 끝난 입자 제거</h5><p>각 파티클의 위치·이동 방향·수명을 <code>list</code>에 보관했습니다.<br class="sentence-break" />갱신할 때 수명을 누적하고, 최대 수명에 도달한 항목은 <code>remove_if</code>로 지웠습니다.<br class="sentence-break" />남은 수명 비율은 알파값에 반영해 서서히 사라지게 했습니다.</p></section><section><h5>그리는 순서와 전달할 데이터</h5><p>반투명 파티클이 겹쳐 보이는 문제를 줄이기 위해 카메라에서 먼 순서로 정렬했습니다.</p><p>Late Update에서 인스턴스 버퍼를 Map하고, 남은 입자의 렌더링 데이터를 복사한 뒤 Unmap했습니다.<br class="sentence-break" />이동·수명 관리에 쓰는 데이터 중 셰이더에 필요한 값만 전달했습니다.</p></section></div></div><details class="project-source-details"><summary>수명·거리 정렬과 인스턴스 버퍼 갱신 코드</summary><div class="project-source-gallery"><img src="assets/projects/scarlet-particle-update-source.png" alt="파티클 수명 누적, remove_if 제거, 카메라 거리 정렬 코드" loading="lazy" decoding="async" /><img src="assets/projects/scarlet-particle-buffer-source.png" alt="Map으로 인스턴스 버퍼에 파티클 데이터를 복사하고 Unmap하는 코드" loading="lazy" decoding="async" /></div></details></article><article class="project-core-block"><header class="project-core-heading"><span>02 / VFX AUTHORING</span><h4>도구에서 만든 설정을 게임 연출로 연결</h4><p>한 이펙트에 여러 종류의 효과를 묶어야 했고, 제작 중 값을 반복해서 바꿀 수 있어야 했습니다.<br class="sentence-break" />개별 효과를 System, 효과의 묶음을 Group으로 나누고 ImGui 도구에서 편집하도록 했습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/scarlet-vfx-architecture.svg" alt="ImGui와 JSON, VFX Manager, Group, System의 연결 구조" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>편집과 저장</h5><p>도구의 목록에서 VFX를 선택해 생성하고 각 System의 값을 조절했습니다.<br class="sentence-break" />완성한 설정은 JSON으로 저장하고 다시 불러와 수정할 수 있습니다.</p></section><section><h5>로딩과 실행</h5><p>게임 로딩 중 VFX 원본을 준비했습니다.<br class="sentence-break" />플레이 중에는 Manager가 이름으로 원본을 찾아 Group을 복제해 반환하고, 호출한 객체가 위치나 부착할 뼈를 지정합니다.</p></section><section><h5>Group 구성을 바꾼 이유</h5><p>EffectGroup은 최대 5개 System을 묶는 형태로 만들었습니다.</p><p>이후 ParticleGroup에서는 System을 이름으로 보관해 조합 개수를 늘릴 수 있도록 바꿨습니다.<br class="sentence-break" />ParticleGroup이 소속 System을 직접 갱신합니다.</p></section></div></div><div class="project-core-gallery"><figure class="project-core-gallery--contain"><img src="assets/projects/scarlet-default-effect.gif" alt="도구에서 기본 Effect를 생성하는 과정" loading="lazy" decoding="async" data-image-expand /></figure><figure class="project-core-gallery--contain"><img src="assets/projects/scarlet-vfx-viewer.gif" alt="VFX 목록에서 효과를 찾아 생성하고 확인하는 과정" loading="lazy" decoding="async" data-image-expand /></figure></div></article></div></section><section class="case-study-section project-core-section"><p class="eyebrow">02 / IMPLEMENTATION</p><h3>연출 기능과 Karen 전투</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>03 / EFFECT TRANSFORM</span><h4>같은 버퍼를 여러 위치에 그리기</h4><p>같은 모양에 위치·회전·크기만 다른 Effect는 로컬 행렬을 vector에 보관했습니다.<br class="sentence-break" />행렬마다 객체를 새로 만드는 대신 같은 버퍼를 반복 렌더링했습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/scarlet-local-matrix.gif" alt="Effect의 로컬 행렬을 추가하고 위치와 크기를 조정하는 과정" loading="lazy" decoding="async" data-image-expand /></div></figure><div class="project-technical-notes"><section><h5>도구에서 행렬 편집</h5><p>목록에 항등 행렬을 추가하고 Guizmo로 변환값을 수정해 저장했습니다.<br class="sentence-break" />이 방식은 로컬 변환만 다른 Effect에 적용했습니다.</p></section><section><h5>개별 Effect 설정</h5><p>Mesh·Rect·Cube 버퍼를 사용하고 UV Sprite, 빌보드, Dissolve, HDR, 왜곡과 Flow Map 옵션을 구현했습니다.</p></section></div></div></article><article class="project-core-block"><header class="project-core-heading"><span>04 / CURVE &amp; EVENT</span><h4>Curve의 값과 이벤트로 연출 이어 붙이기</h4><p>팀의 Timeline에 Curve 갱신을 연결했습니다.<br class="sentence-break" />EffectGroup에서 각 System의 UV Animation·Dissolve·Emissive 값을 설정하고, Curve의 키프레임에는 ParticleGroup 생성 이벤트를 넣었습니다.</p></header><div class="project-technical-notes"><section><h5>시간에 따른 변화</h5><p>ImGui Curve를 사용하고 템플릿·람다로 System에 값을 전달했습니다.<br class="sentence-break" />EffectGroup의 수명과 Curve 재생 시간을 맞춰 연출을 종료하도록 했습니다.</p></section><section><h5>다음 효과의 시작</h5><p>Curve가 지정한 키프레임에 도달하면 ParticleGroup을 생성합니다.<br class="sentence-break" />하나의 효과가 재생되는 중에 다른 효과가 이어지도록 제작할 수 있습니다.</p></section></div><div class="project-core-gallery"><figure class="project-core-gallery--contain"><img src="assets/projects/scarlet-curve.gif" alt="Curve 값을 조절해 VFX의 시간에 따른 변화를 만드는 과정" loading="lazy" decoding="async" data-image-expand /></figure><figure class="project-core-gallery--contain"><img src="assets/projects/scarlet-group-event.gif" alt="EffectGroup의 키프레임 이벤트로 ParticleGroup을 생성하는 과정" loading="lazy" decoding="async" data-image-expand /></figure></div></article><article class="project-core-block"><header class="project-core-heading"><span>05 / MODEL PARTICLE</span><h4>모델 형태를 따라 파티클 생성하기</h4><p>모델에서 불러온 정점 순서가 일정하지 않아 UV 값의 합으로 정렬해 보관했습니다.<br class="sentence-break" />사용할 정점 범위와 그 안의 생성 밀도를 따로 조절해, 같은 모델에서도 차오르는 정도와 모양을 바꿀 수 있도록 했습니다.</p></header><div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--motion-wide project-core-figure--particle-motion"><div class="project-core-frame"><img id="scarlet-particle-tool-motion" src="assets/projects/scarlet-particle-tool-poster.png" data-motion-src="assets/projects/scarlet-particle-tool.gif" data-motion-poster="assets/projects/scarlet-particle-tool-poster.png" data-motion-autoplay="false" width="640" height="480" alt="Scarlet Strings 파티클 도구에서 효과를 생성하고 설정을 조절하는 과정" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="scarlet-particle-tool-motion" hidden>재생</button></figure></div><div class="project-technical-notes"><section><h5>Local·World 이동 기준</h5><p>Local에서는 System이 움직일 때 생성된 파티클도 함께 이동합니다.<br class="sentence-break" />World에서는 이미 생성한 파티클이 각자의 위치에서 움직입니다.<br class="sentence-break" />파티클 이동 방향에도 Curve를 적용했습니다.</p></section><section><h5>보스 연출에 적용</h5><p>손 뼈에 파티클을 붙이고 모델의 회전축·속도와 Curve에 따른 크기 변화로 에너지를 모으는 연출을 만들었습니다.<br class="sentence-break" />Cone·Sphere 형태의 이동과 Mesh Particle의 PhysX 충돌도 설정할 수 있도록 했습니다.</p></section></div></article><article class="project-core-block"><header class="project-core-heading"><span>06 / VFX RENDERING</span><h4>VFX 픽셀 정보를 다른 렌더 단계에 전달</h4><p>팀의 렌더러에 VFX용 RenderGroup을 추가했습니다.<br class="sentence-break" />후처리 등 다른 단계에서도 VFX 픽셀 정보를 사용할 수 있도록 Flag RenderTarget을 연결하고, 공통 값은 HLSL에서 함께 참조하도록 정리했습니다.</p></header><ol class="project-flow project-flow--three"><li><b>01</b><strong>VFX 렌더</strong><p>VFX용 그룹에 등록한 효과를 그립니다.</p></li><li><b>02</b><strong>Flag 기록</strong><p>후속 단계에서 사용할 픽셀 정보를 RenderTarget에 남깁니다.</p></li><li><b>03</b><strong>후속 단계에서 사용</strong><p>다른 렌더 그룹이 저장된 픽셀 정보를 참조합니다.</p></li></ol></article><article class="project-core-block"><header class="project-core-heading"><span>07 / KAREN</span><h4>염력 물체를 빼앗아 다시 던지는 보스</h4><p>팀원이 만든 FSM·Controller·ASM 위에 2개 페이즈와 8개 패턴을 구현했습니다.<br class="sentence-break" />거리에 따라 순간이동이나 원거리 공격 명령을 내리고, 근접·원거리 판정은 각각의 함수로 나눴습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--motion-wide project-core-figure--karen-motion"><div class="project-core-frame"><img id="scarlet-karen-kinetic-motion" src="assets/projects/scarlet-karen-kinetic.jpg" data-motion-src="assets/projects/scarlet-karen-kinetic.gif" data-motion-poster="assets/projects/scarlet-karen-kinetic.jpg" data-motion-autoplay="false" width="854" height="480" alt="Karen이 염력 물체를 빼앗아 플레이어에게 다시 던지는 과정" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="scarlet-karen-kinetic-motion" hidden>재생</button></figure><div class="project-technical-notes"><section><h5>공격 판정</h5><p>근접 공격은 손 등 지정한 뼈의 위치에 Sphere를 맞추고, 애니메이션의 공격 구간에 Overlap을 검사했습니다.<br class="sentence-break" />원거리 공격도 해당 상태가 진행되는 동안 지정한 위치에서 판정합니다.</p></section><section><h5>탈취한 물체의 위치 보정</h5><p>플레이어가 던진 물체를 빼앗으면 비행 애니메이션 시간을 고정합니다.<br class="sentence-break" />현재 위치에서 Karen 기준 소켓 위치까지 보간해 다음 던지기 동작에 맞춥니다.</p></section><section><h5>상태 전환과 재발사</h5><p>Karen의 동작이 끝나고 물체가 남아 있으면 던지기 상태로 전환합니다.<br class="sentence-break" />소켓을 따라 물체 위치를 계속 갱신하다가 던지기 이벤트에서 플레이어를 향해 다시 발사했습니다.</p></section></div></div></article></div></section>
-<p class="case-study-note"><strong>담당 범위.</strong> VFX Manager, Effect·Particle System/Group, ImGui 제작 도구, VFX 렌더 경로와 Karen 패턴·충돌·염력 물체 처리를 구현했습니다.<br class="sentence-break" />Prototype·JsonStorage, Timeline, 공용 셰이더 변수와 FSM·Controller·ASM은 팀 기반을 활용했습니다.</p>
+<section class="case-study-section project-narrative-section" aria-labelledby="scarlet-dialog-narrative-1">
+<h3 id="scarlet-dialog-narrative-1">어려웠던 문제</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 효과 개수를 늘릴 때 반복되던 수정</h4><div class="project-narrative-copy">
+<p>처음에는 EffectGroup에서 사용할 System을 3개로 정하고, 각각의 생성·갱신·저장 코드를 작성했습니다. 이후 5개로 늘리면서 같은 처리를 추가했습니다. 구조를 다시 정리할 필요는 있었지만, 완료 일정을 고려해 기존 구조를 유지하며 필요한 개수까지 확장했습니다.</p>
+<p>이 경험을 바탕으로 이후 ParticleGroup에서는 System을 이름으로 컨테이너에 보관하고, 순회하며 처리했습니다. System을 추가할 때마다 같은 처리 코드를 늘리지 않도록 바꿨습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-vfx-architecture.svg" alt="ImGui와 JSON, VFX Manager, Group, System의 연결 구조" loading="lazy" decoding="async" /></div><figcaption>ImGui와 JSON, VFX Manager, Group, System의 연결 구조</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 팀원이 만든 코드에 카렌의 염력 반격 연결하기</h4><div class="project-narrative-copy">
+<p>플레이어가 던진 염력 물체를 카렌이 빼앗아 다시 던지는 패턴을 구현하려고 했습니다. 이를 위해 다른 팀원이 작성한 플레이어의 염력 공격과 물체 제어 코드에 보스의 반격 동작을 연동해야 했습니다.</p>
+<p>기존 FSM·컨트롤러·애니메이션 시스템의 사용 방식이 익숙하지 않아, 물체를 제어하는 함수들이 어떤 순서로 실행되고 보스의 처리를 어디에 추가해야 하는지 파악하는 데 어려움을 겪었습니다.</p>
+<p>관련 함수의 호출 흐름을 확인하고, 담당 팀원과 상호작용 방식을 논의하며 보스 상태에 필요한 처리를 연결했습니다.</p>
+<p>카렌이 빼앗은 물체를 던지기 동작에 맞춰 움직이려면, 서로 다른 위치에서 날아온 물체를 같은 시작 자세로 맞춰야 했습니다. 목표 위치로 바로 옮기면 움직임이 끊길 수 있어, 캡처한 순간의 위치와 방향을 저장하고 기준 뼈의 위치와 방향까지 보간했습니다.</p>
+<p>이때 보정 속도를 따로 정하기보다 애니메이션 진행률을 보간 비율로 사용했습니다. 애니메이션이 진행되는 만큼 물체의 위치와 바라보는 방향이 목표에 가까워지도록 했습니다. 진행률에 2를 곱해 캡처 동작의 절반 지점에서 보정을 마치면 던지기 동작으로 전환했습니다.</p>
+<p>던지기 동작에서는 애니메이션에 맞춰 움직이는 기준 뼈를 물체가 따라가도록 갱신했습니다. 실제 발사는 애니메이션에 설정한 이벤트 시점에 실행해, 카렌이 던지는 동작과 물체가 날아가는 시점을 맞췄습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="scarlet-karen-kinetic-motion" src="assets/projects/scarlet-karen-kinetic.jpg" data-motion-src="assets/projects/scarlet-karen-kinetic.gif" data-motion-poster="assets/projects/scarlet-karen-kinetic.jpg" data-motion-autoplay="false" width="854" height="480" alt="Karen이 염력 물체를 빼앗아 플레이어에게 다시 던지는 과정" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="scarlet-karen-kinetic-motion" hidden>재생</button><figcaption>Karen이 염력 물체를 빼앗아 플레이어에게 다시 던지는 과정</figcaption></figure></div>
+</article>
+</section>
+<section class="case-study-section project-narrative-section" aria-labelledby="scarlet-dialog-narrative-2">
+<h3 id="scarlet-dialog-narrative-2">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 반복되는 VFX 제작 과정의 추상화</h4><div class="project-narrative-copy">
+<p>이전 프로젝트에서 경험한 반복 작업을 추상화하고, 제작 도구에서 만든 결과를 게임에 적용하는 과정을 연습하고자 했습니다.</p>
+<p>이펙트마다 반복되는 생성·설정·저장 과정을 공통 기능으로 묶고, ImGui 도구에서 여러 효과를 조합하며 위치·크기·재생 시간을 조절할 수 있도록 구현했습니다. 완성한 설정은 저장해 다시 수정하거나 게임에서 불러 쓸 수 있도록, 제작부터 적용까지의 흐름을 구성했습니다.</p>
+</div>
+<div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-default-effect.gif" alt="도구에서 기본 Effect를 생성하는 과정" loading="lazy" decoding="async" data-image-expand /></div><figcaption>도구에서 기본 Effect를 생성하는 과정</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-vfx-viewer.gif" alt="VFX 목록에서 효과를 찾아 생성하고 확인하는 과정" loading="lazy" decoding="async" data-image-expand /></div><figcaption>VFX 목록에서 효과를 찾아 생성하고 확인하는 과정</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-local-matrix.gif" alt="Effect의 로컬 행렬을 추가하고 위치와 크기를 조정하는 과정" loading="lazy" decoding="async" data-image-expand /></div><figcaption>Effect의 로컬 행렬을 추가하고 위치와 크기를 조정하는 과정</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-curve.gif" alt="Curve 값을 조절해 VFX의 시간에 따른 변화를 만드는 과정" loading="lazy" decoding="async" data-image-expand /></div><figcaption>Curve 값을 조절해 VFX의 시간에 따른 변화를 만드는 과정</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-group-event.gif" alt="EffectGroup의 키프레임 이벤트로 ParticleGroup을 생성하는 과정" loading="lazy" decoding="async" data-image-expand /></div><figcaption>EffectGroup의 키프레임 이벤트로 ParticleGroup을 생성하는 과정</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 겹치는 파티클의 그리기 순서 정하기</h4><div class="project-narrative-copy">
+<p>파티클이 겹치는 부분에서 사각형 경계가 드러나는 문제가 있었습니다. 반투명한 파티클을 겹쳐 그리려면 뒤쪽 파티클의 색이 먼저 그려져 있어야 한다고 이해했습니다.</p>
+<p>파티클과 카메라가 움직이면서 앞뒤 관계도 달라지므로, 갱신할 때마다 카메라와 각 파티클 사이의 거리를 계산하고 먼 순서부터 그리도록 정렬했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-particle-result.png" alt="Point·Mesh 파티클을 조합한 원형 VFX 결과" loading="lazy" decoding="async" /></div><figcaption>Point·Mesh 파티클을 조합한 원형 VFX 결과</figcaption></figure></div><details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-particle-update-source.png" alt="파티클 수명 누적, remove_if 제거, 카메라 거리 정렬 코드" loading="lazy" decoding="async" /></div><figcaption>파티클 수명 누적, remove_if 제거, 카메라 거리 정렬 코드</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-particle-buffer-source.png" alt="Map으로 인스턴스 버퍼에 파티클 데이터를 복사하고 Unmap하는 코드" loading="lazy" decoding="async" /></div><figcaption>Map으로 인스턴스 버퍼에 파티클 데이터를 복사하고 Unmap하는 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 모델의 파티클 생성 범위와 밀도 조절</h4><div class="project-narrative-copy">
+<p>모델의 형태를 따라 파티클을 생성하면서, 생성할 부분과 그 안의 밀도를 따로 조절하고자 했습니다. 하지만 불러온 정점의 순서가 불규칙해 개수만 제한해서는 원하는 범위를 선택하기 어려웠습니다.</p>
+<p>UV 좌표의 합으로 정점을 정렬해 일정한 순서를 만들고, 정렬된 정점의 사용 비율로 생성 범위를 조절했습니다. 선택한 범위 안의 밀도는 별도 변수로 조절했습니다. 이 기능은 몬스터가 죽을 때 꽃잎이 생겨 흩어지는 연출에도 적용했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="scarlet-particle-tool-motion" src="assets/projects/scarlet-particle-tool-poster.png" data-motion-src="assets/projects/scarlet-particle-tool.gif" data-motion-poster="assets/projects/scarlet-particle-tool-poster.png" data-motion-autoplay="false" width="640" height="480" alt="Scarlet Strings 파티클 도구에서 효과를 생성하고 설정을 조절하는 과정" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="scarlet-particle-tool-motion" hidden>재생</button><figcaption>Scarlet Strings 파티클 도구에서 효과를 생성하고 설정을 조절하는 과정</figcaption></figure></div><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-model-range-100.png" alt="정점 사용 비율 100%" loading="lazy" decoding="async" /></div><figcaption>정점 사용 비율 100%</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-model-range-70.png" alt="정점 사용 비율 70%" loading="lazy" decoding="async" /></div><figcaption>정점 사용 비율 70%</figcaption></figure></div><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-model-density-low.png" alt="생성 범위와 밀도 조절 예시 1" loading="lazy" decoding="async" /></div><figcaption>생성 범위와 밀도 조절 예시 1</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-model-density-high.png" alt="생성 범위와 밀도 조절 예시 2" loading="lazy" decoding="async" /></div><figcaption>생성 범위와 밀도 조절 예시 2</figcaption></figure></div>
+</article>
+</section>
 <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/an004005/D3D11_TeamPortfolio" target="_blank" rel="noreferrer">GitHub 코드 보기 <span aria-hidden="true">↗</span></a></div>
 </div>
 </div>
@@ -523,199 +572,212 @@
     <dialog class="project-dialog project-dialog--compact" id="action-dialog" aria-labelledby="action-dialog-title">
       <div class="dialog-shell">
         <header class="dialog-header"><div><h2 id="action-dialog-title">ProjectAction<wbr />_BP</h2></div><button class="dialog-close" type="button" data-project-dialog-close aria-label="ProjectAction Blueprint 상세 닫기"><span aria-hidden="true">×</span></button></header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
-            <div class="project-detail-copy"><h3>Blueprint로 <span class="text-unit">애니메이션·</span><wbr /><span class="text-unit">전투·</span><wbr />몬스터 AI·UI를 구현했습니다.</h3>
-              <p>지상·공중 콤보와 피격 반응, 몬스터 AI를 제작한 1인 프로젝트입니다.</p><dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.10 — 11</dd></div><div><dt>ROLE</dt><dd>Solo Programming · Blueprint</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · AnimBP · State Tree · UMG</dd></div></dl></div>
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
+            <div class="project-detail-copy">
+<h3>Blueprint만으로 액션 전투를 만들어 보고자 했습니다.</h3>
+<p>Blueprint만으로 액션 전투를 구현해 보기 위해 시작한 개인 프로젝트입니다. 지상·공중 콤보와 피격 반응, 락온, 몬스터 AI를 구현했습니다.</p>
+<p>Blueprint 중심으로 전투를 구현하면서, 몽타주 재생 결과와 뼈 갱신 완료 이벤트를 연결할 노드는 C++로 확장했습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.10 — 11</dd></div><div><dt>ROLE</dt><dd>Solo Programming · Blueprint</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · AnimBP · State Tree · UMG</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-action project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/projectaction-bp-card.png" alt="ProjectAction Blueprint의 다대일 전투 화면" loading="lazy" decoding="async" /></figure>
           </section>
-          <section class="case-study-section project-core-section">
-            <p class="eyebrow">01 / 대표 구현</p>
-            <h3>실행한 행동과 피격 이벤트를 연결하는 방법</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>01 / TASK &amp; MONTAGE</span><h4>몽타주를 실행한 Task로 완료 결과 돌려주기</h4><p>연속으로 피격되면 몽타주 재생과 행동 전환이 이어집니다.<br class="sentence-break" />이때 재생한 동작과 끝내야 할 피격 Task를 함께 연결해 두고자 했습니다.</p></header>
-                <div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-montage-task.png" alt="Play Action Montage에 Task 객체를 전달하고 On Completed에서 반환 객체의 End Action을 호출한 블루프린트" width="774" height="642" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>플레이어와 몬스터의 행동 보관</h5><p>플레이어는 State Tree, 몬스터는 Behavior Tree로 행동을 실행했습니다.<br class="sentence-break" />CharacterBase의 Recent Action Sender를 Object 타입으로 두어 두 종류의 Task를 보관하고, IAction 인터페이스로 행동을 끝내도록 했습니다.</p></section><section><h5>재생할 때 Task도 함께 전달</h5><p>C++ 플러그인에 Play Action Montage 노드를 추가했습니다.<br class="sentence-break" />몽타주와 함께 Action Object를 받아 콜백 객체에 보관하고, 재생 결과와 함께 돌려주도록 확장했습니다.</p></section><section><h5>완료 콜백에서 해당 Task 종료</h5><p>On Completed에 반환된 객체의 End Action을 연결했습니다.<br class="sentence-break" />완료 시점의 현재 행동을 다시 찾는 대신, 몽타주를 시작할 때 넘긴 Task로 돌아가 피격 상태를 끝냅니다.</p></section></div></div><details class="project-source-details"><summary>Task를 보관하는 C++ 콜백 객체</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-montage-proxy.png" alt="ActionObject를 콜백 객체에 보관하고 PlayMontage를 호출하는 C++ 구현" width="867" height="311" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>02 / DAMAGE EVENTS</span><h4>Any Damage의 중복 처리 제한</h4><p>Point Damage 뒤에 Any Damage도 호출되어 하나의 피격이 공통 처리로 두 번 들어오는 경우를 다뤘습니다.</p></header>
-                <div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-damage-events.png" alt="Point와 Radial Damage는 공통 함수로 바로 전달하고 Any Damage는 프레임 번호를 비교하는 블루프린트" width="602" height="973" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>피격 정보와 처리 경로 통합</h5><p>Point·Radial·Any Damage 이벤트를 Process Damage로 모았습니다.<br class="sentence-break" />피해량, 피격 위치·방향, 공격자 등을 DamageInfo 구조체에 담고, 체력을 갱신한 뒤 Damage Tag에 맞는 행동을 실행합니다.</p></section><section><h5>Any Damage가 이어질 때 검사</h5><p>Process Damage에서 Get Frame Count 값을 저장합니다.<br class="sentence-break" />Any Damage를 받을 때 저장된 값과 현재 프레임이 같으면 건너뛰고, 다를 때만 공통 함수를 실행합니다.<br class="sentence-break" />Point Damage 뒤에 이어지는 Any Damage로 같은 피격을 다시 처리하지 않도록 한 분기입니다.</p></section><section><h5>프레임 번호로 구분하는 범위</h5><p>Point·Radial Damage는 이 검사 없이 공통 함수로 들어갑니다.<br class="sentence-break" />Any Damage 경로는 공격자나 공격 ID를 비교하지 않으므로, 같은 프레임에 들어온 별개의 Any Damage까지 구분하는 방식은 아닙니다.</p></section></div></div><details class="project-source-details"><summary>처리한 프레임과 DamageInfo 저장</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-damage-frame.png" alt="Process Damage에서 현재 프레임 번호를 저장하고 피해 정보를 구조체에 기록하는 블루프린트" width="1669" height="456" loading="lazy" decoding="async" /></div></details>
-              </article>
-            </div>
-          </section>
-          <section class="case-study-section project-core-section">
-            <p class="eyebrow">02 / 그 밖의 구현</p>
-            <h3>스폰부터 전투·AI·UI까지</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>01 / SPAWN</span><h4>스폰 연출과 행동 시작 순서</h4></header>
-                <div class="project-technical-notes"><section><h5>게임 시작 순서</h5><p>GameMode에서 PrepareBirth를 호출해 충돌을 끄고, 플레이어 State Tree와 몬스터 Behavior Tree가 아직 행동을 시작하지 않도록 했습니다.<br class="sentence-break" />시작 UI 뒤에 플레이어의 BeBorn을 실행하고 몬스터 스폰 연출을 이어갑니다.</p></section><section><h5>컨트롤러별 행동 시작</h5><p>플레이어는 BeBorn의 Start Play에서 State Tree를 시작합니다.<br class="sentence-break" />이후 End Birth에서는 IController의 Start Brain을 호출하고, 플레이어·AI 컨트롤러가 각자 구현한 시작 처리를 실행합니다.</p></section><section><h5>첫 화면에 포즈가 튀는 문제</h5><p>아무 동작도 없던 캐릭터를 스폰할 때 한 프레임 동안 포즈가 튀었습니다.<br class="sentence-break" />잠시 Always Tick Pose And Refresh Bones로 바꾸고, 뼈 갱신 완료 콜백에서 전달받아 둔 Tick 옵션을 복원한 뒤 캐릭터의 숨김을 해제했습니다.</p></section><section><h5>뼈 갱신 완료를 Blueprint에 연결</h5><p>C++에서 OnSkeletalMeshBoneTransformsFinalized에 전달받은 이벤트를 등록하고, Blueprint에서 바인딩할 노드를 만들었습니다.<br class="sentence-break" />스폰 그래프는 이 콜백을 받아 캐릭터를 보여주는 시점을 정합니다.</p></section></div><div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-spawn-bones.png" alt="뼈 갱신 옵션을 바꾸고 완료 이벤트에서 옵션 복원과 캐릭터 숨김 해제를 실행하는 스폰 그래프" width="1410" height="465" loading="lazy" decoding="async" /></div></figure></div><details class="project-source-details"><summary>뼈 갱신 완료 이벤트를 연결한 C++ 함수</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-bone-callback.png" alt="Skeletal Mesh의 뼈 변환 완료 델리게이트에 Blueprint 이벤트를 등록하는 함수" width="1530" height="304" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>02 / ANIMATION</span><h4>캐릭터에 맞춘 애니메이션 구성</h4></header>
-                <div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-layered-animation.png" alt="상체 Slot과 Layered Blend로 이동과 공격 동작을 조합한 AnimGraph" width="634" height="625" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>리타겟팅과 Control Rig</h5><p>뼈 구조에 맞춰 Retarget Chain을 만들고 포즈와 관절 각도를 조정했습니다.</p><p>직접 구성한 Control Rig에서는 Forward Solve로 컨트롤 값을 뼈에 적용해 새 동작을 만들고, 기존 동작을 수정할 때는 Backward Solve로 뼈의 값을 컨트롤에 옮겼습니다.</p></section><section><h5>이동과 상체 동작 분리</h5><p>무기별 이동 상태를 State Machine으로 관리하고, 속도·방향은 Blend Space에 반영했습니다.<br class="sentence-break" />상체·하체 Blend Mask와 Slot으로 이동 위에 공격을 적용하고, 상태별 애님 커브로 블렌딩 강도를 조절했습니다.<br class="sentence-break" />전환 조건에서는 Property Access로 캐릭터 변수를 읽었습니다.</p></section><section><h5>공격 전환 시 Snapshot</h5><p>공격 전환 때 포즈가 튀는 문제를 해결하는 데 어려움을 겪었습니다.<br class="sentence-break" />직전 포즈를 Snapshot으로 저장해 다음 동작과 블렌딩했습니다.<br class="sentence-break" />플레이어와 적이 함께 호출할 수 있도록 AnimBP 인터페이스로 묶고, Blend Out 시간도 조절할 수 있게 했습니다.</p></section></div></div><div class="project-technical-notes"><section><h5>방향별 보행 속도</h5><p>이동 방향과 전방 벡터를 내적해 정면·측면·후면 이동을 구분했습니다.<br class="sentence-break" />정면으로 걸을 때만 온전한 Walk Speed를 사용하고, 다른 방향에서는 값을 보간해 이동량을 조절했습니다.</p></section><section><h5>총 조준 애니메이션</h5><p>BS_GunAim에 Mesh Space Additive 동작을 구성했습니다.<br class="sentence-break" />총을 장착했을 때 조준 회전을 상체 Blend Mask에 적용하도록 나눴습니다.</p></section><section><h5>발 높이와 골반 보정</h5><p>발 아래 충돌 지점으로 높이 차이를 구해 Foot IK에 반영했습니다.<br class="sentence-break" />낮은 쪽 발을 기준으로 골반을 내리고, 높이가 갑자기 바뀌지 않도록 보간했습니다.</p></section><section><h5>팔 비틀림 보정</h5><p>팔 회전에서 Y축 성분을 분리해 From Axis And Angle에 전달했습니다.<br class="sentence-break" />Local Space와 뼈 아래에 둔 Offset Transform을 기준으로 상박의 비틀림을 제어했습니다.</p></section></div><details class="project-source-details"><summary>이동 방향에 따른 보행량 계산</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-walk-direction.png" alt="입력 방향과 전방 벡터의 내적을 보간값으로 사용한 이동 입력 그래프" width="1651" height="542" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>03 / STATE TREE &amp; COMBO</span><h4>입력부터 다음 콤보까지</h4></header>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-combo-window.png" alt="Go to Combo2 Notify State로 다음 콤보 입력 구간을 설정한 몽타주" width="644" height="280" loading="lazy" decoding="async" /></div></figure></div><div class="project-technical-notes"><section><h5>입력을 상태 전환으로 전달</h5><p>입력에 Gameplay Tag를 붙여 Try Player Action으로 전달합니다.<br class="sentence-break" />컨트롤러가 State Tree에 이벤트를 보내면 해당 Tag를 전환 조건으로 사용하는 상태가 실행됩니다.<br class="sentence-break" />플레이어와 AI 컨트롤러의 공통 호출은 IController로 나눴습니다.</p></section><section><h5>Task가 실행할 행동 전달</h5><p>Task가 시작될 때 CharacterBase에 자신의 인스턴스와 Tag를 넘깁니다.<br class="sentence-break" />캐릭터의 Do Action은 State Tree와 Behavior Tree 양쪽에서 사용할 수 있게 하고, IAction의 End Action과 Act The Next로 종료와 다음 동작 요청을 구분했습니다.</p></section><section><h5>다음 입력을 받는 구간</h5><p>몽타주의 Notify State가 시작하면 컨트롤러에 해당 인스턴스를 저장하고, 구간이 끝나면 비웁니다.<br class="sentence-break" />이 인스턴스가 유효하고 입력 Tag가 현재 콤보의 Tag와 일치해야 다음 Section으로 넘어갑니다.</p></section><section><h5>지상·공중 콤보의 공통 처리</h5><p>입력 대기와 다음 동작 전환은 부모 Combo Attack Task에 구현했습니다.<br class="sentence-break" />지상·공중 Task에서는 무기 장착이나 공중 공격에 필요한 동작을 추가했습니다.</p></section><section><h5>무기 자동 해제</h5><p>공격에 맞춰 검이나 총을 장착하고, 다른 공격 입력 없이 일정 시간이 지나면 Auto Unequip으로 비무장 상태로 돌아가도록 했습니다.</p></section></div>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>04 / ATTACK &amp; COLLISION</span><h4>공격 판정과 충돌 설정</h4></header>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-attack-notify.png" alt="몽타주의 Notify에서 판정 위치와 크기, Damage Type과 피해량을 Melee Hit에 전달하는 그래프" width="1312" height="536" loading="lazy" decoding="async" /></div></figure></div><div class="project-technical-notes"><section><h5>몽타주에서 타격 설정</h5><p>공격할 프레임에 Notify를 배치하고, 판정 위치·크기·Damage Type·피해량을 Melee Hit로 넘겼습니다.<br class="sentence-break" />공격마다 필요한 판정 값을 몽타주에서 설정하도록 했습니다.</p></section><section><h5>투사체와 시야 채널</h5><p>플레이어와 몬스터를 Red·Blue 팀으로 구분했습니다.<br class="sentence-break" />팀별 투사체와 Sight Object Channel을 두고, 타격의 Overlap·Block 검사도 팀별 Trace Channel로 나눴습니다.</p></section><section><h5>물리 연출용 충돌 프리셋</h5><p>CharacterRagdoll·<wbr />PawnForRagdoll·<wbr />WeaponPhysics 프리셋을 추가했습니다.<br class="sentence-break" />캐릭터가 물리 피격 중일 때와 무기를 놓쳐 떨어뜨릴 때 필요한 충돌 설정을 구분해 사용했습니다.</p></section></div><details class="project-source-details"><summary>팀별 채널과 물리 연출 프리셋</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-collision-channels.png" alt="Sight와 팀별 투사체·타격 채널, CharacterRagdoll과 WeaponPhysics 프리셋 설정" width="1318" height="897" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>05 / AIR COMBAT &amp; HIT</span><h4>공중 콤보와 피격 반응</h4></header>
-                <div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-air-hit.png" alt="적 캐릭터에 Physics Animation을 적용한 공중 피격 장면" width="689" height="542" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>공중에 띄울 대상 관리</h5><p>공중 공격이 가능한 bAirCapturable 상태의 적을 배열에 모으고, Movement Mode와 Damage Type을 바꿨습니다.<br class="sentence-break" />띄우는 높이를 조정하고, 공중에서 플레이어에게 밀리지 않도록 충돌을 껐습니다.</p></section><section><h5>공중 타격과 내려찍기</h5><p>Air Hit에서는 적이 공중에 더 머물도록 처리하고, 마지막 Air Strike Down에서는 플레이어의 중력 값을 바꿨습니다.<br class="sentence-break" />플레이어 Task에서 적 상태를 직접 바꾸는 대신 전달한 Damage Type에 따라 적이 피격 반응을 실행합니다.</p></section><section><h5>물리 피격에서 일어나기까지</h5><p>Ragdoll·Standing·Air Hit 프로필과 관절 제한을 설정했습니다.<br class="sentence-break" />공중 피격에서는 Root를 Pelvis와 연결하고 Root를 Kinematic으로 설정했습니다.</p><p>착지하면 골반 방향으로 일어날 동작을 고르고, 마지막 물리 포즈에 Snapshot을 적용했습니다.</p></section></div></div><div class="project-technical-notes"><section><h5>공중 전투 중 끼임 보정</h5><p>C++ 함수에서 캐릭터 캡슐로 Overlap Blocking 검사를 해 끼임 여부를 확인했습니다.<br class="sentence-break" />겹쳐 있을 때 FindTeleportSpot으로 이동 가능한 위치를 구하고, 찾았을 때만 TeleportPhysics로 옮겼습니다.</p></section><section><h5>타격 이펙트와 사운드</h5><p>Play Damage Effect에서 DamageInfo를 받아 이펙트와 사운드를 실행합니다.<br class="sentence-break" />같은 피격 정보에 들어 있는 공격자의 위치를 밀리는 방향과 회전 계산에도 사용했습니다.</p></section><section><h5>피격 시 이동과 회전</h5><p>공격자 반대 방향의 수평 속도를 적용하면서 기존 수직 속도는 유지했습니다.<br class="sentence-break" />현재 회전과 목표 회전의 각도 차이를 구하고, 남은 시간에 따라 회전 보간값을 줄여 공격자를 바라보는 동작을 만들었습니다.</p></section></div><details class="project-source-details"><summary>끼임 검사와 이동 위치 보정 함수</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-safe-spot.png" alt="캡슐 Overlap 검사 후 FindTeleportSpot의 성공 여부에 따라 이동하는 C++ 함수" width="1211" height="571" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>06 / LOCK-ON</span><h4>시야 안에서 락온 대상 고르기</h4></header>
-                <ol class="project-flow project-flow--three"><li><b>01</b><strong>후보 수집</strong><p>FOV와 최대 거리로 Cone 모양의 시야 범위를 만들고, 그 안의 적을 후보로 보관합니다.</p></li><li><b>02</b><strong>방향·거리 점수</strong><p>카메라 시선과 적 방향의 내적에 거리 가중치를 곱해 후보별 점수를 구합니다.</p></li><li><b>03</b><strong>대상 고정</strong><p>점수가 가장 높은 적을 락온하고, 고정한 대상을 기준으로 Strafe 이동합니다.</p></li></ol><div class="project-technical-notes"><section><h5>시야 입체의 실제 크기</h5><p>FOV의 절반과 최대 거리로 Cone의 폭을 구하고, 원본 메시의 Bounding Box 크기로 나눠 스케일을 계산했습니다.<br class="sentence-break" />설정한 거리와 각도가 실제 시야 범위에 반영되도록 했습니다.</p></section><section><h5>거리 가중치</h5><p>Min Distance부터 Max Distance까지의 거리를 1부터 FarthestScore로 변환했습니다.<br class="sentence-break" />카메라 정면에 가깝고 거리 점수가 높은 후보가 선택되도록 두 값을 곱했습니다.</p></section><section><h5>공격 중 바라보는 시간</h5><p>공격 내내 방향을 바꾸는 대신 Notify State로 정한 구간에서 적을 바라보도록 했습니다.<br class="sentence-break" />공격별로 추적이 끝나는 시점을 몽타주에서 정했습니다.</p></section><section><h5>대상에 맞춘 시선</h5><p>락온한 대상의 눈 위치를 바라보도록 머리 뼈를 회전시켰습니다.<br class="sentence-break" />공격 방향 유도와 별도로 시선을 맞추는 동작입니다.</p></section></div><details class="project-source-details"><summary>FOV와 거리를 메시 스케일로 변환</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-bp-sight-scale.png" alt="FOV와 최대 거리, 원본 메시 Bounding Box로 Cone의 스케일을 구하는 그래프" width="1046" height="494" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>07 / MONSTER AI</span><h4>거리와 피격 상태에 반응하는 AI</h4></header>
-                <div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-behavior-tree.png" alt="피격 분기를 먼저 검사하고 거리 조건으로 근거리 이동과 추적을 나누는 Behavior Tree" width="849" height="790" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>피격·가드부터 확인</h5><p>Behavior Tree에서 피격과 가드 상태를 먼저 검사합니다.<br class="sentence-break" />필요하면 진행 중인 행동을 중단하고 Damage Task로 전환하도록 우선순위를 설정했습니다.</p></section><section><h5>캡슐 간 거리로 이동 선택</h5><p>중심 사이의 수평 거리에서 양쪽 캡슐 반지름을 빼 실제 간격을 구했습니다.<br class="sentence-break" />가까우면 물러나고 멀면 접근하며, 그 사이에서는 옆으로 이동하거나 대기합니다.<br class="sentence-break" />CheckWaitingDistance의 검사 간격에 Time Deviation을 적용했습니다.</p></section><section><h5>공격 가능 여부와 확률</h5><p>플레이어가 피해를 받을 수 있는지 검사한 뒤 거리별 공격을 선택했습니다.<br class="sentence-break" />RollDice의 0~1 값을 Blackboard에 저장하고, CheckDice에서 설정한 확률과 비교했습니다.</p></section><section><h5>가드 중 피격 반응</h5><p>Simple Parallel로 가드와 가드 중 피격을 함께 처리했습니다.<br class="sentence-break" />가드 시간이 남아 있다면 공격을 막은 뒤에도 가드를 유지합니다.</p></section></div></div><div class="project-technical-notes"><section><h5>돌진·점프 공격의 이동 시점</h5><p>몽타주의 Notify에서 이동을 실행해 공격 동작과 시점을 맞췄습니다.<br class="sentence-break" />Blueprint Library를 호출할 때 Notify Object와 World Context를 전달했습니다.</p></section></div>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>08 / HEALTH UI</span><h4>플레이어와 적의 체력 표시</h4></header>
-                <div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-bp-health-ui.png" alt="전투 중 적 머리 위에 거리에 따라 표시되는 체력바" width="862" height="634" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>피해량이 보이는 체력바</h5><p>Material Instance에 현재 체력 비율을 전달해 녹색 영역을 갱신했습니다.<br class="sentence-break" />피해를 받으면 빨간 영역이 시간을 두고 따라 줄어들도록 만들고, 체력바 계산은 Material Function으로 나눴습니다.</p></section><section><h5>거리가 반영되는 적 체력바</h5><p>적 머리 위에 Static Mesh로 체력바를 배치해 멀리 있는 적의 체력바는 화면에서도 작게 보이도록 했습니다.<br class="sentence-break" />빌보드 머테리얼로 카메라를 향하게 하고, 체력바 외 영역은 표시하지 않도록 처리했습니다.</p></section></div></div>
-              </article>
-            </div>
-          </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/Dv5Xmh-rHC0" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
-        </div>
+<section class="case-study-section project-narrative-section" aria-labelledby="action-dialog-narrative-1">
+<h3 id="action-dialog-narrative-1">어려웠던 문제</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 콤보 전환 시 포즈가 튀는 문제</h4><div class="project-narrative-copy">
+<p>콤보 입력 시점에 따라 다음 공격으로 넘어가는 순간의 포즈가 달라, 동작이 갑자기 튀는 문제가 있었습니다.</p>
+<p>전환 직전의 포즈를 저장해 다음 동작과 섞는 방법을 생각했지만, 어떤 Blueprint 노드를 사용해야 할지 몰랐습니다. 관련 기능을 검색하면서 Snapshot을 찾았고, 저장한 포즈와 다음 공격 동작을 블렌딩해 해결했습니다. 물리 피격 후 몸을 일으키는 동작으로 전환할 때도 같은 방식을 적용했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-air-hit.png" alt="적 캐릭터에 Physics Animation을 적용한 공중 피격 장면" width="689" height="542" loading="lazy" decoding="async" /></div><figcaption>적 캐릭터에 Physics Animation을 적용한 공중 피격 장면</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 피해 처리를 모으면서 발생한 중복 호출</h4><div class="project-narrative-copy">
+<p>공격 종류에 관계없이 체력 갱신과 피격 반응을 같은 흐름으로 처리하기 위해, Point·Radial·Any Damage 이벤트를 공통 함수로 모았습니다. 그런데 Point Damage 뒤에 Any Damage도 호출되면서 같은 피격이 두 번 처리됐습니다.</p>
+<p>두 이벤트는 게임 루프를 한 번 도는 동안 연달아 호출됐습니다. 그 안에서는 Get Frame Count로 읽은 프레임 번호가 같으므로, 먼저 처리한 번호를 남겨두면 뒤쪽 이벤트에서 이미 처리했는지 확인할 수 있다고 생각했습니다. 공통 함수에서 그 값을 저장하고, Any Damage에서는 현재 번호와 같으면 건너뛰도록 구현했습니다.</p>
+<p>마지막 처리 번호는 Damaged Frame Count에 덮어써 별도로 매 프레임 초기화하지 않았습니다. 프레임 비교는 Any Damage 분기에만 적용하고, Point·Radial Damage는 바로 공통 함수로 넘겼습니다. 같은 프레임에 들어온 별개의 공격까지 구분하는 방식은 아닙니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-damage-events.png" alt="Point와 Radial Damage는 공통 함수로 바로 전달하고 Any Damage는 프레임 번호를 비교하는 블루프린트" width="602" height="973" loading="lazy" decoding="async" /></div><figcaption>Point와 Radial Damage는 공통 함수로 바로 전달하고 Any Damage는 프레임 번호를 비교하는 블루프린트</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-damage-frame.png" alt="Process Damage에서 현재 프레임 번호를 저장하고 피해 정보를 구조체에 기록하는 블루프린트" width="1669" height="456" loading="lazy" decoding="async" /></div><figcaption>Process Damage에서 현재 프레임 번호를 저장하고 피해 정보를 구조체에 기록하는 블루프린트</figcaption></figure></div></details>
+</article>
+</section>
+<section class="case-study-section project-narrative-section" aria-labelledby="action-dialog-narrative-2">
+<h3 id="action-dialog-narrative-2">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 몽타주를 실행한 Task의 종료 처리</h4><div class="project-narrative-copy">
+<p>플레이어는 State Tree, 몬스터는 Behavior Tree의 Task로 행동을 실행했습니다.</p>
+<p>몽타주 재생 중 다른 행동으로 전환되면, 완료 시점의 현재 Task가 그 몽타주를 시작한 Task와 달라질 수 있었습니다.</p>
+<p>종료할 대상을 정확히 지정하기 위해 몽타주 재생 노드를 C++로 확장했습니다. 재생을 요청한 Task를 함께 보관하고, 완료 시점에 그 Task를 돌려받아 종료하도록 구현했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-montage-task.png" alt="Play Action Montage에 Task 객체를 전달하고 On Completed에서 반환 객체의 End Action을 호출한 블루프린트" width="774" height="642" loading="lazy" decoding="async" /></div><figcaption>Play Action Montage에 Task 객체를 전달하고 On Completed에서 반환 객체의 End Action을 호출한 블루프린트</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-montage-proxy.png" alt="ActionObject를 콜백 객체에 보관하고 PlayMontage를 호출하는 C++ 구현" width="867" height="311" loading="lazy" decoding="async" /></div><figcaption>ActionObject를 콜백 객체에 보관하고 PlayMontage를 호출하는 C++ 구현</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 스폰 연출과 애니메이션 구성</h4><div class="project-narrative-copy">
+<p>GameMode에서 충돌과 행동 시작을 막아 둔 뒤, 시작 UI와 플레이어·몬스터의 스폰 연출을 순서대로 실행했습니다. 플레이어는 State Tree, 몬스터는 Behavior Tree로 행동하고, IController의 Start Brain으로 컨트롤러별 시작 처리를 호출했습니다. 첫 화면에서 포즈가 튀지 않도록 잠시 뼈를 갱신한 뒤, C++로 노출한 뼈 갱신 완료 콜백에서 Tick 옵션을 복원하고 캐릭터를 표시했습니다.</p>
+<p>Retarget Chain과 포즈·관절 각도를 캐릭터에 맞추고, Control Rig의 Forward Solve로 새 동작을 만들거나 Backward Solve로 기존 동작을 수정했습니다. 무기별 이동은 State Machine과 Blend Space로 구성하고, Blend Mask·Slot과 애님 커브로 하체 이동 위에 상체 동작을 적용했습니다. 공통 Snapshot 호출은 AnimBP 인터페이스로 묶고 Blend Out 시간을 조절했습니다.</p>
+<p>이동 방향과 전방 벡터의 내적으로 정면·측면·후면을 구분해 보행 속도를 조절하고, 총 조준에는 Mesh Space Additive를 적용했습니다. 발 아래 충돌 지점으로 Foot IK와 골반 높이를 보간하고, 팔의 Y축 회전 성분과 Local Space의 Offset Transform으로 상박 비틀림을 보정했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-layered-animation.png" alt="상체 Slot과 Layered Blend로 이동과 공격 동작을 조합한 AnimGraph" width="634" height="625" loading="lazy" decoding="async" /></div><figcaption>상체 Slot과 Layered Blend로 이동과 공격 동작을 조합한 AnimGraph</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-spawn-bones.png" alt="뼈 갱신 옵션을 바꾸고 완료 이벤트에서 옵션 복원과 캐릭터 숨김 해제를 실행하는 스폰 그래프" width="1410" height="465" loading="lazy" decoding="async" /></div><figcaption>뼈 갱신 옵션을 바꾸고 완료 이벤트에서 옵션 복원과 캐릭터 숨김 해제를 실행하는 스폰 그래프</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-bone-callback.png" alt="Skeletal Mesh의 뼈 변환 완료 델리게이트에 Blueprint 이벤트를 등록하는 함수" width="1530" height="304" loading="lazy" decoding="async" /></div><figcaption>Skeletal Mesh의 뼈 변환 완료 델리게이트에 Blueprint 이벤트를 등록하는 함수</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-walk-direction.png" alt="입력 방향과 전방 벡터의 내적을 보간값으로 사용한 이동 입력 그래프" width="1651" height="542" loading="lazy" decoding="async" /></div><figcaption>입력 방향과 전방 벡터의 내적을 보간값으로 사용한 이동 입력 그래프</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 입력·콤보와 공격 판정</h4><div class="project-narrative-copy">
+<p>입력에 Gameplay Tag를 붙여 State Tree의 전환 이벤트로 전달했습니다. Task는 시작할 때 자신의 인스턴스와 Tag를 CharacterBase에 넘기고, IAction의 End Action과 Act The Next로 종료와 다음 동작 요청을 구분했습니다. 플레이어와 몬스터의 Task는 Object 타입으로 보관해 같은 호출을 사용할 수 있게 했습니다.</p>
+<p>몽타주의 Notify State로 다음 입력을 받을 구간을 등록했습니다. 구간이 유효하고 입력 Tag가 현재 콤보의 Tag와 일치하면 다음 Section으로 넘겼습니다. 입력 대기와 전환은 부모 Combo Attack Task에 두고, 지상·공중 Task에서 필요한 동작을 추가했습니다. 공격에 맞춰 검과 총을 장착하고 일정 시간 입력이 없으면 자동 해제했습니다.</p>
+<p>타격 시점의 Notify에서 판정 위치·크기·Damage Type·피해량을 전달했습니다. 팀별 투사체·시야·타격 채널과 Ragdoll·무기 물리 프리셋을 나눠 사용했습니다. Point·Radial Damage는 충돌 결과에서 피격 위치와 방향을 가져오고, Any Damage는 캐릭터 위치와 공격자 방향으로 정보를 채워 공통 피해 함수에 전달했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-combo-window.png" alt="Go to Combo2 Notify State로 다음 콤보 입력 구간을 설정한 몽타주" width="644" height="280" loading="lazy" decoding="async" /></div><figcaption>Go to Combo2 Notify State로 다음 콤보 입력 구간을 설정한 몽타주</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-attack-notify.png" alt="몽타주의 Notify에서 판정 위치와 크기, Damage Type과 피해량을 Melee Hit에 전달하는 그래프" width="1312" height="536" loading="lazy" decoding="async" /></div><figcaption>몽타주의 Notify에서 판정 위치와 크기, Damage Type과 피해량을 Melee Hit에 전달하는 그래프</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-collision-channels.png" alt="Sight와 팀별 투사체·타격 채널, CharacterRagdoll과 WeaponPhysics 프리셋 설정" width="1318" height="897" loading="lazy" decoding="async" /></div><figcaption>Sight와 팀별 투사체·타격 채널, CharacterRagdoll과 WeaponPhysics 프리셋 설정</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">4.</span> 공중 콤보와 물리 피격</h4><div class="project-narrative-copy">
+<p>공중 공격이 가능한 적을 배열에 모아 Movement Mode와 Damage Type을 바꾸고, 띄우는 높이와 충돌을 조절했습니다. 공중 타격에서는 적이 더 머물도록 하고, 마지막 내려찍기에서는 플레이어의 중력을 바꿨습니다. 적은 전달받은 Damage Type에 따라 피격 반응을 실행합니다.</p>
+<p>Ragdoll·Standing·Air Hit 프로필과 관절 제한을 설정했습니다. 공중 피격에서는 Root를 Pelvis와 연결하고 Kinematic으로 설정했으며, 착지하면 골반 방향으로 일어날 동작을 선택했습니다. 캡슐의 Overlap Blocking 검사로 끼임을 확인하고, FindTeleportSpot이 이동 가능한 위치를 찾았을 때만 TeleportPhysics로 옮겼습니다.</p>
+<p>DamageInfo로 타격 이펙트와 사운드를 실행하고, 공격자의 위치로 밀리는 방향과 바라볼 방향을 계산했습니다. 공격자 반대 방향의 수평 속도를 적용하면서 기존 수직 속도는 유지하고, 현재 회전과 목표 회전의 각도 차이를 남은 시간에 따라 보간했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-safe-spot.png" alt="캡슐 Overlap 검사 후 FindTeleportSpot의 성공 여부에 따라 이동하는 C++ 함수" width="1211" height="571" loading="lazy" decoding="async" /></div><figcaption>캡슐 Overlap 검사 후 FindTeleportSpot의 성공 여부에 따라 이동하는 C++ 함수</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">5.</span> 락온 대상과 몬스터 행동 선택</h4><div class="project-narrative-copy">
+<p>FOV와 최대 거리로 Cone 시야 범위를 만들고, 원본 메시의 Bounding Box 크기에 맞춰 스케일을 계산했습니다. 범위 안의 적마다 카메라 시선과 적 방향의 내적에 거리 가중치를 곱해 점수를 구했습니다. 가장 높은 점수의 적을 락온하고 Strafe 이동하며, Notify State로 정한 공격 구간에서 대상을 추적했습니다. 머리는 대상의 눈 위치를 바라보게 했습니다.</p>
+<p>Behavior Tree에서는 피격과 가드 상태를 먼저 검사했습니다. 두 캡슐 중심의 수평 거리에서 반지름을 빼 간격을 구하고, 거리에 따라 접근·후퇴·측면 이동·대기를 골랐습니다. 검사 간격에는 Time Deviation을 적용하고, 공격 가능 여부와 거리 조건을 확인한 뒤 Blackboard에 저장한 난수로 공격 확률을 판단했습니다.</p>
+<p>Simple Parallel로 가드와 가드 중 피격을 함께 처리해 남은 가드 시간을 유지했습니다. 돌진·점프 공격은 몽타주의 Notify에서 이동을 실행해 동작과 시점을 맞추고, Blueprint Library에 Notify Object와 World Context를 전달했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-sight-scale.png" alt="FOV와 최대 거리, 원본 메시 Bounding Box로 Cone의 스케일을 구하는 그래프" width="1046" height="494" loading="lazy" decoding="async" /></div><figcaption>FOV와 최대 거리, 원본 메시 Bounding Box로 Cone의 스케일을 구하는 그래프</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-behavior-tree.png" alt="피격 분기를 먼저 검사하고 거리 조건으로 근거리 이동과 추적을 나누는 Behavior Tree" width="849" height="790" loading="lazy" decoding="async" /></div><figcaption>피격 분기를 먼저 검사하고 거리 조건으로 근거리 이동과 추적을 나누는 Behavior Tree</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">6.</span> 플레이어와 적의 체력 표시</h4><div class="project-narrative-copy">
+<p>Material Instance에 현재 체력 비율을 전달해 체력바를 갱신했습니다. 피해를 받으면 빨간 영역이 시간을 두고 따라 줄어들도록 하고, 체력바 계산은 Material Function으로 나눴습니다.</p>
+<p>적 머리 위에 Static Mesh로 체력바를 배치해 거리가 멀수록 화면에서 작게 보이게 했습니다. 빌보드 머테리얼로 카메라를 향하게 하고 체력바 외 영역은 표시하지 않도록 했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-bp-health-ui.png" alt="전투 중 적 머리 위에 거리에 따라 표시되는 체력바" width="862" height="634" loading="lazy" decoding="async" /></div><figcaption>전투 중 적 머리 위에 거리에 따라 표시되는 체력바</figcaption></figure></div>
+</article>
+</section>
+<div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/Dv5Xmh-rHC0" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+</div>
       </div>
     </dialog>
 
     <dialog class="project-dialog project-dialog--compact" id="action-cpp-dialog" aria-labelledby="action-cpp-dialog-title">
       <div class="dialog-shell">
         <header class="dialog-header"><div><h2 id="action-cpp-dialog-title">ProjectAction<wbr />_CPP</h2></div><button class="dialog-close" type="button" data-project-dialog-close aria-label="ProjectAction C++ 상세 닫기"><span aria-hidden="true">×</span></button></header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
-            <div class="project-detail-copy"><h3>Blueprint로 구현한 액션 전투를 C++와 GAS로 다시 구현했습니다.</h3>
-              <p>입력과 전투를 C++·GAS로 옮기고, 애니메이션 보정과 인벤토리, UI를 구현한 1인 프로젝트입니다.</p><dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.11 — 2025.01</dd></div><div><dt>ROLE</dt><dd>Solo Programming · C++/GAS</dd></div><div><dt>STACK</dt><dd>UE5 · C++ · GAS · Enhanced Input · UMG</dd></div></dl></div>
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
+            <div class="project-detail-copy">
+<h3>Blueprint로 만든 전투를 C++와 GAS로 옮겨 봤습니다.</h3>
+<p>Blueprint로 만들었던 액션 전투를 C++와 GAS로 다시 구현해 본 개인 프로젝트입니다. 엔진이 어떤 기능을 제공하고 Blueprint 노드가 어디까지 처리해 주는지, 같은 기능을 C++로 옮기려면 어떤 과정이 필요한지 익히고자 했습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.11 — 2025.01</dd></div><div><dt>ROLE</dt><dd>Solo Programming · C++/GAS</dd></div><div><dt>STACK</dt><dd>UE5 · C++ · GAS · Enhanced Input · UMG</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-action project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/projectaction-cpp-card.png" alt="ProjectAction C++의 지상 콤보 전투 화면" loading="lazy" decoding="async" /></figure>
           </section>
-          <section class="case-study-section project-core-section">
-            <p class="eyebrow">01 / FEATURED IMPLEMENTATION</p>
-            <h3>콤보 입력과 다음 공격을 연결하는 과정</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>01 / INPUT &amp; GAS</span><h4>입력과 실행 중인 Ability 연결</h4><p>애니메이션과 전투 상태가 늘어나면서, 입력이 들어왔을 때 어떤 행동을 실행할 수 있는지 함께 관리할 필요가 있었습니다.<br class="sentence-break" />C++ 버전에서는 GAS로 상태와 Ability를 관리하고, PlayerState가 ASC를 보유하도록 구성했습니다.</p></header>
-                <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--motion-wide"><div class="project-core-frame"><img id="projectaction-cpp-combat-motion" src="assets/projects/projectaction-cpp-combat-poster.png" data-motion-src="assets/projects/projectaction-cpp-combat.gif" data-motion-poster="assets/projects/projectaction-cpp-combat-poster.png" data-motion-autoplay="false" width="640" height="360" alt="ProjectAction C++의 전투와 콤보 동작을 보여주는 플레이 영상" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="projectaction-cpp-combat-motion" hidden>재생</button></figure>
-                  <div class="project-technical-notes">
-                    <section><h5>입력 설정</h5><p>Gameplay Tag와 Input Action의 짝을 Data Asset에 저장했습니다.<br class="sentence-break" />Enhanced Input Component를 상속한 컴포넌트가 이 설정을 읽어 입력 함수를 바인딩합니다.</p></section>
-                    <section><h5>현재 공격 보관</h5><p>공격 Ability가 시작되면 Controller의 BeginComboAction에 Action Tag와 현재 Ability를 전달합니다.<br class="sentence-break" />다음 입력이 왔을 때 이어갈 공격을 이 정보로 찾습니다.</p></section>
-                    <section><h5>다음 공격으로 넘어가는 조건</h5><p>Anim Notify State가 시작되면 Controller에 콤보 입력 구간을 등록하고, 끝나면 비웁니다.<br class="sentence-break" />입력 시 현재 공격의 Tag와 이 구간을 확인해, 조건이 맞으면 진행 중인 Ability의 다음 Montage Section으로 넘깁니다.</p><p>콤보 입력으로 처리되지 않으면 입력에 대응하는 Ability를 실행합니다.</p></section>
-                  </div>
-                </div>
+<section class="case-study-section project-narrative-section" aria-labelledby="action-cpp-dialog-narrative-1">
+<h3 id="action-cpp-dialog-narrative-1">어려웠던 문제</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 행동이 중단될 때의 종료 책임</h4><div class="project-narrative-copy">
+<p>콤보 공격, 닷지, 가드, 피격을 GAS에 연결했습니다. 개별 행동을 실행하는 흐름은 익혔지만, 행동이 서로 끊고 전환되는 상황에서는 기존 전투 로직과 Ability의 역할을 나누는 데 어려움을 겪었고, 프로젝트를 완성하지는 못했습니다.</p>
+<p>지금 코드를 돌아보면, 정상 종료와 중단·취소의 처리 경로가 달라 중단 시 일부 상태 복구가 빠질 수 있는 구조였습니다. 행동을 실행하는 방법뿐 아니라, 어떤 경로로 끝나더라도 필요한 상태를 복구하도록 종료 처리의 책임까지 정했어야 했습니다.</p>
+</div>
 
-                <div class="project-technical-notes">
-                  <section><h5>캐릭터마다 다른 입력</h5><p>이동은 Controller가 처리하고 공격·스킬은 Character에 두었습니다.<br class="sentence-break" />CharacterBase에는 공통 기능을, IController 인터페이스에는 PlayerController와 AIController의 공통 호출을 정의했습니다.</p></section>
-                  <section><h5>조종할 캐릭터가 바뀔 때</h5><p>캐릭터에 빙의하면 해당 BP에 설정한 시작 Ability와 입력 Ability를 부여합니다.<br class="sentence-break" />맵에 배치된 다른 플레이어 캐릭터를 조종해도 각 캐릭터에 구현한 명령을 실행하도록 구성했습니다.</p></section>
-                </div>
-                <details class="project-source-details"><summary>입력 데이터와 콤보 등록·구간 코드</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-cpp-input-data.png" alt="Gameplay Tag로 Input Action을 찾는 C++ Data Asset 클래스" width="723" height="261" loading="lazy" decoding="async" /><img src="assets/projects/projectaction-cpp-combo-registration.png" alt="Controller가 실행 중인 콤보의 Gameplay Tag와 Ability를 보관하는 BeginComboAction 코드" width="815" height="105" loading="lazy" decoding="async" /><img src="assets/projects/projectaction-cpp-combo-window.png" alt="Notify Begin과 End에서 Controller에 콤보 입력 구간을 등록하고 해제하는 코드" width="959" height="718" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>02 / SNAPSHOT</span><h4>전환 직전의 포즈에서 다음 공격으로 블렌딩</h4><p>공격 전환 때 포즈가 튀는 문제를 해결하는 데 어려움을 겪었습니다.<br class="sentence-break" />다음 공격을 누르는 시점마다 Section이 바뀌는 프레임이 달라, 이전 동작과 다음 동작의 포즈가 맞지 않았습니다.</p></header>
-                <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-cpp-snapshot-blend.png" alt="FinalPose Snapshot과 다음 동작을 Blend Poses by bool로 연결한 AnimGraph" width="863" height="477" loading="lazy" decoding="async" /></div></figure>
-                  <div class="project-technical-notes">
-                    <section><h5>Section을 바꾸기 직전</h5><p>다음 공격을 실행할 때 BlendFromCurrentPose로 현재 포즈를 FinalPose Snapshot에 저장한 뒤 Montage Section을 변경합니다.<br class="sentence-break" />전환 시작점을 고정하지 않고, 실제로 재생 중이던 포즈를 사용했습니다.</p></section>
-                    <section><h5>저장한 포즈에서 이어가기</h5><p>Snapshot을 한 Tick 유지한 뒤 다음 애니메이션으로 블렌딩합니다.<br class="sentence-break" />AnimGraph 마지막에 Blend Poses by bool을 두고, 지정한 블렌딩 시간이 지나면 저장한 Snapshot을 제거합니다.</p></section>
-                    <section><h5>적용한 동작</h5><p>지상·공중 콤보에 같은 방식을 적용했습니다.<br class="sentence-break" />입력 시점이 달라도 전환 직전의 포즈에서 다음 공격으로 이어지도록 했습니다.</p></section>
-                  </div>
-                </div>
-                <details class="project-source-details"><summary>Section 전환과 Snapshot 저장·해제 코드</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-cpp-next-section.png" alt="다음 Montage Section으로 이동하기 전에 BlendFromCurrentPose를 호출하는 코드" width="949" height="524" loading="lazy" decoding="async" /><img src="assets/projects/projectaction-cpp-snapshot-code.png" alt="현재 포즈를 저장하고 다음 Tick부터 블렌딩한 뒤 Snapshot을 제거하는 코드" width="843" height="590" loading="lazy" decoding="async" /></div></details>
-              </article>
-            </div>
-          </section>
-          <section class="case-study-section project-core-section">
-            <p class="eyebrow">02 / OTHER IMPLEMENTATIONS</p>
-            <h3>애니메이션 보정과 인벤토리·UI</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>03 / ANIMATION</span><h4>이동·상하체 합성과 무기 탈착</h4><p>필요한 함수는 C++ AnimInstance에 만들고, 이를 상속한 BP에서 AnimGraph를 구성했습니다.<br class="sentence-break" />Update Preview Only를 추가해 에디터에서도 특정 상황의 애니메이션을 확인했습니다.</p></header>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-cpp-animgraph.png" alt="상하체 합성, FullBody Slot, Control Rig와 Snapshot 블렌딩으로 최종 포즈를 만드는 AnimGraph" width="1809" height="302" loading="lazy" decoding="async" /></div></figure></div>
-                <div class="project-technical-notes">
-                  <section><h5>방향과 속도에 맞춘 보폭</h5><p>Velocity와 캐릭터 회전으로 구한 방향은 Orientation Warping에, 수평 이동 속도는 Stride Warping에 전달했습니다.<br class="sentence-break" />Foot IK의 영향을 받지 않는 가상 뼈를 Warping에 사용하고, 애니메이션에서 필요한 게임 스레드 변수는 Property Access로 읽었습니다.</p></section>
-                  <section><h5>이동하며 상체 동작 재생</h5><p>UpperBody Slot의 Montage를 Spine_01 위쪽에 적용하고 하체는 이동 동작을 유지했습니다.<br class="sentence-break" />Layered blend per bone으로 합친 뒤 FullBody Slot, Control Rig와 Snapshot 블렌딩을 거쳐 최종 포즈를 만듭니다.</p></section>
-                  <section><h5>발과 골반 높이 보정</h5><p>Foot Trace는 발의 중간 위치와 Root의 높이를 기준으로 지면을 검사합니다.<br class="sentence-break" />구한 양발의 높이를 보간하고 더 낮은 값을 골반에 반영한 뒤, Control Rig와 FullBody IK로 포즈를 보정했습니다.</p></section>
-                  <section><h5>무기를 넣을 때 검이 갑자기 보이는 문제</h5><p>무기 사용 Ability가 끝나면 검을 칼집에 넣는 애니메이션을 재생합니다.<br class="sentence-break" />에셋의 Socket 움직임 때문에 검이 갑자기 나타나는 부분은 검의 Material Instance에서 Opacity를 조절해 보정했습니다.</p></section>
-                </div>
-                <details class="project-source-details"><summary>무기 탈착과 Material 파라미터 코드</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-cpp-unequip-code.png" alt="검을 숨기는 Material 파라미터 변경과 칼집에 넣는 Montage 선택 코드" width="971" height="371" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>04 / INVENTORY</span><h4>상호작용에서 아이템 획득·이동까지</h4></header>
-                <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--motion-wide project-core-figure--inventory-motion"><div class="project-core-frame"><img id="projectaction-cpp-inventory-motion" src="assets/projects/projectaction-cpp-inventory.png" data-motion-src="assets/projects/projectaction-cpp-inventory.gif" data-motion-poster="assets/projects/projectaction-cpp-inventory.png" data-motion-autoplay="false" alt="ProjectAction C++의 아이템 상호작용과 인벤토리 조작 영상" width="400" height="237" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="projectaction-cpp-inventory-motion" hidden>재생</button></figure>
-                  <div class="project-technical-notes">
-                    <section><h5>슬롯과 아이템 데이터</h5><p>BPC_Inventory가 슬롯 배열을 관리하고 BPC_ItemData가 아이템 데이터를 보관합니다.<br class="sentence-break" />퀵슬롯은 Inventory Component를 상속해 만들었고 창고에도 같은 컴포넌트를 붙였습니다.</p></section>
-                    <section><h5>대상 감지와 획득</h5><p>Interaction 채널로 0.2초마다 대상을 검사하고 상호작용 메시지를 표시합니다.<br class="sentence-break" />BPC_ItemData의 유무로 아이템과 창고를 구분합니다.</p><p>아이템은 Interact With에서 획득자의 인벤토리를 찾아 PickUp을 호출하고, 이름·수량·최대 소지 수량과 빈 슬롯을 확인해 보관합니다.</p></section>
-                  </div>
-                </div>
-                <div class="project-technical-notes">
-                  <section><h5>슬롯 이동과 카테고리 필터</h5><p>OnDragDetected에서 드래그 이미지를 만들고 OnDrop에서 슬롯을 이동합니다.<br class="sentence-break" />같은 아이템은 수량을 합치고 최대 수량을 넘은 나머지는 다른 슬롯에 넣습니다.</p><p>사용·버리기·나누기를 구현했으며, 각 카테고리의 비트 플래그와 선택한 필터를 &amp; 연산해 표시할 아이템을 골랐습니다.</p></section>
-                  <section><h5>퀵슬롯·창고와 화면 갱신</h5><p>인벤토리의 아이템을 퀵슬롯에 등록하고 선택할 수 있게 했습니다.<br class="sentence-break" />창고는 Timeline으로 여닫고, 열려 있는 동안 버리기 메뉴를 보관하기로 바꿉니다.</p><p>인벤토리·퀵슬롯·창고 위젯은 Wrap Box를 비운 뒤 각 컴포넌트의 현재 슬롯 정보로 다시 채웁니다.</p></section>
-                </div>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>05 / INSPECT</span><h4>아이템 이미지·정보와 3D 살펴보기</h4><p>인벤토리에서는 아이템 이미지와 정보를 표시하고, 3D 살펴보기에서는 모델을 회전하거나 확대·축소할 수 있게 했습니다.</p></header>
-                <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-cpp-inspect.png" alt="3D 아이템과 이름, 무게, 가치, 설명을 표시하는 아이템 살펴보기 화면" width="583" height="639" loading="lazy" decoding="async" /></div></figure>
-                  <div class="project-technical-notes">
-                    <section><h5>표시할 모델 구성</h5><p>Inspect 입력으로 BP_Inspect_Base를 생성합니다.<br class="sentence-break" />InspectInfo 구조체로 아이템의 메시와 Material Instance를 전달해 살펴보기 액터에 적용합니다.</p></section>
-                    <section><h5>촬영 결과를 UI에 연결</h5><p>SceneCapture2D의 촬영 결과를 Render Target에 저장하고, 이를 사용하는 Material을 UI 이미지에 표시했습니다.<br class="sentence-break" />액터의 모델을 조작한 결과가 이 이미지에 반영됩니다.</p></section>
-                  </div>
-                </div>
-                <details class="project-source-details"><summary>인벤토리의 이미지·정보 살펴보기</summary><div class="project-source-gallery"><img src="assets/projects/projectaction-cpp-inspect-2d.png" alt="아이템 이미지와 수량, 등급, 카테고리, 설명을 보여주는 2D 살펴보기 화면" width="809" height="563" loading="lazy" decoding="async" /></div></details>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>06 / SETTINGS</span><h4>게임 설정과 저장</h4></header>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projectaction-cpp-settings-ui.png" alt="선택 버튼과 슬라이더를 조합해 만든 그래픽 설정 UI" width="1710" height="857" loading="lazy" decoding="async" /></div></figure></div>
-                <div class="project-technical-notes">
-                  <section><h5>선택지에 맞춘 위젯 구성</h5><p>Video·Control·Audio·Gameplay 화면을 Widget Switcher로 전환했습니다.<br class="sentence-break" />설명·선택 버튼·슬라이더를 위젯으로 나누고, WBP_Selector가 선택지 수만큼 WBP_Pick을 만들어 현재 항목을 강조하도록 구성했습니다.</p></section>
-                  <section><h5>불러오기와 적용</h5><p>저장된 게임 설정이 있으면 불러오고 없으면 초기값을 사용합니다.<br class="sentence-break" />개별 그래픽 옵션을 바꾸면 전체 품질 표시를 Custom으로 바꿉니다.<br class="sentence-break" />적용할 때는 설정 구조체를 BFL_Save의 Set Game Settings에 전달합니다.</p></section>
-                </div>
-              </article>
-            </div>
-          </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/kZmgv7uDXj4" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ YouTube 데모 보기, 새 탭에서 열기">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
-        </div>
+</article>
+</section>
+<section class="case-study-section project-narrative-section" aria-labelledby="action-cpp-dialog-narrative-2">
+<h3 id="action-cpp-dialog-narrative-2">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 입력과 실행 중인 Ability 연결</h4><div class="project-narrative-copy">
+<p>입력이 들어왔을 때 실행할 행동을 전투 상태와 함께 관리하기 위해 GAS를 사용했습니다. PlayerState가 ASC를 보유하도록 하고, Gameplay Tag와 Input Action의 짝을 Data Asset에 저장했습니다. Enhanced Input Component를 상속한 컴포넌트가 이 설정을 읽어 입력 함수를 연결합니다.</p>
+<p>공격 Ability가 시작되면 Controller에 Action Tag와 현재 Ability를 보관합니다. Anim Notify State로 콤보 입력 구간을 등록하고, 입력 Tag와 현재 공격의 Tag가 일치하면 진행 중인 Ability의 다음 Montage Section으로 넘겼습니다. 콤보 입력으로 처리되지 않으면 입력에 대응하는 Ability를 실행했습니다.</p>
+<p>이동은 Controller에, 공격과 스킬은 Character에 두었습니다. CharacterBase와 IController 인터페이스로 공통 호출을 정의하고, 캐릭터에 빙의할 때 해당 BP에 설정된 Ability를 부여해 다른 캐릭터도 조종할 수 있게 했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="projectaction-cpp-combat-motion" src="assets/projects/projectaction-cpp-combat-poster.png" data-motion-src="assets/projects/projectaction-cpp-combat.gif" data-motion-poster="assets/projects/projectaction-cpp-combat-poster.png" data-motion-autoplay="false" width="640" height="360" alt="ProjectAction C++의 전투와 콤보 동작을 보여주는 플레이 영상" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="projectaction-cpp-combat-motion" hidden>재생</button><figcaption>ProjectAction C++의 전투와 콤보 동작을 보여주는 플레이 영상</figcaption></figure></div><details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-input-data.png" alt="Gameplay Tag로 Input Action을 찾는 C++ Data Asset 클래스" width="723" height="261" loading="lazy" decoding="async" /></div><figcaption>Gameplay Tag로 Input Action을 찾는 C++ Data Asset 클래스</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-combo-registration.png" alt="Controller가 실행 중인 콤보의 Gameplay Tag와 Ability를 보관하는 BeginComboAction 코드" width="815" height="105" loading="lazy" decoding="async" /></div><figcaption>Controller가 실행 중인 콤보의 Gameplay Tag와 Ability를 보관하는 BeginComboAction 코드</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-combo-window.png" alt="Notify Begin과 End에서 Controller에 콤보 입력 구간을 등록하고 해제하는 코드" width="959" height="718" loading="lazy" decoding="async" /></div><figcaption>Notify Begin과 End에서 Controller에 콤보 입력 구간을 등록하고 해제하는 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 전환 직전의 포즈에서 다음 공격으로 블렌딩</h4><div class="project-narrative-copy">
+<p>콤보 입력 시점마다 Montage Section이 바뀌는 프레임이 달라, 이전 동작과 다음 동작의 포즈가 맞지 않았습니다. 전환 시작점을 고정하지 않고 실제로 재생 중이던 포즈를 사용하기 위해, Section을 바꾸기 직전에 현재 포즈를 FinalPose Snapshot으로 저장했습니다.</p>
+<p>Snapshot을 한 Tick 유지한 뒤 다음 애니메이션으로 블렌딩했습니다. AnimGraph 마지막의 Blend Poses by bool로 두 포즈를 연결하고, 지정한 블렌딩 시간이 지나면 저장한 Snapshot을 제거했습니다. 지상·공중 콤보에 같은 방식을 적용했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-snapshot-blend.png" alt="FinalPose Snapshot과 다음 동작을 Blend Poses by bool로 연결한 AnimGraph" width="863" height="477" loading="lazy" decoding="async" /></div><figcaption>FinalPose Snapshot과 다음 동작을 Blend Poses by bool로 연결한 AnimGraph</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-next-section.png" alt="다음 Montage Section으로 이동하기 전에 BlendFromCurrentPose를 호출하는 코드" width="949" height="524" loading="lazy" decoding="async" /></div><figcaption>다음 Montage Section으로 이동하기 전에 BlendFromCurrentPose를 호출하는 코드</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-snapshot-code.png" alt="현재 포즈를 저장하고 다음 Tick부터 블렌딩한 뒤 Snapshot을 제거하는 코드" width="843" height="590" loading="lazy" decoding="async" /></div><figcaption>현재 포즈를 저장하고 다음 Tick부터 블렌딩한 뒤 Snapshot을 제거하는 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 이동·상하체 애니메이션과 무기 탈착</h4><div class="project-narrative-copy">
+<p>필요한 함수는 C++ AnimInstance에 만들고, 이를 상속한 BP에서 AnimGraph를 구성했습니다. Update Preview Only로 에디터에서도 특정 상황을 확인하고, 애니메이션에 필요한 게임 스레드 변수는 Property Access로 읽었습니다.</p>
+<p>Velocity와 캐릭터 회전으로 구한 방향을 Orientation Warping에, 수평 이동 속도를 Stride Warping에 전달했습니다. Foot IK의 영향을 받지 않는 가상 뼈를 Warping에 사용하고, UpperBody Slot의 Montage는 Spine_01 위쪽에 적용해 하체의 이동 동작과 합쳤습니다.</p>
+<p>발의 중간 위치와 Root 높이를 기준으로 지면을 검사했습니다. 양발 높이를 보간하고 낮은 값을 골반에 반영한 뒤 Control Rig와 FullBody IK로 보정했습니다. 무기 사용 Ability가 끝나면 칼집에 넣는 동작을 재생하고, Socket 움직임 때문에 검이 갑자기 보이는 구간은 Material Instance의 Opacity로 보정했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-animgraph.png" alt="상하체 합성, FullBody Slot, Control Rig와 Snapshot 블렌딩으로 최종 포즈를 만드는 AnimGraph" width="1809" height="302" loading="lazy" decoding="async" /></div><figcaption>상하체 합성, FullBody Slot, Control Rig와 Snapshot 블렌딩으로 최종 포즈를 만드는 AnimGraph</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-unequip-code.png" alt="검을 숨기는 Material 파라미터 변경과 칼집에 넣는 Montage 선택 코드" width="971" height="371" loading="lazy" decoding="async" /></div><figcaption>검을 숨기는 Material 파라미터 변경과 칼집에 넣는 Montage 선택 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">4.</span> 인벤토리·퀵슬롯·창고</h4><div class="project-narrative-copy">
+<p>슬롯 배열은 BPC_Inventory, 아이템 데이터는 BPC_ItemData가 보관하도록 나눴습니다. 퀵슬롯은 Inventory Component를 상속하고, 창고에도 같은 컴포넌트를 사용했습니다. Interaction 채널로 0.2초마다 대상을 검사해 안내를 표시하고, 아이템과 창고를 구분해 상호작용했습니다.</p>
+<p>아이템을 획득할 때 이름·수량·최대 소지 수량과 빈 슬롯을 확인했습니다. 드래그로 슬롯을 이동하고 같은 아이템은 수량을 합치되, 최대 수량을 넘은 나머지는 다른 슬롯에 넣었습니다. 사용·버리기·나누기를 구현하고, 카테고리 비트 플래그와 선택한 필터를 AND 연산해 표시할 아이템을 골랐습니다.</p>
+<p>퀵슬롯 등록과 선택을 구현하고, 창고는 Timeline으로 여닫도록 했습니다. 창고가 열려 있는 동안 버리기 메뉴를 보관하기로 바꾸고, 인벤토리·퀵슬롯·창고 위젯은 각 컴포넌트의 현재 슬롯 정보로 Wrap Box를 다시 채워 갱신했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="projectaction-cpp-inventory-motion" src="assets/projects/projectaction-cpp-inventory.png" data-motion-src="assets/projects/projectaction-cpp-inventory.gif" data-motion-poster="assets/projects/projectaction-cpp-inventory.png" data-motion-autoplay="false" alt="ProjectAction C++의 아이템 상호작용과 인벤토리 조작 영상" width="400" height="237" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="projectaction-cpp-inventory-motion" hidden>재생</button><figcaption>ProjectAction C++의 아이템 상호작용과 인벤토리 조작 영상</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">5.</span> 아이템 살펴보기와 게임 설정</h4><div class="project-narrative-copy">
+<p>아이템 이미지와 정보를 표시하고, 3D 살펴보기에서는 모델을 회전하거나 확대·축소할 수 있게 했습니다. Inspect 입력으로 생성한 액터에 InspectInfo의 메시와 Material Instance를 적용하고, SceneCapture2D의 촬영 결과를 Render Target에 저장해 UI 이미지로 표시했습니다.</p>
+<p>Video·Control·Audio·Gameplay 화면은 Widget Switcher로 전환했습니다. 설명·선택 버튼·슬라이더를 위젯으로 나누고, 선택지 수만큼 버튼을 만들어 현재 항목을 강조했습니다. 저장된 설정이 없으면 초기값을 사용하고, 개별 그래픽 옵션을 바꾸면 전체 품질 표시를 Custom으로 바꿨습니다. 적용할 설정은 구조체로 모아 저장 함수에 전달했습니다.</p>
+</div>
+<div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-inspect.png" alt="3D 아이템과 이름, 무게, 가치, 설명을 표시하는 아이템 살펴보기 화면" width="583" height="639" loading="lazy" decoding="async" /></div><figcaption>3D 아이템과 이름, 무게, 가치, 설명을 표시하는 아이템 살펴보기 화면</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-inspect-2d.png" alt="아이템 이미지와 수량, 등급, 카테고리, 설명을 보여주는 2D 살펴보기 화면" width="809" height="563" loading="lazy" decoding="async" /></div><figcaption>아이템 이미지와 수량, 등급, 카테고리, 설명을 보여주는 2D 살펴보기 화면</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projectaction-cpp-settings-ui.png" alt="선택 버튼과 슬라이더를 조합해 만든 그래픽 설정 UI" width="1710" height="857" loading="lazy" decoding="async" /></div><figcaption>선택 버튼과 슬라이더를 조합해 만든 그래픽 설정 UI</figcaption></figure></div>
+</article>
+</section>
+<div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/kZmgv7uDXj4" target="_blank" rel="noreferrer" aria-label="ProjectAction C++ YouTube 데모 보기, 새 탭에서 열기">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
+</div>
       </div>
     </dialog>
 
         <dialog class="project-dialog project-dialog--compact" id="cuphead-dialog" aria-labelledby="cuphead-dialog-title">
       <div class="dialog-shell">
         <header class="dialog-header"><div><h2 id="cuphead-dialog-title">CupHead</h2></div><button class="dialog-close" type="button" data-project-dialog-close aria-label="CupHead 상세 닫기"><span aria-hidden="true">×</span></button></header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
-            <div class="project-detail-copy"><h3>처음으로 게임의 시작부터 끝까지 설계하고 구현한 프로젝트입니다.</h3>
-              <p>CupHead의 일부 콘텐츠를 모작하며 타이틀, 스테이지 진행, 종료 씬을 만들었습니다.<br class="sentence-break" />플레이어·보스·투사체의 상태와 충돌, 렌더링과 사운드까지 직접 구현했습니다.</p><dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2022.07.01 — 07.25</dd></div><div><dt>ROLE</dt><dd>Solo Programming · Gameplay/Collision/Rendering</dd></div><div><dt>STACK</dt><dd>C++11 · Win32 API · GDI+ · FMOD</dd></div></dl></div>
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
+            <div class="project-detail-copy">
+<h3>게임이 시작되고 끝나는 한 사이클을 직접 만들었습니다.</h3>
+<p>Win32 API와 C++로 CupHead의 일부 콘텐츠를 모작한 첫 개인 게임 프로젝트입니다. 메뉴에서 게임을 시작해 스테이지를 진행하고 종료하는 한 사이클을 직접 구현하는 데 집중했습니다.</p>
+<p>플레이어와 보스의 행동, 투사체와 충돌 처리, 씬 전환을 구현했으며, 화면 출력과 사운드 재생까지 전체 개발을 맡았습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2022.07.01 — 07.25</dd></div><div><dt>ROLE</dt><dd>Solo Programming · Gameplay/Collision/Rendering</dd></div><div><dt>STACK</dt><dd>C++11 · Win32 API · GDI+ · FMOD</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/cuphead-boss.jpg" alt="CupHead 모작의 보스 전투 화면" loading="lazy" decoding="async" /></figure>
           </section>
-<section class="case-study-section project-core-section"><p class="eyebrow">01 / REPRESENTATIVE CASE</p><h3>게임 진행과 씬의 수명</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>01 / SCENE LIFECYCLE</span><h4>메뉴·플레이·종료를 씬 전환으로 연결</h4><p>메뉴·스테이지·종료 연출을 각각의 씬으로 만들었습니다.<br class="sentence-break" />각 씬은 전환 조건을 판단하고, SceneManager가 이전 씬 정리와 다음 씬 생성·초기화를 맡도록 했습니다.</p></header><ol class="project-flow project-flow--three"><li><b>01</b><strong>플레이 시작</strong><p>시작 메뉴에서 Enter를 누르면 첫 스테이지로 이동합니다.</p></li><li><b>02</b><strong>스테이지 이동</strong><p>지정된 위치에서 Z를 눌러 보스전이나 다음 스테이지로 이동합니다.<br class="sentence-break" />보스전의 적을 모두 처치하면 출구에서 일반 스테이지로 돌아옵니다.</p></li><li><b>03</b><strong>종료 씬</strong><p>종료 연출 뒤 아웃트로 씬으로 전환합니다.<br class="sentence-break" />영상이 끝나거나 Enter를 누르면 프로그램을 종료합니다.</p></li></ol><div class="project-technical-notes"><section><h5>전환할 때 실행되는 순서</h5><p>SceneManager는 요청한 씬 ID가 이전과 다르면 기존 씬을 삭제하고, ID에 맞는 씬을 생성해 Initialize를 호출합니다.<br class="sentence-break" />Update·Late Update·Render도 현재 씬으로 전달합니다.</p></section><section><h5>씬과 객체의 정리 책임</h5><p>첫 스테이지의 소멸자에서는 Release를 호출해 객체·스크롤·지면 관리와 사운드를 정리했습니다.</p><p>Object Manager는 보관한 객체를 삭제하고 각 그룹의 list를 비웁니다.<br class="sentence-break" />새 씬은 초기화 단계에서 필요한 객체를 만듭니다.</p></section></div></article></div></section><section class="case-study-section project-core-section">
-            <p class="eyebrow">02 / IMPLEMENTATION</p>
-            <h3>게임플레이를 위한 충돌 처리</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>01 / AABB &amp; GROUP FILTER</span><h4>필요한 오브젝트 조합만 검사</h4><p>플레이어·몬스터·투사체를 OBJID별 list에 보관했습니다.<br class="sentence-break" />Object Manager의 Late Update에서 실제로 충돌해야 하는 그룹 쌍만 AABB 검사에 전달했습니다.</p></header>
-                <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--contain project-core-figure--ratio-8-5"><div class="project-core-frame"><img src="assets/projects/cuphead-gameplay.jpg" alt="흰색 충돌 사각형이 표시된 CupHead 플레이 화면" loading="lazy" decoding="async" /></div></figure>
-                  <ol class="project-core-list"><li><b>01</b><div><strong>그룹별 보관</strong><p>플레이어·몬스터·투사체를 OBJID에 따라 분리해 list로 관리합니다.</p></div></li><li><b>02</b><div><strong>검사 조합 지정</strong><p>몬스터–총알, 적 총알–플레이어처럼 필요한 list 쌍만 검사합니다.</p></div></li><li><b>03</b><div><strong>반응 위임</strong><p>겹침이 확인되면 양쪽 객체의 Collision_Event를 호출합니다.</p></div></li></ol>
-                </div>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>02 / LINE GROUND</span><h4>선분 높이로 지면 상태 갱신</h4><p>플레이어의 X좌표가 선분 범위에 들어오면 직선식으로 해당 위치의 Y를 구해 발 위치와 이동 상태를 맞췄습니다.</p></header>
-                <div class="project-core-layout project-core-layout--reverse">
-                  <ol class="project-core-list"><li><b>01</b><div><strong>선분 범위 확인</strong><p>플레이어 X가 현재 지형 선분 안에 있는지 먼저 확인합니다.</p></div></li><li><b>02</b><div><strong>지면 높이 계산</strong><p>선분 방정식으로 같은 X좌표의 지면 Y를 계산합니다.</p></div></li><li><b>03</b><div><strong>상태 전환</strong><p>발 위치를 보정하고 GROUND·AIR·FALL 상태를 갱신합니다.</p></div></li></ol>
-                  <figure class="project-core-figure project-core-figure--ratio-8-5"><div class="project-core-frame"><img src="assets/projects/cuphead-stage.jpg" alt="경사진 지면이 포함된 CupHead 스테이지 플레이 화면" loading="lazy" decoding="async" /></div></figure>
-                </div>
-              </article>
-            </div>
-          </section>
+<section class="case-study-section project-narrative-section" aria-labelledby="cuphead-dialog-narrative-1">
+<h3 id="cuphead-dialog-narrative-1">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 씬 전환으로 게임 진행 구성하기</h4><div class="project-narrative-copy">
+<p>메뉴, 스테이지, 종료 화면마다 필요한 객체와 입력 처리가 달라 각각을 씬으로 나눴습니다. 화면을 바꾸는 공통 절차는 SceneManager에서 처리했습니다.</p>
+<p>전환 요청이 들어오면 이전 씬을 삭제하고 다음 씬을 생성해 초기화했습니다. 스테이지를 나갈 때는 사용하던 객체와 지면·스크롤 정보를 정리하고, 다음 스테이지에서 필요한 플레이어와 적을 새로 생성했습니다.</p>
+<p>메뉴에서는 Enter로 게임을 시작하고, 스테이지에서는 출구에서 Z를 눌러 보스전이나 다음 스테이지로 이동하도록 구현했습니다.</p>
+</div>
 
-
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> AABB 충돌 판정과 객체별 반응 처리</h4><div class="project-narrative-copy">
+<p>플레이어와 적, 투사체의 피격을 판정하기 위해 각 객체에 사각형 충돌 범위를 두고 AABB 방식으로 겹침을 검사했습니다. 충돌용 사각형의 좌우·상하 좌표를 구한 뒤, IntersectRect 함수로 두 범위가 겹치는지 확인했습니다.</p>
+<p>불필요한 충돌 검사를 줄이기 위해 객체를 종류별 리스트로 관리했습니다. ObjectManager의 Late Update에서 플레이어 탄환과 몬스터, 적 탄환과 플레이어처럼 실제로 충돌해야 하는 그룹끼리만 검사했습니다.</p>
+<p>충돌이 확인되면 양쪽 객체의 가상 함수 Collision_Event를 호출해 각자의 반응을 처리했습니다. 예를 들어 보스는 탄환의 공격력만큼 체력을 줄이고, 탄환은 소멸 상태로 바꾸면서 이펙트를 생성했습니다. 공통으로 충돌을 검사하면서도 객체마다 필요한 피격 반응을 넣도록 구현했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/cuphead-gameplay.jpg" alt="흰색 충돌 사각형이 표시된 CupHead 플레이 화면" loading="lazy" decoding="async" /></div><figcaption>흰색 충돌 사각형이 표시된 CupHead 플레이 화면</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 선분으로 지면 높이 계산하기</h4><div class="project-narrative-copy">
+<p>경사진 지형에서도 플레이어의 발이 바닥 높이에 맞도록 지면을 선분으로 표현하고, 직선의 방정식으로 높이를 계산했습니다.</p>
+<p>먼저 플레이어의 X좌표가 포함된 선분을 찾고, 양 끝점의 좌표로 해당 X위치의 지면 Y좌표를 구했습니다. 여러 선분이 겹치는 구간에서는 플레이어 아래에 있는 가장 가까운 지면을 선택했습니다.</p>
+<p>계산한 지면 높이와 발 위치를 비교해 공중과 지면 상태를 전환하고, 지면에 서 있을 때는 발이 그 높이에 맞도록 캐릭터의 Y좌표를 보정했습니다. 달릴 때의 먼지와 착지 이펙트도 더해, 경사를 따라 움직이고 점프 후 바닥에 내려앉는 모습을 표현했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/cuphead-stage.jpg" alt="경사진 지면이 포함된 CupHead 스테이지 플레이 화면" loading="lazy" decoding="async" /></div><figcaption>경사진 지면이 포함된 CupHead 스테이지 플레이 화면</figcaption></figure></div>
+</article>
+</section>
 <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/07.22Cuphead" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/Pyhla3B8orE?t=220" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
 </div>
 </div>
@@ -724,18 +786,78 @@
         <dialog class="project-dialog project-dialog--compact" id="minecraft-dialog" aria-labelledby="minecraft-dialog-title">
       <div class="dialog-shell">
         <header class="dialog-header"><div><h2 id="minecraft-dialog-title">Minecraft Dungeons</h2></div><button class="dialog-close" type="button" data-project-dialog-close aria-label="Minecraft Dungeons 상세 닫기"><span aria-hidden="true">×</span></button></header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
             <div class="project-detail-copy">
-
-              <h3>VFX와 쿠크·세이튼 보스를 구현했습니다.</h3>
-              <p>마인크래프트 던전의 전투 형식에 쿠크·세이튼 보스 패턴을 구현한 팀 프로젝트입니다.<br class="sentence-break" />VFX와 보스 패턴을 맡고, 팀이 구축한 멀티플레이·Controller·Command 기반을 활용했습니다.</p>
-              <dl class="project-facts"><div><dt>TYPE</dt><dd>3D Team Project · 4 People</dd></div><div><dt>PERIOD</dt><dd>2022.09.13 — 10.25</dd></div><div><dt>ROLE</dt><dd>VFX · Multiplayer Boss</dd></div><div><dt>STACK</dt><dd>C++11 · DirectX 9 · HLSL · ImGui</dd></div></dl>
-            </div>
+<h3>함께 대응하는 보스 패턴과 VFX를 구현했습니다.</h3>
+<p>DirectX9로 Minecraft Dungeons를 모작한 4인 팀 프로젝트입니다. VFX와 멀티플레이 보스인 쿠크, 세이튼을 맡았습니다.</p>
+<p>처음에는 VFX를 담당했지만, 여러 플레이어가 함께 수행하는 협동 기믹을 구현해 보고 싶어 보스 개발을 추가로 맡았습니다. 팀장이 구현한 멀티플레이와 컨트롤러 구조를 바탕으로, 로스트아크 쿠크세이튼 2관문의 일부 패턴을 구현했습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>3D Team Project · 4 People</dd></div><div><dt>PERIOD</dt><dd>2022.09.13 — 10.25</dd></div><div><dt>ROLE</dt><dd>VFX · Multiplayer Boss</dd></div><div><dt>STACK</dt><dd>C++11 · DirectX 9 · HLSL · ImGui</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/minecraft-boss.jpg" alt="Minecraft Dungeon 모작의 쿠크·세이튼 보스 전투 화면" /></figure>
           </section>
-<section class="case-study-section project-core-section"><p class="eyebrow">01 / REPRESENTATIVE CASES</p><h3>보스 기믹의 조건과 대상 관리</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>01 / KOUKU SYMBOL</span><h4>색 영역 진입부터 심볼 판정까지</h4><p>쿠크의 체력이 절반 이하가 되면 단체 기믹 상태로 전환합니다.<br class="sentence-break" />색 영역에 들어온 플레이어에게 심볼을 부여하고, 쿠크와 세이튼의 애니메이션 시간을 맞춰 패턴을 진행했습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/minecraft-kouku-symbol-areas.png" alt="쿠크 단체 기믹에서 파란색과 빨간색 영역이 생성된 플레이 화면" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>영역에 들어온 플레이어 찾기</h5><p>정해진 위치에 색깔별 원과 이펙트를 만들고 Overlap용 구체를 배치했습니다.<br class="sentence-break" />영역에 들어온 플레이어에게 해당 색의 심볼 상태를 부여합니다.</p></section><section><h5>공격 구간에서 조건 검사</h5><p>공격 애니메이션 구간에는 플레이어의 파란 심볼 여부와 빨간 영역에 겹친 객체 수를 검사합니다.<br class="sentence-break" />파란 심볼이 없고 빨간 영역의 중첩 객체 수도 2가 아니면 해당 플레이어에게 피해를 적용합니다.</p></section><section><h5>명령에서 보스 상태로</h5><p>일반 패턴은 Controller에서 거리와 쿨타임을 검사한 뒤 쿠크에게 명령을 전달합니다.<br class="sentence-break" />쿠크는 명령에 맞는 공격 상태로 바뀌고, 그 상태에서 애니메이션과 판정을 실행합니다.</p></section></div></div><details class="project-source-details"><summary>심볼 부여와 피해 조건 코드</summary><div class="project-source-gallery"><img src="assets/projects/minecraft-kouku-symbol-source.png" alt="Overlap으로 심볼을 부여하고 파란 심볼 여부와 빨간 영역의 중첩 객체 수를 검사하는 코드" loading="lazy" decoding="async" /></div></details></article><article class="project-core-block"><header class="project-core-heading"><span>02 / SATON GRAB</span><h4>잡은 대상을 손에 고정하고 해제하기</h4><p>세이튼의 잡기 패턴은 애니메이션 이벤트로 판정을 시작합니다.<br class="sentence-break" />손 뼈의 월드 위치에 충돌체를 맞추고, 겹친 플레이어를 잡기 상태로 바꿔 손 위치에 고정했습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/minecraft-saton-grab-scene.jpg" alt="세이튼의 손 위치에 플레이어가 붙잡힌 장면" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>잡힌 대상 보관</h5><p>잡은 플레이어 포인터를 <code>set&lt;CPlayer*&gt;</code>에 보관해 같은 대상이 중복 등록되지 않게 했습니다.<br class="sentence-break" />애니메이션이 진행되는 동안 손 위치에 맞춰 플레이어 위치를 갱신합니다.</p></section><section><h5>종료 이벤트에서 정리</h5><p>잡기 종료 이벤트가 들어오면 보관한 대상을 순회해 피해를 적용하고 고정 상태를 해제합니다.<br class="sentence-break" />이어 대상 집합을 비우고 종료 플래그를 되돌립니다.</p></section></div></div><details class="project-source-details"><summary>손 위치 고정과 잡기 종료 코드</summary><div class="project-source-gallery"><img src="assets/projects/minecraft-saton-grab-source.png" alt="손 뼈 기준 Overlap, 대상 집합 보관, 피해 적용과 Graped_Off 및 집합 정리 코드" loading="lazy" decoding="async" /></div></details></article></div></section><section class="case-study-section project-core-section"><p class="eyebrow">02 / IMPLEMENTATION</p><h3>VFX와 상태 이상</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>03 / VFX FACTORY</span><h4>VFX 생성과 공격 범위 예고</h4><p>VFX 생성 함수를 이름으로 등록하고, 필요한 효과를 태그로 찾도록 했습니다.<br class="sentence-break" />템플릿 오버로딩으로 위치·행렬·추가 옵션을 받고, 반환된 객체에서 세부 값을 조정할 수 있습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/minecraft-attack-telegraph.gif" alt="보스 공격의 충돌 시점까지 범위가 차오르는 전투 장면" loading="lazy" decoding="async" data-image-expand /></div></figure><div class="project-technical-notes"><section><h5>공격 시간에 맞춰 범위 채우기</h5><p>최소·최대 크기를 보간해 애니메이션의 충돌 키프레임에 범위가 완전히 차도록 했습니다.<br class="sentence-break" />이펙트는 정해진 수명이 지나면 제거됩니다.</p></section><section><h5>보스 범위는 별도 생성</h5><p>일반 VFX는 공통 팩토리로 만들고, 보스 공격 범위는 필요한 시간·크기 인자를 받는 별도 생성 경로를 사용했습니다.</p></section></div></div></article><article class="project-core-block"><header class="project-core-heading"><span>04 / FASCINATE</span><h4>매혹 상태와 스턴을 이용한 해제</h4><p>임의의 플레이어 위치에 표식을 남긴 뒤 매혹 상태를 부여했습니다.<br class="sentence-break" />매혹된 플레이어는 입력할 수 없고, 세이튼을 향해 회전하며 걸어갑니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/minecraft-fascinate-pattern.gif" alt="4인 플레이에서 표식 이후 매혹 패턴이 진행되는 장면" loading="lazy" decoding="async" data-image-expand /></div></figure><div class="project-technical-notes"><section><h5>표식 위치에 해제 영역 생성</h5><p>표식이 있던 위치에 3초 뒤 스턴 충돌체를 생성합니다.<br class="sentence-break" />여기에 겹친 플레이어에게 스턴을 부여해 매혹을 해제하도록 구현했습니다.</p></section></div></div></article></div></section><section class="case-study-section minecraft-evidence-section"><p class="eyebrow">03 / COMBAT PLAY</p><h3>보스 애니메이션과 4인 전투</h3><div class="project-core-gallery"><figure class="project-core-gallery--contain"><img src="assets/projects/minecraft-kouku-animation.gif" alt="쿠크 망치 패턴의 애니메이션 재생 화면" loading="lazy" decoding="async" data-image-expand /></figure><figure class="project-core-gallery--contain"><img src="assets/projects/minecraft-saton-counter.gif" alt="세이튼 카운터 패턴의 애니메이션 재생 화면" loading="lazy" decoding="async" data-image-expand /></figure><figure class="project-core-gallery--contain"><img src="assets/projects/minecraft-cat-pattern.gif" alt="전투에서 고양이 패턴이 실행되는 장면" loading="lazy" decoding="async" data-image-expand /></figure><figure class="project-core-gallery--contain"><img src="assets/projects/minecraft-multiplayer.gif" alt="여러 플레이어가 세이튼 패턴에 대응하는 전투 장면" loading="lazy" decoding="async" data-image-expand /></figure></div></section>
-<p class="case-study-note"><strong>담당 범위.</strong> VFX 팩토리와 공격 범위 예고, 쿠크·세이튼의 상태·패턴, 충돌·상태 이상 처리를 구현했습니다.<br class="sentence-break" />멀티플레이 시스템, Controller·Command 기반과 Animation Tool은 팀 기반을 활용했습니다.</p>
+<section class="case-study-section project-narrative-section" aria-labelledby="minecraft-dialog-narrative-1">
+<h3 id="minecraft-dialog-narrative-1">어려웠던 문제</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 원작을 분석해 협동 기믹 구현하기</h4><div class="project-narrative-copy">
+<p>여러 플레이어가 역할을 나눠 수행하는 기믹을 구현해 보고 싶어, 로스트아크의 ‘광기의 장막’ 패턴을 참고했습니다. 해당 패턴의 공략은 알고 있었지만, 여러 플레이어의 위치와 상태를 어떻게 관리하고 공격 시점에 판정할지 정하는 데 어려움이 있었습니다.</p>
+<p>원작을 직접 플레이하며 장막의 색깔에 따라 보호받는 인원 조건과 보스의 공격 시점을 살펴봤습니다. 원작에서는 파란 장막은 한 명을 보호하고, 빨간 장막은 두 명이 함께 들어가야 보호받습니다. 장막에 들어갈 때 표시되는 버프 UI를 보고, 장막의 보호 여부를 플레이어의 상태로 저장해 공격 판정에 사용하자는 아이디어를 얻었습니다.</p>
+<p>장막마다 구형 범위로 충돌을 검사하고, 안에 들어온 플레이어에게 색깔별 심볼을 부여했습니다. 기존 상태 이상 처리 함수에 피해량을 0으로 전달해 체력을 줄이지 않고, 스탯 컴포넌트의 심볼 상태를 활성화했습니다. 파란 심볼은 장막 안에서 유효 시간을 계속 갱신하고, 밖으로 나가 갱신이 끊기면 약 0.3초 뒤 해제되도록 했습니다.</p>
+<p>공격 애니메이션의 이벤트가 발생하면 플레이어의 심볼 상태와 빨간 장막의 충돌 결과를 확인해 피해를 판정했습니다. 쿠크와 세이튼의 애니메이션 시간도 맞춰, 장막에 들어가 공격에 대응하는 원작의 협동 패턴을 프로젝트에 맞게 재현했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-kouku-symbol-areas.png" alt="쿠크 단체 기믹에서 파란색과 빨간색 영역이 생성된 플레이 화면" loading="lazy" decoding="async" /></div><figcaption>쿠크 단체 기믹에서 파란색과 빨간색 영역이 생성된 플레이 화면</figcaption></figure></div><details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-kouku-symbol-source.png" alt="Overlap으로 심볼을 부여하고 파란 심볼 여부와 빨간 영역의 중첩 객체 수를 검사하는 코드" loading="lazy" decoding="async" /></div><figcaption>Overlap으로 심볼을 부여하고 파란 심볼 여부와 빨간 영역의 중첩 객체 수를 검사하는 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 추가 콘텐츠에 필요한 리소스 제작</h4><div class="project-narrative-copy">
+<p>쿠크와 세이튼의 보스 패턴을 추가하려면 캐릭터의 외형과 패턴에 맞는 동작도 준비해야 했습니다. 고양이와 쿠크·세이튼의 텍스처를 직접 그리고, 팀장이 만든 애니메이션 작업 도구로 보스의 동작을 제작했습니다. 텍스처는 DDS 형식으로 저장해 게임에서 불러와 사용했습니다.</p>
+</div>
+<div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-cat-model.gif" alt="텍스처를 적용한 고양이 모델을 작업 도구에서 확인하는 모습" loading="lazy" decoding="async" /></div><figcaption>텍스처를 적용한 고양이 모델을 작업 도구에서 확인하는 모습</figcaption></figure>
+<figure class="project-narrative-figure project-narrative-figure--texture"><div class="project-narrative-frame"><img src="assets/projects/minecraft-kouku-texture.png" alt="직접 그린 쿠크 얼굴 텍스처" loading="lazy" decoding="async" /></div><figcaption>직접 그린 쿠크 얼굴 텍스처</figcaption></figure></div><div class="project-narrative-gallery "><figure class="project-narrative-figure project-narrative-figure--texture"><div class="project-narrative-frame"><img src="assets/projects/minecraft-cat-orange-texture.jpg" alt="직접 그린 고양이 얼굴 텍스처" loading="lazy" decoding="async" /></div><figcaption>직접 그린 고양이 얼굴 텍스처</figcaption></figure>
+<figure class="project-narrative-figure project-narrative-figure--texture"><div class="project-narrative-frame"><img src="assets/projects/minecraft-cat-dark-texture.jpg" alt="직접 그린 고양이 얼굴 텍스처" loading="lazy" decoding="async" /></div><figcaption>직접 그린 고양이 얼굴 텍스처</figcaption></figure>
+<figure class="project-narrative-figure project-narrative-figure--texture"><div class="project-narrative-frame"><img src="assets/projects/minecraft-cat-blue-eyes-texture.jpg" alt="직접 그린 고양이 얼굴 텍스처" loading="lazy" decoding="async" /></div><figcaption>직접 그린 고양이 얼굴 텍스처</figcaption></figure>
+<figure class="project-narrative-figure project-narrative-figure--texture"><div class="project-narrative-frame"><img src="assets/projects/minecraft-saton-texture.png" alt="보스 리소스에 사용한 텍스처" loading="lazy" decoding="async" /></div><figcaption>보스 리소스에 사용한 텍스처</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-kouku-animation.gif" alt="쿠크 망치 패턴의 애니메이션 재생 화면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>쿠크 망치 패턴의 애니메이션 재생 화면</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-saton-counter.gif" alt="세이튼 카운터 패턴의 애니메이션 재생 화면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>세이튼 카운터 패턴의 애니메이션 재생 화면</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-cat-pattern.gif" alt="전투에서 고양이 패턴이 실행되는 장면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>전투에서 고양이 패턴이 실행되는 장면</figcaption></figure></div>
+</article>
+</section>
+<section class="case-study-section project-narrative-section" aria-labelledby="minecraft-dialog-narrative-2">
+<h3 id="minecraft-dialog-narrative-2">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> VFX 생성 과정의 추상화</h4><div class="project-narrative-copy">
+<p>VFX를 여러 객체에서 반복해 생성하기 때문에, 객체 생성과 이펙트 레이어 등록을 한곳에서 처리하고자 했습니다. 효과 이름으로 생성 함수를 찾아 객체를 만들고, 레이어에 등록하는 과정을 팩토리 함수로 묶었습니다.</p>
+<p>호출하는 쪽에서 가진 정보에 맞춰 사용할 수 있도록 위치 또는 월드 행렬을 받는 생성 함수를 오버로딩했습니다. 위치만 지정하거나, 위치·회전·크기를 함께 적용해 효과를 생성할 수 있도록 했습니다.</p>
+<p>템플릿을 사용해 생성한 효과의 타입에 맞는 포인터를 반환했습니다. 반환된 포인터로 효과별 추가 설정을 적용했습니다. 예를 들어 물약 효과는 플레이어 위치에 생성한 뒤, 반환된 포인터로 플레이어를 따라가도록 설정했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-vfx-factory-source.png" alt="효과 생성과 레이어 등록을 묶은 팩토리 함수" loading="lazy" decoding="async" /></div><figcaption>효과 생성과 레이어 등록을 묶은 팩토리 함수</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-vfx-follow-source.png" alt="반환된 효과의 포인터로 플레이어를 따라가도록 설정한 코드" loading="lazy" decoding="async" /></div><figcaption>반환된 효과의 포인터로 플레이어를 따라가도록 설정한 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 공격 시점에 맞춰 차오르는 범위 표시</h4><div class="project-narrative-copy">
+<p>플레이어가 보스 공격의 범위와 시점을 미리 알 수 있도록, 바닥의 원이 차오르는 예고 이펙트를 구현했습니다. 원이 채워지는 시점을 실제 공격 판정이 시작되는 때에 맞췄습니다.</p>
+<p>공격 판정이 시작되는 애니메이션 프레임을 프로젝트 기준인 60fps에 맞춰 시간으로 환산했습니다. 이펙트의 누적 시간을 이 값으로 나눠 보간 비율을 구하고, D3DXVec3Lerp로 최소 크기에서 최대 크기까지 원을 키웠습니다.</p>
+<p>패턴에 따라 범위와 공격 시점을 설정할 수 있도록, 범위의 형태·최소 및 최대 크기·공격 프레임을 전용 생성 함수에 함께 전달했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-attack-telegraph.gif" alt="보스 공격의 충돌 시점까지 범위가 차오르는 전투 장면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>보스 공격의 충돌 시점까지 범위가 차오르는 전투 장면</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 손 뼈를 기준으로 한 잡기 패턴</h4><div class="project-narrative-copy">
+<p>세이튼이 플레이어를 잡아 내리찍는 패턴을 구현했습니다. 잡힌 플레이어가 손의 움직임을 따라가도록, 손 뼈의 월드 행렬에서 가져온 위치를 잡기 판정과 위치 보정에 사용했습니다.</p>
+<p>애니메이션의 잡기 구간에서 손 주변의 플레이어를 Overlap으로 찾고, 잡힘 상태를 부여한 뒤 손보다 조금 아래로 위치를 보정했습니다. 같은 플레이어가 반복해서 검출돼도 중복 등록되지 않도록 잡은 대상은 <code>set</code>에 보관했습니다.</p>
+<p>잡기 종료 이벤트에 맞춰 피해와 넉백을 적용하고 잡힘 상태를 해제했습니다. 손에 붙잡혀 움직이던 플레이어가 내리찍는 동작과 함께 튕겨 나가도록 해, 잡기 패턴의 움직임과 타격감을 살렸습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-saton-grab-scene.jpg" alt="세이튼의 손 위치에 플레이어가 붙잡힌 장면" loading="lazy" decoding="async" /></div><figcaption>세이튼의 손 위치에 플레이어가 붙잡힌 장면</figcaption></figure></div><details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-saton-grab-source.png" alt="손 뼈 기준 Overlap, 대상 집합 보관, 피해 적용과 Graped_Off 및 집합 정리 코드" loading="lazy" decoding="async" /></div><figcaption>손 뼈 기준 Overlap, 대상 집합 보관, 피해 적용과 Graped_Off 및 집합 정리 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">4.</span> 스턴 아이템 효과를 활용한 매혹 기믹</h4><div class="project-narrative-copy">
+<p>로스트아크의 비아키스 매혹 패턴을 참고해, 플레이어들이 함께 모여 대응하는 협동 기믹을 구현했습니다. 매혹이 걸리면 일반 행동 대신 세이튼을 향해 회전하고 걸어가도록 했습니다.</p>
+<p>특정 플레이어에게 표식을 남기고, 해당 플레이어의 위치에 스턴 아이템 효과가 발동하도록 했습니다. 플레이어의 상태를 검사할 때 스턴을 매혹보다 먼저 처리해 강제 이동을 멈추고, 스턴 판정에 맞춰 파티클과 원형 이펙트, 효과음을 함께 재생했습니다.</p>
+<p>다른 플레이어들은 표식이 있는 플레이어에게 모여 함께 스턴을 받고, 세이튼에게 끌려가는 움직임을 멈춰 매혹 기믹을 파훼하도록 구현했습니다.</p>
+</div>
+<div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-fascinate-pattern.gif" alt="4인 플레이에서 표식 이후 매혹 패턴이 진행되는 장면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>4인 플레이에서 표식 이후 매혹 패턴이 진행되는 장면</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/minecraft-multiplayer.gif" alt="여러 플레이어가 세이튼 패턴에 대응하는 전투 장면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>여러 플레이어가 세이튼 패턴에 대응하는 전투 장면</figcaption></figure></div>
+</article>
+</section>
 <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/an004005/SR_Minecraft_Dungeon" target="_blank" rel="noreferrer">GitHub 코드 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://www.youtube.com/watch?v=2nZiwh1as1g" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
 </div>
 </div>
@@ -744,11 +866,68 @@
         <dialog class="project-dialog project-dialog--compact" id="gunfire-dialog" aria-labelledby="gunfire-dialog-title">
       <div class="dialog-shell">
         <header class="dialog-header"><div><h2 id="gunfire-dialog-title">Gunfire Reborn</h2></div><button class="dialog-close" type="button" data-project-dialog-close aria-label="Gunfire Reborn 상세 닫기"><span aria-hidden="true">×</span></button></header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro"><div class="project-detail-copy"><h3>DirectX 11로 <span class="text-unit">Gunfire Reborn의</span> <span class="text-unit">여섯 개</span> 스테이지를 모작했습니다.</h3>
-              <p>공용 FSM, 애니메이션 보간, Frustum·Deferred Rendering·Collider를 구현한 개인 프로젝트입니다.</p><dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2022.12.27 — 2023.02.14</dd></div><div><dt>ROLE</dt><dd>Solo Programming · Gameplay/Framework/Rendering</dd></div><div><dt>STACK</dt><dd>C++11 · DirectX 11 · HLSL · Assimp · ImGui · FMOD</dd></div></dl></div><figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/gunfire-gameplay.jpg" alt="Gunfire Reborn 모작의 보스 전투 화면" loading="lazy" decoding="async" /></figure></section>
-<section class="case-study-section project-core-section"><p class="eyebrow">01 / REPRESENTATIVE CASES</p><h3>그림자 범위와 화면 합성</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>01 / SHADOW SCOPE</span><h4>카메라 범위에 맞춰 그림자 계산하기</h4><p>장면 전체를 그림자 맵에 담으려니 해상도가 부족해 가까운 물체의 그림자를 선명하게 표현하기 어려웠습니다.<br class="sentence-break" />카메라 절두체를 기준으로 그림자를 그릴 범위를 구했습니다.</p></header><div class="project-technical-notes"><section><h5>빛의 시야·투영 행렬</h5><p>절두체의 꼭짓점을 월드 공간으로 옮겨 평균으로 중심을 구했습니다.<br class="sentence-break" />중심에서 가장 먼 꼭짓점까지의 거리를 범위로 삼고, 빛 방향의 반대쪽에 시점을 두어 중심을 바라보는 시야 행렬과 직교투영 행렬을 만들었습니다.</p></section><section><h5>근거리 한 구간을 적용한 이유</h5><p>처음에는 절두체를 세 구간으로 나누는 구성을 검토했습니다.<br class="sentence-break" />실제 맵은 좁고 길이 꺾여 있어 가장 가까운 범위 하나를 사용했습니다.<br class="sentence-break" />이 프로젝트에서는 여러 구간을 전환하는 다중 Cascade까지 구현하지 않았습니다.</p></section><section><h5>적용 결과</h5><p>첫 번째 화면은 기존 Shadow Mapping, 두 번째는 카메라에 가까운 범위를 적용한 결과입니다.<br class="sentence-break" />같은 캐릭터의 발밑 그림자 경계를 비교할 수 있습니다.</p></section></div><div class="project-core-gallery"><figure class="project-core-gallery--portrait"><img src="assets/projects/gunfire-shadow-original.png" alt="기존 Shadow Mapping으로 그린 캐릭터와 발밑 그림자" loading="lazy" decoding="async" /></figure><figure class="project-core-gallery--portrait"><img src="assets/projects/gunfire-shadow-near.png" alt="카메라 근거리 범위를 적용해 그린 캐릭터와 발밑 그림자" loading="lazy" decoding="async" /></figure></div><details class="project-source-details"><summary>절두체 중심과 빛의 행렬 계산 코드</summary><div class="project-source-gallery"><img src="assets/projects/gunfire-shadow-matrix-source.png" alt="절두체 꼭짓점을 월드로 변환해 중심과 반지름을 구하고 빛의 행렬을 만드는 코드" loading="lazy" decoding="async" /></div></details></article><article class="project-core-block"><header class="project-core-heading"><span>02 / RENDER TARGET</span><h4>필요한 정보를 나눠 그리고 마지막에 합성</h4><p>조명과 그림자 계산을 분리하기 위해 RenderTarget과 관리 클래스를 만들었습니다.<br class="sentence-break" />객체의 색상·법선·깊이 등을 먼저 기록하고, 뒤의 렌더 단계에서 이 정보를 사용하도록 구성했습니다.</p></header><div class="project-core-layout"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/gunfire-debug.jpg" alt="Diffuse·Normal·Depth 등 MRT 출력과 실제 장면이 표시된 디버그 화면" loading="lazy" decoding="async" /></div></figure><div class="project-technical-notes"><section><h5>등록·바인딩·복원</h5><p>목적에 따라 RenderTarget을 묶어 등록했습니다.<br class="sentence-break" />Renderer는 RenderGroup을 그리기 전에 필요한 타깃을 장치에 바인딩하고, 해당 단계가 끝나면 원래 타깃으로 되돌립니다.</p></section><section><h5>최종 화면 만들기</h5><p>Diffuse·<wbr />Normal·<wbr />Depth·<wbr />Shade·<wbr />Flag 등 각 단계의 결과를 ShaderResourceView로 전달합니다.<br class="sentence-break" />한 프레임의 렌더 작업이 끝나면 UI를 제외한 타깃을 Blend 단계에서 합성해 화면을 그립니다.</p></section><section><h5>시야 밖 객체 제외</h5><p>GameInstance에서 카메라 절두체를 갱신하고, 월드 공간에서 객체 위치·범위와 여섯 평면을 비교합니다.<br class="sentence-break" />검사 결과에 따라 객체를 RenderGroup에 등록했습니다.</p></section></div></div></article></div></section><section class="case-study-section project-core-section"><p class="eyebrow">02 / IMPLEMENTATION</p><h3>상태·애니메이션·충돌</h3><div class="project-core-stack"><article class="project-core-block"><header class="project-core-heading"><span>03 / STATE MACHINE</span><h4>상태의 실행 함수와 전이 조건을 나눠 등록</h4><p>STATE에는 Start·Tick·End 함수를, CHANGER에는 다음 상태와 전이 조건을 등록하는 공용 FSM을 만들었습니다.</p><p>조건이 성립하면 현재 상태의 End와 다음 상태의 Start를 호출하고, 전이하지 않으면 현재 상태의 Tick을 실행합니다.</p></header><ol class="project-flow"><li><b>01</b><strong>Intro</strong><p>스킬 키를 누르면 시작 동작을 재생합니다.</p></li><li><b>02</b><strong>Loop</strong><p>키를 누르고 있으면 유지 동작을 반복합니다.</p></li><li><b>03</b><strong>Outro</strong><p>Intro나 Loop 중 키를 떼면 종료 동작으로 전환합니다.</p></li><li><b>04</b><strong>Idle</strong><p>종료 동작이 끝나면 대기 상태로 돌아갑니다.</p></li></ol><div class="project-technical-notes"><section><h5>전환 순서 확인</h5><p>전이 이력을 list에 남겨 어떤 순서로 상태가 바뀌었는지 확인할 수 있도록 했습니다.</p></section></div></article><article class="project-core-block"><header class="project-core-heading"><span>04 / ANIMATION</span><h4>키프레임 사이와 동작 전환 시점의 보간</h4><p>재생 시간을 기준으로 앞뒤 KeyFrame을 찾고, 두 프레임 사이의 비율로 위치·크기는 Lerp, 회전은 Quaternion Slerp로 계산했습니다.<br class="sentence-break" />부모 뼈의 변환을 반영한 최종 행렬을 셰이더에 전달했습니다.</p></header><div class="project-technical-notes"><section><h5>이전 포즈에서 다음 동작으로</h5><p>동작이 끝나면 마지막 KeyFrame을 보관했습니다.<br class="sentence-break" />상태가 바뀔 때 이전 동작과 새 동작의 뼈 변환을 지정한 시간 동안 섞어 전환했습니다.</p></section><section><h5>카메라에도 적용</h5><p>같은 보간 방식을 타이틀 카메라의 KeyFrame 이동에 사용했습니다.</p></section></div></article><article class="project-core-block"><header class="project-core-heading"><span>05 / COLLIDER</span><h4>객체의 위치를 따라 갱신하는 충돌 컴포넌트</h4><p>DirectXCollision의 Sphere·AABB·OBB를 컴포넌트로 구성했습니다.<br class="sentence-break" />필요한 타입의 원본을 복제하고, 소유 객체의 Late Tick에서 Transform이나 뼈 행렬에 맞춰 위치·방향을 갱신합니다.</p></header><div class="project-technical-notes"><section><h5>타입 조합에 따른 판정</h5><p>충돌체 타입 조합에 맞는 Intersects 인터페이스를 호출했습니다.<br class="sentence-break" />같은 컴포넌트를 캐릭터·무기뿐 아니라 Trigger·Portal에도 사용했습니다.</p></section><section><h5>스테이지 제작</h5><p>작업 도구에서 Trigger를 배치하도록 했습니다.<br class="sentence-break" />일반 5개와 보스 1개 스테이지를 만들고, 이동 가능 영역은 518개 삼각 셀로 구성했습니다.</p></section></div></article></div></section>
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro"><div class="project-detail-copy">
+<h3>캐릭터 제어와 화면을 그리는 과정을 직접 구현했습니다.</h3>
+<p>DirectX11로 Gunfire Reborn을 모작한 개인 프로젝트입니다. 캐릭터의 상태와 애니메이션을 제어하는 방법, 조명과 그림자를 화면에 그리는 과정을 직접 구현하며 익히고자 했습니다.</p>
+<p>플레이어와 몬스터, UI를 개발하고 일반 스테이지 5개와 보스 스테이지 1개를 제작했습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2022.12.27 — 2023.02.14</dd></div><div><dt>ROLE</dt><dd>Solo Programming · Gameplay/Framework/Rendering</dd></div><div><dt>STACK</dt><dd>C++11 · DirectX 11 · HLSL · Assimp · ImGui · FMOD</dd></div></dl>
+</div><figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/gunfire-gameplay.jpg" alt="Gunfire Reborn 모작의 보스 전투 화면" loading="lazy" decoding="async" /></figure></section>
+<section class="case-study-section project-narrative-section" aria-labelledby="gunfire-dialog-narrative-1">
+<h3 id="gunfire-dialog-narrative-1">어려웠던 문제</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 카메라 시야에 맞춘 그림자 범위 계산</h4><div class="project-narrative-copy">
+<p>장면 전체를 하나의 그림자 맵에 담으니 가까운 물체의 그림자도 선명하게 표현하기 어려웠습니다. 카메라 주변에 그림자 범위를 집중해 품질을 높이고자 했습니다.</p>
+<p>CSM을 찾아보며 카메라와의 거리에 따라 범위를 나누는 방법을 알게 됐습니다. 하지만 카메라가 보는 공간을 구하고, 그 공간을 담도록 빛의 시야와 투영 범위를 설정하는 과정을 이해하는 데 어려움을 겪었습니다.</p>
+<p>길이 좁고 꺾이는 맵 구조를 고려해, 이 프로젝트에서는 가까운 범위 하나에 집중했습니다. 카메라의 시야를 여덟 개의 꼭짓점으로 나타내고, 이 점들을 모두 감싸는 범위를 구하는 방식으로 접근했습니다. 꼭짓점을 월드 좌표로 변환해 중심을 구하고, 중심에서 가장 먼 꼭짓점까지의 거리로 범위를 정했습니다. 이를 바탕으로 빛의 시야와 투영 행렬을 계산했습니다. 일반 구간에서는 가까운 영역에 집중하고, 보스 구간에서는 범위를 넓혀 적용했습니다.</p>
+</div>
+<div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/gunfire-shadow-original.png" alt="기존 Shadow Mapping으로 그린 캐릭터와 발밑 그림자" loading="lazy" decoding="async" /></div><figcaption>기존 Shadow Mapping으로 그린 캐릭터와 발밑 그림자</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/gunfire-shadow-near.png" alt="카메라 근거리 범위를 적용해 그린 캐릭터와 발밑 그림자" loading="lazy" decoding="async" /></div><figcaption>카메라 근거리 범위를 적용해 그린 캐릭터와 발밑 그림자</figcaption></figure></div><details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/gunfire-shadow-matrix-source.png" alt="절두체 꼭짓점을 월드로 변환해 중심과 반지름을 구하고 빛의 행렬을 만드는 코드" loading="lazy" decoding="async" /></div><figcaption>절두체 꼭짓점을 월드로 변환해 중심과 반지름을 구하고 빛의 행렬을 만드는 코드</figcaption></figure></div></details>
+</article>
+</section>
+<section class="case-study-section project-narrative-section" aria-labelledby="gunfire-dialog-narrative-2">
+<h3 id="gunfire-dialog-narrative-2">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 상태별 함수를 필요한 시점에 실행하기</h4><div class="project-narrative-copy">
+<p>플레이어와 몬스터의 행동을 관리하면서, 상태가 시작될 때 한 번 실행할 일과 유지되는 동안 반복할 일을 구분하고자 했습니다. 객체마다 행동은 달라도 같은 규칙으로 실행할 수 있는 공통 상태 머신이 필요했습니다.</p>
+<p>각 객체가 실행할 함수를 미리 등록하고, 상태 머신이 필요한 시점에 호출하는 방식으로 접근했습니다. 템플릿과 멤버 함수 포인터로 객체와 함수를 함께 등록하고, 실행 시점을 Start·Tick·End로 나눴습니다. 전이 조건이 충족되면 현재 상태의 End와 다음 상태의 Start를 순서대로 호출하고, 상태가 유지되면 Tick을 실행했습니다.</p>
+<p>보스 등장 연출에서도 애니메이션 시작, 재생 중 카메라와 사운드 처리, 다음 단계로의 전환을 이 구조에 맞춰 작성했습니다.</p>
+</div>
 
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 애니메이션 전환 시 포즈 블렌딩</h4><div class="project-narrative-copy">
+<p>캐릭터의 상태가 바뀔 때 동작도 부드럽게 전환되도록 구현하고자 했습니다. 보간으로 블렌딩 포즈를 계산하는 원리를 익히고, 카메라의 이동과 회전에도 응용하고자 했습니다.</p>
+<p>각 애니메이션의 자세가 달라, 재생할 애니메이션을 바꾸면 팔다리의 위치와 방향이 갑자기 달라지는 문제가 있었습니다.</p>
+<p>두 동작 사이의 중간 자세를 계산하는 방식으로 접근했습니다. 동작마다 블렌딩 시간을 설정하고, 경과 시간에 따라 보간 비율을 계산해 이전 동작과 다음 동작의 포즈를 블렌딩했습니다. 이때 뼈의 위치와 크기는 Lerp, 회전은 Quaternion Slerp를 사용했습니다.</p>
+<p>이후 같은 원리로 초기 화면 카메라의 시작 위치와 목표 위치, 회전을 보간해 카메라 연출에도 적용했습니다.</p>
+</div>
+
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 조명과 그림자 계산을 별도 단계로 나누기</h4><div class="project-narrative-copy">
+<p>실시간 조명과 그림자의 계산 부담을 줄이고자 디퍼드 렌더링을 구현했습니다. 객체를 그릴 때 필요한 정보를 저장하고, 이후 단계에서 조명 계산에 활용하는 방식을 익히고자 했습니다.</p>
+<p>앞 단계의 출력 결과를 다음 단계의 입력으로 사용하는 방식으로 접근했습니다. 화면 해상도 크기의 렌더 타겟을 만들고, MRT를 사용해 모델의 색상·법선·깊이를 각각의 텍스처에 동시에 기록했습니다.</p>
+<p>다음 조명 단계에서는 저장한 깊이 정보로 표면의 월드 좌표를 계산하고, 법선값을 원래 범위로 되돌려 조명과 그림자 계산에 사용했습니다. 마지막으로 색상과 조명 결과를 합성해 화면을 그렸습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/gunfire-debug.jpg" alt="Diffuse·Normal·Depth 등 MRT 출력과 실제 장면이 표시된 디버그 화면" loading="lazy" decoding="async" /></div><figcaption>Diffuse·Normal·Depth 등 MRT 출력과 실제 장면이 표시된 디버그 화면</figcaption></figure></div>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">4.</span> 절두체 컬링으로 드로우 콜 줄이기</h4><div class="project-narrative-copy">
+<p>카메라의 시야 밖에 있는 객체를 그리는 작업을 줄이고자 절두체 컬링을 구현했습니다. 시야를 여섯 개의 평면으로 둘러싼 공간으로 보고, 각 평면을 기준으로 객체가 안쪽에 있는지 검사했습니다.</p>
+<p>객체의 월드 위치와 같은 좌표계에서 비교하기 위해, 투영 공간에 정의한 여덟 꼭짓점에 역투영·역뷰 행렬을 적용해 월드 좌표로 옮겼습니다. 이 점들로 여섯 평면을 만들고, 각 평면과 객체 위치 사이의 거리를 계산했습니다. 설정한 범위보다 바깥에 있는 객체는 렌더 그룹에 등록하지 않아 드로우 콜을 줄였습니다.</p>
+</div>
+
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">5.</span> 충돌 판정의 컴포넌트화</h4><div class="project-narrative-copy">
+<p>캐릭터의 피격 범위, 몬스터의 감지 범위, 포탈의 진입 영역처럼 여러 곳에서 충돌 판정이 필요했습니다. 필요한 형태와 크기를 설정해 같은 기능을 사용할 수 있도록 충돌 처리를 컴포넌트로 묶었습니다.</p>
+<p>DirectXCollision의 Sphere·AABB·OBB를 사용하고, 객체마다 필요한 타입의 원본을 복제해 크기와 위치를 설정했습니다. 충돌 검사에서는 두 충돌체의 타입에 맞는 Intersects 함수를 호출했습니다.</p>
+<p>피격 범위가 애니메이션을 따라 움직이도록 검 몬스터의 머리와 몸통 충돌체는 해당 뼈를 기준으로 갱신했습니다. 뼈의 행렬에 모델 보정 행렬과 객체의 월드 행렬을 곱해 충돌체에 적용했습니다. 감지 범위나 포탈처럼 객체 전체를 기준으로 하는 충돌체는 객체의 월드 행렬로 갱신했습니다.</p>
+</div>
+
+</article>
+</section>
 <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/MATTTTJ/Framework_JH" target="_blank" rel="noreferrer" aria-label="Gunfire Reborn GitHub 저장소 보기, 새 탭에서 열기">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/WVfP2w29bx8" target="_blank" rel="noreferrer" aria-label="Gunfire Reborn YouTube 데모 보기, 새 탭에서 열기">YouTube 데모 보기 <span aria-hidden="true">↗</span></a></div>
 </div>
 </div>
@@ -757,57 +936,46 @@
         <dialog class="project-dialog project-dialog--compact" id="fps-dialog" aria-labelledby="fps-dialog-title">
       <div class="dialog-shell">
         <header class="dialog-header"><div><h2 id="fps-dialog-title">FPSProject</h2></div><button class="dialog-close" type="button" data-project-dialog-close aria-label="FPSProject 상세 닫기"><span aria-hidden="true">×</span></button></header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro"><div class="project-detail-copy"><h3>Blueprint로 만든 FPS 기능을 C++로 옮겼습니다.</h3>
-              <p>Blueprint 동작을 기준으로 Player·Gun·Target·UMG를 C++로 다시 구현한 1인 프로젝트입니다.</p><dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.09 — 10</dd></div><div><dt>ROLE</dt><dd>Solo Programming · BP→C++</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · C++ · UMG</dd></div></dl></div><figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image"><img src="assets/projects/fps-gameplay.jpg" alt="FPSProject의 사격과 HUD가 보이는 플레이 화면" loading="lazy" decoding="async" /></figure></section>
-          <section class="case-study-section project-core-section">
-            <p class="eyebrow">01 / FEATURED IMPLEMENTATION</p>
-            <h3>발사 조건과 다음 사격 예약</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>01 / GAMEPLAY &amp; FIRE</span><h4>잔탄 검사부터 연사·반동까지</h4><p>Player·Controller·UI를 먼저 Blueprint로 제작한 뒤 C++로 옮겼습니다.<br class="sentence-break" />Gun 액터에는 잔탄 확인, 발사, 다음 사격 예약과 효과 처리를 구현했습니다.</p></header>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--motion-wide project-core-figure--fps-motion"><div class="project-core-frame"><img id="fps-full-gameplay-motion" src="assets/projects/fps-gameplay.jpg" data-motion-src="assets/projects/fps-full-gameplay.gif" data-motion-poster="assets/projects/fps-gameplay.jpg" data-motion-autoplay="false" alt="FPSProject의 시작 화면부터 사격과 메뉴 조작까지 담은 전체 플레이 영상" width="400" height="225" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="fps-full-gameplay-motion" hidden>재생</button></figure></div>
-                <div class="project-technical-notes">
-                  <section><h5>발사할 수 있는지 검사</h5><p>FireCPP에서 남은 탄을 확인합니다.<br class="sentence-break" />탄이 있으면 한 발 줄인 뒤 총구의 Transform을 FireBulletCPP에 전달하고, 탄이 없으면 빈 탄창 소리를 재생합니다.</p></section>
-                  <section><h5>연사일 때 다음 사격 예약</h5><p>발사 모드가 FullAuto이면 RegisterNextFireCPP에 발사 간격을 전달해 다음 사격을 예약합니다.<br class="sentence-break" />한 발을 발사하는 함수 안에서 현재 모드를 확인하고 다음 호출을 요청하도록 구성했습니다.</p></section>
-                  <section><h5>발사에 맞춘 반동과 효과</h5><p>발사음과 캐릭터의 Montage를 재생하고 Controller의 Pitch·Yaw에 무작위 값을 더해 반동을 만듭니다.</p><p>이전 총구 효과가 남아 있으면 제거한 뒤 새 효과를 생성하고, 타이머로 제거하도록 했습니다.</p></section>
-                  <section><h5>벽까지의 거리에 맞춘 레이저</h5><p>레이저가 켜져 있을 때 매 Tick Line Trace로 전방 충돌을 검사합니다.<br class="sentence-break" />충돌 지점까지의 거리로 레이저 길이를 줄이고, 충돌이 없으면 설정한 전체 길이를 사용합니다.</p></section>
-                </div>
-                <details class="project-source-details"><summary>발사 조건과 연사·반동 처리 코드</summary><div class="project-source-gallery"><img src="assets/projects/fps-firing-code.png" alt="잔탄 검사, 발사, 연사 예약, 발사음과 반동, 총구 효과 처리를 연결한 FireCPP 코드" width="1166" height="772" loading="lazy" decoding="async" /></div></details>
-              </article>
-            </div>
-          </section>
-          <section class="case-study-section project-core-section">
-            <p class="eyebrow">02 / OTHER IMPLEMENTATIONS</p>
-            <h3>캐릭터·표적과 플레이 화면</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>02 / CHARACTER &amp; ANIMATION</span><h4>캐릭터·무기와 애니메이션 이벤트 연결</h4></header>
-                <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/fps-animation-events.png" alt="재장전 완료, 탄창 탈착, 무기 교체와 발소리 이벤트를 캐릭터 함수에 바인딩한 C++ 코드" width="1140" height="328" loading="lazy" decoding="async" /></div></figure></div>
-                <div class="project-technical-notes">
-                  <section><h5>1인칭 시점에 맞춘 메시 구성</h5><p>1인칭 화면·그림자·다리 표시용 메시를 나눠 구성하고 Child Actor Component에 Gun 액터를 붙였습니다.<br class="sentence-break" />Lyra 애니메이션은 IK Rig와 리타겟팅으로 캐릭터에 맞췄습니다.</p></section>
-                  <section><h5>애니메이션 시점에 맞춘 처리</h5><p>Anim Instance의 재장전 완료·탄창 탈착·무기 교체·발소리 이벤트를 캐릭터 함수에 바인딩했습니다.<br class="sentence-break" />손에 든 무기와 등에 보관한 무기를 구분하고, 교체 시 소켓과 장착 상태를 바꾸도록 했습니다.</p></section>
-                </div>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>03 / TARGET &amp; SCORE</span><h4>표적의 활성화·피격·점수 처리</h4><p>각 표적에 활성화할 Trigger를 지정했습니다.<br class="sentence-break" />대기·일어나는 중·서 있는 상태·쓰러지는 중·쓰러진 상태를 구분해, 회전 동작이 끝날 때 상태를 바꿨습니다.</p></header>
-                <ol class="project-flow"><li><b>01</b><strong>활성화</strong><p>TriggerVolume에 진입하면 연결된 표적의 StandUp을 호출합니다.</p></li><li><b>02</b><strong>일어나기</strong><p>Delta Time으로 회전량을 구하고 목표 각도를 넘지 않게 보정합니다.<br class="sentence-break" />완료되면 Standing으로 전환합니다.</p></li><li><b>03</b><strong>피격과 쓰러짐</strong><p>피격 횟수를 세고 정해진 횟수에 도달하면 KnockDown 동작을 실행합니다.</p></li><li><b>04</b><strong>점수 반영</strong><p>적 표적은 가점, 인질 표적은 감점을 적용합니다.</p></li></ol>
-              </article>
-              <article class="project-core-block">
-                <header class="project-core-heading"><span>04 / UMG &amp; SETTINGS</span><h4>플레이 화면·설정·결과 표시</h4></header>
-                <div class="project-core-layout">
-                  <figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/fps-settings.png" alt="해상도, 창 모드, 마우스 감도와 밝기를 조절하는 FPSProject 설정 UI" width="1561" height="1429" loading="lazy" decoding="async" /></div></figure>
-                  <div class="project-technical-notes">
-                    <section><h5>UMG 위젯과 C++ 연결</h5><p>Blueprint로 만든 로비·인게임 메뉴·전투 HUD·설정 화면을 BindWidget으로 연결했습니다.<br class="sentence-break" />위젯의 입력과 화면 갱신을 C++ 함수로 처리합니다.</p></section>
-                    <section><h5>설정값 검사와 적용</h5><p>해상도·창 모드·마우스 감도·밝기를 조절할 수 있게 했습니다.<br class="sentence-break" />해상도 입력이 숫자인지 확인하고 최소 해상도 이상일 때 Game User Settings에 적용합니다.</p></section>
-                    <section><h5>점수·랭킹과 플레이 시간</h5><p>결과 화면은 GameMode에서 점수·순위·기록을 읽어 Grid Panel에 표시합니다.<br class="sentence-break" />전투 HUD는 플레이어 정보를 표시하고, 게임 시작 시각과 현재 시각의 차이로 플레이 시간을 갱신했습니다.</p></section>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/bZbnOSmpEqI" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/MATTTTJ/ProjectS" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a></div>
-        </div>
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro"><div class="project-detail-copy">
+<h3>Blueprint의 실행 흐름을 C++로 옮기며 배웠습니다.</h3>
+<p>Blueprint로 만든 FPS 기능을 C++로 옮기며, Blueprint에서 참조하던 객체를 코드에서는 어떻게 가져오고, 이벤트에 실행할 함수를 어떻게 연결하는지 배우고자 했습니다. 사격, 재장전, 무기 교체, 표적과 점수 처리, UI를 구현하며 이를 익혔습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Personal Project</dd></div><div><dt>PERIOD</dt><dd>2024.09 — 10</dd></div><div><dt>ROLE</dt><dd>Solo Programming · BP→C++</dd></div><div><dt>STACK</dt><dd>UE5 · Blueprint · C++ · UMG</dd></div></dl>
+</div><figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image"><img src="assets/projects/fps-gameplay.jpg" alt="FPSProject의 사격과 HUD가 보이는 플레이 화면" loading="lazy" decoding="async" /></figure></section>
+<section class="case-study-section project-narrative-section" aria-labelledby="fps-dialog-narrative-1">
+<h3 id="fps-dialog-narrative-1">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 객체 참조와 이벤트 실행 순서 익히기</h4><div class="project-narrative-copy">
+<p>Blueprint에서 노드로 연결했던 실행 흐름을 C++에서는 어떻게 구성해야 하는지에 집중했습니다.</p>
+<p>예를 들어 재장전 완료 이벤트를 연결할 때는 캐릭터의 애님 인스턴스를 가져와, 해당 델리게이트에 캐릭터의 재장전 완료 함수를 등록했습니다. 이때 필요한 객체가 준비된 뒤 이벤트를 연결할 수 있도록 초기화 순서도 확인했습니다. UI에서는 UMG로 만든 위젯을 BindWidget으로 C++ 변수와 연결하고, 버튼 입력과 화면 갱신을 코드로 옮겼습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/fps-animation-events.png" alt="재장전 완료, 탄창 탈착, 무기 교체와 발소리 이벤트를 캐릭터 함수에 바인딩한 C++ 코드" width="1140" height="328" loading="lazy" decoding="async" /></div><figcaption>재장전 완료, 탄창 탈착, 무기 교체와 발소리 이벤트를 캐릭터 함수에 바인딩한 C++ 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 잔탄 검사부터 연사·반동까지</h4><div class="project-narrative-copy">
+<p>Gun 액터에서 남은 탄을 확인하고, 탄이 있으면 한 발 줄인 뒤 총구의 Transform을 발사 함수에 전달했습니다. 탄이 없으면 빈 탄창 소리를 재생하고, FullAuto 모드에서는 발사 간격을 전달해 다음 사격을 예약했습니다.</p>
+<p>발사음과 캐릭터 Montage를 재생하고 Controller의 Pitch·Yaw에 무작위 값을 더해 반동을 만들었습니다. 남아 있는 총구 효과를 제거한 뒤 새 효과를 생성하고 타이머로 정리했습니다. 레이저는 Line Trace로 구한 충돌 지점까지 길이를 줄이고, 충돌이 없으면 설정한 전체 길이를 사용했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="fps-full-gameplay-motion" src="assets/projects/fps-gameplay.jpg" data-motion-src="assets/projects/fps-full-gameplay.gif" data-motion-poster="assets/projects/fps-gameplay.jpg" data-motion-autoplay="false" alt="FPSProject의 시작 화면부터 사격과 메뉴 조작까지 담은 전체 플레이 영상" width="400" height="225" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="fps-full-gameplay-motion" hidden>재생</button><figcaption>FPSProject의 시작 화면부터 사격과 메뉴 조작까지 담은 전체 플레이 영상</figcaption></figure></div><details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/fps-firing-code.png" alt="잔탄 검사, 발사, 연사 예약, 발사음과 반동, 총구 효과 처리를 연결한 FireCPP 코드" width="1166" height="772" loading="lazy" decoding="async" /></div><figcaption>잔탄 검사, 발사, 연사 예약, 발사음과 반동, 총구 효과 처리를 연결한 FireCPP 코드</figcaption></figure></div></details>
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">3.</span> 캐릭터·무기와 애니메이션 연결</h4><div class="project-narrative-copy">
+<p>1인칭 화면·그림자·다리 표시용 메시를 나누고 Child Actor Component에 Gun 액터를 붙였습니다. Lyra 애니메이션은 IK Rig와 리타겟팅으로 캐릭터에 맞췄습니다.</p>
+<p>Anim Instance의 재장전 완료·탄창 탈착·무기 교체·발소리 이벤트를 캐릭터 함수에 연결했습니다. 손에 든 무기와 등에 보관한 무기를 구분하고, 교체 시 소켓과 장착 상태를 바꾸도록 했습니다.</p>
+</div>
+
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">4.</span> 표적·점수와 플레이 화면</h4><div class="project-narrative-copy">
+<p>각 표적에 활성화할 Trigger를 지정하고, 진입하면 일어나는 동작을 실행했습니다. 대기·일어나는 중·서 있는 상태·쓰러지는 중·쓰러진 상태를 나눴습니다. Delta Time으로 회전량을 구해 목표 각도를 넘지 않게 보정하고, 정해진 피격 횟수에 도달하면 쓰러뜨렸습니다. 적 표적은 가점, 인질 표적은 감점을 적용했습니다.</p>
+<p>로비·인게임 메뉴·전투 HUD·설정 화면을 UMG로 구성했습니다. 해상도·창 모드·마우스 감도·밝기를 조절할 수 있게 하고, 해상도는 숫자 여부와 최솟값을 확인한 뒤 Game User Settings에 적용했습니다.</p>
+<p>결과 화면에서는 GameMode의 점수·순위·기록을 Grid Panel에 표시했습니다. HUD에는 플레이어 정보를 표시하고, 게임 시작 시각과 현재 시각의 차이로 플레이 시간을 갱신했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/fps-settings.png" alt="해상도, 창 모드, 마우스 감도와 밝기를 조절하는 FPSProject 설정 UI" width="1561" height="1429" loading="lazy" decoding="async" /></div><figcaption>해상도, 창 모드, 마우스 감도와 밝기를 조절하는 FPSProject 설정 UI</figcaption></figure></div>
+</article>
+</section>
+<div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/bZbnOSmpEqI" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/MATTTTJ/ProjectS" target="_blank" rel="noreferrer">GitHub 저장소 보기 <span aria-hidden="true">↗</span></a></div>
+</div>
       </div>
     </dialog>
 
@@ -817,47 +985,30 @@
           <div><h2 id="projecta-dialog-title">ProjectA</h2></div>
           <button class="dialog-close" type="button" data-project-dialog-close aria-label="ProjectA 상세 닫기"><span aria-hidden="true">×</span></button>
         </header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
             <div class="project-detail-copy">
-
-              <h3>전투 기능의 후속 작업과 트러블슈팅을 맡았습니다.</h3>
-              <p>UE5 Blueprint 기반 협업 프로젝트입니다.<br class="sentence-break" />저스트 닷지, 공중 상태·피격, Behavior Tree 전투 AI의 후속 작업을 맡았습니다.</p>
-              <dl class="project-facts"><div><dt>TYPE</dt><dd>Collaborative Project</dd></div><div><dt>PERIOD</dt><dd>2024.12 — 2025.03</dd></div><div><dt>ROLE</dt><dd>Combat Follow-up · AI · Air Combat</dd></div><div><dt>STACK</dt><dd>UE5.2 · Blueprint · Behavior Tree</dd></div></dl>
-            </div>
+<h3>기존 전투 기능의 일부 수정과 버그 대응을 도왔습니다.</h3>
+<p>현업자들이 사이드 프로젝트로 개발하는 UE5 기반 서브컬처 콘솔 액션 게임에 참여했습니다. 적이 피격될수록 스트레스 게이지가 쌓이고, 가득 차면 분노 상태로 바뀌면서 슈퍼아머와 특수 패턴이 추가되는 컨셉이 특징입니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Collaborative Project</dd></div><div><dt>PERIOD</dt><dd>2024.12 — 2025.03</dd></div><div><dt>ROLE</dt><dd>Combat Follow-up · AI · Air Combat</dd></div><div><dt>STACK</dt><dd>UE5.2 · Blueprint · Behavior Tree</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-archive project-detail-cover-collaboration project-detail-cover--image project-detail-cover--crop"><img src="assets/projects/projecta-card.png" alt="ProjectA의 성당형 보스 전투 화면" loading="lazy" decoding="async" /></figure>
           </section>
-          <section class="case-study-section project-core-section" aria-labelledby="projecta-troubleshooting-title">
-            <p class="eyebrow">01 / TROUBLESHOOTING</p><h3 id="projecta-troubleshooting-title">스트레스 상태의 호출과 초기화를 함께 확인했습니다.</h3>
-            <p class="case-study-lead">전투 기획 팀원의 디버깅을 도우면서 BPC_DamageSystem의 피격부터 스트레스 상태 진입까지 블루프린트 흐름을 확인했습니다.<br class="sentence-break" />게이지 값을 바꾸는 부분과 상태를 시작하는 부분을 나눠 살펴보고, 수정할 위치를 이미지로 정리해 전달했습니다.</p>
-            <div class="project-core-stack"><article class="project-core-block">
-              <header class="project-core-heading"><h4>상태 진입 조건과 게이지 초기화 위치</h4><p>SetStress에서는 게이지를 누적하고 최대치에 도달하면 StartStress를 호출합니다.<br class="sentence-break" />게이지가 최대치로 남는 부분과 StartStress에서 이미 스트레스 상태인지 검사하지 않는 부분을 짚었습니다.</p></header>
-              <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--source"><div class="project-core-frame"><img src="assets/projects/projecta-stress-entry-guard.png" alt="StartStress의 진입 조건에 IsStress 검사를 추가하도록 표시한 실제 수정 제안" width="2040" height="1142" loading="lazy" decoding="async" /></div></figure></div>
-              <div class="project-technical-notes"><section><h5>최대치에 도달한 게이지</h5><p>상태가 시작될 때 게이지를 0으로 되돌리도록 초기화 위치를 제안했습니다.<br class="sentence-break" />기존 초기화 경로와 비교해 다음 피격에서도 최대치가 그대로 사용되는 부분을 확인했습니다.</p></section><section><h5>상태 중복 진입</h5><p>StartStress의 진입 조건에 IsStress를 추가하도록 제안했습니다.<br class="sentence-break" />게이지 누적 단계의 검사와 별개로, 상태를 시작하는 함수에서도 이미 실행 중인지 확인하도록 했습니다.</p></section></div>
-              <details class="project-source-details"><summary>피격 호출 흐름과 게이지 초기화 제안</summary><div class="project-source-gallery"><img src="assets/projects/projecta-stress-damage-flow.png" alt="피격 처리에서 SetStress와 StartStress로 이어지는 호출 경로를 표시한 자료" width="2037" height="1143" loading="lazy" decoding="async" /><img src="assets/projects/projecta-stress-gauge-reset.png" alt="게이지 최대치 검사와 값을 0으로 초기화할 위치를 정리한 자료" width="2043" height="1142" loading="lazy" decoding="async" /></div></details>
-            </article></div>
-          </section>
-          <section class="case-study-section project-core-section" aria-labelledby="projecta-implementation-title">
-            <p class="eyebrow">02 / IMPLEMENTATION</p><h3 id="projecta-implementation-title">전투 기능의 후속 작업</h3>
-            <div class="project-core-stack"><article class="project-core-block"><div class="project-technical-notes">
-              <section><h4>저스트 회피</h4><p>공격 대응 구간과 회피 입력 시점을 맞추고, 성공 결과가 다음 애니메이션과 행동으로 이어지도록 조정했습니다.</p></section>
-              <section><h4>공중 상태와 피격</h4><p>공중 진입·피격·지상 복귀 시의 상태 전환을 조정했습니다.</p></section>
-              <section><h4>Behavior Tree 전투 행동</h4><p>기존 전투에 탐색·이동·공격 행동을 연결했습니다.<br class="sentence-break" />행동 종료 뒤 다음 판단으로 돌아가는 타이밍을 조정했습니다.</p></section>
-            </div></article></div>
-          </section>
-          <section class="case-study-section" aria-labelledby="projecta-playtest-title">
-            <p class="eyebrow">03 / GAMEPLAY</p>
-            <h3 id="projecta-playtest-title">팀 프로젝트 플레이 영상</h3>
-            <div class="project-motion-stack projecta-motion-row">
-              <figure class="project-detail-media project-detail-media--image project-detail-media--motion">
-                <img id="projecta-field-gameplay" src="assets/projects/projecta-field-gameplay-poster.jpg" data-motion-src="assets/projects/projecta-field-gameplay.gif" data-motion-poster="assets/projects/projecta-field-gameplay-poster.jpg" data-motion-autoplay="false" alt="ProjectA의 어두운 성곽 지역 플레이 장면" loading="lazy" decoding="async" />
-                <button class="motion-toggle" type="button" data-motion-toggle aria-controls="projecta-field-gameplay" hidden>재생</button>
-              </figure>
-            </div>
-
-          </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/qOcZ_jURWLo" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/yobtKPJkPzg" target="_blank" rel="noreferrer">추가 영상 보기 <span aria-hidden="true">↗</span></a></div>
-        </div>
+<section class="case-study-section project-narrative-section" aria-labelledby="projecta-dialog-narrative-1">
+<h3 id="projecta-dialog-narrative-1">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 전투 기능 수정과 버그 대응</h4><div class="project-narrative-copy">
+<p>전투 기획 팀원이 전투 기능 대부분을 개발해 둔 상황에서, 저스트 회피와 공중 상태·피격 반응, 전투 AI의 일부 동작을 수정했습니다.</p>
+<p>분노 상태에 진입하면 AI가 멈추는 문제도 분석해, 게이지를 초기화할 위치와 중복 진입을 막을 조건을 이미지에 표시해 팀원에게 전달했습니다.</p>
+</div>
+<details class="project-narrative-details "><summary>구현 자료 보기</summary><div class="project-narrative-gallery "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projecta-stress-entry-guard.png" alt="StartStress의 진입 조건에 IsStress 검사를 추가하도록 표시한 실제 수정 제안" width="2040" height="1142" loading="lazy" decoding="async" /></div><figcaption>StartStress의 진입 조건에 IsStress 검사를 추가하도록 표시한 실제 수정 제안</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projecta-stress-damage-flow.png" alt="피격 처리에서 SetStress와 StartStress로 이어지는 호출 경로를 표시한 자료" width="2037" height="1143" loading="lazy" decoding="async" /></div><figcaption>피격 처리에서 SetStress와 StartStress로 이어지는 호출 경로를 표시한 자료</figcaption></figure>
+<figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/projecta-stress-gauge-reset.png" alt="게이지 최대치 검사와 값을 0으로 초기화할 위치를 정리한 자료" width="2043" height="1142" loading="lazy" decoding="async" /></div><figcaption>게이지 최대치 검사와 값을 0으로 초기화할 위치를 정리한 자료</figcaption></figure></div></details>
+</article>
+</section>
+<div class="project-narrative-playback"><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="projecta-field-gameplay" src="assets/projects/projecta-field-gameplay-poster.jpg" data-motion-src="assets/projects/projecta-field-gameplay.gif" data-motion-poster="assets/projects/projecta-field-gameplay-poster.jpg" data-motion-autoplay="false" alt="ProjectA의 어두운 성곽 지역 플레이 장면" loading="lazy" decoding="async" /></div><button class="motion-toggle" type="button" data-motion-toggle aria-controls="projecta-field-gameplay" hidden>재생</button><figcaption>ProjectA의 어두운 성곽 지역 플레이 장면</figcaption></figure></div></div>
+<div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/qOcZ_jURWLo" target="_blank" rel="noreferrer">YouTube 데모 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/yobtKPJkPzg" target="_blank" rel="noreferrer">추가 영상 보기 <span aria-hidden="true">↗</span></a></div>
+</div>
       </div>
     </dialog>
 
@@ -867,25 +1018,26 @@
           <div><h2 id="insurance-dialog-title">우주보험 손해사정사</h2></div>
           <button class="dialog-close" type="button" data-project-dialog-close aria-label="우주보험 손해사정사 상세 닫기"><span aria-hidden="true">×</span></button>
         </header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
             <div class="project-detail-copy">
-
-              <h3>타이틀과 플레이 기능, UI를 구현했습니다.</h3>
-              <p>UE5 Blueprint 기반 팀 프로젝트입니다.</p>
-              <dl class="project-facts"><div><dt>TYPE</dt><dd>Team Project</dd></div><div><dt>PERIOD</dt><dd>2025.04 — 05</dd></div><div><dt>ROLE</dt><dd>Gameplay Flow · UI</dd></div><div><dt>STACK</dt><dd>UE5.2 · Blueprint</dd></div></dl>
-            </div>
+<h3>타이틀 화면과 플레이 기능, UI를 맡았습니다.</h3>
+<p>UE5 Blueprint 기반 팀 프로젝트에서 타이틀 화면과 플레이 기능, UI를 맡았습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Team Project</dd></div><div><dt>PERIOD</dt><dd>2025.04 — 05</dd></div><div><dt>ROLE</dt><dd>Gameplay Flow · UI</dd></div><div><dt>STACK</dt><dd>UE5.2 · Blueprint</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-archive project-detail-cover--image"><img src="assets/projects/insurance-card.png" alt="우주보험 손해사정사의 VHS 스타일 시작 화면" loading="lazy" decoding="async" /></figure>
           </section>
-          <section class="case-study-section project-core-section" aria-labelledby="insurance-implementation-title">
-            <p class="eyebrow">01 / CORE IMPLEMENTATION</p><h3 id="insurance-implementation-title">화면 전환과 UI 구현</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block"><header class="project-core-heading"><span>01 / PLAY FLOW</span><h4>타이틀에서 플레이까지</h4><p>시작 화면에서 플레이로 전환한 뒤 사용자 입력이 이어지도록 연결했습니다.</p></header></article>
-              <article class="project-core-block"><header class="project-core-heading"><span>02 / UI CONNECTION</span><h4>메뉴와 플레이 UI</h4><p>타이틀 메뉴와 플레이 UI를 구성하고, 사용자 선택에 따른 화면 반응을 연결했습니다.</p></header><div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--motion-wide project-core-figure--insurance-motion"><div class="project-core-frame"><img id="insurance-ui-motion" src="assets/projects/insurance-card.png" data-motion-src="assets/projects/insurance-ui.gif" data-motion-poster="assets/projects/insurance-card.png" data-motion-autoplay="false" width="400" height="232" alt="우주보험 손해사정사의 타이틀 메뉴와 UI 전환 장면" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="insurance-ui-motion" hidden>재생</button></figure></div></article>
-            </div>
-          </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/plkRJd__8yA?si=nnCr76tv9FVXu8N-" target="_blank" rel="noreferrer">게임 플레이 영상 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/4GFmcsbyjHg?si=62BeFt9WATDUe2cA" target="_blank" rel="noreferrer">UI 영상 보기 <span aria-hidden="true">↗</span></a></div>
-        </div>
+<section class="case-study-section project-narrative-section" aria-labelledby="insurance-dialog-narrative-1">
+<h3 id="insurance-dialog-narrative-1">주요 구현 사항</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 타이틀과 UI의 화면 전환</h4><div class="project-narrative-copy">
+<p>메뉴 선택에 따른 화면 반응과 타이틀에서 플레이로 넘어가는 흐름을 구현했습니다.</p>
+</div>
+<div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="insurance-ui-motion" src="assets/projects/insurance-card.png" data-motion-src="assets/projects/insurance-ui.gif" data-motion-poster="assets/projects/insurance-card.png" data-motion-autoplay="false" width="400" height="232" alt="우주보험 손해사정사의 타이틀 메뉴와 UI 전환 장면" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="insurance-ui-motion" hidden>재생</button><figcaption>우주보험 손해사정사의 타이틀 메뉴와 UI 전환 장면</figcaption></figure></div>
+</article>
+</section>
+<div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/plkRJd__8yA?si=nnCr76tv9FVXu8N-" target="_blank" rel="noreferrer">게임 플레이 영상 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://youtu.be/4GFmcsbyjHg?si=62BeFt9WATDUe2cA" target="_blank" rel="noreferrer">UI 영상 보기 <span aria-hidden="true">↗</span></a></div>
+</div>
       </div>
     </dialog>
 
@@ -895,53 +1047,52 @@
           <div><h2 id="projectel-dialog-title">Endless <span>Studio LakeWave</span></h2></div>
           <button class="dialog-close" type="button" data-project-dialog-close aria-label="Endless 상세 닫기"><span aria-hidden="true">×</span></button>
         </header>
-        <div class="project-dialog-content">
-          <section class="project-detail-intro">
+        <div class="project-dialog-content project-narrative">
+<section class="project-detail-intro">
             <div class="project-detail-copy">
-
-              <h3>전투 시스템을 담당하고 있습니다.</h3>
-              <p>락온·무기 전환·피격·처형 기능을 새 기획에 맞게 수정하고 있습니다.</p>
-              <dl class="project-facts"><div><dt>TYPE</dt><dd>Team Project</dd></div><div><dt>PERIOD</dt><dd>2026.04 — Present</dd></div><div><dt>ROLE</dt><dd>Player Combat Systems · Integration</dd></div><div><dt>STACK</dt><dd>UE5.5 · Blueprint · SVN</dd></div></dl>
-            </div>
+<h3>기존 전투 시스템을 새 기획에 맞춰 다듬고 있습니다.</h3>
+<p>약 1년간 개발이 진행된 인디 게임 프로젝트에 합류해 전투 시스템을 맡고 있습니다. 새 기획서에 맞춰 기존 전투 시스템을 다듬는 일을 하고 있습니다.</p>
+<p>기획서를 바탕으로 작업 명세를 작성합니다. 이 과정에서 기획 단계에서는 보이지 않았던 로직의 빈틈이나 빠진 조건을 찾아 담당 팀원과 논의합니다. 기능을 어떤 의도로 기획했는지 확인하고, 그에 맞춰 구현 방법을 조정하며 작업하고 있습니다.</p>
+<dl class="project-facts"><div><dt>TYPE</dt><dd>Team Project</dd></div><div><dt>PERIOD</dt><dd>2026.04 — Present</dd></div><div><dt>ROLE</dt><dd>Player Combat Systems · Integration</dd></div><div><dt>STACK</dt><dd>UE5.5 · Blueprint · SVN</dd></div></dl>
+</div>
             <figure class="project-detail-cover project-detail-cover-archive project-detail-cover-collaboration project-detail-cover--image project-detail-cover--logo"><img src="assets/projects/endless-card.png" alt="Studio LakeWave 로고" loading="lazy" decoding="async" /></figure>
           </section>
-          <section class="case-study-section project-core-section" aria-labelledby="projectel-workflow-title">
-            <p class="eyebrow">01 / WORKFLOW</p>
-            <h3 id="projectel-workflow-title">구현 전에 방향을 맞추고, 판단의 맥락을 남깁니다.</h3>
-            <p class="case-study-lead">약 1년 동안 개발된 프로젝트에 합류해 기존 전투를 새 기획에 맞게 바꾸고 있습니다.<br class="sentence-break" />다른 팀원이 만든 동작을 확인하고 구현 의도에 대한 가설을 세운 뒤, 어떤 부분을 어떻게 바꿀지 먼저 정리합니다.</p>
-            <article class="project-core-block">
-              <div class="project-workflow-layout">
-                <figure class="project-workflow-outline"><img src="assets/projects/endless-workflow-outline.png" width="216" height="359" alt="Outline에 작업 요청 명세, 전투 문서, 로직 변경 가이드, 추가 작업 내역과 일자별 작업 노트를 정리한 목록" loading="lazy" decoding="async" /></figure>
-                <div class="project-technical-notes">
-                  <section><h4>작업 방향을 먼저 검토받습니다.</h4><p>작업 요청이 들어오거나 기획안에 따라 구현할 때는 변경할 내용과 작업 방법을 문서로 작성합니다.<br class="sentence-break" />이 문서를 검토받은 뒤 작업을 시작합니다.</p><p>모두 만든 뒤에야 방향이 다르다는 것을 알게 되면 재작업 비용이 커지기 때문에, 구현 전에 서로 생각한 동작이 맞는지 확인합니다.</p></section>
-                  <section><h4>작업 노트에 판단 과정을 기록합니다.</h4><p>Outline에는 요청 명세와 기능별 문서, 작업 노트를 나눠 정리합니다.<br class="sentence-break" />작업 노트에는 매일 무엇을 했는지, 어디에서 어려움을 겪는지, 어떤 이유로 그 방법을 택했는지 적습니다.</p><p>결과만으로는 전달하기 어려운 판단의 맥락을 남겨 다른 팀원도 작업 중에 확인할 수 있도록 합니다.</p></section>
-                </div>
-              </div>
-              <ol class="project-flow"><li><b>01</b><strong>요청과 기존 동작 확인</strong><p>기획안과 현재 구현을 비교합니다.</p></li><li><b>02</b><strong>변경안 작성</strong><p>바꿀 내용과 작업 방법을 문서로 정리합니다.</p></li><li><b>03</b><strong>검토 후 구현</strong><p>작업 방향을 확인받고 구현을 시작합니다.</p></li><li><b>04</b><strong>작업하며 기록</strong><p>진행 상황·어려움·판단 이유를 일자별로 남깁니다.</p></li></ol>
-            </article>
-          </section>
-          <section class="case-study-section project-core-section" aria-labelledby="projectel-transition-title">
-            <p class="eyebrow">02 / WEAPON TRANSITION</p><h3 id="projectel-transition-title">무기 전환의 요청과 확정 시점을 나눴습니다.</h3>
-            <div class="project-core-stack"><article class="project-core-block">
-              <header class="project-core-heading"><h4>애니메이션 시점에 맞춘 장착 상태 변경</h4><p>무기 교체 입력과 실제로 장착·수납하는 시점은 다릅니다.<br class="sentence-break" />입력을 받으면 바꿀 무기와 요청 상태를 보관하고, 교체 몽타주를 재생하도록 수정했습니다.</p></header>
-              <ol class="project-flow project-flow--three"><li><b>01</b><strong>교체 요청 보관</strong><p>전환할 무기를 정하고 요청을 예약합니다.</p></li><li><b>02</b><strong>전환 동작 실행</strong><p>교체 몽타주와 장착·수납 동작을 시작합니다.</p></li><li><b>03</b><strong>Notify에서 확정</strong><p>해당 시점에 실제 장착 상태를 바꿉니다.</p></li></ol>
-              <div class="project-technical-notes"><section><h5>확정 전에 중단된 경우</h5><p>Notify 전에 피격으로 동작이 중단되면 예약한 요청을 취소합니다.<br class="sentence-break" />아직 바뀌지 않은 장착 상태가 교체된 것으로 남지 않도록 구분했습니다.</p></section><section><h5>이미 변경된 경우</h5><p>Notify를 지난 뒤에는 확정된 무기 상태를 기준으로 후속 동작을 처리합니다.<br class="sentence-break" />입력 여부와 실제 장착 결과를 같은 시점의 값으로 다루지 않도록 정리했습니다.</p></section></div>
-            </article></div>
-          </section>
-          <section class="case-study-section project-core-section" aria-labelledby="projectel-implementation-title">
-            <p class="eyebrow">03 / IMPLEMENTATION</p><h3 id="projectel-implementation-title">락온과 피격 기능의 연동</h3>
-            <div class="project-core-stack">
-              <article class="project-core-block"><header class="project-core-heading"><h4>락온 탐색·검사·해제</h4><p>락온을 전담 컴포넌트로 옮기고 공격·처형·UI·카메라의 호출부를 새 컴포넌트에 맞췄습니다.<br class="sentence-break" />입력으로 후보를 찾은 뒤 대상의 생존 여부와 거리, 시야 가림을 검사합니다.</p></header>
-                <div class="project-technical-notes"><section><h5>대상을 다시 찾는 경우</h5><p>현재 대상이 사망하거나 유효하지 않으면 다른 후보를 탐색합니다.<br class="sentence-break" />새 대상을 찾으면 타깃과 UI·카메라 기준을 갱신하고, 후보가 없으면 락온을 해제합니다.</p></section><section><h5>거리와 시야 조건</h5><p>허용 거리를 벗어난 대상은 락온을 해제합니다.<br class="sentence-break" />거리 안에서 시야가 가려진 경우에는 다른 대상을 탐색하도록 조건을 나눴습니다.</p></section></div>
-              </article>
-              <article class="project-core-block"><header class="project-core-heading"><h4>체력·피격·처형 가능 상태 관리</h4><p>체력 변경과 처형 가능 여부를 피격 반응 컴포넌트에서 관리하도록 모았습니다.<br class="sentence-break" />적 UI는 체력이 바뀔 때 Delegate로 알림을 받아 갱신하고, 다른 전투 기능은 이 컴포넌트의 상태를 참조하도록 수정했습니다.</p></header><div class="project-technical-notes"><section><h5>전투 기능 간 연동</h5><p>타깃 정책·전투 카메라·회피·무기·VFX의 호출을 변경된 전투 흐름에 맞췄습니다.</p></section></div></article>
-            </div>
-          </section>
-          <section class="case-study-section" aria-labelledby="projectel-gameplay-title"><p class="eyebrow">04 / GAMEPLAY</p><h3 id="projectel-gameplay-title">전투 플레이</h3>
-            <div class="project-core-layout project-core-layout--wide-source"><figure class="project-core-figure project-core-figure--motion-wide"><div class="project-core-frame"><img id="endless-hitstop-push" src="assets/projects/endless-hitstop-push-poster.png" data-motion-src="assets/projects/endless-hitstop-push.gif" data-motion-poster="assets/projects/endless-hitstop-push-poster.png" data-motion-autoplay="false" width="400" height="192" alt="Endless 전투의 히트 스톱과 캐릭터 밀어내기 동작" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="endless-hitstop-push" hidden>재생</button></figure></div>
-          </section>
-          <div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/llkUHjYy2oY?si=NHn1Dd8uU5ApxrEA" target="_blank" rel="noreferrer">YouTube 영상 보기 <span aria-hidden="true">↗</span></a><span class="project-video-pending">NDA 적용 프로젝트로 공개 가능한 범위만 수록했습니다.</span></div>
-        </div>
+<details class="project-narrative-details project-narrative-workflow"><summary>작업 명세와 기록 보기</summary><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/endless-workflow-outline.png" width="216" height="359" alt="Outline에 작업 요청 명세, 전투 문서, 로직 변경 가이드, 추가 작업 내역과 일자별 작업 노트를 정리한 목록" loading="lazy" decoding="async" /></div><figcaption>Outline에 작업 요청 명세, 전투 문서, 로직 변경 가이드, 추가 작업 내역과 일자별 작업 노트를 정리한 목록</figcaption></figure></div></details>
+<section class="case-study-section project-narrative-section" aria-labelledby="projectel-dialog-narrative-1">
+<h3 id="projectel-dialog-narrative-1">어려웠던 문제</h3>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">1.</span> 무기 전환 중 피격 처리</h4><div class="project-narrative-copy">
+<p>기존에는 데이터 테이블에서 교체할 무기의 데이터를 가져와 현재 무기에 적용한 뒤, 교체 애니메이션을 재생했습니다. 애니메이션이 시작되기 전에 데이터가 이미 바뀌는 구조라, 도중에 피격됐을 때 교체를 취소하는 처리를 넣기 어려웠습니다.</p>
+<p>이를 위해 기존 무기 전환 로직을 다시 작성했습니다. 교체 요청과 실제 장착 시점을 나누고, 애니메이션의 특정 Notify에서 교체 예약이 여전히 유효한지 확인하도록 했습니다. 예약이 유효하면 무기를 교체하고, 그렇지 않으면 교체에 실패하도록 바꿨습니다.</p>
+</div>
+
+</article>
+<article class="project-narrative-item">
+<h4><span class="project-narrative-number">2.</span> 여러 곳에서 따로 처리하던 락온 기능</h4><div class="project-narrative-copy">
+<p>기존에는 공격·처형·카메라·UI에서 락온을 사용하면서 외부에서 타깃 변수를 직접 바꾸고 있었습니다. 타깃만 지우고 UI는 그대로 두는 등, 락온을 변경할 때 필요한 처리가 함께 이뤄지지 않았습니다.</p>
+<p>먼저 타깃의 사용처와 설정·해제 시점을 추적하고, 기존 의도와 수정 범위를 담당 팀원에게 검토받았습니다. 최소한의 수정으로 새 기획을 반영해 봤지만, 여러 곳에서 값을 직접 바꾸는 구조가 남아 같은 문제가 생길 수 있었습니다.</p>
+<p>그래서 타깃 변경과 해제에 필요한 처리를 새 컴포넌트에 모으고, 외부에서는 공개 함수로만 요청하도록 로직을 다시 작성했습니다. 하드 락 타깃은 변수 하나에 유지하고, 소프트 락 타깃은 공격할 때 계산하도록 바꿨습니다. 공격·처형·카메라·UI의 주요 호출부도 새 함수로 옮겨 같은 방식으로 락온을 사용하도록 했습니다.</p>
+<p>새 기획에 맞춰 설계한 컴포넌트를 기존 전투 시스템에 적용해, 다른 기능과의 연동을 유지하면서 문제를 해결했습니다.</p>
+</div>
+
+</article>
+</section>
+<section class="case-study-section project-narrative-section" aria-labelledby="projectel-dialog-narrative-2">
+<h3 id="projectel-dialog-narrative-2">주요 구현 사항</h3>
+<ul class="project-work-summary">
+<li><strong>공격</strong><div><p>근접·원거리 공격 판정, 공중 콤보, 공격 후딜 중 방어·회피 처리</p></div></li>
+<li><strong>회피</strong><div><p>지상·공중 닷지와 저스트 닷지 판정, 성공 시 슬로 모션과 연계 공격</p></div></li>
+<li><strong>체력·처형</strong><div><p>체력과 적 UI 갱신, 체력·거리·락온 상태에 따른 처형 조건과 지면 판정</p></div></li>
+<li><strong>적 AI</strong><div><p>순찰과 회전, 타깃을 잃었을 때 적 유형별 복귀·추적 유지</p></div></li>
+<li><strong>카메라</strong><div><p>공격·처형 애니메이션에 맞춘 카메라 연출, 순간이동 후 지연과 화면 튐 수정</p></div></li>
+<li><strong>전투 효과</strong><div><p>히트 스톱과 밀어내기, 혈흔·피격·잔상 이펙트</p></div></li>
+<li><strong>사망 연출</strong><div><p>적 사망 시 랙돌에서 디졸브로 이어지는 처리</p></div></li>
+<li><strong>무기</strong><div><p>무기 습득, 장착·수납, 무기 랙돌 처리</p></div></li>
+<li><strong>환경 반응</strong><div><p>날씨와 바람, 낙엽 상호작용, 캐릭터 의상 머티리얼 반응</p></div></li>
+</ul><div class="project-narrative-gallery project-narrative-gallery--single "><figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="endless-hitstop-push" src="assets/projects/endless-hitstop-push-poster.png" data-motion-src="assets/projects/endless-hitstop-push.gif" data-motion-poster="assets/projects/endless-hitstop-push-poster.png" data-motion-autoplay="false" width="400" height="192" alt="Endless 전투의 히트 스톱과 캐릭터 밀어내기 동작" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle data-motion-play-label="재생" data-motion-pause-label="정지" aria-controls="endless-hitstop-push" hidden>재생</button><figcaption>Endless 전투의 히트 스톱과 캐릭터 밀어내기 동작</figcaption></figure></div>
+</section>
+<div class="project-detail-actions"><a class="button button-primary" href="https://youtu.be/llkUHjYy2oY?si=NHn1Dd8uU5ApxrEA" target="_blank" rel="noreferrer">YouTube 영상 보기 <span aria-hidden="true">↗</span></a><span class="project-video-pending">NDA 적용 프로젝트로 공개 가능한 범위만 수록했습니다.</span></div>
+</div>
       </div>
     </dialog>
 

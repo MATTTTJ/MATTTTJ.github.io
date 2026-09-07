@@ -827,3 +827,48 @@ img.is-image-lightbox-trigger:focus-visible { outline: 3px solid var(--aqua); ou
   .project-detail-button,
   .motion-toggle { transition: none; }
 }
+
+/* Project narratives: context, a few challenges, then implementation. */
+.project-narrative .project-detail-copy > p { line-height: 1.85; }
+.project-narrative .project-detail-copy > p + p { margin-top: 16px; }
+.project-narrative .project-narrative-section { padding-block: 30px; }
+.project-narrative-section > h3 { margin-bottom: 22px; }
+.project-narrative-item { min-width: 0; padding: 26px; border: 1px solid var(--line); background: #fff; }
+.project-narrative-item + .project-narrative-item { margin-top: 20px; }
+.project-narrative-item > h4 { margin: 0 0 18px; color: var(--ink); font: 700 clamp(20px, 2.2vw, 25px)/1.45 var(--sans); letter-spacing: -.035em; word-break: keep-all; overflow-wrap: anywhere; }
+.project-narrative-number { color: var(--green); }
+.project-narrative-copy { max-width: 780px; }
+.project-narrative-copy p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.9; word-break: keep-all; overflow-wrap: anywhere; }
+.project-narrative-copy p + p { margin-top: 15px; }
+.project-narrative-copy code { color: var(--ink); font-size: .94em; }
+.project-narrative-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 20px; margin-top: 24px; }
+.project-narrative-gallery--single { grid-template-columns: minmax(0, 1fr); max-width: 780px; margin-inline: auto; }
+.project-narrative-figure { position: relative; min-width: 0; margin: 0; }
+.project-narrative-frame { overflow: hidden; border: 1px solid var(--line); background: #f4f6f3; }
+.project-narrative-frame img { display: block; width: 100%; height: auto; max-height: 440px; object-fit: contain; }
+.project-narrative-figure--texture .project-narrative-frame { background: #fff; }
+.project-narrative-figure--texture img { max-height: 240px; image-rendering: pixelated; }
+.project-narrative-figure figcaption { padding-top: 9px; color: var(--muted); font-size: 12px; line-height: 1.65; word-break: keep-all; overflow-wrap: anywhere; }
+.project-narrative .motion-toggle--feature { top: 12px; right: 12px; }
+.project-narrative-details { margin-top: 22px; border-top: 1px solid var(--line); }
+.project-narrative-details > summary { width: fit-content; max-width: 100%; padding: 15px 0 2px; color: var(--green); font-size: 14px; font-weight: 600; line-height: 1.6; cursor: pointer; }
+.project-narrative-details > summary:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+.project-narrative-details > .project-narrative-gallery { margin-top: 18px; }
+.project-narrative-workflow { margin: 0 0 8px; border-top: 0; }
+.project-narrative-workflow .project-narrative-gallery { max-width: 280px; margin-inline: 0; }
+.project-narrative-workflow img { max-height: none; }
+.project-narrative-playback { margin-bottom: 26px; }
+.project-work-summary { margin: 0; padding: 0; list-style: none; }
+.project-work-summary li { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.project-work-summary strong { color: var(--ink); font-size: 15px; line-height: 1.8; }
+.project-work-summary p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+@media (max-width: 720px) {
+  .project-narrative .project-narrative-section { padding-block: 24px; }
+  .project-narrative-item { padding: 20px 18px; }
+  .project-narrative-copy p { font-size: 14px; line-height: 1.85; }
+  .project-narrative-gallery { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .project-narrative-figure--texture { max-width: 260px; width: 100%; justify-self: center; }
+  .project-narrative-figure figcaption { font-size: 12px; }
+  .project-work-summary li { grid-template-columns: 1fr; gap: 3px; padding-block: 13px; }
+  .project-work-summary strong, .project-work-summary p { font-size: 14px; }
+}
