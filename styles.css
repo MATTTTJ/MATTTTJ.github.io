@@ -136,6 +136,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .tag-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }.tag-list li { padding: 4px 8px; border: 1px solid var(--line); border-radius: 2px; color: var(--green); font: 500 12px/1.35 var(--mono); }
 .project-card-actions { display: grid; align-content: start; margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); }
 .project-card-actions .project-detail-button { width: 100%; }
+.project-card-actions .text-link { justify-self: start; min-height: 32px; margin-top: 12px; }
 .project-detail-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 42px; padding: 0 15px; border: 1px solid var(--green-dark); border-radius: 3px; background: var(--green-dark); color: white; cursor: pointer; font: 600 14px/1 var(--kr); transition: color .18s, background .18s; }
 .project-detail-button:hover { background: var(--green); border-color: var(--green); }
 .text-link { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin: 0; padding-bottom: 2px; border-bottom: 1px solid var(--green); color: var(--green-dark); font: 600 14px/1.5 var(--sans); }.text-link:not(.disabled):hover { color: var(--green); }.text-link.disabled { border-color: #c5d0c6; color: #849086; cursor: default; }
