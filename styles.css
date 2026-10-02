@@ -886,6 +886,12 @@ img.is-image-lightbox-trigger:focus-visible { outline: 3px solid var(--aqua); ou
 .project-narrative-workflow { margin: 0 0 8px; border-top: 0; }
 .project-narrative-workflow .project-narrative-gallery { max-width: 280px; margin-inline: 0; }
 .project-narrative-workflow img { max-height: none; }
+.project-art { margin: 0 0 32px; }
+.project-art > p { margin: 0 0 18px; color: var(--muted); font-size: 15px; line-height: 1.8; word-break: keep-all; }
+.project-art-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: center; }
+.project-art-gallery > img, .project-art-gallery > video { display: block; width: 100%; min-width: 0; height: auto; max-height: 480px; object-fit: contain; background: #252525; }
+.project-art-gallery > .project-art-lead { grid-column: 1 / -1; max-height: none; }
+.project-art-gallery > video { aspect-ratio: 1; }
 .project-narrative-playback { margin-bottom: 26px; }
 .project-work-summary { margin: 0; padding: 0; list-style: none; }
 .project-work-summary li { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
@@ -897,6 +903,7 @@ img.is-image-lightbox-trigger:focus-visible { outline: 3px solid var(--aqua); ou
   .project-narrative-copy p { font-size: 14px; line-height: 1.85; }
   .project-narrative-summary { font-size: 14px; }
   .project-narrative-gallery { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .project-art-gallery { grid-template-columns: minmax(0, 1fr); }
   .project-narrative-figure--texture { max-width: 260px; width: 100%; justify-self: center; }
   .project-narrative-figure figcaption { font-size: 12px; }
   .project-work-summary li { grid-template-columns: 1fr; gap: 3px; padding-block: 13px; }

@@ -172,6 +172,7 @@ projectDialogs.forEach((dialog) => {
   });
   dialog.addEventListener('close', () => {
     resetDialogMotion(dialog);
+    dialog.querySelectorAll('video').forEach((video) => video.pause());
     lastProjectDialogTrigger?.setAttribute('aria-expanded', 'false');
     lastProjectDialogTrigger?.focus();
     lastProjectDialogTrigger = undefined;
