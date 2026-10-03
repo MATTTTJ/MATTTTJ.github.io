@@ -71,6 +71,15 @@ function aboutReferenceScrollBehavior() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
 }
 
+function scrollToAboutReference(target) {
+  const headerHeight = aboutDialog.querySelector('.dialog-header')?.offsetHeight || 0;
+  const top = aboutDialog.scrollTop
+    + target.getBoundingClientRect().top
+    - aboutDialog.getBoundingClientRect().top
+    - headerHeight - 20;
+  aboutDialog.scrollTo({ top, behavior: aboutReferenceScrollBehavior() });
+}
+
 aboutReferenceButtons.forEach((button) => {
   button.addEventListener('click', () => {
     aboutReferenceGallery?.scrollBy({
@@ -82,19 +91,28 @@ aboutReferenceButtons.forEach((button) => {
 aboutReferenceGallery?.addEventListener('scroll', updateAboutReferenceControls, { passive: true });
 window.addEventListener('resize', updateAboutReferenceControls);
 
+aboutDialog?.querySelectorAll('[data-open-reference]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const target = document.getElementById(link.hash.slice(1));
+    if (!(target instanceof HTMLDetailsElement) || !aboutDialog.contains(target)) return;
+    event.preventDefault();
+    target.open = true;
+    scrollToAboutReference(target);
+    updateAboutReferenceControls();
+    target.querySelector('summary')?.focus({ preventScroll: true });
+  });
+});
+
 aboutDialog?.querySelectorAll('[data-about-reference]').forEach((link) => {
   link.addEventListener('click', (event) => {
     const target = document.getElementById(link.hash.slice(1));
     if (!target || !aboutReferenceGallery?.contains(target) || !aboutReferenceSection) return;
     event.preventDefault();
-    const headerHeight = aboutDialog.querySelector('.dialog-header')?.offsetHeight || 0;
-    const top = aboutDialog.scrollTop
-      + aboutReferenceSection.getBoundingClientRect().top
-      - aboutDialog.getBoundingClientRect().top
-      - headerHeight - 20;
+    if (aboutReferenceSection instanceof HTMLDetailsElement) aboutReferenceSection.open = true;
+    scrollToAboutReference(aboutReferenceSection);
     const behavior = aboutReferenceScrollBehavior();
-    aboutDialog.scrollTo({ top, behavior });
     aboutReferenceGallery.scrollTo({ left: target.offsetLeft, behavior });
+    updateAboutReferenceControls();
     target.querySelector('img')?.focus({ preventScroll: true });
   });
 });
@@ -109,11 +127,15 @@ let lastImageLightboxTrigger;
 function openImageLightbox(sourceImage) {
   if (!(imageLightbox instanceof HTMLDialogElement) || !(imageLightboxImage instanceof HTMLImageElement) || imageLightbox.open) return;
   lastImageLightboxTrigger = sourceImage;
-  imageLightbox.classList.toggle('image-lightbox--motion', /\.gif(?:[?#]|$)/i.test(sourceImage.src));
-  imageLightboxImage.src = sourceImage.src;
+  const fullSource = sourceImage.dataset.full || sourceImage.src;
+  imageLightbox.classList.toggle('image-lightbox--document', Boolean(sourceImage.dataset.full));
+  imageLightbox.classList.toggle('image-lightbox--motion', /\.gif(?:[?#]|$)/i.test(fullSource));
+  imageLightboxImage.src = fullSource;
   imageLightboxImage.alt = sourceImage.alt;
   imageLightbox.showModal();
   imageLightboxClose?.focus({ preventScroll: true });
+  imageLightbox.scrollTop = 0;
+  imageLightbox.scrollLeft = 0;
 }
 
 function closeImageLightbox() {
@@ -140,6 +162,7 @@ imageLightbox?.addEventListener('click', (event) => {
   if (event.target === imageLightbox) closeImageLightbox();
 });
 imageLightbox?.addEventListener('close', () => {
+  imageLightbox.classList.remove('image-lightbox--document', 'image-lightbox--motion');
   imageLightboxImage?.removeAttribute('src');
   if (imageLightboxImage) imageLightboxImage.alt = '';
   if (lastImageLightboxTrigger?.isConnected) lastImageLightboxTrigger.focus({ preventScroll: true });

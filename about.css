@@ -1,0 +1,46 @@
+/* Reviewed More About Me layout. Scoped to the existing dialog. */
+#about-dialog { --preview-photo-width: 320px; --preview-photo-ratio: 4 / 3; }
+#about-dialog .about-story-copy .about-reference-links { margin: 22px 0 0; }
+#about-dialog .about-story { grid-template-columns: minmax(0,1fr) minmax(0,var(--preview-photo-width)); }
+#about-dialog .about-story .about-visual-stack { max-width: var(--preview-photo-width); }
+#about-dialog .about-story .about-media-featured { min-height: 0; }
+#about-dialog .preview-recharge { max-width: 960px; margin-top: 32px; }
+#about-dialog .about-section-layout--problem { grid-template-columns: minmax(0,1fr) minmax(0,var(--preview-photo-width)); gap: 36px; }
+#about-dialog .about-gallery.preview-single { grid-template-columns: minmax(0,1fr); }
+#about-dialog .about-gallery.preview-single { width: 100%; max-width: var(--preview-photo-width); }
+#about-dialog .preview-supporting .about-section-heading { margin-bottom: 8px; }
+#about-dialog .preview-supporting h3 { font-size: 26px; }
+#about-dialog .preview-supporting .preview-more { margin: 0; border-bottom: 1px solid var(--line); }
+#about-dialog .preview-supporting .preview-more > summary { padding: 18px 0; }
+#about-dialog .preview-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,var(--preview-photo-width))); gap: 20px; max-width: 660px; margin: 24px 0; align-items: stretch; }
+#about-dialog .preview-gallery.preview-people-gallery { grid-template-columns: repeat(3,minmax(0,var(--preview-photo-width))); max-width: 1000px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x proximity; overscroll-behavior-inline: contain; }
+#about-dialog .preview-people-gallery:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+#about-dialog .preview-people-gallery .preview-photo { scroll-snap-align: start; }
+#about-dialog .preview-people-gallery img[role="button"]:focus-visible { outline-offset: -3px; }
+#about-dialog .preview-photo { margin: 0; min-width: 0; overflow: hidden; border: 1px solid var(--line); background: #f2f5ef; }
+#about-dialog .preview-photo img, #about-dialog .about-gallery.preview-single img, #about-dialog .about-reference-card img { display: block; width: 100%; height: auto; max-height: none; aspect-ratio: var(--preview-photo-ratio); object-fit: contain; cursor: zoom-in; }
+#about-dialog .preview-photo figcaption, #about-dialog .about-gallery.preview-single figcaption, #about-dialog .about-reference-card figcaption { min-height: calc(3.3em + 24px); padding: 12px 16px; color: var(--muted); line-height: 1.65; font-size: 13px; word-break: keep-all; }
+#about-dialog .about-reference-gallery { grid-auto-columns: min(var(--preview-photo-width),100%); gap: 20px; align-items: stretch; }
+#about-dialog .preview-records .preview-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); max-width: 960px; }
+#about-dialog .preview-records .preview-photo img { aspect-ratio: auto; }
+#about-dialog .preview-text-photo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,320px); gap: 36px; align-items: start; max-width: 960px; margin: 0 0 32px; }
+#about-dialog .preview-copy, #about-dialog .preview-media { min-width: 0; }
+#about-dialog .preview-copy .preview-more { margin: 10px 0 22px; }
+#about-dialog .preview-media .preview-gallery { margin: 0; gap: 12px; }
+#about-dialog .preview-media .preview-photo figcaption { min-height: calc(4.95em + 18px); padding: 9px 12px; font-size: 12px; }
+#about-dialog .preview-more { max-width: 960px; margin: 24px 0 40px; }
+#about-dialog .preview-more > summary { width: fit-content; color: var(--green); cursor: pointer; padding: 12px 0; }
+#about-dialog .preview-note { color: var(--muted); font-size: 13px; line-height: 1.8; }
+#about-dialog img[role="button"] { cursor: zoom-in; }
+#about-dialog img[role="button"]:focus-visible, #about-dialog summary:focus-visible, #about-dialog a:focus-visible, #about-dialog button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+@media(max-width:720px) {
+#about-dialog .preview-gallery { grid-template-columns: minmax(0,var(--preview-photo-width)); gap: 20px; }
+#about-dialog .preview-gallery.preview-people-gallery { grid-template-columns: repeat(3,240px); max-width: 100%; gap: 16px; }
+#about-dialog .preview-records .preview-gallery { grid-template-columns: minmax(0,1fr); }
+#about-dialog .about-story, #about-dialog .about-section-layout--problem, #about-dialog .preview-text-photo { grid-template-columns: minmax(0,1fr); gap: 24px; }
+#about-dialog .preview-media { width: 100%; max-width: var(--preview-photo-width); }
+#about-dialog .preview-sports-row .preview-media .preview-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+.image-lightbox.image-lightbox--document[open] { display: block; width: min(1780px, calc(100vw - 32px)); height: auto; max-height: calc(100dvh - 32px); padding: 68px 16px 24px; overflow: auto; background: white; }
+.image-lightbox--document .image-lightbox-image { width: 1674px; min-width: 1050px; max-width: none; max-height: none; margin: 0 auto; box-shadow: none; }
+.image-lightbox--document .image-lightbox-close { position: fixed; }
