@@ -16,6 +16,8 @@
 #about-dialog .preview-gallery.preview-people-gallery { grid-template-columns: repeat(3,minmax(0,var(--preview-photo-width))); max-width: 1000px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x proximity; overscroll-behavior-inline: contain; }
 #about-dialog .preview-people-gallery:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 #about-dialog .preview-people-gallery .preview-photo { scroll-snap-align: start; }
+#about-dialog .preview-people-gallery .preview-photo img { object-fit: cover; }
+#about-dialog .preview-people-gallery img[src$="collaboration-gathering.png"] { object-position: center 30%; }
 #about-dialog .preview-people-gallery img[role="button"]:focus-visible { outline-offset: -3px; }
 #about-dialog .preview-photo { margin: 0; min-width: 0; overflow: hidden; border: 1px solid var(--line); background: #f2f5ef; }
 #about-dialog .preview-photo img, #about-dialog .about-gallery.preview-single img, #about-dialog .about-reference-card img { display: block; width: 100%; height: auto; max-height: none; aspect-ratio: var(--preview-photo-ratio); object-fit: contain; cursor: zoom-in; }
