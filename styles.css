@@ -890,11 +890,42 @@ img.is-image-lightbox-trigger:focus-visible { outline: 3px solid var(--aqua); ou
 .project-art-gallery > img, .project-art-gallery > video { display: block; width: 100%; min-width: 0; height: auto; max-height: 480px; object-fit: contain; background: #252525; }
 .project-art-gallery > .project-art-lead { grid-column: 1 / -1; max-height: none; }
 .project-art-gallery > video { aspect-ratio: 1; }
+#projectel-dialog .project-art-video { position: relative; min-width: 0; background: #252525; }
+#projectel-dialog .project-art-video video { display: block; width: 100%; height: auto; aspect-ratio: 1936 / 1048; object-fit: contain; }
+#projectel-dialog .project-art-video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 12px 18px; border: 1px solid rgb(255 255 255 / .65); border-radius: 999px; background: rgb(20 28 24 / .85); color: #fff; font: 600 14px/1 var(--kr); white-space: nowrap; cursor: pointer; }
+#projectel-dialog .project-art-video-play[hidden] { display: none; }
+#projectel-dialog .project-art-video-play:hover { background: #2d4f3f; }
+#projectel-dialog .project-art-video-play:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 .project-narrative-playback { margin-bottom: 26px; }
 .project-work-summary { margin: 0; padding: 0; list-style: none; }
 .project-work-summary li { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
 .project-work-summary strong { color: var(--ink); font-size: 15px; line-height: 1.8; }
 .project-work-summary p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+
+/* Endless: key contributions and grouped implementation at the existing position. */
+#projectel-dialog .endless-contributions > .eyebrow,
+#projectel-dialog .endless-implementation > .eyebrow { margin-bottom: 8px; }
+#projectel-dialog .endless-contributions > h3,
+#projectel-dialog .endless-implementation > h3 { margin-bottom: 24px; }
+#projectel-dialog .endless-contribution-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+#projectel-dialog .endless-contribution { display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: 24px 22px 18px; border-top: 3px solid var(--green); background: var(--surface-soft); }
+#projectel-dialog .endless-contribution .endless-contribution-category { margin: 0; color: var(--green-dark); font-size: 12px; font-weight: 600; }
+#projectel-dialog .endless-contribution h4 { margin: 0; color: var(--ink); font-size: 22px; line-height: 1.5; font-weight: 700; letter-spacing: -.04em; word-break: keep-all; }
+#projectel-dialog .endless-contribution > p { margin: 0; color: var(--ink); font-size: 15px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+#projectel-dialog .endless-work-group + .endless-work-group { margin-top: 34px; }
+#projectel-dialog .endless-work-group > h4 { margin: 0 0 18px; padding-left: 12px; border-left: 3px solid var(--green); color: var(--ink); font-size: 21px; font-weight: 700; line-height: 1.45; letter-spacing: -.035em; }
+#projectel-dialog .endless-work-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin: 0; padding: 0; list-style: none; }
+#projectel-dialog .endless-work-list--single { grid-template-columns: minmax(0, 1fr); }
+#projectel-dialog .endless-work-list li { min-width: 0; }
+#projectel-dialog .endless-work-list strong { display: block; margin-bottom: 6px; color: var(--ink); font-size: 17px; font-weight: 700; }
+#projectel-dialog .endless-work-list p { margin: 0; color: var(--ink); font-size: 16px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+#projectel-dialog .endless-work-list p + p { margin-top: 6px; }
+@media (max-width: 720px) {
+  #projectel-dialog .endless-contribution-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  #projectel-dialog .endless-contribution { padding: 20px; gap: 12px; }
+  #projectel-dialog .endless-contribution h4 { font-size: 21px; }
+  #projectel-dialog .endless-work-list { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+}
 @media (max-width: 720px) {
   .project-narrative .project-narrative-section { padding-block: 24px; }
   .project-narrative-item { padding: 20px 18px; }

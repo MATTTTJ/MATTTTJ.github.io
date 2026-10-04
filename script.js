@@ -202,6 +202,22 @@ projectDialogs.forEach((dialog) => {
   });
 });
 
+document.querySelectorAll('#projectel-dialog .project-art-video').forEach((wrapper) => {
+  const video = wrapper.querySelector('video');
+  const playButton = wrapper.querySelector('[data-art-video-play]');
+  if (!video || !playButton) return;
+  const updatePlayButton = () => {
+    const playing = !video.paused && !video.ended;
+    if (playing && document.activeElement === playButton) video.focus({ preventScroll: true });
+    playButton.hidden = playing;
+  };
+  ['play', 'pause', 'ended'].forEach((event) => video.addEventListener(event, updatePlayButton));
+  playButton.addEventListener('click', () => {
+    video.play().catch(updatePlayButton);
+  });
+  updatePlayButton();
+});
+
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const motionImages = Array.from(document.querySelectorAll('[data-motion-src][data-motion-poster]'));
 const motionToggles = Array.from(document.querySelectorAll('[data-motion-toggle]'));
