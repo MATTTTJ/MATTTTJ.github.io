@@ -23,6 +23,56 @@ menuToggle?.addEventListener('click', () => {
 
 navLinks.forEach((link) => link.addEventListener('click', closeMenu));
 
+const projectFilters = document.querySelector('[data-project-filters]');
+const projectResults = document.querySelector('#project-results');
+
+if (projectFilters && projectResults) {
+  const tabs = [...projectFilters.querySelectorAll('[data-project-category-tab]')];
+  const cards = [...projectResults.querySelectorAll('[data-project-category]')];
+  const status = document.querySelector('[data-project-filter-status]');
+
+  function selectProjectCategory(tab) {
+    const category = tab.dataset.projectCategoryTab;
+    tabs.forEach((item) => {
+      const selected = item === tab;
+      item.setAttribute('aria-selected', String(selected));
+      item.tabIndex = selected ? 0 : -1;
+    });
+    cards.forEach((card) => {
+      card.hidden = category !== 'all' && card.dataset.projectCategory !== category;
+    });
+    projectResults.setAttribute('aria-labelledby', tab.id);
+    if (status) {
+      const count = cards.filter((card) => !card.hidden).length;
+      status.textContent = `${tab.querySelector('.project-tab-label').textContent} 프로젝트 ${count}개를 표시합니다.`;
+    }
+  }
+
+  tabs.forEach((tab) => {
+    const category = tab.dataset.projectCategoryTab;
+    const count = category === 'all' ? cards.length : cards.filter((card) => card.dataset.projectCategory === category).length;
+    tab.querySelector('[data-project-count]').textContent = String(count);
+    tab.addEventListener('click', () => selectProjectCategory(tab));
+  });
+
+  projectFilters.addEventListener('keydown', (event) => {
+    const currentIndex = tabs.indexOf(document.activeElement);
+    if (currentIndex < 0) return;
+    let nextIndex;
+    if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+    else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = tabs.length - 1;
+    else return;
+    event.preventDefault();
+    selectProjectCategory(tabs[nextIndex]);
+    tabs[nextIndex].focus();
+  });
+
+  selectProjectCategory(tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0]);
+  projectFilters.hidden = false;
+}
+
 function openAboutDialog(trigger) {
   if (!aboutDialog || aboutDialog.open) return;
   lastDialogTrigger = trigger;

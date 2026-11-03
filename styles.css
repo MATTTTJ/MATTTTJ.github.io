@@ -99,7 +99,27 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 
 .section-intro { margin-bottom: 40px; }
 .section-intro h2, .timeline-intro h2 { word-break: keep-all; }
+.project-filters { display: flex; gap: 8px; margin: -10px 0 28px; border-bottom: 1px solid var(--line-strong); overflow-x: auto; scrollbar-width: none; }
+.project-filters[hidden] { display: none; }
+.project-tab { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 12px 18px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: var(--muted); cursor: pointer; font: 600 15px/1.3 var(--kr); white-space: nowrap; }
+.project-tab:hover { color: var(--green-dark); background: var(--surface-soft); }
+.project-tab[aria-selected="true"] { border-bottom-color: var(--green-dark); color: var(--green-dark); }
+.project-tab-count { min-width: 24px; padding: 4px 6px; border-radius: 3px; background: var(--surface-soft); color: var(--muted); font: 500 11px/1 var(--mono); }
+.project-tab[aria-selected="true"] .project-tab-count { background: var(--green-dark); color: #fff; }
+.project-tab:focus-visible { outline: 2px solid var(--green); outline-offset: -4px; }
 .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.project-grid:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+.project-card[hidden] { display: none; }
+@media (max-width: 560px) {
+  .project-filters { gap: 4px; margin-bottom: 22px; }
+  .project-tab { gap: 5px; min-height: 48px; padding-inline: 6px; font-size: 14px; }
+  .project-tab-count { min-width: 18px; padding-inline: 3px; }
+}
+@media (max-width: 360px) {
+  .project-filters { gap: 0; }
+  .project-tab { gap: 4px; padding-inline: 3px; font-size: 13px; }
+  .project-tab-count { display: none; }
+}
 .project-card { display: flex; min-width: 0; height: 100%; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 3px; background: var(--surface); transition: border-color .2s, transform .2s; }
 .project-card:hover { border-color: var(--green); transform: translateY(-2px); }
 .visual-foundations { display: flex; flex-direction: column; justify-content: space-between; padding: 22px 24px; background: #e7eedf; color: var(--green-dark); background-image: linear-gradient(rgb(72 117 95 / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(72 117 95 / .07) 1px, transparent 1px); background-size: 22px 22px; }

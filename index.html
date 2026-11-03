@@ -31,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261103-01" />
+    <link rel="stylesheet" href="styles.css?v=20261103-02" />
     <link rel="stylesheet" href="about.css?v=20261003-02" />
   </head>
   <body>
@@ -119,8 +119,16 @@
             </div>
           </div>
 
-          <div class="project-grid">
-            <article class="project-card">
+          <div class="project-filters" role="tablist" aria-label="프로젝트 카테고리" data-project-filters hidden>
+            <button class="project-tab" type="button" role="tab" id="project-tab-all" aria-controls="project-results" aria-selected="true" data-project-category-tab="all"><span class="project-tab-label">전체</span><span class="project-tab-count" data-project-count></span></button>
+            <button class="project-tab" type="button" role="tab" id="project-tab-game" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="game"><span class="project-tab-label">게임</span><span class="project-tab-count" data-project-count></span></button>
+            <button class="project-tab" type="button" role="tab" id="project-tab-tool" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="tool"><span class="project-tab-label">개발 도구</span><span class="project-tab-count" data-project-count></span></button>
+            <button class="project-tab" type="button" role="tab" id="project-tab-graphics" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="graphics"><span class="project-tab-label">그래픽스</span><span class="project-tab-count" data-project-count></span></button>
+          </div>
+          <p class="sr-only" role="status" data-project-filter-status></p>
+
+          <div class="project-grid" id="project-results" role="tabpanel" aria-labelledby="project-tab-all" tabindex="0">
+            <article class="project-card" data-project-category="graphics">
               <div class="project-visual project-visual--image">
                 <img src="assets/projects/cuda-ray-tracing.png" alt="표면 법선을 색으로 나타낸 구와 바닥의 레이트레이싱 예시" width="400" height="225" loading="lazy" decoding="async" />
               </div>
@@ -136,7 +144,7 @@
               </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="tool">
               <div class="project-visual project-visual--artifact">
                 <iframe src="team-board/" title="team-board 소개 미리보기" loading="lazy" tabindex="-1" aria-hidden="true" inert sandbox="allow-scripts"></iframe>
               </div>
@@ -152,7 +160,7 @@
               </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
               <div class="project-visual project-visual--image project-visual--contain">
                 <img src="assets/projects/packoon-cover.png" alt="가을 마을을 배경으로 배낭을 멘 캐릭터와 PACKOON 로고" loading="lazy" decoding="async" />
               </div>
@@ -169,7 +177,7 @@
               </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
               <div class="project-visual project-visual--image project-visual--contain">
                 <img src="assets/projects/plunge-cover.png" alt="협곡에서 밧줄에 매달린 PLUNGE 캐릭터들" loading="lazy" decoding="async" />
               </div>
@@ -185,7 +193,7 @@
               </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-arpg project-visual--image project-visual--contain">
                     <img src="assets/projects/endless-key-art.png" alt="금속 마스크를 쓴 캐릭터와 PROJECT ENDLESS NEW WORLD 로고" width="720" height="370" loading="lazy" decoding="async" />
                   </div>
@@ -202,7 +210,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-archive visual-insurance project-visual--image">
                     <img src="assets/projects/insurance-card.png" alt="우주보험 손해사정사의 VHS 스타일 시작 화면" loading="lazy" decoding="async" />
                   </div>
@@ -217,7 +225,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-archive visual-projecta project-visual--image">
                     <img src="assets/projects/projecta-card.png" alt="ProjectA의 보스 전투와 공중 피격 화면" loading="lazy" decoding="async" />
                   </div>
@@ -232,7 +240,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-action project-visual--image">
                     <img src="assets/projects/projectaction-cpp-card.png" alt="ProjectAction C++의 플레이어 전투 장면" loading="lazy" decoding="async" />
                   </div>
@@ -247,7 +255,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-action project-visual--image">
                     <img src="assets/projects/projectaction-bp-card.png" alt="ProjectAction Blueprint의 다대일 전투 장면" loading="lazy" decoding="async" />
                   </div>
@@ -262,7 +270,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-archive visual-fps project-visual--image">
                     <img src="assets/projects/fps-gameplay.jpg" alt="FPSProject의 Unreal Engine 게임 플레이 화면" loading="lazy" decoding="async" />
                   </div>
@@ -277,7 +285,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
               <div class="project-visual visual-scarlet project-visual--image">
                 <img src="assets/projects/scarlet-card.png" alt="Scarlet Strings 모작의 최종 보스 카렌 전투 화면" loading="lazy" decoding="async" />
               </div>
@@ -292,7 +300,7 @@
               </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-archive visual-gunfire project-visual--image">
                     <img src="assets/projects/gunfire-card.png" alt="Gunfire Reborn 모작의 메인 메뉴 화면" loading="lazy" decoding="async" />
                   </div>
@@ -307,7 +315,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-archive visual-minecraft project-visual--image">
                     <img src="assets/projects/minecraft-card.jpg" alt="Minecraft Dungeons 모작의 쿠크 보스 전투 화면" loading="lazy" decoding="async" />
                   </div>
@@ -322,7 +330,7 @@
                   </div>
                 </article>
 
-            <article class="project-card">
+            <article class="project-card" data-project-category="game">
                   <div class="project-visual visual-archive visual-cuphead project-visual--image">
                     <img src="assets/projects/cuphead-card.jpg" alt="CupHead 모작의 보스 전투 화면" loading="lazy" decoding="async" />
                   </div>
@@ -1291,6 +1299,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=20261005-01"></script>
+    <script src="script.js?v=20261103-02"></script>
   </body>
 </html>
