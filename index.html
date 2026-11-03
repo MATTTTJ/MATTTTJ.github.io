@@ -31,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261103-02" />
+    <link rel="stylesheet" href="styles.css?v=20261103-03" />
     <link rel="stylesheet" href="about.css?v=20261003-02" />
   </head>
   <body>
@@ -128,6 +128,23 @@
           <p class="sr-only" role="status" data-project-filter-status></p>
 
           <div class="project-grid" id="project-results" role="tabpanel" aria-labelledby="project-tab-all" tabindex="0">
+            <article class="project-card" data-project-category="graphics">
+              <div class="project-visual project-visual--image">
+                <img src="assets/projects/ue-graphics-cel-outline.png" alt="숲 장면에서 캐릭터에 셀 음영과 외곽선을 적용한 언리얼 실습 화면" width="1216" height="726" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-body">
+                <p class="project-schedule">UNREAL ENGINE GRAPHICS</p>
+                <div class="project-topline"><span>15</span><span>GRAPHICS STUDY</span></div>
+                <h3>UE5 카툰 렌더링과 GPU 비용 분석</h3>
+                <p class="project-employment">캐릭터 외곽선·셀 셰이딩 구현<br /><span>Lumen·VSM·Nanite 설정별 비용 비교</span></p>
+                <ul class="tag-list" aria-label="사용 엔진과 기술"><li>Unreal Engine 5.8</li><li>Material</li><li>GPU Profiling</li></ul>
+                <div class="project-card-actions">
+                  <button class="project-detail-button" type="button" data-project-dialog-open="ue-graphics-dialog" aria-haspopup="dialog" aria-controls="ue-graphics-dialog" aria-expanded="false" aria-label="UE5 카툰 렌더링과 GPU 비용 분석 프로젝트 자세히 보기">프로젝트 자세히 보기 <span aria-hidden="true">→</span></button>
+                  <a class="text-link" href="https://app.notion.com/p/5-8-3f6834e5c09e802db13bce9d08a2d44f?source=copy_link" target="_blank" rel="noopener noreferrer" aria-label="UE5 그래픽스 연구 기록, Notion에서 보기 (새 탭)">연구 기록 <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
+
             <article class="project-card" data-project-category="graphics">
               <div class="project-visual project-visual--image">
                 <img src="assets/projects/cuda-ray-tracing.png" alt="표면 법선을 색으로 나타낸 구와 바닥의 레이트레이싱 예시" width="400" height="225" loading="lazy" decoding="async" />
@@ -478,6 +495,88 @@
     <dialog class="image-lightbox" id="image-lightbox" aria-label="원본 이미지 보기">
       <button class="image-lightbox-close" type="button" data-image-lightbox-close aria-label="원본 이미지 닫기"><span aria-hidden="true">×</span></button>
       <img class="image-lightbox-image" alt="" />
+    </dialog>
+
+    <dialog class="project-dialog project-dialog--compact" id="ue-graphics-dialog" aria-labelledby="ue-graphics-dialog-title">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div><p class="eyebrow">GRAPHICS STUDY</p><h2 id="ue-graphics-dialog-title">UE5 카툰 렌더링과 GPU 비용 분석</h2></div>
+          <button class="dialog-close" type="button" data-project-dialog-close aria-label="UE5 그래픽스 상세 닫기"><span aria-hidden="true">×</span></button>
+        </header>
+        <div class="project-dialog-content project-narrative">
+          <section class="project-detail-intro">
+            <div class="project-detail-copy">
+              <h3>캐릭터 외곽선과 4단계 셀 음영</h3>
+              <p>포스트 프로세스 머티리얼로 캐릭터의 외곽선과 셀 셰이딩을 구현했습니다. Custom Stencil로 대상을 구분하고 깊이를 비교해, 배경과 벽 뒤의 캐릭터에는 효과가 적용되지 않도록 했습니다.</p>
+              <p>선 두께와 명암 단계, 색을 머티리얼 인스턴스에서 조절하도록 구성하고, Lumen·VSM·Nanite 설정을 전환하며 렌더링 비용을 비교했습니다.</p>
+              <dl class="project-facts">
+                <div><dt>ENGINE</dt><dd>Unreal Engine 5.8 · DirectX 12</dd></div>
+                <div><dt>METHOD</dt><dd>Post Process Material · Custom Depth / Stencil</dd></div>
+                <div><dt>PROFILING</dt><dd>stat unit · stat gpu · ProfileGPU</dd></div>
+                <div><dt>ENVIRONMENT</dt><dd>RTX 4080 · 1280×720</dd></div>
+              </dl>
+            </div>
+            <figure class="project-detail-cover project-detail-cover--image"><img src="assets/projects/ue-graphics-cel-outline.png" alt="셀 셰이딩과 외곽선을 적용한 캐릭터 실습 화면" width="1216" height="726" loading="lazy" decoding="async" /></figure>
+          </section>
+
+          <section class="case-study-section project-narrative-section" aria-labelledby="ue-graphics-results-title">
+            <h3 id="ue-graphics-results-title">실습 결과 화면</h3>
+            <p class="case-study-lead">서로 다른 카메라 거리에서 촬영한 화면입니다. 숲 맵은 <a class="text-link" href="https://fab.com/s/e2d99db0c36d" target="_blank" rel="noopener noreferrer">Fab 에셋</a>을 사용했고, 캐릭터 후처리 효과와 렌더링 비용을 실습했습니다.</p>
+            <div class="project-narrative-gallery">
+              <figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/ue-graphics-original.png" alt="캐릭터 얼굴을 가까이 촬영한 기본 화면" width="1278" height="713" loading="lazy" decoding="async" /></div><figcaption>기본 화면 · 얼굴 근접</figcaption></figure>
+              <figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/ue-graphics-cel-outline.png" alt="거리를 변경해 촬영한 셀 셰이딩과 외곽선 적용 화면" width="1216" height="726" loading="lazy" decoding="async" /></div><figcaption>셀 셰이딩·외곽선 적용 · 카메라 거리 변경</figcaption></figure>
+            </div>
+          </section>
+
+          <section class="case-study-section project-narrative-section" aria-labelledby="ue-graphics-implementation-title">
+            <h3 id="ue-graphics-implementation-title">표현을 만드는 계산과 조절 항목</h3>
+            <div class="ue-graphics-features">
+              <article class="case-study-card"><span>01 / MASK</span><h4>선택과 가려짐</h4><p>Custom Stencil로 캐릭터를 선택하고, Scene Depth와 Custom Depth를 비교해 보이는 영역에만 효과를 합성했습니다.</p></article>
+              <article class="case-study-card"><span>02 / LIGHTING</span><h4>명암과 색</h4><p>법선과 광원 방향의 내적에, 화면 밝기를 기본색 밝기로 나눠 추정한 조명 값을 섞어 단계화했습니다. 단계값과 어두운 밝기를 분리해 피부와 옷이 무조건 검정으로 떨어지지 않도록 했습니다.</p></article>
+              <article class="case-study-card"><span>03 / PARAMETERS</span><h4>조절 가능한 표현</h4><p>가까운 곳과 먼 곳의 선 두께, 명암 단계 수, 밝기와 색조, 효과 혼합량을 인스턴스 파라미터로 분리했습니다.</p></article>
+            </div>
+          </section>
+
+          <section class="case-study-section project-narrative-section" aria-labelledby="ue-graphics-cost-title">
+            <h3 id="ue-graphics-cost-title">드로우 콜이 줄어도 GPU 시간은 늘었습니다</h3>
+            <div class="project-narrative-copy"><p>Lumen과 VSM을 유지하고 Nanite 설정을 전환한 실습에서, 드로우 콜은 줄었지만 전체 GPU 시간은 늘었습니다. 가장 크게 증가한 항목은 그림자 생성 작업인 Shadow Depths였습니다.</p></div>
+            <div class="ue-cost-table-wrap" role="region" aria-label="Nanite 설정별 비용 비교" tabindex="0">
+              <table class="ue-cost-table">
+                <caption>Nanite 실습 측정값 · RTX 4080 · 1280×720</caption>
+                <thead><tr><th scope="col">측정 항목</th><th scope="col">OFF</th><th scope="col">ON</th></tr></thead>
+                <tbody><tr><th scope="row">전체 GPU</th><td>8.23 ms</td><td>9.68 ms</td></tr><tr><th scope="row">Shadow Depths</th><td>1.62 ms</td><td>3.43 ms</td></tr><tr><th scope="row">드로우 콜</th><td>931회</td><td>673회</td></tr></tbody>
+              </table>
+            </div>
+            <div class="project-narrative-copy"><p>이 결과를 바탕으로 식생의 잎 표현 방식과 WPO가 그림자 생성 비용에 미치는 영향을 다음 조사 대상으로 정했습니다.</p></div>
+            <details class="project-narrative-details">
+              <summary>Lumen·VSM 비교 기록 보기</summary>
+              <div class="ue-cost-table-wrap" role="region" aria-label="Lumen과 VSM의 별도 실험 결과" tabindex="0">
+                <table class="ue-cost-table">
+                  <caption>서로 다른 실험 회차의 기록입니다. 각 행의 ON/OFF를 비교합니다.</caption>
+                  <thead><tr><th scope="col">GPU 시간</th><th scope="col">OFF</th><th scope="col">ON</th></tr></thead>
+                  <tbody><tr><th scope="row">Lumen</th><td>9.16 ms</td><td>9.82 ms</td></tr><tr><th scope="row">VSM</th><td>13.09 ms</td><td>10.69 ms</td></tr></tbody>
+                </table>
+              </div>
+              <div class="project-narrative-copy"><p>Lumen OFF에서는 GPU 시간이 낮았고, VSM 비교에서는 기존 Shadow Maps보다 VSM을 사용한 쪽의 GPU 시간이 낮았습니다. 기능 이름만으로 비용을 판단하지 않고 화면과 렌더 패스 시간을 함께 살펴봤습니다.</p></div>
+            </details>
+            <p class="case-study-note"><strong>효과의 패스 비용은 별도로 기록했습니다.</strong><br />셀 셰이딩·외곽선 ON/OFF의 전체 GPU 차이 +0.054 ms는 OFF 반복 측정 차이 0.126 ms보다 작았습니다. 합친 후처리 머티리얼 패스의 평균 0.016 ms를 별도로 기록해 전체 GPU 시간과 구분했습니다.</p>
+          </section>
+
+          <section class="case-study-section project-narrative-section" aria-labelledby="ue-graphics-next-title">
+            <h3 id="ue-graphics-next-title">후속 실험</h3>
+            <div class="ue-graphics-next">
+              <article><span class="ue-graphics-status">계획</span><h4>Substrate Toon 교체 비교</h4><p>기존 외곽선을 유지한 채 명암 처리만 바꿔, 얼굴 표현과 수정 편의성, GPU 비용을 비교할 계획입니다.</p></article>
+              <article><span class="ue-graphics-status">계획</span><h4>WPO와 그림자 비용 검증</h4><p>식생의 WPO를 끄고 캐시 무효화 페이지 수, Shadow Depths, 전체 GPU 시간을 함께 비교할 계획입니다.</p></article>
+            </div>
+            <p class="ue-graphics-source-note">노드 구현과 자료 수집에는 AI를 활용했고, 비교 기준과 결과 해석은 직접 검토했습니다.</p>
+            <div class="ue-graphics-source-links" aria-label="원문 작업 기록">
+              <a class="text-link" href="https://app.notion.com/p/Outline-3f6834e5c09e80eba5e7d27957372444" target="_blank" rel="noopener noreferrer">외곽선 기록 <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="https://app.notion.com/p/3f7834e5c09e80339d37c77108cba997" target="_blank" rel="noopener noreferrer">셀 셰이딩 기록 <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="https://app.notion.com/p/Lumen-VSM-Nanite-3f6834e5c09e80dbb141eaf19f97e995" target="_blank" rel="noopener noreferrer">비용 비교 기록 <span aria-hidden="true">↗</span></a>
+            </div>
+          </section>
+        </div>
+      </div>
     </dialog>
 
     <dialog class="project-dialog project-dialog--compact" id="packoon-dialog" aria-labelledby="packoon-dialog-title">

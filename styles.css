@@ -157,6 +157,28 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .project-visual--artifact { background: #e9ecef; }
 .project-visual--artifact > iframe { position: absolute; inset: 0; width: 400%; height: 400%; border: 0; transform: scale(.25); transform-origin: top left; pointer-events: none; }
 
+#ue-graphics-dialog .ue-graphics-features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+#ue-graphics-dialog .ue-graphics-features .case-study-card { padding: 22px; }
+#ue-graphics-dialog .ue-graphics-features .case-study-card > span { margin-bottom: 18px; }
+#ue-graphics-dialog .ue-cost-table-wrap { margin: 22px 0; overflow-x: auto; }
+#ue-graphics-dialog .ue-cost-table-wrap:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+#ue-graphics-dialog .ue-cost-table { width: 100%; border-collapse: collapse; color: var(--ink); font-size: 14px; }
+#ue-graphics-dialog .ue-cost-table caption { padding-bottom: 12px; color: var(--muted); font-size: 12px; text-align: left; }
+#ue-graphics-dialog .ue-cost-table th, #ue-graphics-dialog .ue-cost-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; }
+#ue-graphics-dialog .ue-cost-table thead { background: var(--surface-soft); }
+#ue-graphics-dialog .ue-cost-table td { font-family: var(--mono); white-space: nowrap; }
+#ue-graphics-dialog .ue-graphics-next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+#ue-graphics-dialog .ue-graphics-next article { padding: 22px; border: 1px solid var(--line); }
+#ue-graphics-dialog .ue-graphics-next h4 { margin: 14px 0 10px; color: var(--ink); font-size: 18px; letter-spacing: -.035em; }
+#ue-graphics-dialog .ue-graphics-next p, #ue-graphics-dialog .ue-graphics-source-note { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; word-break: keep-all; }
+#ue-graphics-dialog .ue-graphics-status { padding: 4px 8px; border: 1px solid var(--line-strong); color: var(--green); font-size: 11px; }
+#ue-graphics-dialog .ue-graphics-source-note { margin-top: 22px; }
+#ue-graphics-dialog .ue-graphics-source-links { display: flex; flex-wrap: wrap; gap: 14px 24px; margin-top: 18px; }
+@media (max-width: 720px) {
+  #ue-graphics-dialog .ue-graphics-features, #ue-graphics-dialog .ue-graphics-next { grid-template-columns: minmax(0, 1fr); }
+  #ue-graphics-dialog .ue-cost-table th, #ue-graphics-dialog .ue-cost-table td { padding: 12px 8px; font-size: 12px; }
+}
+
 .project-body { display: flex; flex: 1; flex-direction: column; padding: 21px 24px 25px; }
 .project-schedule { margin: 0 0 13px; color: #78857b; font: 500 11px/1.4 var(--mono); letter-spacing: .055em; text-align: left; }
 .project-topline { display: flex; justify-content: space-between; margin-bottom: 20px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--green); font: 500 12px/1.15 var(--mono); letter-spacing: .06em; }.project-topline span:first-child { color: var(--green-dark); }
