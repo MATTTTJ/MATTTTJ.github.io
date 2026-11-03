@@ -29,7 +29,18 @@ const projectResults = document.querySelector('#project-results');
 if (projectFilters && projectResults) {
   const tabs = [...projectFilters.querySelectorAll('[data-project-category-tab]')];
   const cards = [...projectResults.querySelectorAll('[data-project-category]')];
+  const countedCards = cards.filter((card) => !card.hasAttribute('data-project-index'));
+  const workGrid = projectResults.querySelector('[data-project-work-grid]');
+  const learningPanel = projectResults.querySelector('[data-project-learning]');
+  const workCards = [...workGrid.querySelectorAll('[data-project-category]')];
+  const originalOrder = new Map(workCards.map((card, index) => [card, index]));
   const status = document.querySelector('[data-project-filter-status]');
+
+  function matchesCategory(card, category) {
+    return category === 'featured'
+      ? card.hasAttribute('data-project-featured')
+      : card.dataset.projectCategory === category;
+  }
 
   function selectProjectCategory(tab) {
     const category = tab.dataset.projectCategoryTab;
@@ -39,18 +50,29 @@ if (projectFilters && projectResults) {
       item.tabIndex = selected ? 0 : -1;
     });
     cards.forEach((card) => {
-      card.hidden = category !== 'all' && card.dataset.projectCategory !== category;
+      card.hidden = !matchesCategory(card, category);
     });
+    const learningSelected = category === 'learning';
+    workGrid.hidden = learningSelected;
+    learningPanel.hidden = !learningSelected;
+    if (!learningSelected) {
+      const orderedCards = [...workCards].sort((a, b) => category === 'featured'
+        ? (Number(a.dataset.projectFeatured) || Infinity) - (Number(b.dataset.projectFeatured) || Infinity)
+          || originalOrder.get(a) - originalOrder.get(b)
+        : originalOrder.get(a) - originalOrder.get(b));
+      orderedCards.forEach((card) => workGrid.append(card));
+    }
     projectResults.setAttribute('aria-labelledby', tab.id);
     if (status) {
-      const count = cards.filter((card) => !card.hidden).length;
-      status.textContent = `${tab.querySelector('.project-tab-label').textContent} 프로젝트 ${count}개를 표시합니다.`;
+      const count = countedCards.filter((card) => matchesCategory(card, category)).length;
+      const label = learningSelected ? '기술 학습 기록' : tab.querySelector('.project-tab-label').textContent;
+      status.textContent = `${label} ${count}개를 표시합니다.`;
     }
   }
 
   tabs.forEach((tab) => {
     const category = tab.dataset.projectCategoryTab;
-    const count = category === 'all' ? cards.length : cards.filter((card) => card.dataset.projectCategory === category).length;
+    const count = countedCards.filter((card) => matchesCategory(card, category)).length;
     tab.querySelector('[data-project-count]').textContent = String(count);
     tab.addEventListener('click', () => selectProjectCategory(tab));
   });
