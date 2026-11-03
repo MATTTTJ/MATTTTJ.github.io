@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>team-board 소개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 방향: 작업장 안전 표지. 회색 작업대 위에 주황 경고 테이프가 "잠긴 파일" 한 곳에만 쓰인다.
+   레이아웃: 왼쪽 정렬 장(章) 구성, 장 번호는 브로셔의 실제 순서. 대담함은 첫 화면의 보드 예시에만. */
+:root {
+  --bg: #e9ecef;
+  --surface: #ffffff;
+  --ink: #141a24;
+  --muted: #586273;
+  --line: #c9cfd8;
+  --lock: #f05a1a;
+  --lock-ink: #ffffff;
+  --ok: #18825a;
+  --warn: #a8760a;
+  --tape: #f7f8fa;
+  --s-blue: #3b6fd8;
+  --s-amber: #c98a0c;
+  --s-violet: #7a62c9;
+  --font-display: "Black Han Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+  --step-4: clamp(2.5rem, 6vw, 4.25rem);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10141b;
+    --surface: #181e28;
+    --ink: #e7eaf0;
+    --muted: #9aa4b4;
+    --line: #2c3442;
+    --lock: #ff6a2c;
+    --lock-ink: #140a04;
+    --ok: #3cc28b;
+    --warn: #e0ad3a;
+    --tape: #222a36;
+    --s-blue: #5b8cef;
+    --s-amber: #b5821a;
+    --s-violet: #8d78dc;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10141b;
+  --surface: #181e28;
+  --ink: #e7eaf0;
+  --muted: #9aa4b4;
+  --line: #2c3442;
+  --lock: #ff6a2c;
+  --lock-ink: #140a04;
+  --ok: #3cc28b;
+  --warn: #e0ad3a;
+  --tape: #222a36;
+  --s-blue: #5b8cef;
+  --s-amber: #b5821a;
+  --s-violet: #8d78dc;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 480px) { .wrap { padding: 0 16px; } }
+
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; line-height: 1.18; }
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); font-weight: 700; line-height: 1.4; }
+p { margin: 0; max-width: 62ch; }
+.muted { color: var(--muted); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--lock); outline-offset: 3px; }
+
+.mono, .tape, code { font-family: var(--font-mono); }
+
+/* ---------- 머리 ---------- */
+.top {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid var(--line);
+  font-size: var(--step--1); color: var(--muted);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 700; font-size: var(--step-0); }
+.brand-mark {
+  width: 22px; height: 22px; border-radius: 5px;
+  background: repeating-linear-gradient(-45deg, var(--lock) 0 4px, var(--ink) 4px 8px);
+}
+
+/* ---------- 첫 화면 ---------- */
+.hero {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;
+  padding: 64px 0 72px;
+}
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 56px; } }
+.eyebrow { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 18px; }
+.hero h1 .hl { color: var(--lock); }
+.lede { font-size: var(--step-1); margin-top: 24px; line-height: 1.65; }
+.lede + p { margin-top: 14px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 28px 0 0; padding: 0; list-style: none; font-size: var(--step--1); font-weight: 600; }
+.facts li { display: flex; align-items: center; gap: 8px; }
+.facts li::before { content: ""; width: 8px; height: 8px; background: var(--lock); border-radius: 2px; }
+
+/* 보드 예시 */
+.board {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 1px 0 var(--line), 0 24px 48px -28px rgba(20, 26, 36, 0.35);
+  overflow: hidden;
+}
+.board-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: var(--step--1);
+}
+.board-head b { font-weight: 700; }
+.tag-example {
+  font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px;
+}
+.events { list-style: none; margin: 0; padding: 6px 0; }
+.ev {
+  display: grid; grid-template-columns: 34px 1fr; gap: 12px;
+  padding: 14px 18px; border-bottom: 1px dashed var(--line);
+  animation: rise 0.5s cubic-bezier(.2,.7,.2,1) both;
+}
+.ev:last-child { border-bottom: 0; }
+.ev:nth-child(2) { animation-delay: 0.45s; }
+.ev:nth-child(3) { animation-delay: 1.3s; }
+@keyframes rise { from { transform: translateY(10px); } to { transform: none; } }
+.av {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  font-weight: 700; font-size: var(--step--1); color: #fff; position: relative;
+}
+.av.m { background: #4c6ef5; }
+.av.j { background: #0c8599; }
+.av i {
+  position: absolute; right: -4px; bottom: -4px; font-style: normal;
+  width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 0.625rem; background: var(--ink); color: var(--bg); border: 2px solid var(--surface);
+}
+.who { font-size: var(--step--1); color: var(--muted); }
+.who b { color: var(--ink); font-weight: 600; }
+.what { font-weight: 600; margin: 2px 0 8px; line-height: 1.5; }
+.key { font-family: var(--font-mono); font-weight: 500; color: var(--muted); margin-right: 6px; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tape {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; padding: 3px 9px; border-radius: 4px;
+  background: var(--tape); border: 1px solid var(--line); color: var(--ink);
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.tape svg { flex: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+}
+.chip.ok { color: var(--ok); border: 1px solid currentColor; }
+.chip.ok::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.stamp {
+  display: inline-block; font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.08em;
+  color: var(--lock-ink); padding: 3px 12px 2px; border-radius: 4px;
+  background: repeating-linear-gradient(-45deg, var(--lock) 0 9px, color-mix(in srgb, var(--lock) 78%, #000) 9px 18px);
+  transform: rotate(-3deg);
+  animation: stamp 0.42s cubic-bezier(.3,1.6,.5,1) 0.95s both;
+}
+@keyframes stamp { from { transform: rotate(-12deg) scale(1.7); } to { transform: rotate(-3deg) scale(1); } }
+.why { font-size: var(--step--1); color: var(--muted); margin-top: 8px; line-height: 1.55; }
+.why b { color: var(--lock); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ev, .stamp { animation: none; }
+}
+
+/* ---------- 장 ---------- */
+.chapter { padding: 80px 0; border-top: 1px solid var(--line); }
+@media (max-width: 700px) { .chapter { padding: 56px 0; } }
+.ch-head { display: grid; grid-template-columns: 120px 1fr; gap: 24px; margin-bottom: 44px; }
+@media (max-width: 700px) { .ch-head { grid-template-columns: 1fr; gap: 8px; margin-bottom: 32px; } }
+.ch-num { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 10px; }
+.ch-num b { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--step-3); color: var(--lock); line-height: 1; margin-bottom: 4px; }
+.ch-head p { margin-top: 14px; font-size: var(--step-1); }
+.ch-body { margin-left: 144px; }
+@media (max-width: 700px) { .ch-body { margin-left: 0; } }
+
+/* 01 문제 */
+.pains { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--ink); }
+@media (max-width: 820px) { .pains { grid-template-columns: 1fr; } }
+.pains li { padding: 22px 24px 4px 0; display: grid; gap: 10px; align-content: start; }
+.pains li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+@media (max-width: 820px) {
+  .pains li, .pains li + li { padding: 20px 0; border-left: 0; border-bottom: 1px solid var(--line); }
+}
+.pains .n { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); }
+.explain {
+  margin-top: 36px; padding: 20px 24px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line);
+  display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+}
+.explain .q { font-family: var(--font-display); font-size: var(--step-2); line-height: 1; color: var(--muted); }
+
+/* 02 신호 */
+.signals { display: grid; gap: 0; border-top: 2px solid var(--ink); }
+.sig { display: grid; grid-template-columns: 160px 1fr 1.1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: start; }
+@media (max-width: 820px) { .sig { grid-template-columns: 1fr; gap: 10px; } }
+.sig-name { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: var(--step-1); }
+.sw { width: 28px; height: 18px; border-radius: 3px; flex: none; }
+.sw.block { background: repeating-linear-gradient(-45deg, var(--lock) 0 5px, color-mix(in srgb, var(--lock) 70%, #000) 5px 10px); }
+.sw.folder { border: 2px dashed var(--warn); }
+.sw.note { border: 2px solid var(--muted); }
+.sig .eg { display: grid; gap: 6px; justify-items: start; }
+.sig .eg small { font-size: var(--step--1); color: var(--muted); }
+.extra { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 36px; }
+@media (max-width: 820px) { .extra { grid-template-columns: 1fr; gap: 20px; } }
+.extra h3 { margin-bottom: 6px; }
+.extra p { color: var(--muted); }
+
+/* 03 Claude */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+@media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 32px; } }
+.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.points h3 { margin-bottom: 4px; }
+.points p { color: var(--muted); }
+.nametag { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; padding: 2px 10px 2px 3px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: var(--step--1); }
+.nametag .av { width: 22px; height: 22px; font-size: 0.6875rem; }
+.memo-cmp { display: grid; gap: 14px; }
+.memo { border-radius: 10px; padding: 18px 20px; border: 1px solid var(--line); background: var(--surface); }
+.memo .lbl { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+.memo.bad { background: transparent; border-style: dashed; }
+.memo.bad .lbl { color: var(--muted); }
+.memo.bad p { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted); line-height: 1.6; text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
+.memo.good { border-left: 4px solid var(--ok); }
+.memo.good .lbl { color: var(--ok); }
+.memo.good p { font-size: var(--step-1); line-height: 1.6; }
+.src { font-size: var(--step--1); color: var(--muted); }
+
+/* 04 회의 */
+.flow { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); counter-reset: f; }
+@media (max-width: 860px) { .flow { grid-template-columns: 1fr; } }
+.flow li { position: relative; padding: 18px 18px 18px 0; border-top: 2px solid var(--ink); counter-increment: f; }
+.flow li::before { content: counter(f, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); display: block; margin-bottom: 6px; }
+.flow li:last-child { border-top-color: var(--lock); }
+.flow li:last-child::before { color: var(--lock); }
+.flow b { display: block; font-size: var(--step-0); margin-bottom: 4px; }
+.flow span { font-size: var(--step--1); color: var(--muted); display: block; line-height: 1.55; }
+@media (max-width: 860px) { .flow li { padding: 14px 0; } }
+
+.cand { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.cand-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: var(--step--1); }
+.cand-row { display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); align-items: start; }
+.cand-row:last-child { border-bottom: 0; }
+.box { width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--line); margin-top: 3px; }
+.box.on { background: var(--ink); border-color: var(--ink); position: relative; }
+.box.on::after { content: ""; position: absolute; left: 4px; top: 0; width: 5px; height: 10px; border: solid var(--bg); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.cand-row b { display: block; }
+.cite { display: block; font-size: var(--step--1); color: var(--muted); margin-top: 4px; }
+.cite .t { font-family: var(--font-mono); }
+.kind { font-size: 0.6875rem; font-weight: 700; border-radius: 4px; padding: 2px 8px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+
+/* 05 빌드 */
+.buildline {
+  font-family: var(--font-mono); font-size: 0.875rem; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 10px; padding: 16px 18px; display: grid; gap: 12px;
+}
+.buildline .top-l { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.buildline .play {
+  font-family: var(--font-body); font-weight: 700; font-size: var(--step--1);
+  background: var(--ink); color: var(--bg); border-radius: 6px; padding: 6px 14px; display: inline-flex; gap: 8px; align-items: center; justify-self: start;
+}
+.reacts { display: flex; gap: 8px; flex-wrap: wrap; font-family: var(--font-body); font-size: var(--step--1); }
+.reacts span { border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; }
+.web { color: var(--ok); font-weight: 700; font-family: var(--font-body); font-size: 0.75rem; border: 1px solid currentColor; border-radius: 4px; padding: 1px 7px; }
+
+.tune { width: 100%; border-collapse: collapse; font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.tune-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-top: 18px; }
+.tune th, .tune td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tune th:first-child, .tune td:first-child { text-align: left; }
+.tune thead th { font-weight: 700; color: var(--muted); }
+.tune thead th.team { color: var(--ink); }
+.tune tr:last-child td { border-bottom: 0; }
+.tune .diff { background: color-mix(in srgb, var(--warn) 18%, transparent); font-weight: 600; }
+
+/* 06 그 밖에 */
+.grid6 { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); }
+@media (max-width: 860px) { .grid6 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .grid6 { grid-template-columns: 1fr; } }
+.grid6 > div { padding: 22px 22px 22px 0; border-bottom: 1px solid var(--line); }
+.grid6 h3 { margin-bottom: 6px; }
+.grid6 p { color: var(--muted); font-size: 0.9375rem; }
+.pull {
+  margin: 48px 0 0; padding: 0 0 0 24px; border-left: 4px solid var(--lock);
+  font-family: var(--font-display); font-size: var(--step-2); line-height: 1.4; max-width: 30ch;
+}
+.pull small { display: block; font-family: var(--font-body); font-size: var(--step--1); color: var(--muted); margin-top: 10px; }
+
+/* 07 시작 */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+.steps li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 10px; align-content: start; }
+.steps .who-do { font-size: 0.75rem; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+.steps p { color: var(--muted); font-size: 0.9375rem; }
+.code { font-family: var(--font-mono); font-size: 0.75rem; background: var(--tape); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; overflow-x: auto; white-space: nowrap; }
+.spec { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 36px; border-top: 2px solid var(--ink); }
+@media (max-width: 860px) { .spec { grid-template-columns: 1fr 1fr; } }
+.spec div { padding: 18px 18px 18px 0; }
+.spec b { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1.2; }
+.spec span { font-size: var(--step--1); color: var(--muted); }
+
+.fit { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+@media (max-width: 760px) { .fit { grid-template-columns: 1fr; gap: 28px; } }
+.fit h3 { margin-bottom: 12px; }
+.fit ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.fit li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
+.fit li::before { content: ""; width: 12px; height: 12px; margin-top: 7px; border-radius: 3px; }
+.fit .yes li::before { background: var(--ok); }
+.fit .no li::before { border: 2px solid var(--muted); }
+
+.end { padding: 72px 0 40px; border-top: 1px solid var(--line); }
+.end h2 { font-size: var(--step-4); max-width: 18ch; }
+.end p { margin-top: 18px; font-size: var(--step-1); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 24px 0 40px; font-size: var(--step--1); color: var(--muted); }
+
+/* ---------- 04 하루의 흐름 (움직이는 예시) ---------- */
+.demo { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 960px) { .demo { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+.snav { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+@media (max-width: 960px) {
+  .snav { grid-auto-flow: column; grid-auto-columns: minmax(132px, 1fr); overflow-x: auto; padding-bottom: 4px; }
+}
+.snav button {
+  appearance: none; border: 0; background: transparent; color: inherit; font: inherit; text-align: left;
+  cursor: pointer; display: grid; grid-template-columns: 28px 1fr; gap: 2px 8px; padding: 12px 14px;
+  border-radius: 10px; width: 100%; position: relative; overflow: hidden;
+}
+.snav button:hover { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+.snav button[aria-selected="true"] { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.snav .sn { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); grid-row: span 2; padding-top: 3px; }
+.snav button[aria-selected="true"] .sn { color: var(--lock); font-weight: 500; }
+.snav b { font-size: 0.9375rem; line-height: 1.4; }
+.snav .sd { font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
+@media (max-width: 960px) { .snav .sd { display: none; } }
+.snav .bar { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--lock); }
+
+.win {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; min-width: 0;
+  box-shadow: 0 1px 0 var(--line), 0 30px 60px -36px rgba(20, 26, 36, 0.5);
+}
+.win-bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 0.78rem; color: var(--muted); }
+.dots { display: flex; gap: 6px; flex: none; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.win-title { flex: 1; min-width: 0; line-height: 1.4; }
+.playbtn {
+  appearance: none; font: inherit; font-size: 0.75rem; font-weight: 700; cursor: pointer; flex: none;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 3px 12px;
+}
+.stage { position: relative; height: 480px; overflow: hidden; background: var(--bg); }
+@media (max-width: 600px) { .stage { height: 540px; } }
+.pane { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 0.35s, visibility 0.35s; overflow: hidden; }
+.pane.on { opacity: 1; visibility: visible; }
+.demo-cap { margin-top: 16px; font-size: var(--step-1); line-height: 1.6; min-height: 3.2em; max-width: 62ch; }
+.demo-note { margin-top: 6px; font-size: var(--step--1); color: var(--muted); }
+
+@keyframes show { from { visibility: hidden; transform: translateY(4px); } to { visibility: visible; transform: none; } }
+@keyframes pop-in { from { visibility: hidden; transform: translateY(6px) scale(0.97); } to { visibility: visible; transform: none; } }
+
+/* 터미널: 두 테마 모두 어두운 화면 */
+.term { background: #0e1219; color: #d7dde7; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.6; padding: 22px 24px; }
+.term .tl { margin: 0 0 10px; max-width: none; }
+.term .u { background: #1b2230; border-radius: 6px; padding: 8px 12px; color: #fff; }
+.term .u::before { content: "> "; color: #ff6a2c; }
+.term .u small { display: block; color: #8a94a3; font-size: 0.75rem; overflow-wrap: anywhere; }
+.term .c::before { content: "⏺ "; color: #3cc28b; }
+.term .q { color: #e8c46a; padding-left: 20px; }
+.term .dim { color: #8a94a3; }
+.term.play .tl { animation: show 0.3s ease-out both; animation-delay: calc(var(--i) * 0.75s); }
+
+/* 회의록 */
+.doc { background: var(--surface); padding: 22px 28px; font-size: 0.875rem; }
+.doc-title { font-size: 1.25rem; font-weight: 700; line-height: 1.35; }
+.doc-meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
+.doc-meta span { font-size: 0.75rem; border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; color: var(--muted); }
+.doc-meta .reg { color: var(--ink); font-weight: 700; }
+.tabs { display: flex; gap: 18px; border-bottom: 1px solid var(--line); margin-bottom: 16px; font-size: 0.8125rem; color: var(--muted); }
+.tabs span { padding: 6px 0; }
+.tabs .on { color: var(--ink); font-weight: 700; box-shadow: inset 0 -2px 0 var(--ink); }
+.doc h4 { margin: 0 0 8px; font-size: 0.9375rem; }
+.topic { display: grid; gap: 7px; }
+.topic > b { font-size: 0.9375rem; }
+.topic p, .topic li { line-height: 1.6; }
+.topic ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.lab { font-size: 0.6875rem; font-weight: 700; border-radius: 4px; padding: 1px 6px; margin-right: 6px; background: var(--tape); border: 1px solid var(--line); }
+.lab.ok { color: var(--ok); border-color: currentColor; background: transparent; }
+.lab.warn { color: var(--warn); border-color: currentColor; background: transparent; }
+.fn { font-size: 0.625rem; color: var(--muted); vertical-align: super; line-height: 0; margin-left: 2px; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 2px; }
+.fn.hot { color: var(--lock); text-decoration-color: currentColor; }
+.hotline { position: relative; }
+.tip {
+  position: absolute; left: 40px; top: calc(100% + 6px); z-index: 2; width: min(300px, 80vw);
+  background: var(--ink); color: var(--bg); border-radius: 8px; padding: 10px 12px; font-size: 0.75rem; line-height: 1.55;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+}
+.tip .mono { opacity: 0.7; }
+.tip u { opacity: 0.8; }
+.doc.play .tip { animation: pop-in 0.3s ease-out 1.6s both; }
+.doc.play .fn.hot { animation: hotfn 0.6s ease-out 1.2s both; }
+@keyframes hotfn { from { color: var(--muted); } to { color: var(--lock); } }
+.toggle { color: var(--muted); font-size: 0.8125rem; margin-top: 30px; }
+
+/* 할일 후보 검토 */
+.review { background: var(--surface); display: flex; flex-direction: column; }
+.rv-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 0.8125rem; flex-wrap: wrap; }
+.rv-head b { font-size: 0.9375rem; }
+.count { font-family: var(--font-mono); font-weight: 500; }
+.rv-row { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; padding: 11px 20px; border-bottom: 1px solid var(--line); align-items: start; font-size: 0.8125rem; }
+.rv-row b { display: block; font-size: 0.875rem; }
+.rv-row .box { width: 18px; height: 18px; }
+.rv-side { display: grid; gap: 4px; justify-items: end; }
+.rec { font-size: 0.6875rem; color: var(--muted); }
+.pick { font-size: 0.6875rem; font-weight: 700; display: inline-flex; gap: 5px; align-items: center; color: var(--ink); }
+.review.play .rv-row .box.on { animation: checkbox 0.25s ease-out both; animation-delay: var(--d); }
+.review.play .rv-row .box.on::after { animation: vis 0.01s both; animation-delay: var(--d); }
+@keyframes vis { from { visibility: hidden; } to { visibility: visible; } }
+.review.play .pick { animation: pop-in 0.25s ease-out both; animation-delay: var(--d); }
+@keyframes checkbox { from { background: transparent; border-color: var(--line); transform: scale(0.8); } to { transform: none; } }
+.rv-foot { margin-top: auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--line); font-size: 0.8125rem; flex-wrap: wrap; }
+.mk { background: var(--ink); color: var(--bg); font-weight: 700; border-radius: 8px; padding: 8px 16px; font-size: 0.8125rem; }
+.review.play .mk { animation: press 0.5s ease-out 3.4s both; }
+@keyframes press { 0% { transform: none; } 30% { transform: scale(0.93); box-shadow: 0 0 0 4px color-mix(in srgb, var(--lock) 45%, transparent); } 100% { transform: none; box-shadow: 0 0 0 0 transparent; } }
+
+/* 할일 보드 */
+.board-pane { background: var(--surface); display: flex; flex-direction: column; padding: 12px 14px 14px; gap: 10px; }
+.bp-head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 0.75rem; color: var(--muted); }
+.bp-head b { color: var(--ink); font-size: 0.875rem; margin-right: 4px; }
+.bp-head span { border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+.cols { flex: 1; overflow-x: auto; overflow-y: hidden; min-height: 0; }
+.cols-in { display: grid; grid-template-columns: 30px repeat(4, minmax(140px, 1fr)); gap: 8px; height: 100%; min-width: 640px; position: relative; }
+.col { background: var(--bg); border-radius: 10px; padding: 8px 7px; display: flex; flex-direction: column; gap: 8px; min-height: 0; }
+.col h5 { margin: 0; font-size: 0.75rem; display: flex; justify-content: space-between; color: var(--muted); padding: 0 3px; font-weight: 700; }
+.col-list { display: flex; flex-direction: column; gap: 7px; }
+.rail { align-items: center; justify-content: flex-start; padding: 10px 0; }
+.rail span { writing-mode: vertical-rl; font-size: 0.75rem; color: var(--muted); font-weight: 700; letter-spacing: 0.1em; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 9px;
+  font-size: 0.75rem; display: grid; gap: 5px; position: relative;
+}
+.card[hidden] { display: none; }
+.c-top { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
+.ck { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); }
+.pr { font-size: 0.625rem; font-weight: 700; border-radius: 4px; padding: 0 5px; border: 1px solid currentColor; }
+.pr.p1 { color: var(--warn); }
+.pr.p2 { color: var(--muted); }
+.from { font-size: 0.625rem; font-weight: 700; color: var(--lock); }
+.kd { font-size: 0.625rem; font-weight: 700; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; }
+.c-title { font-weight: 600; line-height: 1.4; font-size: 0.78rem; }
+.c-memo { color: var(--muted); font-size: 0.7rem; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.c-memo:empty { display: none; }
+.c-act { display: none; gap: 6px; align-items: center; color: var(--muted); }
+.card.hot .c-act { display: flex; }
+.card.hot { box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.45); }
+.btn-take { background: var(--ink); color: var(--bg); border-radius: 5px; padding: 2px 9px; font-weight: 700; font-size: 0.6875rem; transition: transform 0.12s; }
+.btn-take.press { transform: scale(0.9); }
+.c-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; color: var(--muted); font-size: 0.6875rem; }
+.c-who { display: inline-flex; align-items: center; gap: 5px; }
+.mav { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 0.5625rem; font-weight: 700; color: #fff; position: relative; flex: none; }
+.mav.j { background: #0c8599; }
+.mav.m { background: #4c6ef5; }
+.mav.s { background: #ae3ec9; }
+.mav.d { background: #e8590c; }
+.mav i { position: absolute; right: -5px; bottom: -4px; font-style: normal; width: 12px; height: 12px; border-radius: 50%; display: grid; place-items: center; font-size: 0.5rem; background: var(--ink); color: var(--bg); border: 1.5px solid var(--surface); }
+.card.new { box-shadow: 0 0 0 2px color-mix(in srgb, var(--lock) 55%, transparent); }
+.card.arrive { animation: drop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1.25) both; animation-delay: var(--d, 0s); }
+@keyframes drop { from { transform: translateY(-28px) scale(0.95); visibility: hidden; } 1% { visibility: visible; } to { transform: none; } }
+.card.flash { animation: flash 1.1s ease-out; }
+@keyframes flash { 0% { box-shadow: 0 0 0 3px var(--lock); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.card.moving { z-index: 3; }
+
+.cursor { position: absolute; left: 0; top: 0; z-index: 6; opacity: 0; pointer-events: none; transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s; }
+.cursor.on { opacity: 1; }
+.cursor svg { transition: transform 0.12s; transform-origin: 0 0; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35)); }
+.cursor.click svg { transform: scale(0.82); }
+.pop {
+  position: absolute; z-index: 5; width: 250px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.45); padding: 12px; font-size: 0.75rem; display: grid; gap: 7px; justify-items: start;
+  opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity 0.25s, transform 0.25s, visibility 0.25s; pointer-events: none;
+}
+.pop.on { opacity: 1; visibility: visible; transform: none; }
+.pop .chip { visibility: hidden; }
+.pop.ok .chip { visibility: visible; animation: pop-in 0.25s ease-out both; }
+.toast {
+  position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 4; background: var(--ink); color: var(--bg);
+  border-radius: 10px; padding: 10px 14px; font-size: 0.78rem; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start;
+  transform: translateY(calc(100% + 40px)); transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.3, 1); box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+}
+.toast.on { transform: none; }
+.toast .mav { width: 24px; height: 24px; font-size: 0.6875rem; margin-top: 2px; }
+.toast .mav i { border-color: var(--ink); }
+.toast .mono { font-size: 0.7rem; opacity: 0.85; overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pane, .cursor, .pop, .toast { transition: none; }
+}
+
+/* ---------- 07~09 대시보드, 타임라인, 흐름 ---------- */
+.dash, .tl-pane, .flowp { background: var(--surface); padding: 16px 20px; font-size: 0.8125rem; }
+@media (max-width: 760px) { .dash, .tl-pane, .flowp { overflow-y: auto; } }
+.p-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.p-title b { font-size: 0.9375rem; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; font-size: 0.7rem; }
+.seg span { padding: 2px 9px; color: var(--muted); }
+.seg .on { background: var(--ink); color: var(--bg); font-weight: 700; }
+
+.dash-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .dash-grid { grid-template-columns: 1fr; } }
+.box2 { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 8px; align-content: start; }
+.box2 h6 { margin: 0; font-size: 0.78rem; display: flex; justify-content: space-between; }
+.box2 h6 span { color: var(--muted); font-weight: 400; }
+.q-row { display: grid; grid-template-columns: 22px 1fr; gap: 8px; padding: 7px 0; border-top: 1px dashed var(--line); line-height: 1.45; }
+.q-row:first-of-type { border-top: 0; }
+.q-ico { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: var(--tape); border: 1px solid var(--line); font-size: 0.7rem; }
+.q-row b { font-weight: 600; }
+.q-row small { display: block; color: var(--muted); font-size: 0.7rem; }
+.q-row.new { background: color-mix(in srgb, var(--lock) 9%, transparent); border-radius: 6px; padding: 7px 6px; margin: 0 -6px; border-top-color: transparent; }
+.q-row.new .q-ico { border-color: var(--lock); color: var(--lock); }
+.warnmark { color: var(--warn); font-weight: 700; }
+.ms { display: grid; gap: 6px; }
+.ms-line { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 0.75rem; }
+.ms-bar { height: 8px; border-radius: 4px; background: var(--tape); border: 1px solid var(--line); overflow: hidden; }
+.ms-bar i { display: block; height: 100%; width: 57%; background: var(--s-blue); border-radius: 0 4px 4px 0; transform-origin: left; }
+.nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.nums div { background: var(--bg); border-radius: 8px; padding: 6px 8px; display: grid; }
+.nums b { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.nums span { font-size: 0.66rem; color: var(--muted); }
+.people { display: grid; gap: 6px; }
+.person { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; line-height: 1.45; font-size: 0.75rem; }
+.person .mav { width: 22px; height: 22px; font-size: 0.625rem; }
+.person small { display: block; color: var(--muted); font-size: 0.7rem; }
+.person .act::before { content: "● "; color: var(--ok); }
+.dash-foot { margin-top: 10px; font-size: 0.72rem; color: var(--muted); }
+.dash.play .q-row { animation: show 0.35s ease-out both; animation-delay: calc(0.25s + var(--i) * 0.45s); }
+.dash.play .ms-bar i { animation: grow 1s cubic-bezier(.2,.7,.2,1) 0.4s both; }
+.dash.play .person { animation: show 0.35s ease-out both; animation-delay: calc(1.6s + var(--i) * 0.3s); }
+@keyframes grow { from { transform: scaleX(0); } to { transform: none; } }
+
+/* 타임라인 */
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.7rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 16px; height: 9px; border-radius: 2px; display: inline-block; }
+.sw-claimed { background: repeating-linear-gradient(135deg, var(--s-blue) 0 4px, color-mix(in srgb, var(--s-blue) 55%, var(--surface)) 4px 8px); }
+.sw-review { background: var(--s-amber); }
+.sw-done { background: var(--s-violet); }
+.tl-grid { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 0 10px; margin-top: 12px; }
+.tl-scroll { overflow-x: auto; }
+.tl-inner { min-width: 540px; }
+.tl-name { display: flex; align-items: center; gap: 6px; height: 50px; font-size: 0.75rem; font-weight: 600; }
+.tl-name.head { height: 26px; }
+.tl-plot { position: relative; }
+.tl-band { position: relative; height: 26px; border-bottom: 1px solid var(--line); }
+.bmark { position: absolute; top: 4px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.625rem; color: var(--muted); white-space: nowrap; display: grid; justify-items: center; line-height: 1.2; }
+.bmark::after { content: ""; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid var(--muted); margin-top: 1px; }
+.tl-row { position: relative; height: 50px; border-bottom: 1px solid var(--line); }
+.bar2 { position: absolute; top: 14px; height: 22px; border-radius: 4px; color: #fff; font-family: var(--font-mono); font-size: 0.625rem; display: flex; align-items: center; padding: 0 6px; white-space: nowrap; overflow: hidden; transform-origin: left; box-shadow: 0 0 0 2px var(--surface); }
+.bar2.done { background: var(--s-violet); }
+.bar2.review { background: var(--s-amber); color: #1a1206; }
+.bar2.claimed { background: repeating-linear-gradient(135deg, var(--s-blue) 0 6px, color-mix(in srgb, var(--s-blue) 70%, #000) 6px 12px); }
+.vline { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1px solid var(--line); pointer-events: none; }
+.vline.today { border-left: 2px solid var(--lock); }
+.tl-axis { position: relative; height: 22px; font-size: 0.66rem; color: var(--muted); }
+.tl-axis span { position: absolute; top: 4px; transform: translateX(-50%); white-space: nowrap; }
+.tl-axis span.first { transform: none; }
+.tl-axis .today { color: var(--lock); font-weight: 700; }
+.tl-pane.play .bar2 { animation: grow 0.7s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(0.2s + var(--i) * 0.16s); }
+.tl-pane.play .vline.today { animation: show 0.3s ease-out 1.7s both; }
+.tl-pane.play .bmark { animation: pop-in 0.3s ease-out both; animation-delay: calc(1.9s + var(--i) * 0.2s); }
+
+/* 흐름 그래프 */
+.flow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 760px) { .flow-grid { grid-template-columns: 1fr; } }
+.chart { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px 10px; display: grid; gap: 6px; align-content: start; }
+.chart h6 { margin: 0; font-size: 0.78rem; }
+.chart .head-num { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.chart .head-num b { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.chart .head-num span { font-size: 0.72rem; color: var(--muted); }
+.better { font-size: 0.7rem; font-weight: 700; color: var(--ok); border: 1px solid currentColor; border-radius: 999px; padding: 0 8px; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .grid line { stroke: var(--line); stroke-width: 1; }
+.chart text { fill: var(--muted); font-family: var(--font-body); font-size: 9px; }
+.chart .lbl-today { fill: var(--ink); font-weight: 700; }
+.chart .ideal { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; }
+.chart .actual { stroke: var(--s-blue); stroke-width: 2; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.chart .forecast { stroke: var(--s-blue); stroke-width: 2; stroke-dasharray: 1 4; stroke-linecap: round; fill: none; }
+.chart .area { fill: var(--s-blue); opacity: 0.1; }
+.chart .pt { fill: var(--s-blue); stroke: var(--surface); stroke-width: 2; }
+.chart .pt-end { fill: var(--s-blue); stroke: var(--surface); stroke-width: 2.5; }
+.chart .note { font-size: 0.7rem; color: var(--muted); }
+.lg { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.68rem; color: var(--muted); }
+.lg span { display: inline-flex; align-items: center; gap: 5px; }
+.lg svg { width: 18px; height: 6px; }
+.flow-foot { margin-top: 10px; font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.flowp.play .draw { stroke-dasharray: 1; animation: draw 1.3s cubic-bezier(.4,0,.2,1) 0.3s both; }
+.flowp.play .forecast, .flowp.play .pt, .flowp.play .pt-end, .flowp.play .area, .flowp.play .ann { animation: vis 0.01s both; animation-delay: 1.6s; }
+.flowp.play .head-num, .flowp.play .better { animation: show 0.3s ease-out 1.7s both; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"></span>team-board</span>
+    <span>작은 게임 개발 팀을 위한 채팅과 할일 보드</span>
+  </header>
+
+  <!-- 첫 화면 -->
+  <section class="hero" aria-labelledby="h-hero">
+    <div>
+      <p class="eyebrow">팀원과 팀원마다 붙은 AI 가 한 보드에서</p>
+      <h1 id="h-hero">몇 명이 동시에 일해도 <span class="hl">같은 씬은 한 명만</span> 고칩니다.</h1>
+      <p class="lede">team-board 는 게임을 만드는 작은 팀이 쓰는 채팅방이자 할일 보드입니다. 팀원은 웹 화면으로, 팀원마다 쓰는 AI 개발 도우미 Claude 는 같은 보드에 직접 붙습니다.</p>
+      <p class="muted">누가 무슨 파일을 손대는지 보드가 먼저 알기 때문에, 두 사람이 같은 장면 파일을 고쳐 한쪽 작업을 버리는 일이 생기지 않습니다.</p>
+      <ul class="facts">
+        <li>Unity · Unreal · Godot</li>
+        <li>사람과 Claude 가 같은 보드에</li>
+        <li>서버 한 대, 추가 설치 없음</li>
+      </ul>
+    </div>
+
+    <figure class="board" style="margin:0" aria-label="보드 예시: 두 번째 사람이 이미 잡힌 씬 파일을 고치려 하자 보드가 막는 장면">
+      <div class="board-head">
+        <span><b># 엘라스틱-다이브</b> · 할일 스레드</span>
+        <span class="tag-example">예시 화면</span>
+      </div>
+      <ol class="events">
+        <li class="ev">
+          <div class="av m" aria-hidden="true">민<i>A</i></div>
+          <div>
+            <div class="who"><b>민지 · Claude A</b> 가 가져감</div>
+            <div class="what"><span class="key">ED-14</span>협곡 맵 조명 다듬기</div>
+            <div class="row">
+              <span class="tape"><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><rect x="1" y="5" width="9" height="6.5" rx="1.5" fill="currentColor"/><path d="M3 5V3.5a2.5 2.5 0 0 1 5 0V5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Assets/Scenes/Canyon.unity</span>
+              <span class="chip ok">겹치는 작업 없음</span>
+            </div>
+          </div>
+        </li>
+        <li class="ev">
+          <div class="av j" aria-hidden="true">준<i>B</i></div>
+          <div>
+            <div class="who"><b>준호 · Claude B</b> 가 시작하려 함</div>
+            <div class="what"><span class="key">ED-15</span>협곡에 몬스터 배치</div>
+            <div class="row">
+              <span class="tape">Assets/Scenes/Canyon.unity</span>
+              <span class="stamp">막힘</span>
+            </div>
+            <p class="why"><b>민지 · Claude A</b> 가 이 씬을 고치는 중입니다. 씬 파일은 두 사람의 수정을 합칠 수 없어서 보드가 시작을 막았습니다.</p>
+          </div>
+        </li>
+        <li class="ev">
+          <div class="av j" aria-hidden="true">준<i>B</i></div>
+          <div>
+            <div class="who"><b>준호 · Claude B</b> 가 순서를 바꿔 시작</div>
+            <div class="what"><span class="key">ED-15</span>몬스터 등장 코드부터 먼저 작업</div>
+            <div class="row">
+              <span class="tape">Assets/Scripts/Monster</span>
+              <span class="chip ok">겹치는 작업 없음</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </figure>
+  </section>
+</div>
+
+<!-- 01 문제 -->
+<section class="chapter" aria-labelledby="h-1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>01</b>문제</div>
+      <div>
+        <h2 id="h-1">AI 가 손을 보태면, 부딪히는 일도 늘어납니다.</h2>
+        <p class="muted">요즘 게임 팀은 팀원마다 AI 개발 도우미를 하나씩 붙여 일합니다. 손은 두 배가 되지만 서로 무엇을 하는지는 더 보기 어려워집니다.</p>
+      </div>
+    </div>
+    <div class="ch-body">
+      <ul class="pains">
+        <li>
+          <span class="n">하나</span>
+          <h3>같은 장면을 둘이 고치면 한쪽이 사라집니다.</h3>
+          <p class="muted">게임의 장면, 캐릭터 부품, 그림, 3D 모델, 소리 파일은 두 사람의 수정을 합칠 수 없습니다. 나중에 저장한 사람이 먼저 한 사람의 작업을 덮어씁니다.</p>
+        </li>
+        <li>
+          <span class="n">둘</span>
+          <h3>AI 는 다른 사람의 AI 를 모릅니다.</h3>
+          <p class="muted">내 Claude 는 옆자리 동료의 Claude 가 지금 같은 버그를 조사하는지 알 수 없습니다. 같은 일을 두 번 하거나, 서로의 파일을 건드립니다.</p>
+        </li>
+        <li>
+          <span class="n">셋</span>
+          <h3>AI 가 남긴 글은 사람이 읽기 어렵습니다.</h3>
+          <p class="muted">AI 의 작업 메모에는 코드 이름과 기호가 가득합니다. 기획자나 아티스트는 무엇이 달라졌는지, 자기가 다음에 뭘 해야 하는지 알기 어렵습니다.</p>
+        </li>
+      </ul>
+      <div class="explain">
+        <span class="q" aria-hidden="true">?</span>
+        <p><b>Claude Code 가 뭔가요?</b> Anthropic 이 만든 AI 개발 도우미입니다. 개발자 컴퓨터에서 게임의 코드와 파일을 직접 읽고 고치고, 빌드와 시험도 합니다. team-board 는 팀원 각자의 Claude Code 를 하나의 보드에 연결해 팀원처럼 일하게 합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 겹침 막기 -->
+<section class="chapter" aria-labelledby="h-2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>02</b>겹침 막기</div>
+      <div>
+        <h2 id="h-2">할일을 가져갈 때 손댈 파일을 적습니다. 나머지는 보드가 봅니다.</h2>
+        <p class="muted">사람이든 Claude 든 할일을 시작할 때 손댈 파일이나 폴더를 함께 적습니다. 보드는 다른 사람이 진행 중인 작업과 겹치는지 바로 확인하고, 겹침의 종류에 따라 세 가지로 알려 줍니다.</p>
+      </div>
+    </div>
+    <div class="ch-body">
+      <div class="signals">
+        <div class="sig">
+          <div class="sig-name"><span class="sw block" aria-hidden="true"></span>막힘</div>
+          <p>합칠 수 없는 파일에서 만나면 시작을 막습니다. 먼저 잡은 사람이 끝내거나 손을 떼면 다시 할 수 있습니다.</p>
+          <div class="eg">
+            <span class="tape">Assets/Scenes</span>
+            <span class="tape">Assets/Scenes/Main.unity</span>
+            <small>폴더 안의 장면 파일에서 만나므로 막힙니다.</small>
+          </div>
+        </div>
+        <div class="sig">
+          <div class="sig-name"><span class="sw folder" aria-hidden="true"></span>폴더 경고</div>
+          <p>두 사람이 같은 폴더를 통째로 잡으면 막지는 않습니다. 대신 그 안의 장면 파일은 아무도 잠그지 않았다고 따로 경고합니다.</p>
+          <div class="eg">
+            <span class="tape">Assets/UI</span>
+            <span class="tape">Assets/UI</span>
+            <small>손댈 장면은 정확한 파일로 다시 잡으라고 알려 줍니다.</small>
+          </div>
+        </div>
+        <div class="sig">
+          <div class="sig-name"><span class="sw note" aria-hidden="true"></span>주의</div>
+          <p>코드와 문서는 둘이 고쳐도 나중에 합칠 수 있습니다. 그래서 막지 않고, 서로 같은 곳을 만진다는 사실만 양쪽에 알립니다.</p>
+          <div class="eg">
+            <span class="tape">Assets/Scripts/Rope</span>
+            <span class="tape">Assets/Scripts/Rope/RopeSpec.cs</span>
+            <small>코드 파일에서 만나므로 주의만 나옵니다.</small>
+          </div>
+        </div>
+      </div>
+      <div class="extra">
+        <div>
+          <h3>엔진마다 다른 파일을 압니다.</h3>
+          <p>Unity 의 장면과 프리팹, Unreal 의 에셋과 맵, Godot 의 씬처럼 합칠 수 없는 파일 종류를 엔진별로 알고 있습니다.</p>
+        </div>
+        <div>
+          <h3>잊힌 작업은 풀립니다.</h3>
+          <p>8시간 동안 소식이 없는 할일은 "오래됨" 이 되어 더는 막지 않습니다. 누구든 이어받을 수 있습니다.</p>
+        </div>
+        <div>
+          <h3>커밋 전에도 한 번 더 봅니다.</h3>
+          <p>게임 레포에 커밋 검사를 걸어 두면, 커밋할 때 남이 잡은 파일이나 내가 잡지 않은 파일을 건드렸는지 알려 줍니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Claude -->
+<section class="chapter" aria-labelledby="h-3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>03</b>AI 팀원</div>
+      <div>
+        <h2 id="h-3">각자의 Claude 가 팀원처럼 보고, 남기고, 넘겨줍니다.</h2>
+        <p class="muted">Claude 는 세션을 시작할 때마다 보드의 진행 상황과 안 읽은 채팅을 먼저 읽고 일을 고릅니다.</p>
+      </div>
+    </div>
+    <div class="ch-body split">
+      <ul class="points">
+        <li>
+          <h3>누가 무엇을 하는지 이름으로 보입니다.</h3>
+          <p>한 사람이 Claude 를 여러 개 띄워도 보드는 따로 구분합니다. 채팅과 할일에 <span class="nametag"><span class="av m" aria-hidden="true">민</span>민지 · Claude A</span> 처럼 나옵니다.</p>
+        </li>
+        <li>
+          <h3>지금 조사 중인 것이 한 줄로 보입니다.</h3>
+          <p>"줄이 벽을 뚫는 원인 조사 중" 같은 한 줄이 보드 머리에 뜹니다. 다른 Claude 는 같은 조사를 시작하기 전에 그 줄을 봅니다.</p>
+        </li>
+        <li>
+          <h3>손을 뗄 때는 꼭 메모를 남깁니다.</h3>
+          <p>어디까지 했는지, 다음에 할 일, 막힌 것을 적어야 할일을 놓을 수 있습니다. 다음 사람이나 다음 Claude 는 그 메모부터 읽고 이어서 합니다.</p>
+        </li>
+        <li>
+          <h3>사람이 읽을 글은 사람의 말로 씁니다.</h3>
+          <p>보드는 Claude 에게 글쓰기 기준을 줍니다. 할일 메모의 첫 줄은 코드를 모르는 팀원이 읽는다고 생각하고, 달라진 것과 남은 것을 짧은 문장으로 씁니다.</p>
+        </li>
+      </ul>
+      <div class="memo-cmp">
+        <div class="memo bad">
+          <div class="lbl">전에 Claude 가 쓰던 메모</div>
+          <p>웹: Lit 물체가 안 보이던 원인 = 웹 기본 품질 Mobile URP 설정 → QualitySettings WebGL 기본 PC.</p>
+        </div>
+        <div class="memo good">
+          <div class="lbl">지금 보드에 남는 메모</div>
+          <p>웹 빌드에서 탑과 캐릭터가 안 보이던 문제를 고쳤습니다. 원인은 웹이 쓰던 그래픽 설정이었고, PC 용 설정으로 바꿨습니다.</p>
+        </div>
+        <p class="src">실제 팀 보드의 할일 메모에서 가져온 예입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 하루의 흐름 -->
+<section class="chapter" aria-labelledby="h-4">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>04</b>하루의 흐름</div>
+      <div>
+        <h2 id="h-4">회의에서 나온 할일을 누군가 가져가고, 팀이 진행을 지켜보기까지 이렇게 흘러갑니다.</h2>
+        <p class="muted">디스코드 음성 회의를 녹음 봇 Craig 로 녹음했다고 해 봅니다. 녹음 링크 하나에서 시작해 보드의 카드가 움직이고 대시보드와 그래프에 쌓이는 데까지 아홉 장면입니다.</p>
+      </div>
+    </div>
+
+    <div class="demo" id="demo">
+      <div class="snav" role="tablist" aria-label="장면 고르기">
+        <button role="tab" aria-selected="true" aria-controls="stage" id="st-0"><span class="sn">01</span><b>녹음 링크 전달</b><span class="sd">Claude 에게 링크를 줍니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-1" tabindex="-1"><span class="sn">02</span><b>회의록 생성</b><span class="sd">보드에 회의록이 올라옵니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-2" tabindex="-1"><span class="sn">03</span><b>후보 고르기</b><span class="sd">팀이 할일을 고릅니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-3" tabindex="-1"><span class="sn">04</span><b>보드에 카드</b><span class="sd">열린 할일이 생깁니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-4" tabindex="-1"><span class="sn">05</span><b>가져가기</b><span class="sd">손댈 파일을 적고 시작합니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-5" tabindex="-1"><span class="sn">06</span><b>리뷰 요청</b><span class="sd">Claude 가 이어서 끝냅니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-6" tabindex="-1"><span class="sn">07</span><b>대시보드</b><span class="sd">내가 처리할 것이 모입니다</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-7" tabindex="-1"><span class="sn">08</span><b>타임라인</b><span class="sd">누가 언제 무엇을 잡았나</span><span class="bar"></span></button>
+        <button role="tab" aria-selected="false" aria-controls="stage" id="st-8" tabindex="-1"><span class="sn">09</span><b>흐름과 지표</b><span class="sd">속도와 품질을 봅니다</span><span class="bar"></span></button>
+      </div>
+
+      <div>
+        <div class="win">
+          <div class="win-bar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win-title">Claude Code · 준호의 터미널</span>
+            <button class="playbtn" type="button" id="demo-play" aria-pressed="false">▶ 자동 재생</button>
+          </div>
+          <div class="stage" id="stage" role="tabpanel" aria-labelledby="st-0">
+
+            <!-- 1. 터미널 -->
+            <div class="pane term on" data-pane="term">
+              <p class="tl u" style="--i:0">어제 회의 녹음이야. 회의록 작성해 줘<small>https://craig.horse/rec/…</small></p>
+              <p class="tl c" style="--i:1">녹음을 받았습니다. 화자 4명, 52분입니다.</p>
+              <p class="tl c" style="--i:2">화자별로 받아썼습니다. <span class="dim">대본 412줄</span></p>
+              <p class="tl c" style="--i:3">회의 중에 함께 쓴 메모와 합쳐 회의록을 썼습니다.</p>
+              <p class="tl c" style="--i:4">참석자에게 확인할 것이 하나 있습니다.</p>
+              <p class="tl q" style="--i:4.6">1. 보스 체력 표시 위치는 누가 정하나요?</p>
+              <p class="tl u" style="--i:5.6">민지가 다음 회의에서 정하기로 했어</p>
+              <p class="tl c" style="--i:6.6">보드에 올렸습니다. 회의록, 원본 대본, 열린 질문 3개, 할일 후보 5개입니다.</p>
+            </div>
+
+            <!-- 2. 회의록 -->
+            <div class="pane doc" data-pane="doc">
+              <div class="doc-title">2026-10-28 정기 회의 · 보스전 첫 패턴</div>
+              <div class="doc-meta"><span class="reg">정기</span><span>52분</span><span>참석 4명</span><span>❓ 열린 질문 3</span><span>할일 후보 5</span></div>
+              <div class="tabs"><span class="on">회의록</span><span>메모</span><span>원본 대본</span></div>
+              <h4>주요 논의</h4>
+              <div class="topic">
+                <b>보스전 첫 패턴</b>
+                <p><span class="lab">쟁점</span>첫 보스에 공격 패턴을 몇 개 넣고 시험할지 정해야 했습니다.<span class="fn">14–15</span></p>
+                <ul>
+                  <li class="hotline"><b>준호</b> 두 개만 먼저 넣고 손맛부터 보자고 했습니다.<span class="fn hot">30</span>
+                    <div class="tip"><span class="mono">#30 · [01:20]</span> 준호<br>"패턴은 두 개만 먼저 넣고 손맛부터 보죠."<br><u>원본 대본에서 보기</u></div>
+                  </li>
+                  <li><b>민지</b> 세 번째 패턴은 아트가 나온 뒤에 넣자고 했습니다.<span class="fn">41</span></li>
+                </ul>
+                <p><span class="lab ok">모두 받은 것</span>패턴 두 개로 시작합니다.<span class="fn">44</span></p>
+                <p><span class="lab warn">남은 것</span>보스 체력 표시를 어디에 둘지 정하지 못했습니다.<span class="fn">52–53</span></p>
+                <div class="toggle">▸ 발언 자세히</div>
+              </div>
+            </div>
+
+            <!-- 3. 할일 후보 -->
+            <div class="pane review" data-pane="review">
+              <div class="rv-head"><b>할일 후보 · 2026-10-28 정기 회의</b><span class="count" id="rv-count">고름 3 / 5</span></div>
+              <div class="rv-row"><span class="box on" style="--d:0.8s" aria-hidden="true"></span>
+                <div><b>보스 공격 패턴 두 가지 만들기</b><span class="cite"><span class="t">[01:20]</span> 준호: "패턴은 두 개만 먼저 넣고 손맛부터 보죠."</span></div>
+                <div class="rv-side"><span class="kind">개발</span><span class="rec">추천 준호</span><span class="pick" style="--d:0.8s"><span class="mav m">민</span>민지 고름</span></div></div>
+              <div class="rv-row"><span class="box on" style="--d:1.6s" aria-hidden="true"></span>
+                <div><b>보스 등장 연출 카메라</b><span class="cite"><span class="t">[08:42]</span> 서연: "등장할 때 카메라가 한 번 당겨지면 좋겠어요."</span></div>
+                <div class="rv-side"><span class="kind">개발</span><span class="rec">추천 서연</span><span class="pick" style="--d:1.6s"><span class="mav s">서</span>서연 고름</span></div></div>
+              <div class="rv-row"><span class="box on" style="--d:2.4s" aria-hidden="true"></span>
+                <div><b>보스 체력 표시 위치 정하기</b><span class="cite"><span class="t">[14:05]</span> 민지: "이건 다음 회의에서 아트 보고 정해요."</span></div>
+                <div class="rv-side"><span class="kind">결정</span><span class="rec">추천 민지</span><span class="pick" style="--d:2.4s"><span class="mav j">준</span>준호 고름</span></div></div>
+              <div class="rv-row"><span class="box" aria-hidden="true"></span>
+                <div><b>보스방 배경 음악 후보 모으기</b><span class="cite"><span class="t">[21:10]</span> 도윤: "음악은 레퍼런스부터 모아 볼게요."</span></div>
+                <div class="rv-side"><span class="kind">기획·문서</span></div></div>
+              <div class="rv-foot"><span class="muted">회의에서 나온 이름은 추천으로만 붙습니다.</span><span class="mk">할일 3개 만들기</span></div>
+            </div>
+
+            <!-- 4~6. 할일 보드 -->
+            <div class="pane board-pane" data-pane="board">
+              <div class="bp-head"><b>엘라스틱 다이브 · 할일 보드</b><span>지금 활동 2</span><span id="bp-locks">🔒 잡힌 영역 2</span></div>
+              <div class="cols">
+                <div class="cols-in">
+                  <div class="col rail"><span>백로그 7</span></div>
+                  <div class="col" data-col="open"><h5>열린 할일 <span class="cnt"></span></h5><div class="col-list"></div></div>
+                  <div class="col" data-col="claimed"><h5>진행 중 <span class="cnt"></span></h5><div class="col-list"></div></div>
+                  <div class="col" data-col="review"><h5>리뷰 <span class="cnt"></span></h5><div class="col-list"></div></div>
+                  <div class="col" data-col="done"><h5>완료 <span class="cnt"></span></h5><div class="col-list"></div></div>
+                </div>
+              </div>
+              <div id="card-pool" hidden>
+                <div class="card" data-id="21"><div class="c-top"><span class="ck">ED-21</span><span class="pr p1">P1</span><span class="from">🎙 회의</span></div><div class="c-title">보스 공격 패턴 두 가지 만들기</div><div class="c-memo"></div><div class="c-act"><span class="btn-take">가져가기</span><span>⏰</span><span>⋯</span></div><div class="c-foot"><span class="c-slot"><span class="c-who">담당 없음</span></span><span class="c-lock"></span></div></div>
+                <div class="card" data-id="22"><div class="c-top"><span class="ck">ED-22</span><span class="pr p2">P2</span><span class="from">🎙 회의</span></div><div class="c-title">보스 등장 연출 카메라</div><div class="c-foot"><span class="c-who">담당 없음</span><span></span></div></div>
+                <div class="card" data-id="23"><div class="c-top"><span class="ck">ED-23</span><span class="kd">결정</span><span class="from">🎙 회의</span></div><div class="c-title">보스 체력 표시 위치 정하기</div><div class="c-foot"><span class="c-who">정할 사람 민지</span><span></span></div></div>
+                <div class="card" data-id="18"><div class="c-top"><span class="ck">ED-18</span><span class="pr p2">P2</span></div><div class="c-title">튜토리얼 문구 다듬기</div><div class="c-foot"><span class="c-who">담당 없음</span><span>💬 2</span></div></div>
+                <div class="card" data-id="17"><div class="c-top"><span class="ck">ED-17</span><span class="pr p1">P1</span></div><div class="c-title">줄 장력 다듬기</div><div class="c-memo">줄이 벽을 뚫는 원인을 찾고 있습니다.</div><div class="c-foot"><span class="c-who"><span class="mav s">서<i>A</i></span>서연</span><span>🔒 1</span></div></div>
+                <div class="card" data-id="16"><div class="c-top"><span class="ck">ED-16</span><span class="pr p2">P2</span></div><div class="c-title">메인 메뉴 효과음</div><div class="c-foot"><span class="c-who"><span class="mav d">도</span>도윤</span><span>🔒 1</span></div></div>
+                <div class="card" data-id="13"><div class="c-top"><span class="ck">ED-13</span></div><div class="c-title">협곡 바위 배치</div><div class="c-foot"><span class="c-who"><span class="mav m">민</span>민지</span><span>어제</span></div></div>
+              </div>
+            </div>
+
+
+            <!-- 7. 대시보드 -->
+            <div class="pane dash" data-pane="dash">
+              <div class="p-title"><b>민지의 대시보드</b><span class="seg"><span>모든 프로젝트</span><span class="on">엘라스틱 다이브</span></span></div>
+              <div class="dash-grid">
+                <div class="box2">
+                  <h6>내가 처리할 것 <span>4</span></h6>
+                  <div class="q-row new" style="--i:0"><span class="q-ico">↺</span><div><b>리뷰 요청 · ED-21 보스 공격 패턴 두 가지 만들기</b><small>준호 · Claude B · 방금</small></div></div>
+                  <div class="q-row" style="--i:1"><span class="q-ico">?</span><div><b>내가 정할 결정 · ED-23 보스 체력 표시 위치</b><small>기한 11/4 · 선택지 3개</small></div></div>
+                  <div class="q-row" style="--i:2"><span class="q-ico">▶</span><div><b>아직 안 해 본 빌드 · #8 0.3.2-dev</b><small>준호 · Claude B · 웹에서 바로 플레이</small></div></div>
+                  <div class="q-row" style="--i:3"><span class="q-ico">@</span><div><b>나를 부른 멘션 · # 엘라스틱-다이브</b><small>도윤: "메뉴 소리 바꾼 것 들어 봐 주세요" <span class="warnmark">⚠ 하루 넘음</span></small></div></div>
+                </div>
+                <div style="display:grid;gap:12px;align-content:start">
+                  <div class="box2">
+                    <h6>팀 현황</h6>
+                    <div class="ms">
+                      <div class="ms-line"><b>★ M2 보스전 · 11/30 (28일 남음)</b><span class="muted">할일 8/14 · 통과 조건 2/4</span></div>
+                      <div class="ms-bar" role="img" aria-label="할일 14개 중 8개 끝남"><i></i></div>
+                    </div>
+                    <div class="nums">
+                      <div><b>1</b><span>진행 중</span></div>
+                      <div><b>2</b><span>리뷰 대기</span></div>
+                      <div><b>0</b><span>막힘</span></div>
+                      <div><b>1</b><span>오래됨</span></div>
+                    </div>
+                  </div>
+                  <div class="box2">
+                    <h6>사람별 지금</h6>
+                    <div class="people">
+                      <div class="person" style="--i:0"><span class="mav s">서<i>A</i></span><div><b>서연</b> · ED-17 줄 장력 다듬기<small class="act">Claude A: 줄이 벽을 뚫는 원인 조사 중</small></div></div>
+                      <div class="person" style="--i:1"><span class="mav j">준<i>B</i></span><div><b>준호</b> · ED-21 리뷰 기다리는 중<small class="act">Claude B: ED-22 카메라 연출 자료 찾는 중</small></div></div>
+                      <div class="person" style="--i:2"><span class="mav d">도</span><div><b>도윤</b> · ED-16 메인 메뉴 효과음<small>리뷰 기다리는 중</small></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="dash-foot">사람별 개수나 순위는 없습니다. 숫자는 팀 전체 것만 보여 줍니다.</p>
+            </div>
+
+            <!-- 8. 타임라인 -->
+            <div class="pane tl-pane" data-pane="timeline">
+              <div class="p-title"><b>타임라인</b><span class="seg"><span class="on">2주</span><span>4주</span><span>8주</span></span></div>
+              <div class="legend"><span><i class="sw-claimed"></i>진행 중</span><span><i class="sw-review"></i>리뷰 중</span><span><i class="sw-done"></i>끝남</span><span><i style="background:var(--lock);width:2px;height:12px"></i>오늘</span><span>▾ 빌드 올린 때</span></div>
+              <div class="tl-grid">
+                <div>
+                  <div class="tl-name head"></div>
+                  <div class="tl-name"><span class="mav m">민</span>민지</div>
+                  <div class="tl-name"><span class="mav j">준</span>준호</div>
+                  <div class="tl-name"><span class="mav s">서</span>서연</div>
+                  <div class="tl-name"><span class="mav d">도</span>도윤</div>
+                </div>
+                <div class="tl-scroll">
+                  <div class="tl-inner">
+                    <div class="tl-plot">
+                      <span class="vline" style="left:0"></span>
+                      <span class="vline" style="left:50%"></span>
+                      <span class="vline" style="left:92.86%"></span>
+                      <span class="vline today" style="left:97.14%"></span>
+                      <div class="tl-band">
+                        <span class="bmark" style="left:28.57%;--i:0" title="빌드 #6 · 10/24">#6</span>
+                        <span class="bmark" style="left:75%;--i:1" title="빌드 #7 · 10/30">#7</span>
+                        <span class="bmark" style="left:95.7%;--i:2" title="빌드 #8 · 오늘">#8</span>
+                      </div>
+                      <div class="tl-row">
+                        <span class="bar2 done" style="left:7.14%;width:25%;--i:0" title="ED-11 협곡 입구 길 · 10/21 가져감 · 10/24 끝남">ED-11</span>
+                        <span class="bar2 done" style="left:50%;width:39.29%;--i:4" title="ED-13 협곡 바위 배치 · 10/27 가져감 · 11/1 끝남">ED-13</span>
+                      </div>
+                      <div class="tl-row">
+                        <span class="bar2 done" style="left:14.29%;width:46.43%;--i:1" title="ED-15 협곡 몬스터 배치 · 10/22 가져감 · 10/28 끝남">ED-15</span>
+                        <span class="bar2 review" style="left:64.29%;width:32.86%;--i:5" title="ED-21 보스 공격 패턴 · 10/29 가져감 · 리뷰 중">ED-21</span>
+                      </div>
+                      <div class="tl-row">
+                        <span class="bar2 done" style="left:0;width:46.43%;--i:2" title="ED-14 협곡 맵 조명 · 10/20 가져감 · 10/26 끝남">ED-14</span>
+                        <span class="bar2 claimed" style="left:57.14%;width:40%;--i:6" title="ED-17 줄 장력 다듬기 · 10/28 가져감 · 진행 중">ED-17</span>
+                      </div>
+                      <div class="tl-row">
+                        <span class="bar2 done" style="left:21.43%;width:32.14%;--i:3" title="ED-12 효과음 정리 · 10/23 가져감 · 10/27 끝남">ED-12</span>
+                        <span class="bar2 review" style="left:71.43%;width:25.71%;--i:7" title="ED-16 메인 메뉴 효과음 · 10/30 가져감 · 리뷰 중">ED-16</span>
+                      </div>
+                    </div>
+                    <div class="tl-axis"><span class="first" style="left:0">10/20 월</span><span style="left:50%">10/27 월</span><span class="today" style="left:96%">오늘 11/2</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. 흐름 그래프 -->
+            <div class="pane flowp" data-pane="flow">
+              <div class="p-title"><b>흐름 (팀)</b><span class="muted" style="font-size:0.72rem">막대나 점에 마우스를 올리면 값이 보입니다</span></div>
+              <div class="flow-grid">
+                <div class="chart">
+                  <h6>M2 번다운 · 남은 할일</h6>
+                  <div class="head-num"><b>6개</b><span>이 속도면 11/13 완료 예상 · 마감 11/30</span></div>
+                  <svg viewBox="0 0 340 186" role="img" aria-label="M2 남은 할일: 10월 19일 11개에서 회의 뒤 3개가 늘었다가 오늘 6개. 최근 속도면 11월 13일에 0개.">
+                    <g class="grid"><line x1="30" x2="325" y1="160" y2="160"/><line x1="30" x2="325" y1="87.5" y2="87.5"/><line x1="30" x2="325" y1="15" y2="15"/></g>
+                    <text x="24" y="163" text-anchor="end">0</text><text x="24" y="90.5" text-anchor="end">7</text><text x="24" y="18" text-anchor="end">14</text>
+                    <line x1="325" x2="325" y1="15" y2="160" stroke="var(--muted)" stroke-dasharray="2 3"/>
+                    <path class="ideal" d="M30 15 L325 160"/>
+                    <path class="actual draw" pathLength="1" d="M30 46.1 L44.1 56.4 L58.1 66.8 L72.1 77.1 L86.2 87.5 L93.2 56.4 L107.3 77.1 L121.3 87.5 L128.3 97.9"/>
+                    <path class="forecast" d="M128.3 97.9 L205.6 160"/>
+                    <g class="ann"><text x="97" y="47">+3 회의</text></g>
+                    <circle class="pt" cx="93.2" cy="56.4" r="4"><title>10/28 · 남은 할일 10개 (회의에서 3개 생김)</title></circle>
+                    <circle class="pt-end" cx="128.3" cy="97.9" r="5"><title>오늘 11/2 · 남은 할일 6개</title></circle>
+                    <circle class="pt" cx="205.6" cy="160" r="4"><title>예상 완료 11/13</title></circle>
+                    <text x="30" y="178">10/19</text>
+                    <text x="128.3" y="178" text-anchor="middle" class="lbl-today">오늘</text>
+                    <text x="205.6" y="178" text-anchor="middle">11/13 예상</text>
+                    <text x="325" y="178" text-anchor="end">11/30 마감</text>
+                  </svg>
+                  <div class="lg">
+                    <span><svg viewBox="0 0 18 6" aria-hidden="true"><line x1="0" x2="18" y1="3" y2="3" stroke="var(--s-blue)" stroke-width="2"/></svg>남은 할일</span>
+                    <span><svg viewBox="0 0 18 6" aria-hidden="true"><line x1="0" x2="18" y1="3" y2="3" stroke="var(--s-blue)" stroke-width="2" stroke-dasharray="1 4" stroke-linecap="round"/></svg>최근 속도로 본 예상</span>
+                    <span><svg viewBox="0 0 18 6" aria-hidden="true"><line x1="0" x2="18" y1="3" y2="3" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"/></svg>마감까지 고르게 줄 때</span>
+                  </div>
+                </div>
+                <div class="chart">
+                  <h6>기록한 지표 · 줄이 지형을 뚫는 비율</h6>
+                  <div class="head-num"><b>3.1 %</b><span class="better">▼ 0.8 좋아짐</span><span>낮을수록 좋음</span></div>
+                  <svg viewBox="0 0 340 186" role="img" aria-label="줄이 지형을 뚫는 비율: 8번 기록하는 동안 7.8%에서 3.1%로 내려감.">
+                    <g class="grid"><line x1="30" x2="325" y1="160" y2="160"/><line x1="30" x2="325" y1="87.5" y2="87.5"/><line x1="30" x2="325" y1="15" y2="15"/></g>
+                    <text x="24" y="163" text-anchor="end">0</text><text x="24" y="90.5" text-anchor="end">4</text><text x="24" y="18" text-anchor="end">8 %</text>
+                    <path class="area" d="M30 18.6 L72.1 29.5 L114.3 34.9 L156.4 60.3 L198.6 54.9 L240.7 83.9 L282.9 89.3 L325 103.8 L325 160 L30 160 Z"/>
+                    <path class="actual draw" pathLength="1" d="M30 18.6 L72.1 29.5 L114.3 34.9 L156.4 60.3 L198.6 54.9 L240.7 83.9 L282.9 89.3 L325 103.8"/>
+                    <circle class="pt" cx="30" cy="18.6" r="4"><title>10/21 · 7.8 % · 3e1a9f0 · 빌드 #5</title></circle>
+                    <circle class="pt" cx="72.1" cy="29.5" r="4"><title>10/22 · 7.2 % · 81c04d2</title></circle>
+                    <circle class="pt" cx="114.3" cy="34.9" r="4"><title>10/24 · 6.9 % · 0b7e5a1 · 빌드 #6</title></circle>
+                    <circle class="pt" cx="156.4" cy="60.3" r="4"><title>10/26 · 5.5 % · c9d2f13</title></circle>
+                    <circle class="pt" cx="198.6" cy="54.9" r="4"><title>10/28 · 5.8 % · 47aa0e9</title></circle>
+                    <circle class="pt" cx="240.7" cy="83.9" r="4"><title>10/30 · 4.2 % · e2f61b8 · 빌드 #7</title></circle>
+                    <circle class="pt" cx="282.9" cy="89.3" r="4"><title>11/1 · 3.9 % · 5d03c7a</title></circle>
+                    <circle class="pt-end" cx="325" cy="103.8" r="5"><title>11/2 · 3.1 % · a41f2e6 · 빌드 #8</title></circle>
+                    <text x="30" y="178">10/21</text>
+                    <text x="325" y="178" text-anchor="end">11/2</text>
+                  </svg>
+                  <p class="note">마지막 기록: 128번 중 4번 관통 (Cave_02) · Claude 가 테스트를 돌리고 남김</p>
+                </div>
+              </div>
+              <div class="flow-foot"><span>사람별 그래프는 없습니다. 팀 숫자만 그립니다.</span><span>표로 보기</span></div>
+            </div>
+            <div class="cursor" aria-hidden="true"><svg width="22" height="26" viewBox="0 0 22 26"><path d="M2 2l17 11-7.5 1.4L15.6 23l-3.4 1.5-4.1-8.6L2 21z" fill="#fff" stroke="#141a24" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+            <div class="pop" aria-hidden="true">
+              <b>ED-21 가져가기</b>
+              <span class="muted">손댈 파일이나 폴더</span>
+              <span class="tape"><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><rect x="1" y="5" width="9" height="6.5" rx="1.5" fill="currentColor"/><path d="M3 5V3.5a2.5 2.5 0 0 1 5 0V5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Assets/Scenes/Boss.unity</span>
+              <span class="tape">Assets/Scripts/Boss</span>
+              <span class="chip ok">겹치는 작업 없음</span>
+            </div>
+            <div class="toast" aria-hidden="true"></div>
+          </div>
+        </div>
+        <p class="demo-cap" aria-live="polite">회의가 끝나면 누구든 녹음 링크를 자기 Claude 에게 줍니다. Claude 가 화자별로 받아쓰고, 회의 중 함께 쓴 메모와 합쳐 회의록을 만듭니다.</p>
+        <p class="demo-note">이해를 돕기 위한 애니메이션 효과입니다. 화면 속 이름, 대화, 할일은 예시이고 실제 화면과 조금 다를 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 빌드와 튜닝 -->
+<section class="chapter" aria-labelledby="h-5">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>05</b>빌드와 손맛</div>
+      <div>
+        <h2 id="h-5">Claude 가 올린 빌드를 팀이 바로 해 보고, 수치도 같이 정합니다.</h2>
+        <p class="muted">게임 빌드를 주고받으려고 파일 공유 링크를 돌릴 필요가 없습니다.</p>
+      </div>
+    </div>
+    <div class="ch-body split">
+      <div style="display:grid;gap:22px">
+        <div class="buildline" aria-label="빌드 보드 예시">
+          <div class="top-l"><span>빌드 #7 · 0.3.1-dev · main@abc1234</span><span class="web">웹</span></div>
+          <span class="play"><svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0l10 6-10 6z" fill="currentColor"/></svg>플레이</span>
+          <div class="reacts"><span>👍 3</span><span>🐞 1</span><span>댓글 2</span></div>
+        </div>
+        <ul class="points">
+          <li><h3>브라우저에서 바로 실행됩니다.</h3><p>웹용으로 만든 빌드는 플레이 버튼 하나로 새 탭에서 돌아갑니다. 설치 파일 빌드도 같은 곳에서 내려받습니다.</p></li>
+          <li><h3>버그 신고가 할일 초안이 됩니다.</h3><p>게임 안에서 신고하면 스크린샷, 로그, 장면 이름이 붙은 초안이 보드에 생기고 사람이 확정합니다. 게임이 멈춘 기록도 같은 원인끼리 묶여 올라옵니다.</p></li>
+          <li><h3>바뀐 내용이 같이 따라옵니다.</h3><p>빌드마다 지난 빌드 뒤 무엇이 바뀌었는지 패치 노트가 붙고, 시험할 때 확인할 것도 함께 적힙니다.</p></li>
+        </ul>
+      </div>
+      <div>
+        <h3>튜닝: 게임의 손맛을 숫자로 함께 고릅니다.</h3>
+        <p class="muted" style="margin-top:6px">줄의 탄성, 카메라, 난이도 같은 수치 묶음을 보드에 올립니다. 여러 후보를 기본값과 나란히 비교하고, 슬라이더로 고치고, 팀이 쓸 값을 정합니다. 게임은 정해진 팀 값을 그대로 읽어 갑니다.</p>
+        <div class="tune-wrap">
+          <table class="tune" aria-label="튜닝 비교 예시">
+            <thead><tr><th scope="col">줄 설정</th><th scope="col">기본</th><th scope="col">후보 · 쫀득</th><th scope="col" class="team">팀 값</th></tr></thead>
+            <tbody>
+              <tr><td>매달리면 늘어나는 정도</td><td>12 %</td><td class="diff">18 %</td><td class="diff">15 %</td></tr>
+              <tr><td>튀어 오르는 정도</td><td>30 %</td><td class="diff">45 %</td><td>30 %</td></tr>
+              <tr><td>최대 길이</td><td>8.0 m</td><td>8.0 m</td><td class="diff">9.5 m</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="src" style="margin-top:10px">예시 값입니다. 노란 칸은 기본과 다른 값입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 그 밖에 -->
+<section class="chapter" aria-labelledby="h-6">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>06</b>한곳에서</div>
+      <div>
+        <h2 id="h-6">메신저, 문서, 일정표를 따로 쓰지 않아도 됩니다.</h2>
+      </div>
+    </div>
+    <div class="ch-body">
+      <div class="grid6">
+        <div><h3>채팅</h3><p>슬랙처럼 채널, 스레드, 멘션, 반응이 있습니다. 할일마다 스레드가 하나 생겨 그 일의 모든 소식이 모입니다.</p></div>
+        <div><h3>문서</h3><p>노션처럼 페이지를 겹겹이 만듭니다. 여러 명이 같은 문서를 동시에 고쳐도 서로의 커서가 보입니다.</p></div>
+        <div><h3>결정</h3><p>정할 일은 정할 사람과 기한을 두고, 선택지에 표를 받아 결정합니다. 결정한 내용은 기록으로 남습니다.</p></div>
+        <div><h3>마일스톤</h3><p>이번 목표와 통과 조건을 정해 두면 남은 할일과 마감까지 남은 날이 늘 보입니다.</p></div>
+        <div><h3>아침 요약</h3><p>매일 아침 어제 끝낸 일, 리뷰를 기다리는 일, 막힌 일이 팀 채널에 한 번 올라옵니다.</p></div>
+        <div><h3>디스코드 알림</h3><p>팀이 디스코드에 모여 있다면 중요한 소식을 디스코드로도 받습니다. 휴대폰 알림도 됩니다.</p></div>
+      </div>
+      <blockquote class="pull">사람별 개수나 순위는 어디에도 없습니다. 숫자는 팀 전체 것만 있습니다.<small>대시보드는 누가 몇 개 했는지 대신, 내가 지금 처리할 것과 팀이 어디까지 왔는지를 보여 줍니다.</small></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 07 시작 -->
+<section class="chapter" aria-labelledby="h-7">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num"><b>07</b>시작하기</div>
+      <div>
+        <h2 id="h-7">서버 하나 띄우고, 팀원은 한 줄만 붙여 넣습니다.</h2>
+        <p class="muted">팀이 직접 운영하는 서버라서 팀의 대화, 할일, 문서, 빌드가 팀 서버 한 곳에 모입니다.</p>
+      </div>
+    </div>
+    <div class="ch-body">
+      <ol class="steps">
+        <li>
+          <span class="who-do">관리자 한 명 · 한 번</span>
+          <h3>서버를 띄웁니다.</h3>
+          <p>클라우드의 작은 서버 한 대면 됩니다. 무료 서버나 월 몇 달러짜리 서버에서도 돌아갑니다.</p>
+          <div class="code">TEAM_TOKEN=팀-비밀 npm start</div>
+        </li>
+        <li>
+          <span class="who-do">팀원마다</span>
+          <h3>웹에서 참여합니다.</h3>
+          <p>팀 비밀과 이름을 넣으면 네 글자 코드가 나옵니다. 관리자가 그 코드를 승인하면 들어옵니다.</p>
+        </li>
+        <li>
+          <span class="who-do">팀원마다</span>
+          <h3>내 Claude 를 연결합니다.</h3>
+          <p>화면의 내 Claude 연결을 누르고 나오는 한 줄을 터미널에 붙여 넣습니다. Windows, macOS, Linux 모두 됩니다.</p>
+          <div class="code">curl -fsSL https://우리팀주소/install.sh | bash …</div>
+        </li>
+      </ol>
+      <div class="spec">
+        <div><b>0개</b><span>따로 설치할 라이브러리</span></div>
+        <div><b>파일 1개</b><span>팀의 모든 기록이 담기는 데이터베이스</span></div>
+        <div><b>약 48MB</b><span>서버가 쓰는 메모리 (실측)</span></div>
+        <div><b>한국어</b><span>화면, 안내, 오류 메시지 모두</span></div>
+      </div>
+
+      <div class="fit">
+        <div class="yes">
+          <h3>이런 팀에 잘 맞습니다</h3>
+          <ul>
+            <li>Unity, Unreal, Godot 로 게임을 만드는 팀</li>
+            <li>팀원마다 Claude Code 를 쓰거나 쓰려는 팀</li>
+            <li>디스코드에서 음성 회의를 하는 팀</li>
+            <li>기획, 아트, 개발이 한 보드에서 같이 보고 싶은 팀</li>
+          </ul>
+        </div>
+        <div class="no">
+          <h3>미리 알아 두실 점</h3>
+          <ul>
+            <li>참여한 사람은 서버의 모든 프로젝트를 함께 봅니다. 팀끼리 서로 못 보게 나누려면 서버를 따로 띄웁니다.</li>
+            <li>서버를 둘 곳은 팀이 직접 준비합니다.</li>
+            <li>회의 녹음 정리는 디스코드의 Craig 녹음을 기준으로 합니다.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="end" aria-labelledby="h-end">
+    <h2 id="h-end">덮어쓴 작업을 다시 만드는 시간을 게임에 쓰세요.</h2>
+    <p class="muted">서버 주소와 팀 비밀만 정하면 오늘부터 팀과 팀의 Claude 가 한 보드에서 일합니다.</p>
+  </section>
+  <footer class="foot">
+    <span>team-board · 2026년 11월 기준 기능</span>
+    <span>화면 예시의 이름과 값은 설명을 위한 것입니다.</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const root = document.getElementById('demo');
+  if (!root) return;
+  const $ = (s) => root.querySelector(s);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const STEPS = [
+    { pane: 'term', dur: 8000, title: 'Claude Code · 준호의 터미널',
+      cap: '회의가 끝나면 누구든 녹음 링크를 자기 Claude 에게 줍니다. Claude 가 화자별로 받아쓰고, 회의 중 함께 쓴 메모와 합쳐 회의록을 만듭니다.' },
+    { pane: 'doc', dur: 6500, title: 'team-board · 📝 회의록 · 2026-10-28 정기 회의',
+      cap: '회의록은 보드 문서로 올라옵니다. 주제마다 쟁점, 사람별 입장, 합의한 것, 남은 것이 먼저 나옵니다. 작은 숫자에 마우스를 올리면 근거가 된 대본 줄이 보입니다.' },
+    { pane: 'review', dur: 5500, title: 'team-board · 할일 후보 검토',
+      cap: 'Claude 가 뽑은 할일 후보를 팀이 함께 봅니다. 무엇을 할일로 만들지는 사람이 고릅니다.' },
+    { pane: 'board', dur: 4500, title: 'team-board · 엘라스틱 다이브 할일 보드',
+      cap: '고른 후보가 열린 할일 칸에 카드로 생깁니다. 카드에는 회의에서 나왔다는 표시와 근거가 된 말이 붙어 있습니다.' },
+    { pane: 'board', dur: 8500, title: 'team-board · 엘라스틱 다이브 할일 보드',
+      cap: '준호 님이 카드의 가져가기를 누르고 손댈 파일을 적습니다. 겹치는 작업이 없어서 바로 진행 중으로 옮겨집니다. 이제 다른 사람은 보스 씬으로 할일을 시작할 수 없습니다.' },
+    { pane: 'board', dur: 7500, title: 'team-board · 엘라스틱 다이브 할일 보드',
+      cap: '준호 님의 Claude 가 이어서 작업하고 리뷰를 요청합니다. 카드와 채널에는 팀원이 읽을 수 있는 메모와 바로 해 볼 수 있는 빌드가 올라옵니다.' },
+    { pane: 'dash', dur: 7500, title: 'team-board · 대시보드 · 민지',
+      cap: '민지 님이 대시보드를 엽니다. 준호 님의 리뷰 요청, 민지 님이 정할 결정, 아직 안 해 본 빌드가 한곳에 모여 있습니다. 옆에는 마일스톤까지 남은 일과 팀원마다 지금 하는 일이 보입니다.' },
+    { pane: 'timeline', dur: 7000, title: 'team-board · 대시보드 · 타임라인',
+      cap: '타임라인은 사람마다 한 줄, 할일마다 막대 하나입니다. 누가 언제부터 무엇을 잡고 있는지, 빌드가 언제 올라왔는지 한눈에 봅니다. 막대에 마우스를 올리면 할일 이름과 날짜가 보입니다.' },
+    { pane: 'flow', dur: 8000, title: 'team-board · 대시보드 · 흐름',
+      cap: '흐름 그래프는 팀 전체 숫자만 그립니다. 이 속도면 마일스톤이 언제 끝나는지, Claude 가 테스트로 잰 숫자가 좋아지고 있는지 봅니다.' },
+  ];
+
+  const nav = [...root.querySelectorAll('.snav [role="tab"]')];
+  const panes = {};
+  root.querySelectorAll('.pane').forEach((p) => { panes[p.dataset.pane] = p; });
+  const stage = $('.stage'), title = $('.win-title'), cap = $('.demo-cap');
+  const cursor = $('.cursor'), pop = $('.pop'), toast = $('.toast'), scroller = $('.cols');
+  const playBtn = document.getElementById('demo-play');
+  const count = document.getElementById('rv-count'), locks = document.getElementById('bp-locks');
+  const cols = {};
+  root.querySelectorAll('.col[data-col]').forEach((c) => { cols[c.dataset.col] = c.querySelector('.col-list'); });
+  const cards = {};
+  root.querySelectorAll('.card').forEach((c) => { cards[c.dataset.id] = c; });
+  const c21 = cards['21'];
+
+  const LAYOUT = {
+    base:   { open: ['18'], claimed: ['17'], review: ['16'], done: ['13'] },
+    fresh:  { open: ['21', '22', '23', '18'], claimed: ['17'], review: ['16'], done: ['13'] },
+    claim:  { open: ['22', '23', '18'], claimed: ['21', '17'], review: ['16'], done: ['13'] },
+    review: { open: ['22', '23', '18'], claimed: ['17'], review: ['21', '16'], done: ['13'] },
+  };
+  const WHO = {
+    none: '<span class="c-who">담당 없음</span>',
+    jun: '<span class="c-who"><span class="mav j">준</span>준호</span>',
+    junB: '<span class="c-who"><span class="mav j">준<i>B</i></span>준호 · Claude B</span>',
+  };
+  const TOAST_CLAIM = '<span class="mav j">준</span><div><b># 엘라스틱-다이브</b> · ED-21 스레드<br>준호 가 가져감 · 겹치는 작업 없음<br><span class="mono">Assets/Scenes/Boss.unity, Assets/Scripts/Boss</span></div>';
+  const TOAST_REVIEW = '<span class="mav j">준<i>B</i></span><div><b>준호 · Claude B</b> · ED-21 리뷰 요청<br>보스가 두 가지 패턴으로 공격합니다. 빌드 #8 <span class="web">웹</span> ▶ 플레이</div>';
+
+  function card21(stateName) {
+    const memo = c21.querySelector('.c-memo'), slot = c21.querySelector('.c-slot'), lock = c21.querySelector('.c-lock');
+    if (stateName === 'claim') { memo.textContent = ''; slot.innerHTML = WHO.jun; lock.textContent = '🔒 1'; }
+    else if (stateName === 'review') {
+      memo.textContent = '보스가 두 가지 패턴으로 공격합니다. 다음: 민지 님이 웹 빌드로 해 보고 괜찮으면 합칩니다.';
+      slot.innerHTML = WHO.junB; lock.textContent = '🔒 1';
+    } else { memo.textContent = ''; slot.innerHTML = WHO.none; lock.textContent = ''; }
+  }
+
+  function place(name, animate) {
+    const first = new Map();
+    if (animate && !reduce) Object.values(cards).forEach((c) => { if (c.offsetParent) first.set(c, c.getBoundingClientRect()); });
+    const shown = new Set();
+    Object.entries(LAYOUT[name]).forEach(([col, ids]) => ids.forEach((id) => { cols[col].appendChild(cards[id]); shown.add(id); }));
+    Object.entries(cards).forEach(([id, c]) => { c.hidden = !shown.has(id); });
+    ['21', '22', '23'].forEach((id) => cards[id].classList.toggle('new', name === 'fresh'));
+    card21(name === 'review' ? 'review' : name === 'claim' ? 'claim' : 'none');
+    Object.values(cols).forEach((list) => {
+      list.parentElement.querySelector('.cnt').textContent = [...list.children].filter((c) => !c.hidden).length;
+    });
+    locks.textContent = '🔒 잡힌 영역 ' + (name === 'claim' || name === 'review' ? 3 : 2);
+    first.forEach((r, c) => {
+      if (c.hidden) return;
+      const n = c.getBoundingClientRect();
+      const dx = r.left - n.left, dy = r.top - n.top;
+      if (!dx && !dy) return;
+      c.style.transition = 'none';
+      c.style.transform = `translate(${dx}px, ${dy}px)`;
+      c.classList.add('moving');
+      c.getBoundingClientRect();
+      c.style.transition = 'transform 0.75s cubic-bezier(.2,.7,.2,1)';
+      c.style.transform = '';
+      c.addEventListener('transitionend', () => { c.style.transition = ''; c.classList.remove('moving'); }, { once: true });
+    });
+  }
+
+  let timers = [];
+  const later = (ms, fn) => timers.push(setTimeout(fn, ms));
+  const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
+
+  function resetOverlays() {
+    cursor.classList.remove('on', 'click');
+    pop.classList.remove('on', 'ok');
+    toast.classList.remove('on');
+    Object.values(cards).forEach((c) => c.classList.remove('hot', 'arrive', 'flash'));
+    c21.querySelector('.btn-take').classList.remove('press');
+  }
+  const showToast = (html) => { toast.innerHTML = html; toast.classList.add('on'); };
+
+  function pointAt(el, fx, fy) {
+    const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    cursor.style.transform = `translate(${r.left - s.left + r.width * fx}px, ${r.top - s.top + r.height * fy}px)`;
+  }
+  function showPop(el) {
+    const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    let left = r.right - s.left + 12, top = r.top - s.top;
+    if (left + 250 > s.width - 8) {
+      left = r.left - s.left - 262;
+      if (left < 8) { left = Math.max(8, Math.min(r.left - s.left, s.width - 258)); top = r.bottom - s.top + 8; }
+    }
+    pop.style.left = left + 'px';
+    pop.style.top = Math.max(8, Math.min(top, s.height - 200)) + 'px';
+    pop.classList.add('on');
+  }
+  function keepVisible(el) {
+    const sr = scroller.getBoundingClientRect(), r = el.getBoundingClientRect();
+    if (r.left < sr.left || r.right + 270 > sr.right) scroller.scrollLeft += r.left - sr.left - 40;
+  }
+
+  function claimScene() {
+    place('fresh', false);
+    keepVisible(c21);
+    const s = stage.getBoundingClientRect();
+    cursor.style.transition = 'none';
+    cursor.style.transform = `translate(${s.width - 70}px, ${s.height - 70}px)`;
+    cursor.getBoundingClientRect();
+    cursor.style.transition = '';
+    later(400, () => { cursor.classList.add('on'); pointAt(c21, 0.5, 0.45); });
+    later(1400, () => c21.classList.add('hot'));
+    later(1650, () => pointAt(c21.querySelector('.btn-take'), 0.45, 0.55));
+    later(2550, () => { cursor.classList.add('click'); c21.querySelector('.btn-take').classList.add('press'); showPop(c21); });
+    later(2750, () => { cursor.classList.remove('click'); c21.querySelector('.btn-take').classList.remove('press'); });
+    later(3500, () => pop.classList.add('ok'));
+    later(4800, () => {
+      pop.classList.remove('on', 'ok'); cursor.classList.remove('on'); c21.classList.remove('hot');
+      place('claim', true); c21.classList.add('flash');
+    });
+    later(5600, () => showToast(TOAST_CLAIM));
+  }
+  function reviewScene() {
+    place('claim', false);
+    later(800, () => { card21('review'); c21.classList.add('flash'); });
+    later(2200, () => { c21.classList.remove('flash'); place('review', true); });
+    later(3000, () => showToast(TOAST_REVIEW));
+  }
+
+  let idx = 0, playing = false, nextT = 0;
+
+  function bars() {
+    nav.forEach((b, k) => {
+      const bar = b.querySelector('.bar');
+      bar.style.transition = 'none';
+      bar.style.width = '0';
+      if (playing && k === idx) {
+        bar.getBoundingClientRect();
+        bar.style.transition = `width ${STEPS[idx].dur}ms linear`;
+        bar.style.width = '100%';
+      }
+    });
+  }
+
+  function run(i, animate) {
+    clearTimers();
+    clearTimeout(nextT);
+    resetOverlays();
+    idx = i;
+    const st = STEPS[i];
+    nav.forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+    stage.setAttribute('aria-labelledby', nav[i].id);
+    Object.entries(panes).forEach(([k, p]) => { p.classList.toggle('on', k === st.pane); p.classList.remove('play'); });
+    title.textContent = st.title;
+    cap.textContent = st.cap;
+    const live = animate && !reduce;
+    if (live) { void panes[st.pane].offsetWidth; panes[st.pane].classList.add('play'); }
+
+    if (st.pane === 'review') {
+      if (live) {
+        count.textContent = '고름 0 / 5';
+        [800, 1600, 2400].forEach((ms, k) => later(ms, () => { count.textContent = `고름 ${k + 1} / 5`; }));
+      } else count.textContent = '고름 3 / 5';
+    }
+    if (i === 3) {
+      if (live) {
+        place('base', false);
+        later(380, () => {
+          place('fresh', false);
+          ['21', '22', '23'].forEach((id, k) => { cards[id].style.setProperty('--d', k * 0.18 + 's'); cards[id].classList.add('arrive'); });
+        });
+      } else place('fresh', false);
+    }
+    if (i === 4) { if (live) claimScene(); else { place('claim', false); showToast(TOAST_CLAIM); } }
+    if (i === 5) { if (live) reviewScene(); else { place('review', false); showToast(TOAST_REVIEW); } }
+
+    bars();
+    if (playing) nextT = setTimeout(() => run((idx + 1) % STEPS.length, true), st.dur);
+  }
+
+  function setPlaying(p, restart) {
+    playing = p;
+    playBtn.textContent = p ? '❚❚ 멈춤' : '▶ 자동 재생';
+    playBtn.setAttribute('aria-pressed', String(p));
+    if (p) { if (restart) run(idx, true); }
+    else { clearTimeout(nextT); bars(); }
+  }
+
+  nav.forEach((b, k) => b.addEventListener('click', () => { setPlaying(false); run(k, true); }));
+  root.querySelector('.snav').addEventListener('keydown', (e) => {
+    const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (!d) return;
+    e.preventDefault();
+    const k = (idx + d + nav.length) % nav.length;
+    setPlaying(false); run(k, true); nav[k].focus();
+  });
+  playBtn.addEventListener('click', () => setPlaying(!playing, !playing));
+
+  // 첫 화면은 완성된 상태로 둡니다. 예시가 화면에 들어오면 그때 자동 재생합니다.
+  place('fresh', false);
+  run(0, false);
+  let started = false, autoPaused = false;
+  if (!reduce && 'IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          if (!started) { started = true; setPlaying(true, true); }
+          else if (autoPaused) { autoPaused = false; setPlaying(true, true); }
+        } else if (playing) { autoPaused = true; setPlaying(false); }
+      });
+    }, { threshold: 0.4 }).observe(root);
+  }
+})();
+</script>
+</body>
+</html>
