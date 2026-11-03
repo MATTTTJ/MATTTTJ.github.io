@@ -31,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261103-09" />
+    <link rel="stylesheet" href="styles.css?v=20261103-10" />
     <link rel="stylesheet" href="about.css?v=20261003-02" />
   </head>
   <body>
@@ -150,6 +150,23 @@
 
           <div class="project-results" id="project-results" role="tabpanel" aria-labelledby="project-tab-featured" tabindex="0">
   <div class="project-grid" data-project-work-grid>
+<article class="project-card" id="scarlet-vfx-card" data-project-category="graphics">
+  <div class="project-visual project-visual--image project-visual--contain">
+    <img src="assets/projects/scarlet-particle-result.png" alt="Scarlet Strings 모작에서 Point·Mesh 파티클을 조합한 노란 원형 이펙트" width="778" height="543" loading="lazy" decoding="async" />
+  </div>
+  <div class="project-body">
+    <p class="project-schedule">SCARLET STRINGS · DIRECTX 11</p>
+    <div class="project-topline"><span>17</span><span>GRAPHICS IMPLEMENTATION</span></div>
+    <h3>DirectX 11 <span class="text-unit vfx-title-unit">파티클·이펙트</span> 시스템</h3>
+    <p class="project-employment">파티클 갱신과 HLSL 표현 구현<br /><span>빌보드·디졸브·깊이·후처리 연결</span></p>
+    <ul class="tag-list" aria-label="사용 언어와 기술"><li>DirectX 11</li><li>HLSL</li><li>C++</li></ul>
+    <div class="project-card-actions">
+      <button class="project-detail-button" type="button" data-project-dialog-open="scarlet-vfx-dialog" aria-haspopup="dialog" aria-controls="scarlet-vfx-dialog" aria-expanded="false" aria-label="DirectX 11 파티클·이펙트 시스템 구현 내용 보기">구현 내용 보기 <span aria-hidden="true">→</span></button>
+      <button class="text-link project-related-button" type="button" data-project-dialog-open="scarlet-dialog" aria-haspopup="dialog" aria-controls="scarlet-dialog" aria-expanded="false" aria-label="파티클·이펙트 시스템을 적용한 Scarlet Strings 게임 프로젝트 보기">게임 프로젝트 보기 <span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</article>
+
 <article class="project-card" data-project-category="graphics">
               <div class="project-visual project-visual--image">
                 <img src="assets/projects/ue-graphics-cel-outline.png" alt="숲 장면에서 캐릭터에 셀 음영과 외곽선을 적용한 언리얼 실습 화면" width="1216" height="726" loading="lazy" decoding="async" />
@@ -748,6 +765,130 @@
       <img class="image-lightbox-image" alt="" />
     </dialog>
 
+
+<dialog class="project-dialog project-dialog--compact" id="scarlet-vfx-dialog" aria-labelledby="scarlet-vfx-dialog-title">
+  <div class="dialog-shell">
+    <header class="dialog-header">
+      <div><p class="eyebrow">SCARLET STRINGS · DIRECTX 11</p><h2 id="scarlet-vfx-dialog-title">파티클·이펙트 시스템</h2></div>
+      <button class="dialog-close" type="button" data-project-dialog-close aria-label="파티클·이펙트 시스템 상세 닫기"><span aria-hidden="true">×</span></button>
+    </header>
+    <div class="project-dialog-content project-narrative">
+      <section class="project-detail-intro">
+        <div class="project-detail-copy">
+          <h3>입자 갱신과 HLSL 표현을 렌더링 흐름에 연결했습니다.</h3>
+          <p>Scarlet Strings를 모작한 6인 팀 프로젝트에서 파티클·이펙트 시스템과 제작 도구, VFX용 HLSL을 담당했습니다.</p>
+          <p>CPU에서 갱신한 입자 데이터를 인스턴스 버퍼로 전달하고, HLSL에서 빌보드와 시간에 따른 표현을 만들었습니다. 이펙트가 장면의 깊이와 출력 타깃을 함께 사용하도록 팀의 렌더러에 연결했습니다.</p>
+          <dl class="project-facts">
+            <div><dt>PROJECT</dt><dd>Scarlet Strings · 6인 팀 모작</dd></div>
+            <div><dt>ROLE</dt><dd>파티클·이펙트 시스템 · VFX HLSL · 제작 도구</dd></div>
+            <div><dt>STACK</dt><dd>C++ · Direct3D 11 · HLSL · ImGui · JSON</dd></div>
+            <div><dt>PERIOD</dt><dd>2023.02 — 04</dd></div>
+          </dl>
+        </div>
+        <figure class="project-detail-cover project-detail-cover--image vfx-detail-cover"><img src="assets/projects/scarlet-particle-result.png" alt="Point·Mesh 파티클을 조합해 만든 원형 VFX 결과" width="778" height="543" loading="lazy" decoding="async" /></figure>
+      </section>
+
+      <section class="case-study-section project-narrative-section" aria-labelledby="vfx-flow-title">
+        <h3 id="vfx-flow-title">입자 데이터가 화면에 그려지는 과정</h3>
+        <ol class="vfx-render-flow">
+          <li><span>01 / CPU</span><strong>입자 상태 갱신</strong><p>생성 간격·위치·수명을 갱신하고, Point 파티클을 카메라에서 먼 순서로 정렬합니다.</p></li>
+          <li><span>02 / INSTANCE BUFFER</span><strong>GPU로 데이터 전달</strong><p>살아 있는 입자를 동적 인스턴스 버퍼에 복사해 인스턴스 드로우에 사용합니다.</p></li>
+          <li><span>03 / HLSL</span><strong>형태와 색 표현</strong><p>빌보드 면을 만들고, 텍스처·수명·Curve 값으로 크기와 투명도 등을 바꿉니다.</p></li>
+          <li><span>04 / RENDER PASS</span><strong>장면에 합성</strong><p>렌더 그룹에 맞춰 그리고, 일부 패스는 장면 깊이를 읽거나 후처리용 Flag를 기록합니다.</p></li>
+        </ol>
+      </section>
+
+      <section class="case-study-section project-narrative-section" aria-labelledby="vfx-hlsl-title">
+        <h3 id="vfx-hlsl-title">HLSL로 만든 파티클과 이펙트 표현</h3>
+        <article class="project-narrative-item">
+          <h4><span class="project-narrative-number">1.</span> 점 하나를 카메라를 향하는 면으로</h4>
+          <div class="project-narrative-copy">
+            <p>Point 파티클은 위치·크기·현재 수명·전체 수명을 인스턴스 데이터로 전달합니다. 버텍스 셰이더에서 남은 수명 비율을 구하고, 지오메트리 셰이더에서 카메라 방향을 기준으로 두 삼각형을 만들어 빌보드로 그렸습니다.</p>
+            <p>수명에 따른 크기 변화는 버텍스 단계에서 처리하고, 남은 수명 비율은 픽셀 단계의 알파 계산에도 사용했습니다. 같은 입자 데이터를 형태와 투명도 표현에 함께 쓴 구조입니다.</p>
+          </div>
+          <details class="project-narrative-details vfx-source-details">
+            <summary>빌보드 생성 HLSL 보기</summary>
+            <pre class="vfx-code" tabindex="0"><code>vLook = g_vCamPosition.xyz - In[0].vPosition;
+vRight = (normalize(cross(float3(0.f, 1.f, 0.f), vLook)) * PSize.x * 0.5f);
+vUp = (normalize(cross(vLook, vRight)) * PSize.y * 0.5f);</code></pre>
+            <p class="vfx-source-note">이 축으로 네 모서리를 계산하고, 두 삼각형의 정점을 출력합니다.</p>
+            <a class="text-link vfx-source-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Client/Bin/ShaderFiles/Shader_VtxPointInstance_ParticleSystem.hlsl#L79-L175" target="_blank" rel="noopener noreferrer">VS·GS 원본 코드 <span aria-hidden="true">↗</span></a>
+          </details>
+        </article>
+        <article class="project-narrative-item">
+          <h4><span class="project-narrative-number">2.</span> 텍스처와 시간 값으로 표현 바꾸기</h4>
+          <div class="project-narrative-copy">
+            <p>플립북 패스에서는 입자의 재생 시간으로 텍스처 시트의 프레임을 골랐습니다. 이펙트 패스에서는 마스크로 알파를 정하고, 디졸브 텍스처와 임계값을 비교해 픽셀을 지웠습니다. 색상과 블룸에 사용할 밝기도 파라미터로 조절했습니다.</p>
+            <p>도구에서 편집한 Curve는 System의 파라미터 값을 시간에 따라 갱신합니다. 그 값을 셰이더에 전달해 디졸브·색상·블룸용 밝기 등 각 패스의 표현을 조절하도록 연결했습니다.</p>
+          </div>
+          <div class="project-narrative-gallery project-narrative-gallery--single">
+            <figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-curve.gif" alt="ImGui Curve를 조절하며 VFX의 시간에 따른 표현을 편집하는 도구 화면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>Curve로 System의 시간에 따른 변화를 편집하는 과정</figcaption></figure>
+          </div>
+          <a class="text-link vfx-source-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Client/Bin/ShaderFiles/Shader_VtxTex_VFX.hlsl#L131-L151" target="_blank" rel="noopener noreferrer">디졸브·블룸용 출력 코드 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="project-narrative-item">
+          <h4><span class="project-narrative-number">3.</span> 장면 깊이로 맞닿는 경계 완화하기</h4>
+          <div class="project-narrative-copy">
+            <p>일부 이펙트 패스에서는 장면의 Depth 텍스처를 읽었습니다. 이펙트의 투영 좌표로 화면 UV를 구하고, 장면 깊이와 이펙트 깊이의 차이가 작아질수록 알파를 줄이는 방식으로 맞닿는 부분의 경계를 완화했습니다.</p>
+            <p>C++의 EffectSystem에서 Depth 텍스처를 바인딩하고, 해당 HLSL 패스에서 샘플링하도록 연결했습니다.</p>
+          </div>
+          <details class="project-narrative-details vfx-source-details">
+            <summary>깊이 기반 알파 계산 HLSL 보기</summary>
+            <pre class="vfx-code" tabindex="0"><code>vector vDepthDesc = g_DepthTex.Sample(LinearSampler, vTexUV);
+float fOldViewZ = vDepthDesc.y * g_Far;
+float fViewZ = In.vProjPos.w;
+Out.vColor.a = saturate(Out.vColor.a * (saturate(fOldViewZ - fViewZ)));</code></pre>
+            <a class="text-link vfx-source-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Client/Bin/ShaderFiles/Shader_VtxTex_VFX.hlsl#L440-L468" target="_blank" rel="noopener noreferrer">깊이를 읽는 이펙트 패스 <span aria-hidden="true">↗</span></a>
+          </details>
+        </article>
+      </section>
+
+      <section class="case-study-section project-narrative-section" aria-labelledby="vfx-pipeline-title">
+        <h3 id="vfx-pipeline-title">VFX 출력을 팀 렌더러의 후처리로 전달</h3>
+        <div class="project-narrative-copy">
+          <p>효과에 따라 불투명·반투명·데칼 렌더 그룹을 선택하도록 했습니다. 반투명 VFX는 장면 합성 뒤 HDR 타깃에 그리며, 일부 셰이더 패스는 색상과 함께 후처리용 Flag를 별도 타깃에 출력합니다.</p>
+          <p>예를 들어 왜곡용 이펙트 패스는 Flag에 왜곡 종류와 적용 비율을 기록합니다. 렌더러가 이 타깃을 후처리 셰이더에 넘기면, 후속 패스는 Flag를 읽어 왜곡한 화면과 원래 화면을 혼합합니다. <strong>이펙트가 쓰는 픽셀 정보와 다음 단계가 읽는 입력을 맞춰 연결한 부분입니다.</strong></p>
+        </div>
+        <ol class="vfx-target-flow">
+          <li><span>VFX PIXEL SHADER</span><strong>색상 + Flag 출력</strong><p>SV_TARGET0 / SV_TARGET1</p></li>
+          <li><span>MRT_HDR</span><strong>HDR + Flag 타깃</strong><p>Target_HDR / Target_Flag</p></li>
+          <li><span>POST PROCESS</span><strong>Flag를 읽어 화면 처리</strong><p>왜곡 대상과 혼합 비율 사용</p></li>
+        </ol>
+        <div class="vfx-source-links">
+          <a class="text-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Client/Bin/ShaderFiles/Shader_VtxTex_VFX.hlsl#L530-L539" target="_blank" rel="noopener noreferrer">Flag 출력 코드 <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Engine/private/Renderer.cpp#L907-L943" target="_blank" rel="noopener noreferrer">후처리 입력 연결 <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Client/Bin/ShaderFiles/Shader_PostProcessVFX.hlsl#L67-L105" target="_blank" rel="noopener noreferrer">Flag를 읽는 후속 패스 <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="case-study-section project-narrative-section" aria-labelledby="vfx-particles-title">
+        <h3 id="vfx-particles-title">CPU에서 관리하고 인스턴스로 그리는 파티클</h3>
+        <div class="project-narrative-copy">
+          <p>생성 간격과 한 번에 생성할 개수를 정하고, Point·Mesh 파티클의 이동과 수명을 CPU에서 갱신했습니다. 수명이 끝난 입자는 목록에서 제거했습니다. Point 파티클은 월드 위치를 기준으로 카메라와의 거리를 구해 먼 순서로 정렬했습니다.</p>
+          <p>Late Update에서는 살아 있는 입자의 데이터를 동적 인스턴스 버퍼에 기록합니다. Map·Unmap으로 버퍼를 갱신하고 DrawIndexedInstanced로 그렸습니다. Mesh 파티클은 이동·물리 처리에 쓰는 상태와 GPU에 넘길 드로우 데이터를 구분했습니다.</p>
+        </div>
+        <div class="project-narrative-gallery">
+          <figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-particle-update-source.png" alt="Point 파티클의 수명 제거와 카메라 거리 정렬 코드" loading="lazy" decoding="async" /></div><figcaption>수명이 끝난 입자를 제거하고 Point 파티클의 그리는 순서 갱신</figcaption></figure>
+          <figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-particle-buffer-source.png" alt="파티클 목록을 동적 인스턴스 버퍼에 복사하는 Map·Unmap 코드" loading="lazy" decoding="async" /></div><figcaption>CPU에서 갱신한 데이터를 인스턴스 버퍼에 전달</figcaption></figure>
+        </div>
+        <a class="text-link vfx-source-link" href="https://github.com/an004005/D3D11_TeamPortfolio/blob/master/Client/private/ParticleSystem.cpp#L1070-L1167" target="_blank" rel="noopener noreferrer">Point 파티클 갱신 코드 <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="case-study-section project-narrative-section" aria-labelledby="vfx-authoring-title">
+        <h3 id="vfx-authoring-title">도구에서 편집한 효과를 게임에 적용</h3>
+        <div class="project-narrative-copy">
+          <p>개별 이펙트는 EffectSystem으로, 입자의 생성·갱신은 ParticleSystem으로 나눴습니다. 여러 System을 함께 재생할 때는 각각 EffectGroup과 ParticleGroup으로 묶었습니다. ImGui에서 셰이더 패스·텍스처·파라미터·로컬 변환을 편집하고, 설정을 JSON으로 저장해 게임에서 불러 쓰도록 했습니다.</p>
+          <p>팀의 Timeline에서 Curve 값을 받는 콜백을 구현해 System의 파라미터를 갱신했습니다. 지정한 키프레임에 도달하면 EffectGroup에서 ParticleGroup을 재생하는 이벤트도 연결해 효과가 이어지도록 구성했습니다.</p>
+        </div>
+        <div class="project-narrative-gallery">
+          <figure class="project-narrative-figure"><div class="project-narrative-frame"><img id="vfx-particle-tool-motion" src="assets/projects/scarlet-particle-tool-poster.png" data-motion-src="assets/projects/scarlet-particle-tool.gif" data-motion-poster="assets/projects/scarlet-particle-tool-poster.png" data-motion-autoplay="false" width="640" height="480" alt="파티클 제작 도구에서 효과를 생성하고 설정을 조절하는 과정" loading="lazy" decoding="async" /></div><button class="motion-toggle motion-toggle--feature" type="button" data-motion-toggle aria-controls="vfx-particle-tool-motion" hidden>재생</button><figcaption>파티클 생성과 설정 편집</figcaption></figure>
+          <figure class="project-narrative-figure"><div class="project-narrative-frame"><img src="assets/projects/scarlet-group-event.gif" alt="EffectGroup의 키프레임 이벤트에서 ParticleGroup을 생성하는 도구 화면" loading="lazy" decoding="async" data-image-expand /></div><figcaption>EffectGroup 재생 중 ParticleGroup을 생성하는 이벤트</figcaption></figure>
+        </div>
+      </section>
+      <div class="project-detail-actions"><a class="button button-primary" href="https://github.com/an004005/D3D11_TeamPortfolio" target="_blank" rel="noopener noreferrer">프로젝트 코드 보기 <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </div>
+</dialog>
 
 <dialog class="project-dialog project-dialog--compact" id="mesh-instancing-dialog" aria-labelledby="mesh-instancing-dialog-title">
   <div class="dialog-shell">

@@ -1017,3 +1017,30 @@ img.is-image-lightbox-trigger:focus-visible { outline: 3px solid var(--aqua); ou
   .project-work-summary li { grid-template-columns: 1fr; gap: 3px; padding-block: 13px; }
   .project-work-summary strong, .project-work-summary p { font-size: 14px; }
 }
+
+/* Scarlet Strings VFX case study */
+#scarlet-vfx-dialog .vfx-detail-cover { min-height: 0; aspect-ratio: 1.2; background: #050505; }
+#scarlet-vfx-dialog .vfx-detail-cover > img { background: #050505; }
+.project-body h3 .vfx-title-unit { color: inherit; font: inherit; }
+.vfx-render-flow, .vfx-target-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 24px 0 0; padding: 0; list-style: none; }
+.vfx-target-flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.vfx-render-flow li, .vfx-target-flow li { min-width: 0; padding: 20px 17px; border: 1px solid var(--line); background: var(--surface); }
+.vfx-render-flow li > span, .vfx-target-flow li > span { display: block; margin-bottom: 17px; color: var(--green); font: 500 10px/1.5 var(--mono); letter-spacing: .04em; }
+.vfx-render-flow strong, .vfx-target-flow strong { display: block; margin-bottom: 9px; color: var(--ink); font-size: 16px; line-height: 1.5; }
+.vfx-render-flow p, .vfx-target-flow p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.vfx-source-link { display: inline-flex; margin-top: 19px; }
+.vfx-source-links { display: flex; flex-wrap: wrap; gap: 14px 22px; margin-top: 22px; }
+.vfx-source-links .text-link { font-size: 13px; }
+.vfx-code { max-width: 100%; margin: 18px 0 0; padding: 18px; overflow-x: auto; border: 1px solid var(--line); background: var(--canvas); color: var(--ink); font: 400 12px/1.85 var(--mono); white-space: pre; overflow-wrap: normal; tab-size: 2; }
+.vfx-code:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.vfx-source-note { margin: 13px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.vfx-source-details .vfx-source-link { margin-top: 12px; font-size: 13px; }
+@media (max-width: 900px) {
+  .vfx-render-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .vfx-render-flow, .vfx-target-flow { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .vfx-render-flow li, .vfx-target-flow li { padding: 17px 18px; }
+  .vfx-render-flow li > span, .vfx-target-flow li > span { margin-bottom: 9px; }
+  .vfx-source-links { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
