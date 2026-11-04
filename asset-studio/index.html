@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asset Studio 소개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 방향: 인화 검수대. 중성 회색 라이트 테이블 위에 그림만 색을 가지고, 사람이 찍는 "확정" 도장 한 가지에만 청록을 쓴다.
+   레이아웃: team-board 소개와 같은 장(章) 구성. 대담함은 첫 화면의 조립 검토 예시에만. */
+:root {
+  --bg: #e8e9e7;
+  --surface: #ffffff;
+  --ink: #171a1c;
+  --muted: #5b636a;
+  --line: #c9cdcf;
+  --stamp: #156b5b;
+  --stamp-ink: #ffffff;
+  --warn: #a4660a;
+  --bad: #b2412f;
+  --tape: #f4f5f4;
+  --claude: #4b5fc4;
+  --font-display: "Black Han Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+  --step-4: clamp(2.5rem, 6vw, 4.25rem);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121416; --surface: #1a1d20; --ink: #e8eaec; --muted: #9ba3aa; --line: #2d3236;
+    --stamp: #3fcbb0; --stamp-ink: #071a15; --warn: #e0ac3a; --bad: #ec7b66; --tape: #22262a; --claude: #8d9cf0;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--step-0); line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 480px) { .wrap { padding: 0 16px; } }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h1, h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; line-height: 1.18; }
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); font-weight: 700; line-height: 1.4; }
+p { margin: 0; max-width: 62ch; }
+.muted { color: var(--muted); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--stamp); outline-offset: 3px; }
+.mono, code { font-family: var(--font-mono); }
+
+/* 머리 */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); font-size: var(--step--1); color: var(--muted); }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 700; font-size: var(--step-0); }
+.brand-mark { width: 22px; height: 22px; border-radius: 5px; background: linear-gradient(135deg, var(--stamp) 0 50%, var(--ink) 50% 100%); }
+.stage { border: 1px solid var(--warn); color: var(--warn); border-radius: 999px; padding: 2px 10px; font-weight: 600; }
+
+/* 첫 화면 */
+.hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; padding: 64px 0 72px; }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 56px; } }
+.eyebrow { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 18px; }
+.hl { color: var(--stamp); }
+.lede { font-size: var(--step-1); margin-top: 24px; line-height: 1.65; }
+.lede + p { margin-top: 14px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 28px 0 0; padding: 0; list-style: none; font-size: var(--step--1); font-weight: 600; }
+.facts li { display: flex; align-items: center; gap: 8px; }
+.facts li::before { content: ""; width: 8px; height: 8px; background: var(--stamp); border-radius: 2px; }
+
+/* 조립 검수 예시 (첫 화면) */
+.shot { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; font-size: 0.75rem; }
+.shot-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; color: var(--muted); }
+.shot-head b { color: var(--ink); font-size: 0.8125rem; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; font-size: 0.6875rem; }
+.chip.on { border-color: var(--stamp); color: var(--stamp); font-weight: 700; }
+.scene { position: relative; height: 230px; border-radius: 10px; overflow: hidden; background: linear-gradient(#b9d2d8, #d9e3dc 60%, #cfd7c3); }
+.scene.dusk { background: linear-gradient(#d8a98f, #e2c2a4 55%, #b9a98e); }
+.layer { position: absolute; left: 0; right: 0; transition: transform .6s ease; }
+.lbl { position: absolute; left: 8px; font-family: var(--font-mono); font-size: 0.625rem; background: rgba(20,24,28,.72); color: #fff; padding: 1px 6px; border-radius: 4px; }
+.redo { position: absolute; right: 10px; top: 86px; background: var(--surface); color: var(--bad); border: 1px solid var(--bad); border-radius: 6px; padding: 3px 8px; font-size: 0.6875rem; font-weight: 700; }
+.shot-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.stamp-btn { background: var(--stamp); color: var(--stamp-ink); border: 0; border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.75rem; font-family: inherit; }
+.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; font-size: 0.75rem; font-family: inherit; cursor: pointer; }
+.caption { font-size: var(--step--1); color: var(--muted); margin-top: 10px; }
+.scene img.full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.checker { background-color: var(--tape); background-image: linear-gradient(45deg, rgba(0,0,0,.055) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.055) 75%), linear-gradient(45deg, rgba(0,0,0,.055) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.055) 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
+@media (prefers-color-scheme: dark) { .checker { background-image: linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%), linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%); } }
+.strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 28px; }
+@media (max-width: 760px) { .strip { grid-template-columns: repeat(3, 1fr); } }
+.strip figure { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: 1fr auto; }
+.strip .checker { aspect-ratio: 1; position: relative; }
+.strip img { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); display: block; object-fit: contain; }
+.strip figcaption { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); padding: 6px 10px; background: var(--surface); border-top: 1px solid var(--line); }
+.steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.two .steps3 figure { margin: 0; display: grid; gap: 6px; background: none; border: 0; border-radius: 0; padding: 0; }
+.steps3 img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; border: 1px solid var(--line); }
+.steps3 figcaption { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); }
+.show { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+@media (max-width: 860px) { .show { grid-template-columns: 1fr; } }
+.show figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: start; }
+.show figcaption { font-size: var(--step--1); color: var(--muted); }
+.pair-stage { position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; user-select: none; }
+.pair-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 10px; display: block; pointer-events: none; }
+.pair-stage .handle { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); transform: translateX(-1px); }
+.pair-stage .handle::after { content: "◂ ▸"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--ink); color: var(--bg); font-size: 0.625rem; padding: 2px 6px; border-radius: 999px; white-space: nowrap; }
+.pair-stage .lbl.r { left: auto; right: 8px; }
+.pair input[type=range] { width: 100%; margin: 0; accent-color: var(--stamp); }
+.ptabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.ptabs button { appearance: none; font: inherit; font-size: 0.75rem; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
+.ptabs button[aria-pressed="true"] { border-color: var(--stamp); color: var(--stamp); font-weight: 700; }
+.props { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.props div { aspect-ratio: 1; border-radius: 8px; border: 1px solid var(--line); position: relative; overflow: hidden; }
+.props img { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); object-fit: contain; display: block; }
+.props .tag { position: absolute; left: 6px; bottom: 5px; font-family: var(--font-mono); font-size: 0.625rem; background: rgba(20,24,28,.72); color: #fff; padding: 0 5px; border-radius: 3px; }
+
+/* 장 */
+.chapter { padding: 80px 0; border-top: 1px solid var(--line); }
+@media (max-width: 700px) { .chapter { padding: 56px 0; } }
+.ch-head { display: grid; grid-template-columns: 120px 1fr; gap: 24px; margin-bottom: 44px; }
+@media (max-width: 700px) { .ch-head { grid-template-columns: 1fr; gap: 8px; margin-bottom: 32px; } }
+.ch-num { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 10px; }
+.ch-num b { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--step-3); color: var(--stamp); line-height: 1; margin-bottom: 4px; }
+.ch-head p { margin-top: 14px; font-size: var(--step-1); }
+.ch-body { margin-left: 144px; }
+@media (max-width: 700px) { .ch-body { margin-left: 0; } }
+
+/* 01 문제 */
+.probs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+@media (max-width: 860px) { .probs { grid-template-columns: 1fr; } }
+.probs .k { font-family: var(--font-display); font-size: var(--step-2); color: var(--muted); line-height: 1; margin-bottom: 10px; }
+.probs h3 { margin-bottom: 8px; }
+.probs p { color: var(--muted); font-size: 0.9375rem; }
+.ask { margin-top: 44px; display: grid; grid-template-columns: 44px 1fr; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+.ask .q { font-family: var(--font-display); font-size: var(--step-3); line-height: 1; color: var(--stamp); }
+.ask p { max-width: none; }
+
+/* 02 차별점 표 */
+.cmp { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.cmp th, .cmp td { text-align: left; vertical-align: top; padding: 14px 12px; border-top: 1px solid var(--line); }
+.cmp th { font-size: var(--step--1); color: var(--muted); font-weight: 600; border-top: 2px solid var(--ink); }
+.cmp td:first-child { font-weight: 700; width: 20%; }
+.cmp td:nth-child(2) { color: var(--muted); }
+.cmp td:nth-child(3) { background: var(--tape); }
+@media (max-width: 700px) { .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; } .cmp thead { display: none; } .cmp td { border-top: 0; padding: 6px 12px; } .cmp tr { border-top: 1px solid var(--line); padding: 10px 0; } .cmp td:first-child { width: auto; padding-top: 12px; } .cmp td:nth-child(2)::before { content: "따로 쓰는 도구 · "; font-weight: 600; } .cmp td:nth-child(3)::before { content: "Asset Studio · "; font-weight: 600; color: var(--stamp); } }
+
+/* 03 써 보기 (단계 보기) */
+.demo { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 960px) { .demo { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+.snav { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+@media (max-width: 960px) { .snav { grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); overflow-x: auto; padding-bottom: 4px; } }
+.snav button { appearance: none; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; width: 100%; padding: 10px 12px; border-radius: 8px; cursor: pointer; display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: start; min-height: 44px; }
+.snav button[aria-current="step"] { background: var(--surface); border: 1px solid var(--line); }
+.snav .n { font-family: var(--font-mono); color: var(--muted); font-size: 0.75rem; padding-top: 3px; }
+.snav b { display: block; font-size: 0.9375rem; }
+.snav small { color: var(--muted); font-size: 0.75rem; display: block; }
+.panel { display: none; }
+.panel.on { display: grid; gap: 14px; }
+.term { background: #15181b; color: #e6e9ec; border-radius: 12px; padding: 16px 18px; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.7; }
+.term .u { color: #9ad0ff; }
+.term .c { color: #c8c2ff; }
+.term .d { color: #8b949e; }
+.term .ok { color: #5fd5b9; }
+.panel .explain { color: var(--muted); font-size: 0.9375rem; }
+.board { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; font-size: 0.8125rem; }
+.keys { display: grid; gap: 6px; }
+.key { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 8px 10px; background: var(--bg); border-radius: 8px; }
+.key code { font-size: 0.75rem; }
+.st { font-size: 0.6875rem; font-weight: 700; border-radius: 4px; padding: 0 6px; border: 1px solid currentColor; }
+.st.w { color: var(--warn); } .st.ok { color: var(--stamp); } .st.g { color: var(--muted); }
+.cands { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.cand { aspect-ratio: 4/3; border-radius: 8px; border: 1px solid var(--line); position: relative; overflow: hidden; }
+.cand img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; }
+.cand.pick { outline: 3px solid var(--stamp); outline-offset: -3px; }
+.cand .tag { position: absolute; left: 6px; bottom: 5px; font-family: var(--font-mono); font-size: 0.625rem; background: rgba(20,24,28,.72); color: #fff; padding: 0 5px; border-radius: 3px; }
+.cand .stamp { position: absolute; right: 6px; top: 6px; background: var(--stamp); color: var(--stamp-ink); font-size: 0.625rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; }
+pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.6; overflow-x: auto; }
+
+/* 04 그림체 */
+.loop { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; align-items: stretch; }
+@media (max-width: 860px) { .loop { grid-template-columns: 1fr 1fr; } }
+.loop div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 6px; align-content: start; font-size: 0.875rem; }
+.loop b { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.loop p { color: var(--muted); font-size: 0.8125rem; }
+.weights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 28px; }
+@media (max-width: 600px) { .weights { grid-template-columns: 1fr 1fr; } }
+.weights div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; text-align: center; }
+.weights b { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1.1; }
+.weights span { font-size: 0.75rem; color: var(--muted); }
+.weights .o { border-color: var(--stamp); }
+.extra { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 36px; }
+@media (max-width: 820px) { .extra { grid-template-columns: 1fr; gap: 20px; } }
+.extra h3 { margin-bottom: 6px; }
+.extra p { color: var(--muted); }
+
+/* 05 조립 */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+.two figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; }
+.two figcaption { font-size: var(--step--1); color: var(--muted); }
+.rig { height: 220px; border-radius: 8px; background: var(--bg); display: flex; align-items: center; justify-content: center; }
+
+/* 07 만들 수 있는 것 */
+.caps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+@media (max-width: 760px) { .caps { grid-template-columns: 1fr; } }
+.caps li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 4px; }
+.caps b { font-size: 0.9375rem; }
+.caps span { color: var(--muted); font-size: 0.875rem; }
+
+/* 08 역할 */
+.roles { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+@media (max-width: 760px) { .roles { grid-template-columns: 1fr; } }
+.roles ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.roles li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
+.roles li::before { content: ""; width: 12px; height: 12px; margin-top: 7px; border-radius: 3px; }
+.roles .can li::before { background: var(--claude); }
+.roles .cant li::before { border: 2px solid var(--muted); }
+
+/* 09 시작하기 */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+.steps li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 10px; align-content: start; }
+.steps .who-do { font-size: 0.75rem; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+.steps p { color: var(--muted); font-size: 0.9375rem; }
+.code { font-family: var(--font-mono); font-size: 0.75rem; background: var(--tape); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; overflow-x: auto; white-space: nowrap; }
+.spec { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 36px; border-top: 2px solid var(--ink); }
+@media (max-width: 860px) { .spec { grid-template-columns: 1fr 1fr; } }
+.spec div { padding: 16px 12px 0 0; }
+.spec b { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1.1; }
+.spec span { font-size: var(--step--1); color: var(--muted); }
+.fit { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+@media (max-width: 760px) { .fit { grid-template-columns: 1fr; gap: 28px; } }
+.fit h3 { margin-bottom: 12px; }
+.fit ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.fit li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
+.fit li::before { content: ""; width: 12px; height: 12px; margin-top: 7px; border-radius: 3px; }
+.fit .yes li::before { background: var(--stamp); }
+.fit .no li::before { border: 2px solid var(--muted); }
+.ms { margin-top: 36px; display: grid; gap: 6px; }
+.ms div { display: grid; grid-template-columns: var(--w, 56px) 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 0.9375rem; }
+.ms code { color: var(--muted); }
+.close { padding: 72px 0 48px; border-top: 1px solid var(--line); }
+.close h2 { margin-bottom: 18px; }
+.close-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 860px) { .close-grid { grid-template-columns: 1fr; gap: 28px; } }
+.keyart { margin: 0; display: grid; gap: 10px; }
+.keyart video { width: 100%; aspect-ratio: 16/9; display: block; border-radius: 12px; border: 1px solid var(--line); background: #000; }
+.keyart figcaption { font-size: var(--step--1); color: var(--muted); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 24px 0 40px; font-size: var(--step--1); color: var(--muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Asset Studio</div>
+  <div>혼자 쓰는 로컬 AI 게임 에셋 파이프라인 · <span class="stage">v1 · 내부 도구</span></div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">그림체 하나 · GPU 한 장 · 확정은 사람</div>
+    <h1>그림체를 한 번 고정하면, 에셋은 주문한 대로 나옵니다. <span class="hl">확정</span>만 사람이 합니다.</h1>
+    <p class="lede">Asset Studio는 게임을 혼자 만드는 사람이 쓰는 로컬 도구입니다. 내 PC의 그래픽카드로 이미지를 만들고, 내 그림체를 학습시켜 고정하고, 게임 프로젝트의 AI 도우미가 주문한 에셋을 조립해 보고 확정합니다.</p>
+    <p class="muted">배경 레이어, 캐릭터 파츠, 소품, 3D 메시까지 같은 그림체로 나오고, 확정한 것만 게임 쪽으로 넘어갑니다.</p>
+    <ul class="facts">
+      <li>외부 서비스 없이 내 GPU로</li>
+      <li>그림체는 학습한 LoRA로 고정</li>
+      <li>게임 쪽 Claude가 키로 주문</li>
+      <li>Godot · Unity</li>
+    </ul>
+  </div>
+  <div>
+    <div class="shot" aria-label="조립 검토 화면">
+      <div class="shot-head">
+        <b>마을 구역 · 조립 검토</b>
+        <span>
+          <span class="chip on">노을 판</span>
+          <span class="chip">낮 판 · 대기</span>
+          <span class="chip">GPU · 대기</span>
+        </span>
+      </div>
+      <div class="scene" id="scene" style="height:auto; aspect-ratio:16/9" aria-hidden="true">
+        <img class="full" src="img/scene_walk.gif" alt="">
+        <span class="lbl" style="top:8px">village/far_hills · 시차 0.2</span>
+        <span class="lbl" style="top:30px">village/old_tree · 시차 0.6</span>
+        <span class="lbl" style="top:52px">shared/ground_strip · 반복 띠 · 시차 1.0</span>
+        <span class="lbl" style="top:74px">packoon/raccoon · 파츠 조립 · 걷기</span>
+        <span class="redo" style="top:auto; bottom:12px">↻ 다시 · "앞 수풀이 너무 어둡다"</span>
+      </div>
+      <div class="shot-foot">
+        <span class="muted">레이어 4 · 확정 대기 1 · <span class="mono">village/far_hills v2</span></span>
+        <span><button class="ghost" type="button">낱장 보기</button> <button class="stamp-btn" type="button">세트 확정</button></span>
+      </div>
+    </div>
+    <p class="caption">조립 검토 화면. 게임 쪽 Claude가 주문한 레이어와 캐릭터를 겹쳐 놓고 보다가, 어색한 조각만 콕 집어 다시 만들고, 마음에 들면 세트를 한 번에 확정합니다.</p>
+  </div>
+</section>
+
+<section class="chapter" id="problem">
+  <div class="ch-head">
+    <div class="ch-num"><b>01</b>문제</div>
+    <div>
+      <h2>AI로 그림은 나오는데, 게임에 넣을 수는 없었습니다.</h2>
+      <p class="muted">이미지 생성 도구는 많습니다. 문제는 한 장이 아니라 수백 장을 같은 그림체로, 게임이 쓰는 형태로 뽑는 일입니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="probs">
+      <div><div class="k">하나</div><h3>장마다 그림체가 다릅니다.</h3><p>같은 설명을 넣어도 열 장이 열 가지 그림체로 나옵니다. 레퍼런스를 매번 붙여도 조금씩 흔들려서, 한 게임의 에셋으로 보이지 않습니다.</p></div>
+      <div><div class="k">둘</div><h3>조각으로 나온 그림은 따로 보고 판단할 수 없습니다.</h3><p>배경은 먼 산, 언덕, 숲, 땅 띠로 나뉘어 나오고 캐릭터는 머리·몸통·팔·다리로 나옵니다. 폴더에서 한 장씩 열어 봐서는 겹쳤을 때 어색한지 알 수 없습니다.</p></div>
+      <div><div class="k">셋</div><h3>AI가 만든 것과 내가 고른 것이 어긋납니다.</h3><p>게임 쪽 AI 도우미가 에셋을 뽑아 폴더에 넣으면, 내가 검토해 고른 것과 게임에 들어간 것이 같은 파일인지 아무도 보장하지 않습니다.</p></div>
+    </div>
+    <div class="ask">
+      <div class="q">?</div>
+      <div>
+        <h3>LoRA가 뭔가요?</h3>
+        <p class="muted" style="margin-top:6px">이미지 생성 모델을 화가라고 하면, LoRA는 그 화가를 내 그림체로 훈련시킨 결과를 담은 작은 파일입니다. 내 그림 20~30장을 주고 몇 시간 훈련시키면, 그 뒤로는 그림을 매번 보여 주지 않아도 이 파일만 끼우면 화가가 내 그림체로 그립니다. 훈련은 화가 한 명에게만 먹히므로, 주력 화가를 한 명 정해서 훈련시킵니다. Asset Studio는 이 훈련과 재훈련을 화면 안에서 처리합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="diff">
+  <div class="ch-head">
+    <div class="ch-num"><b>02</b>차별점</div>
+    <div>
+      <h2>도구를 이어 붙인 게 아니라, 그림체를 지키는 순서를 화면으로 만들었습니다.</h2>
+      <p class="muted">ComfyUI, 학습 도구, 폴더, 뷰어를 따로 오가며 할 수도 있습니다. Asset Studio는 그 순서와 규칙을 한 창에 넣고, 사람은 고르고 확정하는 일만 합니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <table class="cmp">
+      <thead><tr><th>이럴 때</th><th>따로 쓰는 도구</th><th>Asset Studio</th></tr></thead>
+      <tbody>
+        <tr><td>그림체를 잡을 때</td><td>레퍼런스를 매번 붙이거나, 학습 도구를 따로 배워 폴더에 이미지를 넣고 설정 파일을 씁니다.</td><td>마음에 드는 그림 1~2장에서 시작합니다. 그걸 레퍼런스로 다양한 대상을 뽑고, 좋은 것에 별점을 매기면 그게 다음 학습의 재료가 됩니다.</td></tr>
+        <tr><td>다시 학습할 때</td><td>AI가 만든 그림으로 다시 학습하면 AI 특유의 흠이 진해지고 그림체가 서서히 밀립니다. 막을 장치가 없습니다.</td><td>원본은 항상 가장 높은 가중치로 들어갑니다. 새 버전은 원본·이전 버전과 같은 조건으로 나란히 비교한 뒤에만 쓰입니다. 이전 버전은 지우지 않습니다.</td></tr>
+        <tr><td>검토할 때</td><td>폴더를 열어 한 장씩 봅니다. 레이어와 파츠는 게임에 넣어 봐야 압니다.</td><td>레이어를 겹쳐 시차를 움직여 보고, 파츠는 뼈대에 조립해 관절을 돌려 봅니다. 어색한 조각을 클릭해 한 줄 적으면 그것만 다시 만듭니다.</td></tr>
+        <tr><td>게임 쪽 AI가 주문할 때</td><td>AI가 파일 이름을 정해 폴더에 넣습니다. 내가 고른 것과 게임이 읽는 것이 같은지 알 수 없습니다.</td><td>AI는 파일 이름이 아니라 <code>village/far_mountain</code> 같은 키로 주문합니다. 내가 확정한 후보만 그 키에 묶이고, 게임 쪽은 매니페스트를 읽어 가져갑니다.</td></tr>
+        <tr><td>그래픽카드가 한 장일 때</td><td>학습 중에 생성을 걸면 메모리가 모자라 둘 다 죽습니다.</td><td>생성·학습·3D 변환은 한 줄로 서서 하나씩 돌아갑니다. 학습 중 들어온 요청은 기다렸다가 끝나면 실행됩니다.</td></tr>
+        <tr><td>비용</td><td>온라인 학습 서비스는 학습과 생성마다 크레딧이 나갑니다.</td><td>내 GPU로 돌아 생성과 학습이 무료입니다. 3D 외주(Tripo)만 사람이 누를 때 크레딧이 나갑니다.</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:24px">ComfyUI와 학습 도구는 그대로 씁니다. Asset Studio가 하는 일은 그 도구들을 대신 켜고 끄고, 결과를 기록하고, 사람이 볼 화면을 만드는 것입니다.</p>
+  </div>
+</section>
+
+<section class="chapter" id="try">
+  <div class="ch-head">
+    <div class="ch-num"><b>03</b>써 보기</div>
+    <div>
+      <h2>게임 쪽 Claude가 "마을 배경 주문해 줘"라고 받으면, 이렇게 흘러갑니다.</h2>
+      <p class="muted">게임 프로젝트의 Claude CLI가 주문을 넣고, Asset Studio가 후보를 만들고, 사람이 확정하고, 게임 쪽이 가져가기까지 다섯 장면입니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="demo">
+      <ul class="snav" id="snav">
+        <li><button type="button" aria-current="step" data-p="0"><span class="n">01</span><span><b>주문</b><small>게임 쪽 Claude가 키로 주문합니다</small></span></button></li>
+        <li><button type="button" data-p="1"><span class="n">02</span><span><b>생성</b><small>키마다 후보가 만들어집니다</small></span></button></li>
+        <li><button type="button" data-p="2"><span class="n">03</span><span><b>조립 검토</b><small>겹쳐 보고 어색한 것만 다시</small></span></button></li>
+        <li><button type="button" data-p="3"><span class="n">04</span><span><b>확정</b><small>사람이 키에 후보를 묶습니다</small></span></button></li>
+        <li><button type="button" data-p="4"><span class="n">05</span><span><b>가져가기</b><small>게임 쪽이 매니페스트를 읽습니다</small></span></button></li>
+      </ul>
+      <div id="panels">
+        <div class="panel on">
+          <div class="term"><span class="d">Claude Code · PACKOON 저장소</span><br><span class="u">❯</span> 마을 구역 배경 주문해 줘. 먼 산, 땅 띠, 가을 수풀.<br><span class="c">Asset Studio에 주문을 넣겠습니다. 키는 village/far_hills, shared/ground_strip, shared/autumn_bush 입니다.</span><br><span class="c">먼 산은 화면 2장 폭에 낮·노을 두 판, 땅 띠는 가로 반복, 수풀은 낱개에 노말맵 짝입니다.</span><br><span class="ok">주문 #12 생성됨 · 3건 · 상태: 생성 대기</span></div>
+          <p class="explain">게임 쪽 Claude는 파일 이름을 정하지 않습니다. 키와 필요한 모양(폭, 반복 여부, 조명 판)만 보냅니다. 그림체는 Asset Studio의 스타일 프리셋이 정합니다.</p>
+        </div>
+        <div class="panel">
+          <div class="board">
+            <div class="shot-head"><b>주문 #12 · PACKOON</b><span class="chip on">GPU · 생성 중 2/6</span></div>
+            <div class="keys">
+              <div class="key"><code>shared/autumn_bush</code><span class="muted">후보 4 · 노말맵 짝</span><span class="st ok">검토 대기</span></div>
+              <div class="key"><code>village/far_hills</code><span class="muted">후보 2/4 · 낮·노을</span><span class="st w">생성 중</span></div>
+              <div class="key"><code>shared/ground_strip</code><span class="muted">반복 띠</span><span class="st g">대기</span></div>
+            </div>
+          </div>
+          <p class="explain">모든 요청은 한 줄로 서서 하나씩 돌아갑니다. 학습이 돌고 있었다면 주문은 기다렸다가 학습이 끝난 뒤 실행됩니다. 결과마다 프롬프트, 시드, 모델, LoRA 버전이 함께 저장돼 나중에 똑같이 다시 만들 수 있습니다.</p>
+        </div>
+        <div class="panel">
+          <div class="board">
+            <div class="shot-head"><b>shared/autumn_bush · 후보 4</b><span class="muted">같은 프리셋 · 시드만 다름</span></div>
+            <div class="cands">
+              <div class="cand checker"><img src="img/bush_yellow.webp" alt=""><span class="tag">#0611</span></div>
+              <div class="cand pick checker"><img src="img/bush_maple.webp" alt=""><span class="tag">#0612</span><span class="stamp">Claude 추천</span></div>
+              <div class="cand checker"><img src="img/bush_berry.webp" alt=""><span class="tag">#0613</span></div>
+              <div class="cand checker"><img src="img/bush_green.webp" alt=""><span class="tag">#0614</span></div>
+            </div>
+            <div class="muted">Claude 추천 #0612 · "원본의 채도와 붓 질감에 가장 가까움. 잎 덩어리가 또렷해 땅 띠 앞에 낱개로 두기 좋음."</div>
+          </div>
+          <p class="explain">조립 화면에서는 세 키의 후보를 겹쳐 놓고 카메라를 끌어 시차를 봅니다. 땅 띠의 이음매가 어색하면 그 조각을 클릭하고 "이음매가 보인다"라고 적습니다. 그 한 조각만 다시 만들어져 같은 자리에 들어옵니다.</p>
+        </div>
+        <div class="panel">
+          <div class="board">
+            <div class="shot-head"><b>확정</b><span class="muted">키 하나에 후보 하나</span></div>
+            <div class="keys">
+              <div class="key"><code>shared/autumn_bush</code><span class="muted">#0612 · v1</span><span class="st ok">확정</span></div>
+              <div class="key"><code>village/far_hills</code><span class="muted">#0620 · v1</span><span class="st ok">확정</span></div>
+              <div class="key"><code>shared/ground_strip</code><span class="muted">#0633 (다시 만든 것) · v1</span><span class="st ok">확정</span></div>
+            </div>
+            <div><button class="stamp-btn" type="button">세트 확정 · 3건</button></div>
+          </div>
+          <p class="explain">확정은 사람만 누릅니다. Claude는 추천까지만 합니다. 확정하면 그 키의 버전이 1이 되고, 나중에 다른 후보로 바꿔 확정하면 버전이 올라갑니다. 확정·승인된 것은 자동으로 지워지지 않습니다.</p>
+        </div>
+        <div class="panel">
+<pre class="json">GET /projects/packoon/manifest
+{
+  "village/far_hills": {
+    "version": 1, "asset": 620,
+    "files": {
+      "day":    {"path": "far_hills_day.png",    "sha256": "9f3a…"},
+      "sunset": {"path": "far_hills_sunset.png", "sha256": "c01b…"}
+    },
+    "params": {"width": 2688, "height": 1080, "top_transparent": true}
+  },
+  "shared/autumn_bush": {
+    "version": 1, "asset": 612,
+    "files": {
+      "diffuse": {"path": "autumn_bush.png",   "sha256": "41e7…"},
+      "normal":  {"path": "autumn_bush_n.png", "sha256": "7d2c…"}
+    },
+    "params": {"isolated": true, "unlit": true}
+  }
+}</pre>
+          <div class="term"><span class="d">Claude Code · PACKOON 저장소</span><br><span class="c">매니페스트를 읽었습니다. village/far_hills v1, shared/ground_strip v1, shared/autumn_bush v1.</span><br><span class="c">파일 5개를 받아 해시를 확인했습니다. art/village/, art/shared/ 에 넣고 키 버전을 기록했습니다.</span><br><span class="ok">다음에 매니페스트의 버전이 올라가면 그 키만 다시 받습니다.</span></div>
+          <p class="explain">게임 쪽은 매니페스트만 봅니다. 내가 확정한 것과 게임이 쓰는 것이 같은 파일이라는 걸 키·버전·해시가 보장합니다.</p>
+        </div>
+      </div>
+    </div>
+    <p class="caption">키 이름과 숫자는 설명을 위해 줄인 것입니다.</p>
+  </div>
+</section>
+
+<section class="chapter" id="style">
+  <div class="ch-head">
+    <div class="ch-num"><b>04</b>그림체 고정</div>
+    <div>
+      <h2>마음에 드는 그림 한두 장에서 시작해, 고른 것이 다음 학습이 됩니다.</h2>
+      <p class="muted">처음부터 레퍼런스 30장을 모을 필요가 없습니다. 적게 시작해서 뽑고 고르는 동안 그림체가 단단해집니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="loop">
+      <div><b>1</b><span>원본 1~2장</span><p>직접 고른 그림. 이 그림체로 가겠다는 기준입니다.</p></div>
+      <div><b>2</b><span>레퍼런스만으로 생성</span><p>원본을 보여 주며 소품·배경·캐릭터를 다양하게 뽑습니다.</p></div>
+      <div><b>3</b><span>별점</span><p>★★ · ★ · 제외. Claude가 추천하고 사람이 정합니다.</p></div>
+      <div><b>4</b><span>LoRA 학습</span><p>원본과 고른 그림으로 학습. 250단계마다 샘플이 쌓입니다.</p></div>
+      <div><b>5</b><span>원본과 비교</span><p>이전 버전·새 버전을 같은 조건으로 나란히. 더 가까운 쪽을 씁니다.</p></div>
+    </div>
+    <div class="strip" aria-label="같은 프리셋으로 뽑은 것들">
+      <figure><div class="checker"><img src="img/house.webp" alt="초가집 소품"></div><figcaption>prop/house</figcaption></figure>
+      <figure><div class="checker"><img src="img/bush_maple.webp" alt="단풍 수풀 소품"></div><figcaption>shared/autumn_bush</figcaption></figure>
+      <figure><div class="checker"><img src="img/grass1.webp" alt="억새 소품"></div><figcaption>shared/reed_grass</figcaption></figure>
+      <figure><div class="checker"><img src="img/tree.webp" alt="단풍나무 레이어"></div><figcaption>village/old_tree</figcaption></figure>
+      <figure><div class="checker"><img src="img/raccoon.webp" alt="너구리 캐릭터"></div><figcaption>packoon/raccoon</figcaption></figure>
+    </div>
+    <p class="caption">같은 프리셋으로 뽑은 소품·배경·캐릭터. 대상이 달라도 붓 질감과 채도가 같아야 한 게임의 에셋으로 보입니다. 이 그림들이 별점을 받으면 다음 학습의 재료가 됩니다.</p>
+    <div class="weights" aria-label="학습 가중치">
+      <div class="o"><b>×4</b><span>원본</span></div>
+      <div><b>×2</b><span>★★ 원본급</span></div>
+      <div><b>×1</b><span>★ 쓸 만함</span></div>
+      <div><b>×0</b><span>제외</span></div>
+    </div>
+    <div class="extra">
+      <div><h3>원본은 묻히지 않습니다.</h3><p>AI가 만든 그림으로 다시 학습하면 흠이 진해지고 그림체가 밀립니다. 그래서 원본은 늘 가장 높은 가중치로 들어가고, 원본 비중이 20% 아래로 내려가면 학습 전에 경고합니다.</p></div>
+      <div><h3>이전 버전은 남습니다.</h3><p>새 버전이 원본에서 멀어졌으면 이전 버전으로 돌아갑니다. 어떤 버전으로 무엇을 만들었는지 모든 결과물에 기록됩니다.</p></div>
+      <div><h3>주력 모델은 오디션으로 정합니다.</h3><p>그림체 훈련은 화가 한 명에게만 먹힙니다. 처음 설치할 때 후보 모델 둘에게 같은 원본으로 그리게 해 더 가까운 쪽을 주력으로 정하고, 프리셋은 그 모델에 묶입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="assemble">
+  <div class="ch-head">
+    <div class="ch-num"><b>05</b>조립 검토</div>
+    <div>
+      <h2>조각은 겹쳐 봐야 압니다. 어색한 조각만 콕 집어 다시 만듭니다.</h2>
+      <p class="muted">배경은 레이어로, 캐릭터는 파츠로 나옵니다. 낱장이 아니라 조립한 상태로 보고, 클릭 한 번으로 그 조각만 다시 주문합니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="two">
+      <figure>
+        <div class="scene" style="height:auto; aspect-ratio:16/9" aria-hidden="true">
+          <img class="full" src="img/scene.webp" alt="">
+          <span class="lbl" style="top:8px">카메라 ← 드래그 →</span>
+          <span class="lbl" style="top:8px; left:auto; right:8px">노을 판 · 조명 미리보기</span>
+          <span class="lbl" style="top:auto; bottom:8px">레이어 4 · far_hills / old_tree / ground_strip / front_grass</span>
+        </div>
+        <figcaption><b>배경</b> · 레이어를 순서대로 쌓고 시차 값을 두어 카메라를 끌어 봅니다. 낮·노을 판을 바꾸고, 반복 띠는 이어 붙여 보고, 빛 없는 띠에는 미리보기 조명을 비춥니다. 배치는 구역마다 저장되어 다음 주문도 같은 자리에 열립니다.</figcaption>
+      </figure>
+      <figure>
+        <div class="steps3">
+          <figure><img src="img/char_green.webp" alt="A포즈 원본, 크로마키 배경"><figcaption>1 · 원본 (크로마키)</figcaption></figure>
+          <figure><img src="img/parts_sheet.webp" alt="파츠 시트: 모자, 머리, 귀, 보따리, 몸통, 꼬리, 팔, 다리"><figcaption>2 · 파츠 시트</figcaption></figure>
+          <figure><img src="img/face_sheet.webp" alt="표정 시트: 눈과 입 변형"><figcaption>3 · 표정 시트</figcaption></figure>
+        </div>
+        <figcaption><b>캐릭터</b> · A포즈 한 장에서 파츠 시트를 만들어 머리·몸통·팔·다리로 나눕니다. 마스킹 없이 각 파츠를 온전한 모양으로 다시 그리므로 관절에 가려졌던 부분까지 나옵니다. 뼈대에 조립해 관절을 돌려 보고, 이름은 <code>upper_arm_L</code>처럼 프리셋에 정해진 것만 써서 Godot 애니메이션이 캐릭터끼리 호환됩니다. 눈·입은 표정 시트로 따로 뽑아 바꿔 끼웁니다.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="order">
+  <div class="ch-head">
+    <div class="ch-num"><b>06</b>주문과 확정</div>
+    <div>
+      <h2>에이전트는 키로 주문하고, 사람이 확정하고, 게임은 매니페스트만 읽습니다.</h2>
+      <p class="muted">두 Claude(게임 쪽, Asset Studio 쪽)와 사람이 같은 에셋을 가리키게 하는 규칙입니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="extra" style="margin-top:0">
+      <div><h3>키는 게임 쪽이 정하고, 바뀌지 않습니다.</h3><p><code>village/far_mountain</code>처럼 영문 소문자와 밑줄로 된 키입니다. Asset Studio는 키를 새로 짓거나 바꾸지 않습니다. 파일 이름은 키에 딸린 정보일 뿐입니다.</p></div>
+      <div><h3>확정은 사람만 누릅니다.</h3><p>키마다 후보가 여러 장 생기고, 그중 하나에 확정을 누르는 건 사람입니다. Claude는 추천과 이유를 붙일 뿐이고, 승인·거절·삭제는 할 수 없습니다. 권한은 말이 아니라 토큰으로 막혀 있습니다.</p></div>
+      <div><h3>매니페스트가 하나의 기준입니다.</h3><p>확정하면 키 → 에셋, 버전, 파일 해시가 매니페스트에 오릅니다. 게임 쪽은 그것만 읽고 가져가고, 해시로 받은 파일이 맞는지 확인합니다. 다시 확정하면 버전이 올라가 게임 쪽이 새로 받습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="caps">
+  <div class="ch-head">
+    <div class="ch-num"><b>07</b>만들 수 있는 것</div>
+    <div>
+      <h2>게임이 무엇을 쓸지는 게임이 정하고, 어떤 모양이든 만들어낼 수 있게 했습니다.</h2>
+      <p class="muted">구역이 화면 몇 장인지, 레이어가 몇 겹인지는 주문에 담깁니다. Asset Studio는 그 값을 받아 만드는 능력만 갖춥니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <ul class="caps">
+      <li><b>화면 여러 장 폭의 파노라마</b><span>먼 산·언덕처럼 시차가 작은 겹. 위는 투명, 아래는 끝까지 채우고 위아래 여유를 둡니다.</span></li>
+      <li><b>조명 변형</b><span>같은 그림의 낮 판·노을 판. 구도는 그대로 두고 빛만 바꿔 원본에 연결합니다.</span></li>
+      <li><b>이음매 없는 가로 반복 띠</b><span>숲 띠, 땅 띠, 앞 수풀. 왼쪽 끝과 오른쪽 끝이 이어지도록 이음매를 고치고 검사합니다.</span></li>
+      <li><b>빛 없는 디퓨즈 + 노말맵</b><span>게임의 2D 조명을 받을 겹. 평평한 조명으로 뽑고 노말맵을 짝으로 만듭니다.</span></li>
+      <li><b>윗면 가장자리 고정</b><span>오르막·내리막을 따라 휘어 깔리는 땅 띠. 윗면이 고르게 이어지도록 검사합니다.</span></li>
+      <li><b>낱개 소품과 UI 아이콘</b><span>투명 배경. 나무, 바위, 집, 발판, 물약병 같은 것.</span></li>
+      <li><b>캐릭터 파츠 시트</b><span>스켈레톤 애니메이션용 파츠 PNG와 뼈대 정보(<code>parts.json</code>).</span></li>
+      <li><b>3D 메시</b><span>승인한 2D 소품을 3D로 바꾸고 목표 폴리곤 수로 줄여 GLB·FBX로 냅니다. 리깅이 필요하거나 디테일이 중요한 것만 Tripo로 보냅니다.</span></li>
+    </ul>
+    <div class="show">
+      <figure class="pair" id="pair">
+        <div class="pair-stage checker" id="pairStage">
+          <img id="pairA" src="img/bush_maple.webp" alt="디퓨즈">
+          <img id="pairB" src="img/bush_maple_n.webp" alt="노말맵" style="clip-path: inset(0 0 0 50%)">
+          <div class="handle" id="pairHandle" style="left:50%"></div>
+          <span class="lbl" style="top:8px">디퓨즈</span><span class="lbl r" style="top:8px">노말맵</span>
+        </div>
+        <input type="range" id="pairRange" min="0" max="100" value="50" aria-label="디퓨즈와 노말맵 비교 위치">
+        <div class="ptabs" id="ptabs">
+          <button type="button" aria-pressed="true" data-a="img/bush_maple.webp" data-b="img/bush_maple_n.webp">단풍 수풀</button>
+          <button type="button" data-a="img/grass2.webp" data-b="img/grass2_n.webp">억새</button>
+          <button type="button" data-a="img/tree.webp" data-b="img/tree_n.webp">나무</button>
+          <button type="button" data-a="img/raccoon.webp" data-b="img/raccoon_n.webp">너구리</button>
+        </div>
+        <figcaption><b>디퓨즈 + 노말맵 짝</b> · 슬라이더를 끌어 보세요. 같은 그림에서 노말맵을 뽑아 짝으로 둡니다. 게임의 2D 조명이 이 짝을 받아 노을·횃불에 따라 잎과 털의 굴곡이 살아납니다.</figcaption>
+      </figure>
+      <figure>
+        <div class="props">
+          <div class="checker"><img src="img/house.webp" alt="초가집"><span class="tag">prop/house</span></div>
+          <div class="checker"><img src="img/bush_yellow.webp" alt="노란 수풀"><span class="tag">bush_02</span></div>
+          <div class="checker"><img src="img/bush_berry.webp" alt="열매 수풀"><span class="tag">bush_03</span></div>
+          <div class="checker"><img src="img/grass1.webp" alt="억새 1"><span class="tag">reed_01</span></div>
+          <div class="checker"><img src="img/bush_green.webp" alt="초록 수풀"><span class="tag">bush_04</span></div>
+          <div class="checker"><img src="img/grass2.webp" alt="억새 2"><span class="tag">reed_02</span></div>
+        </div>
+        <figcaption><b>낱개 소품</b> · 투명 배경으로 나와 그대로 배치합니다. 같은 키에 변형을 여러 장 두면 게임 쪽이 골라 흩뿌릴 수 있습니다.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="roles">
+  <div class="ch-head">
+    <div class="ch-num"><b>08</b>역할 나누기</div>
+    <div>
+      <h2>Claude는 손이 많은 일을, 사람은 눈이 필요한 일을 합니다.</h2>
+      <p class="muted">Claude는 두 군데서 일합니다. 화면 안에서는 프롬프트·캡션·추천을 쓰고, 밖에서는 Claude CLI가 같은 기능을 MCP로 씁니다. 모든 행동은 누가 했는지 기록됩니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="roles">
+      <div><h3>Claude가 합니다</h3><ul class="can">
+        <li>한국어 요청을 영어 프롬프트로. 그림체 단어는 빼고 내용만</li>
+        <li>레퍼런스를 읽어 팔레트·선·채색·조명을 글로 정리</li>
+        <li>학습용 캡션, 톤이 튀는 이미지 찾기</li>
+        <li>후보마다 별점 추천과 한 줄 이유</li>
+        <li>새 LoRA 버전이 원본에 더 가까운지 판단</li>
+        <li>파츠 이름이 맞는지, 색이 어긋난 파츠가 있는지 확인</li>
+        <li>MCP로 생성·변형·파츠 시트 주문, 결과 조회</li>
+      </ul></div>
+      <div><h3>사람만 합니다</h3><ul class="cant">
+        <li>원본 레퍼런스 고르기</li>
+        <li>승인·거절·확정</li>
+        <li>학습 데이터의 별점 확정과 학습 시작 허가</li>
+        <li>새 LoRA 버전을 프리셋에 연결할지</li>
+        <li>삭제, 프리셋 변경</li>
+        <li>크레딧이 나가는 Tripo 실행</li>
+      </ul></div>
+    </div>
+    <p class="muted" style="margin-top:28px">이 경계는 Claude가 쓰는 토큰의 권한으로 막혀 있습니다. 규칙을 읽고 지키는 게 아니라, 넘으려 해도 서버가 거절합니다.</p>
+  </div>
+</section>
+
+<section class="chapter" id="start">
+  <div class="ch-head">
+    <div class="ch-num"><b>09</b>시작하기</div>
+    <div>
+      <h2>내 PC 한 대에 설치하고, 원본 두 장으로 시작합니다.</h2>
+      <p class="muted">설치는 Claude Code가 하고, 사람은 그림체의 기준이 될 원본을 고릅니다. 그다음부터는 주문하고 확정하는 일만 남습니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <ol class="steps">
+      <li><span class="who-do">Claude Code · 한 번</span><h3>설치합니다.</h3><p>경로에 한글과 공백이 없는 폴더에 저장소를 받고 설치 명령 하나를 내립니다. ComfyUI, 학습 도구, 모델, Blender를 받아 첫 실행 검증까지 통과시킵니다. 관리자 권한이 필요하면 멈추고 묻습니다.</p><div class="code" style="white-space:normal">D:\AI\studio 에 Asset Studio 설치해줘</div></li>
+      <li><span class="who-do">사람</span><h3>원본 2장을 고르고 주력 모델을 정합니다.</h3><p>후보 모델 둘에게 같은 원본으로 그리게 해 그림체가 더 가까운 쪽을 주력으로 정합니다. 그 원본이 첫 스타일 프리셋의 기준이 됩니다.</p></li>
+      <li><span class="who-do">게임 쪽 Claude</span><h3>MCP를 연결하고 주문합니다.</h3><p>게임 저장소의 설정에 Asset Studio MCP 서버와 토큰을 넣으면, 그 Claude는 키로 주문하고 매니페스트를 읽어 갑니다. 확정은 여전히 화면에서 사람이 누릅니다.</p><div class="code" style="white-space:normal">claude mcp add asset-studio -- python -m studio.mcp</div></li>
+    </ol>
+    <div class="ms" aria-label="화면 구성" style="--w:72px">
+      <div><code>검토함</code><span>주문·확정 대기 목록 · 조립 검토(배경 레이어, 캐릭터 파츠) · 세트 확정</span></div>
+      <div><code>생성</code><span>스타일 프리셋으로 생성 · 레퍼런스 분석 · 조명 변형 · 반복 띠 · 노말맵 짝</span></div>
+      <div><code>갤러리</code><span>별점 · Claude 추천 · 프롬프트·시드·LoRA 버전 기록 · 승인·거절</span></div>
+      <div><code>파츠</code><span>A포즈 한 장 → 파츠 시트 → 뼈대 조립 · <code>parts.json</code></span></div>
+      <div><code>학습</code><span>데이터셋 가중치 · LoRA 학습 · 원본과 비교 · 버전 연결</span></div>
+      <div><code>스케치 · 3D</code><span>대충 그린 선에서 에셋 · 승인한 소품을 GLB·FBX로 · 폴리곤 수 줄이기</span></div>
+    </div>
+    <div class="spec">
+      <div><b>1장</b><span>그래픽카드 · RTX 16GB 기준</span></div>
+      <div><b>150GB+</b><span>SSD 여유 · 모델 파일이 큼</span></div>
+      <div><b>0원</b><span>생성·학습 비용 · 내 GPU</span></div>
+      <div><b>127.0.0.1</b><span>내 PC에서만 열리는 화면</span></div>
+    </div>
+    <div class="fit">
+      <div><h3>이런 사람에게 맞습니다</h3><ul class="yes">
+        <li>그림체 하나로 게임 에셋을 수백 장 뽑아야 하는 1인·소규모 개발자</li>
+        <li>Claude Code로 게임을 만들면서 에셋도 에이전트에게 주문하고 싶은 사람</li>
+        <li>배경을 레이어로, 캐릭터를 파츠로 쓰는 2D 게임</li>
+        <li>에셋 비용을 월정액이 아니라 내 GPU로 해결하고 싶은 사람</li>
+      </ul></div>
+      <div><h3>미리 알아 두실 점</h3><ul class="no">
+        <li>NVIDIA 그래픽카드가 있는 Windows PC가 필요합니다.</li>
+        <li>Claude 기능은 Claude Code와 유료 요금제가 있어야 합니다.</li>
+        <li>레퍼런스는 유료 플랜으로 만든 것과 직접 그린 것만 씁니다. 다른 게임의 그림은 쓰지 않습니다.</li>
+        <li>파츠 시트는 자동 배치가 어긋난 파츠를 사람이 손봐야 할 때가 있습니다. 화면에 "손보기 필요"로 표시됩니다.</li>
+        <li>판매하지 않는 내부 도구입니다. 팀이 같이 쓰는 건 다음 버전입니다.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="close-grid">
+    <div>
+      <h2>그림체는 한 번만 정하고, 그다음부터는 주문하고 확정합니다.</h2>
+      <p class="lede" style="margin-top:0">만드는 손은 GPU와 Claude가 되고, 사람에게 남는 일은 처음에 원본을 고르는 것과 마지막에 확정을 누르는 것입니다.</p>
+      <p class="muted" style="margin-top:14px">첫 프로젝트는 PACKOON입니다. 그림체를 지켜야 하는 어떤 게임에도 프로젝트를 하나 더 만들어 그대로 씁니다.</p>
+    </div>
+    <figure class="keyart">
+      <video src="img/packoon_title.mp4" poster="img/packoon_title.webp" autoplay muted loop playsinline aria-label="PACKOON 타이틀 화면"></video>
+      <figcaption>PACKOON · 타이틀 화면. 첫 스타일 프리셋은 이 게임의 원본에서 학습했습니다.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>Asset Studio · 2026년 11월 · v1</span>
+  <span>화면의 키 이름과 숫자는 설명을 위해 줄인 것입니다.</span>
+</footer>
+
+</div>
+<script>
+(function(){
+  var stage=document.getElementById('pairStage'), A=document.getElementById('pairA'), B=document.getElementById('pairB'), H=document.getElementById('pairHandle'), R=document.getElementById('pairRange'), tabs=document.getElementById('ptabs');
+  function setPos(v){ v=Math.max(0,Math.min(100,v)); B.style.clipPath='inset(0 0 0 '+v+'%)'; H.style.left=v+'%'; R.value=v; }
+  R.addEventListener('input',function(){ setPos(+R.value); });
+  var dragging=false;
+  function fromEvent(e){ var r=stage.getBoundingClientRect(); var x=(e.touches?e.touches[0].clientX:e.clientX)-r.left; setPos(x/r.width*100); }
+  stage.addEventListener('pointerdown',function(e){ dragging=true; stage.setPointerCapture(e.pointerId); fromEvent(e); });
+  stage.addEventListener('pointermove',function(e){ if(dragging) fromEvent(e); });
+  stage.addEventListener('pointerup',function(){ dragging=false; });
+  stage.addEventListener('pointercancel',function(){ dragging=false; });
+  tabs.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; tabs.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');}); b.setAttribute('aria-pressed','true'); A.src=b.dataset.a; B.src=b.dataset.b; });
+  var nav=document.getElementById('snav'), panels=document.querySelectorAll('#panels .panel');
+  nav.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    nav.querySelectorAll('button').forEach(function(x){x.removeAttribute('aria-current');});
+    b.setAttribute('aria-current','step');
+    var i=+b.dataset.p; panels.forEach(function(p,j){p.classList.toggle('on',i===j);});
+  });
+})();
+</script>
+</body>
+</html>
