@@ -22,6 +22,7 @@
   --bad: #b2412f;
   --tape: #f4f5f4;
   --claude: #4b5fc4;
+  --check: rgba(0,0,0,.055);
   --font-display: "Black Han Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
@@ -34,11 +35,16 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #121416; --surface: #1a1d20; --ink: #e8eaec; --muted: #9ba3aa; --line: #2d3236;
     --stamp: #3fcbb0; --stamp-ink: #071a15; --warn: #e0ac3a; --bad: #ec7b66; --tape: #22262a; --claude: #8d9cf0;
-    color-scheme: dark;
+    --check: rgba(255,255,255,.05); color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+    --bg: #121416; --surface: #1a1d20; --ink: #e8eaec; --muted: #9ba3aa; --line: #2d3236;
+    --stamp: #3fcbb0; --stamp-ink: #071a15; --warn: #e0ac3a; --bad: #ec7b66; --tape: #22262a; --claude: #8d9cf0;
+    --check: rgba(255,255,255,.05); color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--step-0); line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; }
@@ -88,8 +94,7 @@ a { color: inherit; }
 .ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; font-size: 0.75rem; font-family: inherit; cursor: pointer; }
 .caption { font-size: var(--step--1); color: var(--muted); margin-top: 10px; }
 .scene img.full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.checker { background-color: var(--tape); background-image: linear-gradient(45deg, rgba(0,0,0,.055) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.055) 75%), linear-gradient(45deg, rgba(0,0,0,.055) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.055) 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
-@media (prefers-color-scheme: dark) { .checker { background-image: linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%), linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%); } }
+.checker { background-color: var(--tape); background-image: linear-gradient(45deg, var(--check) 25%, transparent 25%, transparent 75%, var(--check) 75%), linear-gradient(45deg, var(--check) 25%, transparent 25%, transparent 75%, var(--check) 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; }
 .strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 28px; }
 @media (max-width: 760px) { .strip { grid-template-columns: repeat(3, 1fr); } }
 .strip figure { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: 1fr auto; }
@@ -251,6 +256,71 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
 .keyart video { width: 100%; aspect-ratio: 16/9; display: block; border-radius: 12px; border: 1px solid var(--line); background: #000; }
 .keyart figcaption { font-size: var(--step--1); color: var(--muted); }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 24px 0 40px; font-size: var(--step--1); color: var(--muted); border-top: 1px solid var(--line); }
+
+/* 보충: 움직이는 그림 자료 */
+img { max-width: 100%; }
+.fig { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: start; }
+.fig figcaption { font-size: var(--step--1); color: var(--muted); }
+.fig + .show, .show + .fig { margin-top: 24px; }
+.ptabs.mono button { font-family: var(--font-mono); }
+/* GPU 한 줄 */
+.lane { margin-top: 28px; }
+.lane-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: stretch; font-size: 0.8125rem; }
+@media (max-width: 700px) { .lane-row { grid-template-columns: 1fr; } }
+.lane-q { display: flex; gap: 8px; align-items: center; justify-content: flex-end; overflow: hidden; background: var(--bg); border-radius: 8px; padding: 10px; min-height: 52px; }
+.job { white-space: nowrap; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 4px 10px; font-family: var(--font-mono); font-size: 0.75rem; }
+.job.t { border-color: var(--warn); color: var(--warn); }
+.lane-q.nudge .job { animation: nudge .5s ease; }
+@keyframes nudge { from { transform: translateX(-28px); opacity: .5; } to { transform: none; opacity: 1; } }
+.lane-gpu { min-width: 220px; border: 2px solid var(--stamp); border-radius: 8px; padding: 8px 12px; display: grid; gap: 4px; align-content: center; }
+.lane-gpu b { font-size: 0.6875rem; color: var(--stamp); letter-spacing: .04em; }
+.lane-gpu span { font-family: var(--font-mono); font-size: 0.75rem; }
+.lane-bar { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.lane-bar i { display: block; height: 100%; width: 62%; background: var(--stamp); }
+.lane-bar i.run { animation: fill 2.4s linear; width: 100%; }
+@keyframes fill { from { width: 0; } to { width: 100%; } }
+.lane-done { border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; display: grid; align-content: center; text-align: center; color: var(--muted); }
+.lane-done b { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+/* 학습 단계 샘플 */
+.stepsfig .frames { position: relative; aspect-ratio: 1080/202; border-radius: 8px; overflow: hidden; background: var(--bg); }
+.stepsfig .frames img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+.stepsfig .frames img.on { opacity: 1; }
+.show figure.wide { grid-column: 1 / -1; }
+/* 오디션 */
+.aud { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.aud div { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1; }
+.aud img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.aud .tag, .maps .tag { position: absolute; left: 6px; bottom: 6px; font-family: var(--font-mono); font-size: 0.625rem; background: rgba(20,24,28,.72); color: #fff; padding: 1px 6px; border-radius: 3px; }
+/* 조립 검토: 하는 일 */
+.review-list { display: grid; gap: 18px; align-content: start; }
+.review-list p { color: var(--muted); font-size: 0.9375rem; margin-top: 4px; }
+/* 겹 벗기기 */
+.peel-stage { position: relative; aspect-ratio: 2/1; border-radius: 8px; overflow: hidden; }
+.peel-stage img { position: absolute; top: 0; left: 21.2%; width: 38.4%; height: 100%; object-fit: contain; transition: transform .8s cubic-bezier(.3,.7,.2,1); pointer-events: none; }
+.peel-stage img.off[data-to="r"] { transform: translateX(105%); }
+.peel-stage img.off[data-to="l"] { transform: translateX(-55%); }
+.peel-stage .lbl { top: 8px; }
+/* 뼈대 미리보기 */
+.rig-stage { position: relative; border-radius: 8px; overflow: hidden; display: grid; place-items: center; padding: 8px 0; }
+.rig-stage canvas { height: 340px; max-width: 100%; width: auto; display: block; }
+.rig-ctl { display: flex; gap: 10px 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.rig-ctl label { font-size: 0.75rem; display: flex; gap: 6px; align-items: center; cursor: pointer; }
+.rig-ctl input { accent-color: var(--stamp); }
+.pieces { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.pieces div { border: 1px solid var(--line); border-radius: 6px; aspect-ratio: 3/4; position: relative; overflow: hidden; }
+.pieces img { position: absolute; inset: 4px 4px 16px; width: calc(100% - 8px); height: calc(100% - 20px); object-fit: contain; }
+.pieces span { position: absolute; left: 0; right: 0; bottom: 2px; text-align: center; font-family: var(--font-mono); font-size: 0.5625rem; color: var(--muted); }
+.shotimg { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); }
+/* 빛 움직이기 */
+.light-stage { position: relative; border-radius: 8px; overflow: hidden; background: radial-gradient(120% 90% at 50% 100%, #3a3350 0%, #1c1d2b 60%, #14151f 100%); display: grid; place-items: center; aspect-ratio: 4/3; touch-action: pan-y; cursor: crosshair; }
+.light-stage canvas, .light-stage img { height: 100%; width: auto; max-width: 100%; display: block; object-fit: contain; }
+.light-dot { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: #ffd9a0; box-shadow: 0 0 18px 8px rgba(255,200,130,.55); pointer-events: none; left: 70%; top: 25%; }
+.light-stage .lbl { top: 8px; }
+/* 맵 세트 */
+.maps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.maps div { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1; }
+.maps img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (prefers-reduced-motion: reduce) { .peel-stage img, .stepsfig .frames img { transition: none; } .lane-q.nudge .job, .lane-bar i.run { animation: none; } }
 </style>
 </head>
 <body>
@@ -266,11 +336,12 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
     <div class="eyebrow">그림체 하나 · GPU 한 장 · 확정은 사람</div>
     <h1>그림체를 한 번 고정하면, 에셋은 주문한 대로 나옵니다. <span class="hl">확정</span>만 사람이 합니다.</h1>
     <p class="lede">Asset Studio는 게임을 혼자 만드는 사람이 쓰는 로컬 도구입니다. 내 PC의 그래픽카드로 이미지를 만들고, 내 그림체를 학습시켜 고정하고, 게임 프로젝트의 AI 도우미가 주문한 에셋을 조립해 보고 확정합니다.</p>
-    <p class="muted">배경 레이어, 캐릭터 파츠, 소품, 3D 메시까지 같은 그림체로 나오고, 확정한 것만 게임 쪽으로 넘어갑니다.</p>
+    <p class="muted">배경 레이어, 소품, 3D 메시, 뼈대가 붙은 캐릭터 조각까지 같은 그림체로 나오고, 확정한 것만 게임 쪽으로 넘어갑니다.</p>
     <ul class="facts">
       <li>외부 서비스 없이 내 GPU로</li>
       <li>그림체는 학습한 LoRA로 고정</li>
       <li>게임 쪽 Claude가 키로 주문</li>
+      <li>조각에서 애니메이션까지</li>
       <li>Godot · Unity</li>
     </ul>
   </div>
@@ -342,10 +413,18 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
         <tr><td>검토할 때</td><td>폴더를 열어 한 장씩 봅니다. 레이어와 파츠는 게임에 넣어 봐야 압니다.</td><td>레이어를 겹쳐 시차를 움직여 보고, 파츠는 뼈대에 조립해 관절을 돌려 봅니다. 어색한 조각을 클릭해 한 줄 적으면 그것만 다시 만듭니다.</td></tr>
         <tr><td>게임 쪽 AI가 주문할 때</td><td>AI가 파일 이름을 정해 폴더에 넣습니다. 내가 고른 것과 게임이 읽는 것이 같은지 알 수 없습니다.</td><td>AI는 파일 이름이 아니라 <code>village/far_mountain</code> 같은 키로 주문합니다. 내가 확정한 후보만 그 키에 묶이고, 게임 쪽은 매니페스트를 읽어 가져갑니다.</td></tr>
         <tr><td>그래픽카드가 한 장일 때</td><td>학습 중에 생성을 걸면 메모리가 모자라 둘 다 죽습니다.</td><td>생성·학습·3D 변환은 한 줄로 서서 하나씩 돌아갑니다. 학습 중 들어온 요청은 기다렸다가 끝나면 실행됩니다.</td></tr>
-        <tr><td>비용</td><td>온라인 학습 서비스는 학습과 생성마다 크레딧이 나갑니다.</td><td>내 GPU로 돌아 생성과 학습이 무료입니다. 3D 외주(Tripo)만 사람이 누를 때 크레딧이 나갑니다.</td></tr>
+        <tr><td>비용</td><td>온라인 학습 서비스는 학습과 생성마다 크레딧이 나갑니다.</td><td>내 GPU로 돌아 생성, 학습, 3D 변환이 무료입니다. 외부 3D 서비스(Tripo)는 꺼져 있고, 켜더라도 사람이 누를 때만 크레딧이 나갑니다.</td></tr>
       </tbody>
     </table>
     <p class="muted" style="margin-top:24px">ComfyUI와 학습 도구는 그대로 씁니다. Asset Studio가 하는 일은 그 도구들을 대신 켜고 끄고, 결과를 기록하고, 사람이 볼 화면을 만드는 것입니다.</p>
+    <figure class="fig lane" id="lane">
+      <div class="lane-row">
+        <div class="lane-q" id="laneQ" aria-label="대기 줄"><span class="job">3D 변환 · prop/house</span><span class="job">생성 · shared/ground_strip</span><span class="job">생성 · village/far_hills</span></div>
+        <div class="lane-gpu"><b>GPU · 실행 중</b><span id="laneNow">학습 · PACKOON LoRA v3</span><div class="lane-bar"><i id="laneBar"></i></div></div>
+        <div class="lane-done"><b id="laneDone">12</b>완료</div>
+      </div>
+      <figcaption><b>GPU 한 줄</b> · 생성, 학습, 3D 변환은 같은 줄에 섭니다. 앞의 일이 끝나야 다음 일이 그래픽카드를 씁니다. 학습 중에 들어온 주문은 줄에서 기다리고, 남은 시간이 화면에 표시됩니다.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -466,6 +545,40 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
       <div><b>×1</b><span>★ 쓸 만함</span></div>
       <div><b>×0</b><span>제외</span></div>
     </div>
+    <div class="show">
+      <figure class="stepsfig wide" id="stepsfig">
+        <div class="frames">
+          <img class="on" src="img/steps_0.webp" alt="학습 전 모델이 그린 유적, 그루터기, 등불 호수">
+          <img src="img/steps_500.webp" alt="500단계 샘플">
+          <img src="img/steps_1000.webp" alt="1000단계 샘플">
+          <img src="img/steps_1500.webp" alt="1500단계 샘플">
+        </div>
+        <div class="ptabs mono" id="stepTabs">
+          <button type="button" aria-pressed="true" data-i="0">0단계 · 학습 전</button>
+          <button type="button" data-i="1">500단계</button>
+          <button type="button" data-i="2">1000단계</button>
+          <button type="button" data-i="3">1500단계</button>
+        </div>
+        <figcaption><b>학습 중 샘플</b> · 두 번째 프로젝트(숲)를 학습할 때 실제로 쌓인 샘플입니다. 같은 프롬프트 세 개를 단계마다 다시 그립니다. 단계가 오를수록 원본의 색과 분위기가 배어들고, 너무 익은 단계는 버리고 가장 좋은 단계를 골라 씁니다.</figcaption>
+      </figure>
+      <figure class="wide" id="audfig">
+        <div class="show" style="margin-top:0">
+          <div class="aud">
+            <div><img id="audA" src="img/audition_mushrooms_klein.webp" alt="후보 A가 그린 빛나는 버섯"><span class="tag">후보 A · FLUX.2 Klein 4B</span></div>
+            <div><img id="audB" src="img/audition_mushrooms_zimage.webp" alt="후보 B가 그린 빛나는 버섯"><span class="tag">후보 B · Z-Image</span></div>
+          </div>
+          <div class="review-list">
+            <div class="ptabs" id="audTabs">
+              <button type="button" aria-pressed="true" data-a="img/audition_mushrooms_klein.webp" data-b="img/audition_mushrooms_zimage.webp">빛나는 버섯</button>
+              <button type="button" data-a="img/audition_stump_klein.webp" data-b="img/audition_stump_zimage.webp">이끼 낀 그루터기</button>
+            </div>
+            <div><h3>같은 원본, 같은 주문, 두 화가.</h3><p>두 후보 모델을 같은 원본으로 학습시키고 같은 주문을 넣은 결과입니다. 한쪽은 질감을, 다른 쪽은 게임에 놓일 구도를 더 잘 잡기도 합니다.</p></div>
+            <div><h3>고르는 건 사람입니다.</h3><p>어느 쪽이 내 원본에 가까운지 나란히 보고 주력을 정합니다. 프리셋은 그 모델에 묶이고, 진 쪽의 결과도 기록으로 남습니다.</p></div>
+          </div>
+        </div>
+        <figcaption><b>주력 모델 오디션</b> · 숲 프로젝트에서 실제로 비교한 그림입니다.</figcaption>
+      </figure>
+    </div>
     <div class="extra">
       <div><h3>원본은 묻히지 않습니다.</h3><p>AI가 만든 그림으로 다시 학습하면 흠이 진해지고 그림체가 밀립니다. 그래서 원본은 늘 가장 높은 가중치로 들어가고, 원본 비중이 20% 아래로 내려가면 학습 전에 경고합니다.</p></div>
       <div><h3>이전 버전은 남습니다.</h3><p>새 버전이 원본에서 멀어졌으면 이전 버전으로 돌아갑니다. 어떤 버전으로 무엇을 만들었는지 모든 결과물에 기록됩니다.</p></div>
@@ -479,7 +592,7 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
     <div class="ch-num"><b>05</b>조립 검토</div>
     <div>
       <h2>조각은 겹쳐 봐야 압니다. 어색한 조각만 콕 집어 다시 만듭니다.</h2>
-      <p class="muted">배경은 레이어로, 캐릭터는 파츠로 나옵니다. 낱장이 아니라 조립한 상태로 보고, 클릭 한 번으로 그 조각만 다시 주문합니다.</p>
+      <p class="muted">배경은 여러 겹의 레이어로 나옵니다. 낱장이 아니라 조립한 상태로 보고, 클릭 한 번으로 그 조각만 다시 주문합니다.</p>
     </div>
   </div>
   <div class="ch-body">
@@ -493,21 +606,80 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
         </div>
         <figcaption><b>배경</b> · 레이어를 순서대로 쌓고 시차 값을 두어 카메라를 끌어 봅니다. 낮·노을 판을 바꾸고, 반복 띠는 이어 붙여 보고, 빛 없는 띠에는 미리보기 조명을 비춥니다. 배치는 구역마다 저장되어 다음 주문도 같은 자리에 열립니다.</figcaption>
       </figure>
-      <figure>
-        <div class="steps3">
-          <figure><img src="img/char_green.webp" alt="A포즈 원본, 크로마키 배경"><figcaption>1 · 원본 (크로마키)</figcaption></figure>
-          <figure><img src="img/parts_sheet.webp" alt="파츠 시트: 모자, 머리, 귀, 보따리, 몸통, 꼬리, 팔, 다리"><figcaption>2 · 파츠 시트</figcaption></figure>
-          <figure><img src="img/face_sheet.webp" alt="표정 시트: 눈과 입 변형"><figcaption>3 · 표정 시트</figcaption></figure>
-        </div>
-        <figcaption><b>캐릭터</b> · A포즈 한 장에서 파츠 시트를 만들어 머리·몸통·팔·다리로 나눕니다. 마스킹 없이 각 파츠를 온전한 모양으로 다시 그리므로 관절에 가려졌던 부분까지 나옵니다. 뼈대에 조립해 관절을 돌려 보고, 이름은 <code>upper_arm_L</code>처럼 프리셋에 정해진 것만 써서 Godot 애니메이션이 캐릭터끼리 호환됩니다. 눈·입은 표정 시트로 따로 뽑아 바꿔 끼웁니다.</figcaption>
-      </figure>
+      <div class="review-list">
+        <div><h3>겹쳐 놓고 카메라를 끕니다.</h3><p>먼 산은 천천히, 앞 수풀은 빠르게 움직입니다. 시차 값은 레이어마다 정하고, 배치는 구역마다 저장됩니다.</p></div>
+        <div><h3>빛을 바꿔 봅니다.</h3><p>낮 판과 노을 판을 바꾸고, 빛 없는 겹에는 미리보기 조명을 비춰 게임 안에서 어떻게 보일지 봅니다.</p></div>
+        <div><h3>반복 띠는 이어 붙여 봅니다.</h3><p>땅 띠와 숲 띠를 여러 번 이어 놓고 이음매와 윗선이 고르게 이어지는지 확인합니다.</p></div>
+        <div><h3>어색한 조각만 다시 만듭니다.</h3><p>조각을 클릭하고 한 줄 적으면 그것만 다시 만들어져 같은 자리에 들어옵니다. 일부만 칠해서 고칠 수도 있습니다.</p></div>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="chapter" id="parts">
+  <div class="ch-head">
+    <div class="ch-num"><b>06</b>파츠와 애니메이션</div>
+    <div>
+      <h2>원화 한 장에서 겹을 벗겨 조각을 만들고, 뼈를 붙여 움직입니다.</h2>
+      <p class="muted">캐릭터를 가위로 오리면 가려져 있던 자리가 비어서, 팔을 돌리는 순간 구멍이 보입니다. Asset Studio는 입은 모습 그대로에서 바깥 겹부터 하나씩 벗겨, 조각마다 온전한 그림을 만듭니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <figure class="fig" id="peel">
+      <div class="peel-stage checker" id="peelStage">
+        <img src="img/peel_body.webp" alt="겹을 모두 벗긴 너구리의 몸">
+        <img src="img/peel_tail.webp" alt="꼬리 조각" data-i="4" data-to="l">
+        <img src="img/peel_straps.webp" alt="보따리 끈 조각" data-i="3" data-to="r">
+        <img src="img/peel_bundle.webp" alt="보따리 조각" data-i="2" data-to="l">
+        <img src="img/peel_hat.webp" alt="밀짚모자 조각" data-i="1" data-to="r">
+        <span class="lbl">packoon/raccoon · 겹 4</span>
+      </div>
+      <div class="ptabs mono" id="peelTabs">
+        <button type="button" aria-pressed="true" data-k="0">원화</button>
+        <button type="button" data-k="1">1 · 밀짚모자</button>
+        <button type="button" data-k="2">2 · 보따리</button>
+        <button type="button" data-k="3">3 · 끈</button>
+        <button type="button" data-k="4">4 · 꼬리</button>
+      </div>
+      <figcaption><b>겹 벗기기</b> · PACKOON의 너구리로 실제로 돌린 결과입니다. Claude가 벗길 순서를 제안하고, 그림 모델이 한 겹씩 지우면서 가려져 있던 귀와 등을 같은 그림체로 그립니다. 떼어 낸 조각은 원화의 픽셀을 그대로 쓰고, 배경은 처음부터 끝까지 투명합니다.</figcaption>
+    </figure>
+    <div class="show">
+      <figure id="rigfig">
+        <div class="rig-stage checker"><canvas id="rigCv" width="478" height="720" role="img" aria-label="숲의 정령이 걷는 애니메이션"></canvas></div>
+        <div class="rig-ctl">
+          <div class="ptabs" id="rigTabs">
+            <button type="button" aria-pressed="true" data-clip="walk">걷기</button>
+            <button type="button" data-clip="wave">손 흔들기</button>
+          </div>
+          <label for="rigBones"><input type="checkbox" id="rigBones" checked> 뼈 보기</label>
+        </div>
+        <div class="pieces" aria-label="나뉜 조각">
+          <div class="checker"><img src="img/piece_head.webp" alt=""><span>head</span></div>
+          <div class="checker"><img src="img/piece_body.webp" alt=""><span>body</span></div>
+          <div class="checker"><img src="img/piece_cloak.webp" alt=""><span>cloak</span></div>
+          <div class="checker"><img src="img/piece_arm_r.webp" alt=""><span>arm_r</span></div>
+          <div class="checker"><img src="img/piece_arm_l.webp" alt=""><span>arm_l</span></div>
+          <div class="checker"><img src="img/piece_leg_r.webp" alt=""><span>leg_r</span></div>
+          <div class="checker"><img src="img/piece_leg_l.webp" alt=""><span>leg_l</span></div>
+        </div>
+        <figcaption><b>뼈대 미리보기</b> · 두 번째 프로젝트의 캐릭터입니다. 조각 7개에 뼈 12개가 붙고, 팔과 다리는 뼈 두 개의 가중치를 따라 팔꿈치와 무릎에서 휘어집니다. 걷기와 손 흔들기로 관절이 벌어지는지 확인한 뒤에 넘깁니다.</figcaption>
+      </figure>
+      <div class="review-list">
+        <div><h3>가려진 자리까지 그려진 조각.</h3><p>팔이 몸을 가리고 있었다면 몸 조각에는 팔 밑의 옷이 그려져 있습니다. 관절이 만나는 곳은 서로 겹치게 여유를 두어, 크게 움직여도 틈이 벌어지지 않습니다.</p></div>
+        <div><h3>눈과 입은 바꿔 끼웁니다.</h3><p>뜬 눈과 감은 눈, 입 모양은 같은 자리에 겹쳐 둔 레이어입니다. 깜빡임과 표정은 그림을 바꿔 끼워 만듭니다.</p></div>
+        <div><h3>이름은 프리셋대로, 어디로든.</h3><p>조각 이름은 <code>arm_l</code>, <code>leg_r</code>처럼 정해진 것만 써서 애니메이션이 캐릭터끼리 호환됩니다. 레이어 PSD, Godot Skeleton2D 씬, 조각 PNG와 <code>parts.json</code>으로 내보냅니다.</p></div>
+      </div>
+    </div>
+    <figure class="fig">
+      <img class="shotimg" src="img/screen_animate.webp" alt="애니메이션 화면: 자동 리깅 창에 레이어 일곱 개와 찾은 부위가 표로 나와 있다">
+      <figcaption><b>애니메이션 화면</b> · "애니메이션 편집기에서 열기"를 누르면 조각이 레이어 이름과 함께 편집기로 넘어가고 자동 리깅 창이 열립니다. 부위를 확인하고 Generate rig를 누르면 뼈, 휘어지는 메시, 팔다리 IK가 붙습니다. 편집기는 오픈소스 Rigby2D를 앱 안에 넣은 것이고, 앱과 분리된 주소에서 돌아갑니다.</figcaption>
+    </figure>
   </div>
 </section>
 
 <section class="chapter" id="order">
   <div class="ch-head">
-    <div class="ch-num"><b>06</b>주문과 확정</div>
+    <div class="ch-num"><b>07</b>주문과 확정</div>
     <div>
       <h2>에이전트는 키로 주문하고, 사람이 확정하고, 게임은 매니페스트만 읽습니다.</h2>
       <p class="muted">두 Claude(게임 쪽, Asset Studio 쪽)와 사람이 같은 에셋을 가리키게 하는 규칙입니다.</p>
@@ -524,7 +696,7 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
 
 <section class="chapter" id="caps">
   <div class="ch-head">
-    <div class="ch-num"><b>07</b>만들 수 있는 것</div>
+    <div class="ch-num"><b>08</b>만들 수 있는 것</div>
     <div>
       <h2>게임이 무엇을 쓸지는 게임이 정하고, 어떤 모양이든 만들어낼 수 있게 했습니다.</h2>
       <p class="muted">구역이 화면 몇 장인지, 레이어가 몇 겹인지는 주문에 담깁니다. Asset Studio는 그 값을 받아 만드는 능력만 갖춥니다.</p>
@@ -535,11 +707,13 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
       <li><b>화면 여러 장 폭의 파노라마</b><span>먼 산·언덕처럼 시차가 작은 겹. 위는 투명, 아래는 끝까지 채우고 위아래 여유를 둡니다.</span></li>
       <li><b>조명 변형</b><span>같은 그림의 낮 판·노을 판. 구도는 그대로 두고 빛만 바꿔 원본에 연결합니다.</span></li>
       <li><b>이음매 없는 가로 반복 띠</b><span>숲 띠, 땅 띠, 앞 수풀. 왼쪽 끝과 오른쪽 끝이 이어지도록 이음매를 고치고 검사합니다.</span></li>
-      <li><b>빛 없는 디퓨즈 + 노말맵</b><span>게임의 2D 조명을 받을 겹. 평평한 조명으로 뽑고 노말맵을 짝으로 만듭니다.</span></li>
+      <li><b>빛 없는 디퓨즈 + 재질 맵</b><span>게임의 2D 조명을 받을 겹. 평평한 조명으로 뽑고 노말맵을 짝으로 만듭니다. 스페큘러와 발광 맵도 주문에 적으면 같이 나옵니다.</span></li>
       <li><b>윗면 가장자리 고정</b><span>오르막·내리막을 따라 휘어 깔리는 땅 띠. 윗면이 고르게 이어지도록 검사합니다.</span></li>
       <li><b>낱개 소품과 UI 아이콘</b><span>투명 배경. 나무, 바위, 집, 발판, 물약병 같은 것.</span></li>
-      <li><b>캐릭터 파츠 시트</b><span>스켈레톤 애니메이션용 파츠 PNG와 뼈대 정보(<code>parts.json</code>).</span></li>
-      <li><b>3D 메시</b><span>승인한 2D 소품을 3D로 바꾸고 목표 폴리곤 수로 줄여 GLB·FBX로 냅니다. 리깅이 필요하거나 디테일이 중요한 것만 Tripo로 보냅니다.</span></li>
+      <li><b>캐릭터 조각과 뼈대</b><span>겹을 벗겨 만든 조각 PNG, 뼈와 가중치(<code>parts.json</code>), 레이어 PSD, Godot Skeleton2D 씬.</span></li>
+      <li><b>3D 메시</b><span>승인한 2D 소품을 내 GPU에서 3D로 바꾸고 목표 폴리곤 수로 줄여 GLB·FBX로 냅니다. 화면에서 돌려 본 뒤 확정합니다.</span></li>
+      <li><b>질감 다듬기</b><span>구도는 그대로 두고 그림을 타일로 나눠 세부를 올립니다. 큰 화면에 쓸 2K 이상 크기.</span></li>
+      <li><b>스케치에서 에셋</b><span>대충 그린 선이나 색 덩어리를 구도로 삼아 같은 그림체로 그립니다.</span></li>
     </ul>
     <div class="show">
       <figure class="pair" id="pair">
@@ -558,6 +732,23 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
         </div>
         <figcaption><b>디퓨즈 + 노말맵 짝</b> · 슬라이더를 끌어 보세요. 같은 그림에서 노말맵을 뽑아 짝으로 둡니다. 게임의 2D 조명이 이 짝을 받아 노을·횃불에 따라 잎과 털의 굴곡이 살아납니다.</figcaption>
       </figure>
+      <figure id="lightfig">
+        <div class="light-stage" id="lightStage">
+          <img id="lightFallback" src="img/raccoon.webp" alt="너구리 캐릭터">
+          <span class="light-dot" id="lightDot" aria-hidden="true"></span>
+          <span class="lbl">미리보기 조명 · 횃불</span>
+        </div>
+        <figcaption><b>노말맵이 하는 일</b> · 그림 위에서 포인터를 움직여 보세요. 빛의 위치에 따라 털과 옷 주름의 밝은 면이 바뀝니다. 그림은 한 장이고, 굴곡은 짝으로 만든 노말맵이 알려 줍니다.</figcaption>
+      </figure>
+      <figure>
+        <div class="maps">
+          <div><img src="img/map_unlit.webp" alt="빛 없는 디퓨즈"><span class="tag">디퓨즈 · 빛 없음</span></div>
+          <div><img src="img/map_normal.webp" alt="노말맵"><span class="tag">노말</span></div>
+          <div><img src="img/map_specular.webp" alt="스페큘러 맵"><span class="tag">스페큘러</span></div>
+          <div><img src="img/map_emission.webp" alt="발광 맵"><span class="tag">발광</span></div>
+        </div>
+        <figcaption><b>재질 맵 한 벌</b> · 숲 프로젝트의 버섯입니다. 빛 없는 디퓨즈에서 노말, 스페큘러, 발광 맵을 뽑아 한 벌로 묶습니다. 어떤 맵이 필요한지는 주문에 적습니다.</figcaption>
+      </figure>
       <figure>
         <div class="props">
           <div class="checker"><img src="img/house.webp" alt="초가집"><span class="tag">prop/house</span></div>
@@ -575,7 +766,7 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
 
 <section class="chapter" id="roles">
   <div class="ch-head">
-    <div class="ch-num"><b>08</b>역할 나누기</div>
+    <div class="ch-num"><b>09</b>역할 나누기</div>
     <div>
       <h2>Claude는 손이 많은 일을, 사람은 눈이 필요한 일을 합니다.</h2>
       <p class="muted">Claude는 두 군데서 일합니다. 화면 안에서는 프롬프트·캡션·추천을 쓰고, 밖에서는 Claude CLI가 같은 기능을 MCP로 씁니다. 모든 행동은 누가 했는지 기록됩니다.</p>
@@ -590,7 +781,8 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
         <li>후보마다 별점 추천과 한 줄 이유</li>
         <li>새 LoRA 버전이 원본에 더 가까운지 판단</li>
         <li>파츠 이름이 맞는지, 색이 어긋난 파츠가 있는지 확인</li>
-        <li>MCP로 생성·변형·파츠 시트 주문, 결과 조회</li>
+        <li>캐릭터에서 벗길 겹의 순서와 관절 위치 제안</li>
+        <li>MCP로 생성·변형·질감 다듬기 주문, 결과 조회</li>
       </ul></div>
       <div><h3>사람만 합니다</h3><ul class="cant">
         <li>원본 레퍼런스 고르기</li>
@@ -598,7 +790,8 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
         <li>학습 데이터의 별점 확정과 학습 시작 허가</li>
         <li>새 LoRA 버전을 프리셋에 연결할지</li>
         <li>삭제, 프리셋 변경</li>
-        <li>크레딧이 나가는 Tripo 실행</li>
+        <li>파츠의 겹 목록과 관절 위치 확정</li>
+        <li>크레딧이 나가는 외부 서비스 실행</li>
       </ul></div>
     </div>
     <p class="muted" style="margin-top:28px">이 경계는 Claude가 쓰는 토큰의 권한으로 막혀 있습니다. 규칙을 읽고 지키는 게 아니라, 넘으려 해도 서버가 거절합니다.</p>
@@ -607,7 +800,7 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
 
 <section class="chapter" id="start">
   <div class="ch-head">
-    <div class="ch-num"><b>09</b>시작하기</div>
+    <div class="ch-num"><b>10</b>시작하기</div>
     <div>
       <h2>내 PC 한 대에 설치하고, 원본 두 장으로 시작합니다.</h2>
       <p class="muted">설치는 Claude Code가 하고, 사람은 그림체의 기준이 될 원본을 고릅니다. 그다음부터는 주문하고 확정하는 일만 남습니다.</p>
@@ -619,11 +812,21 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
       <li><span class="who-do">사람</span><h3>원본 2장을 고르고 주력 모델을 정합니다.</h3><p>후보 모델 둘에게 같은 원본으로 그리게 해 그림체가 더 가까운 쪽을 주력으로 정합니다. 그 원본이 첫 스타일 프리셋의 기준이 됩니다.</p></li>
       <li><span class="who-do">게임 쪽 Claude</span><h3>MCP를 연결하고 주문합니다.</h3><p>게임 저장소의 설정에 Asset Studio MCP 서버와 토큰을 넣으면, 그 Claude는 키로 주문하고 매니페스트를 읽어 갑니다. 확정은 여전히 화면에서 사람이 누릅니다.</p><div class="code" style="white-space:normal">claude mcp add asset-studio -- python -m studio.mcp</div></li>
     </ol>
-    <div class="ms" aria-label="화면 구성" style="--w:72px">
+    <figure class="fig screens" id="screens" style="margin-top:36px">
+      <div class="ptabs" id="screenTabs">
+        <button type="button" aria-pressed="true" data-src="img/screen_gallery.webp" data-alt="갤러리 화면: 생성된 에셋이 투명 배경 위에 카드로 놓여 있다">갤러리</button>
+        <button type="button" data-src="img/screen_parts.webp" data-alt="파츠 화면: 겹 벗기기 초안 두 개와 벗길 목록">파츠</button>
+        <button type="button" data-src="img/screen_animate.webp" data-alt="애니메이션 화면: 편집기 안의 자동 리깅 창">애니메이션</button>
+      </div>
+      <img class="shotimg" id="screenImg" src="img/screen_gallery.webp" alt="갤러리 화면: 생성된 에셋이 투명 배경 위에 카드로 놓여 있다">
+      <figcaption><b>실제 화면</b> · 시험 프로젝트를 열어 둔 Asset Studio입니다. 왼쪽 메뉴가 아래 표의 화면 구성과 같습니다.</figcaption>
+    </figure>
+    <div class="ms" aria-label="화면 구성" style="--w:96px">
       <div><code>검토함</code><span>주문·확정 대기 목록 · 조립 검토(배경 레이어, 캐릭터 파츠) · 세트 확정</span></div>
       <div><code>생성</code><span>스타일 프리셋으로 생성 · 레퍼런스 분석 · 조명 변형 · 반복 띠 · 노말맵 짝</span></div>
       <div><code>갤러리</code><span>별점 · Claude 추천 · 프롬프트·시드·LoRA 버전 기록 · 승인·거절</span></div>
-      <div><code>파츠</code><span>A포즈 한 장 → 파츠 시트 → 뼈대 조립 · <code>parts.json</code></span></div>
+      <div><code>파츠</code><span>원화 한 장 → 겹 벗기기 → 관절 배치 → 조각 · 뼈대 미리보기 · <code>parts.json</code></span></div>
+      <div><code>애니메이션</code><span>조각을 편집기로 넘겨 자동 리깅 · 뼈·메시·IK · 움직임 만들기</span></div>
       <div><code>학습</code><span>데이터셋 가중치 · LoRA 학습 · 원본과 비교 · 버전 연결</span></div>
       <div><code>스케치 · 3D</code><span>대충 그린 선에서 에셋 · 승인한 소품을 GLB·FBX로 · 폴리곤 수 줄이기</span></div>
     </div>
@@ -644,7 +847,7 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
         <li>NVIDIA 그래픽카드가 있는 Windows PC가 필요합니다.</li>
         <li>Claude 기능은 Claude Code와 유료 요금제가 있어야 합니다.</li>
         <li>레퍼런스는 유료 플랜으로 만든 것과 직접 그린 것만 씁니다. 다른 게임의 그림은 쓰지 않습니다.</li>
-        <li>파츠 시트는 자동 배치가 어긋난 파츠를 사람이 손봐야 할 때가 있습니다. 화면에 "손보기 필요"로 표시됩니다.</li>
+        <li>품이 큰 옷을 입은 캐릭터는 조각의 경계를 사람이 손봐야 할 때가 있습니다. 화면에서 영역을 칠해 고칩니다.</li>
         <li>판매하지 않는 내부 도구입니다. 팀이 같이 쓰는 건 다음 버전입니다.</li>
       </ul></div>
     </div>
@@ -690,6 +893,136 @@ pre.json { margin: 0; background: var(--tape); border: 1px solid var(--line); bo
     b.setAttribute('aria-current','step');
     var i=+b.dataset.p; panels.forEach(function(p,j){p.classList.toggle('on',i===j);});
   });
+})();
+</script>
+
+<script type="application/json" id="bonesData">{"fw":239,"fh":360,"cols":8,"walk":[0,24],"wave":[24,24],"segs":[[[138.1,186.2,137.7,167.4],[137.7,167.4,140.5,81.9],[140.5,81.9,172.3,14.0],[117.1,91.9,90.6,114.7],[90.6,114.7,34.9,152.8],[122.0,188.2,112.0,253.6],[112.0,253.6,50.6,332.0],[162.9,93.1,183.9,121.2],[183.9,121.2,216.7,155.2],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,141.7,81.9],[141.7,81.9,174.6,14.7],[118.1,91.7,89.9,112.3],[89.9,112.3,30.6,144.5],[122.0,188.2,118.5,254.3],[118.5,254.3,65.8,338.8],[163.8,93.5,186.2,120.4],[186.2,120.4,220.7,152.7],[154.9,187.0,143.8,249.6],[143.8,249.6,172.1,329.8]],[[138.1,186.2,137.7,167.4],[137.7,167.4,142.5,82.0],[142.5,82.0,175.8,14.9],[118.8,91.5,89.3,110.1],[89.3,110.1,27.3,136.6],[122.0,188.2,124.6,254.4],[124.6,254.4,82.0,344.3],[164.5,93.7,188.2,119.5],[188.2,119.5,224.3,150.1],[154.9,187.0,138.1,248.4],[138.1,248.4,157.0,331.2]],[[138.1,186.2,137.7,167.4],[137.7,167.4,142.8,82.0],[142.8,82.0,175.6,14.6],[119.1,91.4,88.6,108.5],[88.6,108.5,24.7,130.1],[122.0,188.2,129.9,253.9],[129.9,253.9,97.9,348.2],[164.8,93.8,189.7,118.5],[189.7,118.5,227.1,147.3],[154.9,187.0,133.3,246.8],[133.3,246.8,142.5,331.3]],[[138.1,186.2,137.7,167.4],[137.7,167.4,142.5,82.0],[142.5,82.0,173.9,14.0],[118.8,91.5,87.8,107.4],[87.8,107.4,22.8,125.8],[122.0,188.2,133.9,253.3],[133.9,253.3,112.2,350.5],[164.5,93.7,190.5,117.3],[190.5,117.3,229.1,144.5],[154.9,187.0,129.7,245.4],[129.7,245.4,129.7,330.4]],[[138.1,186.2,137.7,167.4],[137.7,167.4,141.7,81.9],[141.7,81.9,171.2,13.1],[118.1,91.7,86.8,107.2],[86.8,107.2,21.4,123.9],[122.0,188.2,136.4,252.8],[136.4,252.8,123.9,351.6],[163.8,93.5,190.5,116.1],[190.5,116.1,230.1,142.0],[154.9,187.0,127.4,244.4],[127.4,244.4,119.6,329.0]],[[138.1,186.2,137.7,167.4],[137.7,167.4,140.5,81.9],[140.5,81.9,168.2,12.3],[117.1,91.9,85.9,107.6],[85.9,107.6,20.5,124.3],[122.0,188.2,137.2,252.6],[137.2,252.6,131.8,352.0],[162.9,93.1,190.0,115.2],[190.0,115.2,230.1,140.3],[154.9,187.0,126.7,244.0],[126.7,244.0,112.8,327.9]],[[138.1,186.2,137.7,167.4],[137.7,167.4,139.4,81.9],[139.4,81.9,165.8,11.8],[116.1,92.2,85.2,108.5],[85.2,108.5,20.3,126.9],[122.0,188.2,136.4,252.8],[136.4,252.8,135.5,352.4],[161.9,92.8,189.2,114.8],[189.2,114.8,229.4,139.6],[154.9,187.0,127.4,244.4],[127.4,244.4,109.7,327.5]],[[138.1,186.2,137.7,167.4],[137.7,167.4,138.6,81.9],[138.6,81.9,164.6,11.6],[115.4,92.4,85.1,109.8],[85.1,109.8,21.1,131.0],[122.0,188.2,133.9,253.3],[133.9,253.3,134.7,352.9],[161.2,92.6,188.1,114.9],[188.1,114.9,228.0,140.4],[154.9,187.0,129.7,245.4],[129.7,245.4,110.6,328.2]],[[138.1,186.2,137.7,167.4],[137.7,167.4,138.3,81.9],[138.3,81.9,164.9,11.8],[115.1,92.5,85.6,111.1],[85.6,111.1,22.9,136.1],[122.0,188.2,129.9,253.9],[129.9,253.9,129.3,353.5],[160.9,92.5,187.1,115.8],[187.1,115.8,226.0,142.7],[154.9,187.0,133.3,246.8],[133.3,246.8,115.4,329.9]],[[138.1,186.2,137.7,167.4],[137.7,167.4,138.6,81.9],[138.6,81.9,166.6,12.4],[115.4,92.4,86.8,112.4],[86.8,112.4,26.0,141.7],[122.0,188.2,124.6,254.4],[124.6,254.4,119.7,353.8],[161.2,92.6,186.0,117.3],[186.0,117.3,223.4,146.2],[154.9,187.0,138.1,248.4],[138.1,248.4,123.8,332.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,139.4,81.9],[139.4,81.9,169.3,13.2],[116.1,92.2,88.5,113.6],[88.5,113.6,30.1,147.3],[122.0,188.2,118.5,254.3],[118.5,254.3,106.6,353.1],[161.9,92.8,185.0,119.1],[185.0,119.1,220.3,150.5],[154.9,187.0,143.8,249.6],[143.8,249.6,135.5,334.2]],[[138.1,186.2,137.7,167.4],[137.7,167.4,140.5,81.9],[140.5,81.9,172.3,14.0],[117.1,91.9,90.6,114.7],[90.6,114.7,34.9,152.8],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[162.9,93.1,183.9,121.2],[183.9,121.2,216.7,155.2],[154.9,187.0,150.1,250.4],[150.1,250.4,149.5,335.4]],[[138.1,186.2,137.7,167.4],[137.7,167.4,141.7,81.9],[141.7,81.9,174.6,14.7],[118.1,91.7,92.8,115.7],[92.8,115.7,40.2,158.0],[122.0,188.2,105.5,252.3],[105.5,252.3,74.4,346.9],[163.8,93.5,182.7,123.0],[182.7,123.0,212.8,159.4],[154.9,187.0,156.4,250.6],[156.4,250.6,164.9,335.2]],[[138.1,186.2,137.7,167.4],[137.7,167.4,142.5,82.0],[142.5,82.0,175.8,14.9],[118.8,91.5,94.7,116.7],[94.7,116.7,45.4,162.8],[122.0,188.2,99.7,250.5],[99.7,250.5,57.9,340.9],[164.5,93.7,181.3,124.5],[181.3,124.5,208.9,162.9],[154.9,187.0,162.3,250.2],[162.3,250.2,180.5,333.2]],[[138.1,186.2,137.7,167.4],[137.7,167.4,142.8,82.0],[142.8,82.0,175.6,14.6],[119.1,91.4,96.2,117.8],[96.2,117.8,50.2,167.1],[122.0,188.2,94.8,248.6],[94.8,248.6,42.8,333.5],[164.8,93.8,179.9,125.4],[179.9,125.4,205.3,165.3],[154.9,187.0,167.3,249.4],[167.3,249.4,194.9,329.8]],[[138.1,186.2,137.7,167.4],[137.7,167.4,142.5,82.0],[142.5,82.0,173.9,14.0],[118.8,91.5,97.0,118.8],[97.0,118.8,54.1,170.8],[122.0,188.2,91.2,246.8],[91.2,246.8,30.4,325.6],[164.5,93.7,178.5,125.9],[178.5,125.9,202.5,166.6],[154.9,187.0,171.1,248.5],[171.1,248.5,207.2,325.5]],[[138.1,186.2,137.7,167.4],[137.7,167.4,141.7,81.9],[141.7,81.9,171.2,13.1],[118.1,91.7,97.3,119.7],[97.3,119.7,56.6,173.5],[122.0,188.2,88.9,245.6],[88.9,245.6,21.1,318.4],[163.8,93.5,177.3,125.8],[177.3,125.8,200.7,166.9],[154.9,187.0,173.4,247.9],[173.4,247.9,216.5,321.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,140.5,81.9],[140.5,81.9,168.2,12.3],[117.1,91.9,96.9,120.4],[96.9,120.4,57.6,175.2],[122.0,188.2,88.2,245.1],[88.2,245.1,15.3,312.9],[162.9,93.1,176.5,125.4],[176.5,125.4,200.1,166.3],[154.9,187.0,174.2,247.6],[174.2,247.6,222.5,317.6]],[[138.1,186.2,137.7,167.4],[137.7,167.4,139.4,81.9],[139.4,81.9,165.8,11.8],[116.1,92.2,96.0,120.8],[96.0,120.8,56.8,175.7],[122.0,188.2,88.9,245.6],[88.9,245.6,13.0,309.9],[161.9,92.8,176.2,124.8],[176.2,124.8,200.7,165.2],[154.9,187.0,173.4,247.9],[173.4,247.9,224.8,315.6]],[[138.1,186.2,137.7,167.4],[137.7,167.4,138.6,81.9],[138.6,81.9,164.6,11.6],[115.4,92.4,94.9,120.7],[94.9,120.7,54.3,174.6],[122.0,188.2,91.2,246.8],[91.2,246.8,14.2,309.9],[161.2,92.6,176.6,124.1],[176.6,124.1,202.4,163.6],[154.9,187.0,171.1,248.5],[171.1,248.5,223.6,315.4]],[[138.1,186.2,137.7,167.4],[137.7,167.4,138.3,81.9],[138.3,81.9,164.9,11.8],[115.1,92.5,93.6,120.0],[93.6,120.0,50.3,171.7],[122.0,188.2,94.8,248.6],[94.8,248.6,18.7,312.7],[160.9,92.5,177.6,123.3],[177.6,123.3,205.1,161.7],[154.9,187.0,167.3,249.4],[167.3,249.4,218.8,317.0]],[[138.1,186.2,137.7,167.4],[137.7,167.4,138.6,81.9],[138.6,81.9,166.6,12.4],[115.4,92.4,92.4,118.7],[92.4,118.7,45.3,167.0],[122.0,188.2,99.7,250.5],[99.7,250.5,26.5,318.0],[161.2,92.6,179.3,122.5],[179.3,122.5,208.6,159.6],[154.9,187.0,162.3,250.2],[162.3,250.2,210.9,319.9]],[[138.1,186.2,137.7,167.4],[137.7,167.4,139.4,81.9],[139.4,81.9,169.3,13.2],[116.1,92.2,91.4,116.9],[91.4,116.9,40.0,160.5],[122.0,188.2,105.5,252.3],[105.5,252.3,37.2,324.7],[161.9,92.8,181.5,121.8],[181.5,121.8,212.6,157.5],[154.9,187.0,156.4,250.6],[156.4,250.6,200.0,323.6]],[[138.1,186.2,137.7,167.4],[137.7,167.4,133.1,82.0],[133.1,82.0,146.6,8.3],[110.6,94.0,76.0,98.6],[76.0,98.6,13.7,72.7],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[156.3,91.2,186.6,108.8],[186.6,108.8,230.1,127.3],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,133.6,82.0],[133.6,82.0,148.6,8.5],[111.1,93.8,76.4,97.6],[76.4,97.6,21.1,58.9],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[156.8,91.3,186.7,109.5],[186.7,109.5,229.9,128.9],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,134.2,81.9],[134.2,81.9,150.6,8.8],[111.6,93.7,76.8,96.6],[76.8,96.6,28.6,49.4],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[157.3,91.5,186.9,110.2],[186.9,110.2,229.6,130.4],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,134.7,81.9],[134.7,81.9,152.2,9.1],[112.0,93.5,77.1,95.8],[77.1,95.8,32.4,45.3],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[157.7,91.6,187.0,110.8],[187.0,110.8,229.4,131.7],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,135.0,81.9],[135.0,81.9,153.5,9.3],[112.3,93.4,77.4,95.1],[77.4,95.1,30.9,46.3],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[158.0,91.7,187.1,111.3],[187.1,111.3,229.2,132.6],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,135.2,81.9],[135.2,81.9,154.3,9.4],[112.5,93.3,77.6,94.7],[77.6,94.7,25.1,52.4],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[158.2,91.7,187.1,111.5],[187.1,111.5,229.1,133.3],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,135.3,81.9],[135.3,81.9,154.5,9.5],[112.5,93.3,77.6,94.6],[77.6,94.6,18.1,62.8],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[158.3,91.7,187.1,111.6],[187.1,111.6,229.0,133.5],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,135.2,81.9],[135.2,81.9,154.3,9.4],[112.5,93.3,77.6,94.7],[77.6,94.7,13.0,75.1],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[158.2,91.7,187.1,111.5],[187.1,111.5,229.1,133.3],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,135.0,81.9],[135.0,81.9,153.5,9.3],[112.3,93.4,77.4,95.1],[77.4,95.1,10.6,85.4],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[158.0,91.7,187.1,111.3],[187.1,111.3,229.2,132.6],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,134.7,81.9],[134.7,81.9,152.2,9.1],[112.0,93.5,77.1,95.8],[77.1,95.8,9.9,90.5],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[157.7,91.6,187.0,110.8],[187.0,110.8,229.4,131.7],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,134.2,81.9],[134.2,81.9,150.6,8.8],[111.6,93.7,76.8,96.6],[76.8,96.6,9.7,89.2],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[157.3,91.5,186.9,110.2],[186.9,110.2,229.6,130.4],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,133.6,82.0],[133.6,82.0,148.6,8.5],[111.1,93.8,76.4,97.6],[76.4,97.6,10.7,82.4],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[156.8,91.3,186.7,109.5],[186.7,109.5,229.9,128.9],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,133.1,82.0],[133.1,82.0,146.6,8.3],[110.6,94.0,76.0,98.6],[76.0,98.6,13.7,72.7],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[156.3,91.2,186.6,108.8],[186.6,108.8,230.1,127.3],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,132.5,82.0],[132.5,82.0,144.5,8.1],[110.1,94.2,75.6,99.7],[75.6,99.7,18.5,63.8],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[155.8,91.1,186.4,108.0],[186.4,108.0,230.3,125.6],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,132.0,82.1],[132.0,82.1,142.5,7.9],[109.6,94.4,75.3,100.6],[75.3,100.6,22.8,58.3],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[155.3,91.0,186.3,107.4],[186.3,107.4,230.5,124.1],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,131.5,82.1],[131.5,82.1,140.9,7.8],[109.2,94.5,75.0,101.5],[75.0,101.5,23.9,57.5],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.9,90.9,186.1,106.8],[186.1,106.8,230.6,122.8],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,131.1,82.1],[131.1,82.1,139.6,7.7],[108.9,94.6,74.8,102.1],[74.8,102.1,20.9,61.6],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.5,90.8,186.0,106.3],[186.0,106.3,230.7,121.8],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,130.9,82.1],[130.9,82.1,138.8,7.6],[108.8,94.7,74.7,102.5],[74.7,102.5,15.3,70.6],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.3,90.8,185.9,106.0],[185.9,106.0,230.7,121.1],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,130.8,82.1],[130.8,82.1,138.5,7.6],[108.7,94.7,74.7,102.7],[74.7,102.7,10.2,82.8],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.3,90.8,185.9,105.9],[185.9,105.9,230.7,120.9],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,130.9,82.1],[130.9,82.1,138.8,7.6],[108.8,94.7,74.7,102.5],[74.7,102.5,7.7,95.1],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.3,90.8,185.9,106.0],[185.9,106.0,230.7,121.1],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,131.1,82.1],[131.1,82.1,139.6,7.7],[108.9,94.6,74.8,102.1],[74.8,102.1,7.4,103.6],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.5,90.8,186.0,106.3],[186.0,106.3,230.7,121.8],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,131.5,82.1],[131.5,82.1,140.9,7.8],[109.2,94.5,75.0,101.5],[75.0,101.5,7.7,105.4],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[154.9,90.9,186.1,106.8],[186.1,106.8,230.6,122.8],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,132.0,82.1],[132.0,82.1,142.5,7.9],[109.6,94.4,75.3,100.6],[75.3,100.6,7.8,99.7],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[155.3,91.0,186.3,107.4],[186.3,107.4,230.5,124.1],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]],[[138.1,186.2,137.7,167.4],[137.7,167.4,132.5,82.0],[132.5,82.0,144.5,8.1],[110.1,94.2,75.6,99.7],[75.6,99.7,9.2,87.8],[122.0,188.2,112.0,253.6],[112.0,253.6,91.1,351.0],[155.8,91.1,186.4,108.0],[186.4,108.0,230.3,125.6],[154.9,187.0,150.1,250.4],[150.1,250.4,186.8,327.1]]]}</script>
+<script>
+(function(){
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){ return document.getElementById(id); }
+  function press(tabs, b){ tabs.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); }
+  // 화면에 보일 때만 돌고, 사람이 누르면 멈추는 자동 넘김
+  function auto(el, tick, ms){
+    if (still || !el || !('IntersectionObserver' in window)) return function(){};
+    var timer = null, stopped = false;
+    var io = new IntersectionObserver(function(es){
+      var vis = es[0].isIntersecting;
+      if (vis && !timer && !stopped) timer = setInterval(tick, ms);
+      if (!vis && timer) { clearInterval(timer); timer = null; }
+    }, { threshold: 0.35 });
+    io.observe(el);
+    return function(){ stopped = true; if (timer) { clearInterval(timer); timer = null; } };
+  }
+
+  // GPU 한 줄
+  (function(){
+    var q = $('laneQ'), now = $('laneNow'), bar = $('laneBar'), done = $('laneDone'); if (!q) return;
+    var extra = ['생성 · shared/autumn_bush', '조명 변형 · far_hills 노을', '질감 다듬기 · old_tree', '파츠 · 겹 벗기기 raccoon', '3D 변환 · prop/house', '생성 · shared/ground_strip', '학습 · PACKOON LoRA v4'], n = 0, count = 12;
+    auto($('lane'), function(){
+      var jobs = q.querySelectorAll('.job'), next = jobs[jobs.length - 1];
+      now.textContent = next.textContent; next.remove();
+      var j = document.createElement('span'); j.className = 'job'; j.textContent = extra[n++ % extra.length];
+      if (j.textContent.indexOf('학습') === 0) j.className = 'job t';
+      q.insertBefore(j, q.firstChild);
+      q.classList.remove('nudge'); bar.classList.remove('run'); void q.offsetWidth; q.classList.add('nudge'); bar.classList.add('run');
+      done.textContent = ++count;
+    }, 2400);
+  })();
+
+  // 학습 단계 샘플
+  (function(){
+    var fig = $('stepsfig'), tabs = $('stepTabs'); if (!fig) return;
+    var imgs = fig.querySelectorAll('.frames img'), btns = tabs.querySelectorAll('button'), i = 0;
+    function show(k){ i = k; imgs.forEach(function(m, j){ m.classList.toggle('on', j === k); }); press(tabs, btns[k]); }
+    var stop = auto(fig, function(){ show((i + 1) % imgs.length); }, 2200);
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; stop(); show(+b.dataset.i); });
+  })();
+
+  // 오디션, 실제 화면: 탭으로 그림 바꾸기
+  (function(){
+    var t = $('audTabs'); if (t) t.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; press(t, b); $('audA').src = b.dataset.a; $('audB').src = b.dataset.b; });
+    var s = $('screenTabs'); if (s) s.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; press(s, b); var m = $('screenImg'); m.src = b.dataset.src; m.alt = b.dataset.alt; });
+  })();
+
+  // 겹 벗기기
+  (function(){
+    var stage = $('peelStage'), tabs = $('peelTabs'); if (!stage) return;
+    var layers = stage.querySelectorAll('img[data-i]'), btns = tabs.querySelectorAll('button'), k = 0;
+    function show(v){ k = v; layers.forEach(function(m){ m.classList.toggle('off', +m.dataset.i <= v); }); press(tabs, btns[v]); }
+    var stop = auto($('peel'), function(){ show((k + 1) % btns.length); }, 1900);
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; stop(); show(+b.dataset.k); });
+  })();
+
+  // 뼈대 미리보기: 앱의 자세 렌더러가 그린 프레임 + 같은 행렬로 계산한 뼈 위치
+  (function(){
+    var cv = $('rigCv'); if (!cv) return;
+    var data = JSON.parse($('bonesData').textContent), ctx = cv.getContext('2d'), sheet = new Image();
+    var clip = 'walk', f = 0, bones = $('rigBones'), tabs = $('rigTabs'), sc = cv.width / data.fw;
+    function draw(){
+      var range = data[clip], i = range[0] + (f % range[1]);
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.drawImage(sheet, (i % data.cols) * data.fw, Math.floor(i / data.cols) * data.fh, data.fw, data.fh, 0, 0, cv.width, cv.height);
+      if (!bones.checked) return;
+      var segs = data.segs[i];
+      ctx.lineCap = 'round';
+      [['rgba(10,20,18,.75)', 7], ['#3fcbb0', 3.5]].forEach(function(st){
+        ctx.strokeStyle = st[0]; ctx.lineWidth = st[1]; ctx.beginPath();
+        segs.forEach(function(s){ ctx.moveTo(s[0] * sc, s[1] * sc); ctx.lineTo(s[2] * sc, s[3] * sc); });
+        ctx.stroke();
+      });
+      segs.forEach(function(s){ ctx.beginPath(); ctx.arc(s[0] * sc, s[1] * sc, 5.5, 0, 6.3); ctx.fillStyle = '#fff'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#0d3b32'; ctx.stroke(); });
+    }
+    sheet.onload = function(){ draw(); auto($('rigfig'), function(){ f++; draw(); }, 83); };
+    sheet.src = 'img/spirit_frames.webp';
+    bones.addEventListener('change', draw);
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; press(tabs, b); clip = b.dataset.clip; f = 0; draw(); });
+  })();
+
+  // 노말맵 조명: 디퓨즈 × (주변광 + 횃불 · N·L)
+  (function(){
+    var stage = $('lightStage'); if (!stage) return;
+    var W = 300, H = 400, d = new Image(), n = new Image(), left = 2, D, N, cv, ctx, out, dot = $('lightDot');
+    var lx = W * 0.78, ly = H * 0.22, manual = false, t = 0;
+    function render(){
+      var o = out.data, lz = 110;
+      for (var y = 0, p = 0, q = 0; y < H; y++) for (var x = 0; x < W; x++, p += 4, q += 3) {
+        var a = D[p + 3]; o[p + 3] = a; if (!a) continue;
+        var vx = lx - x, vy = ly - y, len = Math.sqrt(vx * vx + vy * vy + lz * lz);
+        var nl = (N[q] * vx - N[q + 1] * vy + N[q + 2] * lz) / len; if (nl < 0) nl = 0;
+        var k = nl * 1.7 / (1 + (len * len) / 90000);
+        o[p] = D[p] * (0.40 + 1.00 * k); o[p + 1] = D[p + 1] * (0.42 + 0.80 * k); o[p + 2] = D[p + 2] * (0.56 + 0.52 * k);
+      }
+      ctx.putImageData(out, 0, 0);
+      var r = cv.getBoundingClientRect(), s = stage.getBoundingClientRect();
+      dot.style.left = (r.left - s.left + lx / W * r.width) + 'px'; dot.style.top = (r.top - s.top + ly / H * r.height) + 'px';
+    }
+    function ready(){
+      if (--left) return;
+      try {
+        var tmp = document.createElement('canvas'); tmp.width = W; tmp.height = H;
+        var c = tmp.getContext('2d', { willReadFrequently: true });
+        var s = Math.min(W / d.naturalWidth, H / d.naturalHeight), w = d.naturalWidth * s, h = d.naturalHeight * s, ox = (W - w) / 2, oy = (H - h) / 2;
+        c.drawImage(d, ox, oy, w, h); D = c.getImageData(0, 0, W, H).data;
+        c.clearRect(0, 0, W, H); c.drawImage(n, ox, oy, w, h);
+        var raw = c.getImageData(0, 0, W, H).data; N = new Float32Array(W * H * 3);
+        for (var i = 0, j = 0; i < raw.length; i += 4, j += 3) {
+          var a = raw[i] / 127.5 - 1, b = raw[i + 1] / 127.5 - 1, z = raw[i + 2] / 127.5 - 1, l = Math.sqrt(a * a + b * b + z * z) || 1;
+          N[j] = a / l; N[j + 1] = b / l; N[j + 2] = z / l;
+        }
+      } catch (e) { return; }                          // 읽을 수 없으면 원래 그림을 그대로 둔다
+      cv = document.createElement('canvas'); cv.width = W; cv.height = H; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', '빛을 받는 너구리');
+      ctx = cv.getContext('2d'); out = ctx.createImageData(W, H);
+      stage.replaceChild(cv, $('lightFallback'));
+      render();
+      function at(e){ var r = cv.getBoundingClientRect(); lx = (e.clientX - r.left) / r.width * W; ly = (e.clientY - r.top) / r.height * H; manual = true; render(); }
+      stage.addEventListener('pointermove', at); stage.addEventListener('pointerdown', at);
+      stage.addEventListener('pointerleave', function(){ manual = false; });
+      auto($('lightfig'), function(){ if (manual) return; t += 0.05; lx = W * (0.5 + 0.46 * Math.cos(t)); ly = H * (0.36 + 0.26 * Math.sin(t * 1.3)); render(); }, 50);
+      window.addEventListener('resize', render);
+    }
+    d.onload = ready; n.onload = ready; d.src = 'img/raccoon.webp'; n.src = 'img/raccoon_n.webp';
+  })();
 })();
 </script>
 </body>
