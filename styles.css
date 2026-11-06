@@ -132,6 +132,7 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 @media (max-width: 560px) {
   .project-filters { gap: 4px; margin-bottom: 22px; }
   .project-tab { gap: 5px; min-height: 48px; padding-inline: 6px; font-size: 14px; }
+  .project-tab-subjects { display: block; }
   .project-tab-count { min-width: 18px; padding-inline: 3px; }
   .learning-index-link { align-items: flex-start; flex-direction: column; gap: 7px; padding: 16px 18px; }
   .study-group-heading h3 { font-size: 19px; }
@@ -150,6 +151,10 @@ h2 { margin-bottom: 0; font: 700 clamp(33px, 4vw, 54px)/1.25 var(--sans); }
 .foundations-visual-footer span { font-size: 23px; }
 .foundations-card-summary { margin: 0 0 16px; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .project-visual { position: relative; min-height: 0; aspect-ratio: 16 / 9; overflow: hidden; }
+.visual-learning-overview { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 28px; background: var(--ink); color: var(--surface); }
+.visual-learning-overview strong { font: 500 clamp(48px, 6vw, 78px)/1 var(--mono); letter-spacing: -.06em; }
+.visual-learning-overview > span { font: 500 18px/1.5 var(--kr); }
+.project-filters { scroll-margin-top: 90px; }
 .visual-scarlet { display: grid; place-items: center; color: var(--green-dark); background: #e7f0e8; }
 .visual-scarlet::before { content: ""; position: absolute; inset: 14%; border: 1px solid #9dbba7; background-image: linear-gradient(#c9dbce 1px, transparent 1px), linear-gradient(90deg, #c9dbce 1px, transparent 1px); background-size: 28px 28px; }
 .visual-scarlet::after { content: ""; position: absolute; width: 46%; aspect-ratio: 1; border: 1px solid var(--green); border-radius: 50%; background: rgb(251 250 244 / 68%); }

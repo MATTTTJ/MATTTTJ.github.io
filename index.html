@@ -31,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261103-11" />
+    <link rel="stylesheet" href="styles.css?v=20261106-01" />
     <link rel="stylesheet" href="about.css?v=20261003-02" />
   </head>
   <body>
@@ -141,15 +141,31 @@
 
           <div class="project-filters" role="tablist" aria-label="프로젝트 카테고리" data-project-filters hidden>
             <button class="project-tab" type="button" role="tab" id="project-tab-featured" aria-controls="project-results" aria-selected="true" data-project-category-tab="featured"><span class="project-tab-label">대표 작업</span><span class="project-tab-count" data-project-count></span></button>
+            <button class="project-tab" type="button" role="tab" id="project-tab-learning" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="learning"><span class="project-tab-label">C++ <span class="project-tab-subjects">자료구조 알고리즘</span></span><span class="project-tab-count" data-project-count></span></button>
             <button class="project-tab" type="button" role="tab" id="project-tab-game" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="game"><span class="project-tab-label">게임</span><span class="project-tab-count" data-project-count></span></button>
             <button class="project-tab" type="button" role="tab" id="project-tab-tool" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="tool"><span class="project-tab-label">개발 도구</span><span class="project-tab-count" data-project-count></span></button>
             <button class="project-tab" type="button" role="tab" id="project-tab-graphics" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="graphics"><span class="project-tab-label">그래픽스</span><span class="project-tab-count" data-project-count></span></button>
-            <button class="project-tab" type="button" role="tab" id="project-tab-learning" aria-controls="project-results" aria-selected="false" tabindex="-1" data-project-category-tab="learning"><span class="project-tab-label">기술 학습</span><span class="project-tab-count" data-project-count></span></button>
           </div>
           <p class="sr-only" role="status" data-project-filter-status></p>
 
           <div class="project-results" id="project-results" role="tabpanel" aria-labelledby="project-tab-featured" tabindex="0">
   <div class="project-grid" data-project-work-grid>
+<article class="project-card" id="learning-overview-card" data-project-category="featured" data-project-featured="0">
+  <div class="project-visual visual-learning-overview" aria-hidden="true">
+    <strong>C++</strong>
+    <span>자료구조 · 알고리즘</span>
+  </div>
+  <div class="project-body">
+    <p class="project-schedule">C++ · DATA STRUCTURES · ALGORITHMS</p>
+    <h3>C++ 자료구조 알고리즘</h3>
+    <p class="project-employment">가상 함수·vtable 분석부터 자료구조와<br />탐색·정렬 알고리즘까지 정리한 학습 기록</p>
+    <ul class="tag-list" aria-label="학습 언어와 주제"><li>C++</li><li>STL</li><li>Algorithms</li></ul>
+    <div class="project-card-actions">
+      <button class="project-detail-button" type="button" data-project-category-open="learning" aria-controls="project-results">카테고리 자세히 보기 <span aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</article>
+
 <article class="project-card" data-project-category="graphics">
               <div class="project-visual project-visual--image">
                 <img src="assets/projects/ue-graphics-cel-outline.png" alt="숲 장면에서 캐릭터에 셀 음영과 외곽선을 적용한 언리얼 실습 화면" width="1216" height="726" loading="lazy" decoding="async" />
@@ -2135,6 +2151,6 @@ Out.vColor.a = saturate(Out.vColor.a * (saturate(fOldViewZ - fViewZ)));</code></
       </div>
     </footer>
 
-    <script src="script.js?v=20261103-04"></script>
+    <script src="script.js?v=20261106-01"></script>
   </body>
 </html>

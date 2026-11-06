@@ -57,7 +57,7 @@ if (projectFilters && projectResults) {
     learningPanel.hidden = !learningSelected;
     if (!learningSelected) {
       const orderedCards = [...workCards].sort((a, b) => category === 'featured'
-        ? (Number(a.dataset.projectFeatured) || Infinity) - (Number(b.dataset.projectFeatured) || Infinity)
+        ? Number(a.dataset.projectFeatured ?? Infinity) - Number(b.dataset.projectFeatured ?? Infinity)
           || originalOrder.get(a) - originalOrder.get(b)
         : originalOrder.get(a) - originalOrder.get(b));
       orderedCards.forEach((card) => workGrid.append(card));
@@ -65,7 +65,7 @@ if (projectFilters && projectResults) {
     projectResults.setAttribute('aria-labelledby', tab.id);
     if (status) {
       const count = countedCards.filter((card) => matchesCategory(card, category)).length;
-      const label = learningSelected ? '기술 학습 기록' : tab.querySelector('.project-tab-label').textContent;
+      const label = tab.querySelector('.project-tab-label').textContent.trim();
       status.textContent = `${label} ${count}개를 표시합니다.`;
     }
   }
@@ -75,6 +75,16 @@ if (projectFilters && projectResults) {
     const count = countedCards.filter((card) => matchesCategory(card, category)).length;
     tab.querySelector('[data-project-count]').textContent = String(count);
     tab.addEventListener('click', () => selectProjectCategory(tab));
+  });
+
+  projectResults.querySelectorAll('[data-project-category-open]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const tab = tabs.find((item) => item.dataset.projectCategoryTab === button.dataset.projectCategoryOpen);
+      if (!tab) return;
+      selectProjectCategory(tab);
+      tab.focus({ preventScroll: true });
+      projectFilters.scrollIntoView({ block: 'start' });
+    });
   });
 
   projectFilters.addEventListener('keydown', (event) => {
