@@ -322,6 +322,74 @@ img { max-width: 100%; }
 .maps div { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1; }
 .maps img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (prefers-reduced-motion: reduce) { .peel-stage img, .stepsfig .frames img { transition: none; } .lane-q.nudge .job, .lane-bar i.run { animation: none; } }
+/* 11-20 보충: 동작 만들기, 3D, 나온 것들 */
+[hidden] { display: none !important; }
+.px { image-rendering: pixelated; image-rendering: crisp-edges; }
+.flow-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); letter-spacing: .04em; margin: 0 0 10px; }
+.flow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; align-items: stretch; }
+.flow + .flow-label { margin-top: 28px; }
+.fstep { margin: 0; position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: grid; grid-template-rows: auto 1fr; gap: 8px; }
+.fstep:not(:last-child)::after { content: "▸"; position: absolute; right: -10px; top: 38%; width: 10px; text-align: center; color: var(--muted); font-size: 0.75rem; }
+.fstep .ph { aspect-ratio: 1; border-radius: 6px; position: relative; overflow: hidden; }
+.fstep .ph img { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); object-fit: contain; display: block; }
+.fstep .ph.cover img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fstep figcaption { display: grid; gap: 2px; align-content: start; }
+.fstep b { font-size: 0.875rem; }
+.fstep span { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.fstep .n { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--stamp); font-weight: 600; }
+.fstep.done { border-color: var(--stamp); }
+.gate { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 12px; }
+@media (max-width: 860px) { .gate { grid-template-columns: repeat(2, 1fr); } }
+.gate div { background: var(--bg); border-radius: 6px; padding: 7px 9px; font-size: 0.75rem; display: grid; gap: 1px; }
+.gate code { font-size: 0.6875rem; color: var(--stamp); font-weight: 600; }
+.player-stage { position: relative; border-radius: 8px; overflow: hidden; display: grid; place-items: center; padding: 10px 0; }
+.player-stage canvas { height: 300px; max-width: 100%; width: auto; display: block; image-rendering: pixelated; }
+.player-stage .lbl { top: 8px; }
+.player-stage .fno { position: absolute; right: 8px; top: 8px; font-family: var(--font-mono); font-size: 0.6875rem; background: var(--ink); color: var(--bg); padding: 1px 7px; border-radius: 4px; }
+.player-ctl { display: grid; grid-template-columns: auto auto auto 1fr; gap: 8px; align-items: center; }
+.player-ctl input[type=range] { width: 100%; accent-color: var(--stamp); }
+.player-ctl .ghost { min-width: 44px; min-height: 36px; }
+.verdicts { display: grid; gap: 6px; font-size: 0.8125rem; }
+.verdicts div { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; padding: 6px 10px; border-radius: 6px; background: var(--bg); }
+.verdicts .st { justify-self: start; }
+.stage3d { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; background: var(--bg); }
+.stage3d img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .5s ease; }
+.stage3d .lbl { top: 8px; }
+.house4 { display: grid; grid-template-columns: 3fr 2fr 2fr 2fr; gap: 8px; align-items: start; }
+@media (max-width: 600px) { .house4 { grid-template-columns: 1fr 1fr; } .house4 figure:first-child { grid-column: 1 / -1; } }
+.house4 figure { margin: 0; display: grid; gap: 4px; }
+.house4 img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #bfbfbf; border-radius: 6px; border: 1px solid var(--line); display: block; }
+.house4 figure:first-child img { aspect-ratio: auto; height: auto; object-fit: contain; }
+.house4 figcaption { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--muted); }
+.picked { position: absolute; right: 6px; top: 6px; background: var(--stamp); color: var(--stamp-ink); font-size: 0.625rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; z-index: 2; }
+.hero-show { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 860px) { .hero-show { grid-template-columns: minmax(0, 1fr); } }
+.hero-stage { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; display: grid; place-items: center; }
+.hero-stage img { max-width: 86%; max-height: 86%; display: block; }
+.hero-stage .lbl { top: 8px; }
+.cast { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 24px; }
+@media (max-width: 900px) { .cast { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 520px) { .cast { grid-template-columns: repeat(3, 1fr); } }
+.cast figure { margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; background: var(--surface); }
+.cast .ph { aspect-ratio: 3/4; position: relative; }
+.cast .ph img { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); object-fit: contain; }
+.cast figcaption { padding: 5px 8px; font-size: 0.6875rem; line-height: 1.4; color: var(--muted); border-top: 1px solid var(--line); }
+.cast figcaption b { display: block; color: var(--ink); font-size: 0.75rem; }
+.sets-stage { border-radius: 8px; overflow: hidden; background: var(--bg); display: grid; place-items: center; }
+.sets-stage img { width: auto; max-width: 100%; height: auto; max-height: 680px; display: block; }
+.dot-animation-open { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; padding: 0; border: 0; border-radius: inherit; background: transparent; cursor: zoom-in; }
+.dot-animation-open:focus-visible { outline: 3px solid var(--stamp); outline-offset: -4px; }
+.dot-animation-hint { margin: 8px 0 0; color: var(--muted); font-size: .8125rem; }
+.dot-animation-dialog { width: min(880px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); overflow: auto; }
+.dot-animation-dialog::backdrop { background: rgb(0 0 0 / 78%); }
+.dot-animation-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.dot-animation-header h2 { margin: 0; font-size: 1rem; }
+.dot-animation-close { min-width: 44px; min-height: 44px; }
+.dot-animation-stage { display: grid; place-items: center; height: min(72dvh, 720px); padding: 20px; box-sizing: border-box; }
+.dot-animation-stage img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; image-rendering: pixelated; }
+.fstep .ph { background-color: var(--tape); }
+@media (prefers-reduced-motion: reduce) { .peel-stage img, .stepsfig .frames img { transition: none; } .lane-q.nudge .job, .lane-bar i.run { animation: none; } }
+
 </style>
 </head>
 <body>
@@ -679,9 +747,186 @@ img { max-width: 100%; }
   </div>
 </section>
 
+<section class="chapter" id="motion">
+  <div class="ch-head">
+    <div class="ch-num"><b>07</b>동작 만들기</div>
+    <div>
+      <h2>정지 그림 한 장을 영상으로 움직이고, 다시 도트로 되돌립니다.</h2>
+      <p class="muted">뼈대로 움직이기 어려운 털, 옷자락, 숨쉬기는 내 GPU의 영상 모델이 그립니다. Asset Studio는 그 영상을 정지 그림과 같은 키, 같은 색, 같은 눈으로 되돌리고, 열네 가지를 검사한 뒤에만 사람에게 보여 줍니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <p class="flow-label">인물 하나를 세우기 · 엄마</p>
+    <div class="flow" aria-label="인물 하나를 세우는 순서">
+      <figure class="fstep"><div class="ph checker"><img src="img/v2/mom_ref.webp" alt="학습한 그림체로 뽑은 엄마의 원화"></div><figcaption><span class="n">1 · 원화</span><b>학습한 그림체로 뽑기</b><span>내 LoRA로 종, 옷, 성격을 적어 뽑습니다.</span></figcaption></figure>
+      <figure class="fstep"><div class="ph checker"><img src="img/v2/mom_flat.webp" alt="평면 그림으로 다시 그린 엄마"></div><figcaption><span class="n">2 · 평면 그림</span><b>셀 애니메이션풍으로</b><span>주인공 그림을 기준으로 선과 면을 평평하게 다시 그립니다. 이 단계만 Codex 그림 생성을 씁니다.</span></figcaption></figure>
+      <figure class="fstep done"><div class="ph checker"><img class="px" src="img/v2/mom_px.webp" alt="엄마의 도트 정지 그림"></div><figcaption><span class="n">3 · 도트 정지 그림</span><b>정한 키, 정한 색</b><span>크기표의 키로 줄이고, 눈동자의 흰 점 자리를 기록합니다.</span></figcaption></figure>
+    </div>
+    <p class="flow-label">동작 하나를 만들기 · 무쇠 서 있기(숨쉬기)</p>
+    <div class="flow" aria-label="동작 하나를 만드는 순서">
+      <figure class="fstep"><div class="ph checker"><img src="img/v2/wf_start.webp" alt="영상에 넣는 무쇠의 서 있는 그림"></div><figcaption><span class="n">1 · 시작 그림</span><b>정지 그림 그대로</b><span>도구나 다른 자세가 필요한 동작만 시작 자세를 따로 그립니다.</span></figcaption></figure>
+      <figure class="fstep"><div class="ph checker"><img src="img/v2/wf_video.webp" alt="영상 모델이 만든 무쇠의 숨쉬기 영상"></div><figcaption><span class="n">2 · 영상</span><b>Wan 2.2 · 49프레임</b><span>내 GPU에서 한 편에 약 90초. 시드 두 개로 두 편을 뽑습니다.</span></figcaption></figure>
+      <figure class="fstep"><div class="ph checker"><img src="img/v2/wf_rgba.webp" alt="배경을 지운 프레임"></div><figcaption><span class="n">3 · 배경 지우기</span><b>투명 배경</b><span>가장자리에 남은 배경색까지 걷어 냅니다.</span></figcaption></figure>
+      <figure class="fstep"><div class="ph checker"><img class="px" src="img/v2/wf_pxraw.webp" alt="도트로 바꾼 프레임"></div><figcaption><span class="n">4 · 도트로</span><b>정지 그림의 팔레트</b><span>정지 그림에 쓴 색만으로 프레임마다 다시 찍습니다.</span></figcaption></figure>
+      <figure class="fstep done"><div class="ph checker"><img class="px" src="img/v2/musoe_idle.webp" alt="다듬은 무쇠의 숨쉬기 도트 동작"></div><figcaption><span class="n">5 · 다듬기</span><b>발, 머리, 숨</b><span>발과 두 손, 머리는 멈추고 몸통만 숨을 쉬게 합니다. 얼굴 톤과 흰 점, 다문 입은 정지 그림에 맞춥니다.</span></figcaption></figure>
+    </div>
+
+    <div class="show">
+      <figure id="playerfig">
+        <div class="player-stage checker">
+          <canvas id="plCv" width="228" height="292" role="img" aria-label="무쇠 서 있기 프레임"></canvas>
+          <span class="lbl">검수 화면 · 무쇠 서 있기</span>
+          <span class="fno" id="plNo">0 / 47</span>
+        </div>
+        <div class="player-ctl">
+          <button class="ghost" type="button" id="plPrev" aria-label="이전 프레임">◂</button>
+          <button class="ghost" type="button" id="plPlay">멈춤</button>
+          <button class="ghost" type="button" id="plNext" aria-label="다음 프레임">▸</button>
+          <input type="range" id="plRange" min="0" max="47" value="0" aria-label="프레임 위치">
+        </div>
+        <figcaption><b>프레임 재생기</b> · 사람이 보는 검수 화면은 동작을 영상이 아니라 프레임으로 보여 줍니다. 멈추고, 한 장씩 넘기고, 번호로 "31번에서 눈이 사라진다"라고 적을 수 있습니다.</figcaption>
+      </figure>
+      <div class="review-list">
+        <div><h3>열네 가지를 통과해야 사람에게 갑니다.</h3><p>도구가 먼저 재고, Claude가 모든 프레임을 확대해서 한 장씩 본 뒤 항목마다 통과나 흠을 적습니다. 한 항목이라도 흠이면 사람의 화면에 올라가지 않습니다.</p></div>
+        <div class="verdicts">
+          <div><span class="st ok">통과</span><span>14항목 모두 통과. 검수 화면에 올라갑니다.</span></div>
+          <div><span class="st w">다시</span><span>시드를 바꿔 두 번 더 뽑습니다. 그래도 안 되면 끝 자세 그림을 마지막 프레임으로 줍니다.</span></div>
+          <div><span class="st g">보류</span><span>세 번 모두 안 되면 사람이 정할 것으로 넘기고, 올리지 않았다고 적습니다.</span></div>
+        </div>
+        <div><h3>사람이 한 말은 규칙이 됩니다.</h3><p>"발바닥이 출렁인다", "입을 왜 자꾸 벌리냐" 같은 지적이 두 번 나오면 검사 항목에 한 줄이 늘고, 그 뒤로 만드는 모든 동작에 적용됩니다.</p></div>
+      </div>
+    </div>
+    <div class="gate" aria-label="동작 검사 열네 항목">
+      <div><code>1</code>위치 · 발 고정</div><div><code>2</code>튀는 도트</div><div><code>3</code>색과 톤</div><div><code>4</code>눈과 흰 점</div><div><code>5</code>다문 입</div><div><code>6</code>서 있기의 숨</div><div><code>7</code>모자·끈·뿔</div>
+      <div><code>8</code>생기거나 사라짐</div><div><code>9</code>보는 방향</div><div><code>10</code>동작의 쓰임</div><div><code>11</code>도구 쥔 손</div><div><code>12</code>얼굴</div><div><code>13</code>무슨 동작인가</div><div><code>14</code>인물 전체 일관</div>
+    </div>
+    <div class="spec">
+      <div><b>49</b><span>프레임 · 초당 24장</span></div>
+      <div><b>~90초</b><span>영상 한 편 · RTX 4080</span></div>
+      <div><b>14</b><span>사람에게 가기 전 검사</span></div>
+      <div><b>113</b><span>통과한 동작 · 11월 20일</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="made">
+  <div class="ch-head">
+    <div class="ch-num"><b>08</b>나온 도트</div>
+    <div>
+      <h2>첫 프로젝트에서 실제로 나온 도트입니다.</h2>
+      <p class="muted">PACKOON 한 게임에서 이번 달에 나온 도트 가운데 검사를 통과한 것만 골랐습니다. "★ 사람이 고른 것"은 검수에서 사람이 마음에 든다고 한 것입니다.</p>
+      <p class="dot-animation-hint">애니메이션을 누르면 크게 볼 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="hero-show">
+      <figure class="fig" style="margin:0">
+        <div class="hero-stage checker"><span class="picked" id="heroPicked">★ 사람이 고른 것</span><img class="px" id="heroImg" src="img/v2/hero_idle.webp" alt="주인공 서 있기"><span class="lbl" id="heroLbl">주인공 · 서 있기(숨쉬기)</span></div>
+        <div class="ptabs" id="heroTabs">
+          <button type="button" aria-pressed="true" data-src="hero_idle" data-name="서 있기(숨쉬기)" data-pick="1">서 있기</button>
+          <button type="button" data-src="hero_walk" data-name="걷기" data-pick="1">걷기</button>
+          <button type="button" data-src="hero_jump" data-name="점프">점프</button>
+          <button type="button" data-src="hero_dig" data-name="캐기">캐기</button>
+          <button type="button" data-src="hero_pickup" data-name="줍기">줍기</button>
+          <button type="button" data-src="hero_carry" data-name="짐 지기">짐 지기</button>
+          <button type="button" data-src="hero_jige_walk" data-name="지게 지고 걷기">지게 걷기</button>
+          <button type="button" data-src="hero_seolpi_walk" data-name="설피 신고 걷기">설피 걷기</button>
+          <button type="button" data-src="hero_knot" data-name="매듭 묶기">매듭</button>
+        </div>
+        <figcaption><b>주인공 동작</b> · 키 120점의 도트입니다. 서 있기는 머리와 발을 멈추고 몸통만 숨을 쉽니다. 모든 동작에서 얼굴 톤, 다문 입, 볼의 모자끈이 같습니다.</figcaption>
+      </figure>
+      <div class="review-list">
+        <div><h3>한 인물은 끝까지 같은 얼굴입니다.</h3><p>동작마다 영상을 새로 뽑지만, 눈의 모양과 흰 점, 입, 톤은 정지 그림 하나에 맞춥니다. 한 동작에서 고친 규칙은 그 인물의 다른 동작에도 그대로 씁니다.</p></div>
+        <div><h3>서 있기는 인사가 아닙니다.</h3><p>영상 모델은 서 있으라고 하면 자꾸 고개를 숙입니다. 그래서 목 위는 한 덩어리로만 1점 오르내리게 하고, 두 손과 발은 멈추게 합니다.</p></div>
+        <div><h3>도구는 게임이 쥐여 줄 수도 있습니다.</h3><p>낫처럼 여러 인물이 같은 모양으로 들어야 하는 도구는 동작 안에 그리지 않습니다. 영상에서는 초록 막대를 쥐게 하고 변환에서 지운 뒤, 프레임마다 손의 자리와 방향만 기록해 게임이 같은 낫 그림을 덧씌웁니다.</p></div>
+      </div>
+    </div>
+
+    <div class="cast" aria-label="다른 인물들의 동작">
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_mom_laundry.webp" alt=""></div><figcaption><b>엄마</b>봄 마당 빨래</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_dad_knot.webp" alt=""></div><figcaption><b>아빠</b>매듭 묶었다 풀기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_morak.webp" alt=""></div><figcaption><b>모락</b>호탕하게 부채질</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_toad.webp" alt=""></div><figcaption><b>두꺼비 할멈</b>약탕관 곁에 앉음</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_yeotbang.webp" alt=""></div><figcaption><b>엿방울</b>가위 장단</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_whitebrow.webp" alt=""></div><figcaption><b>흰눈썹 노인</b>바둑 두기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_old_otter.webp" alt=""></div><figcaption><b>늙은 수달</b>겨울 낚시</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_magpie.webp" alt=""></div><figcaption><b>늙은 까치</b>약보자기 들고 낢</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_brother.webp" alt=""></div><figcaption><b>다람쥐 형제</b>다툼</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_kkubeogi.webp" alt=""></div><figcaption><b>꾸벅이</b>졸음</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_mole.webp" alt=""></div><figcaption><b>꼬마 두더지</b>반짝돌 굴림</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_caravan.webp" alt=""></div><figcaption><b>상단 보부상</b>짐 지고 행렬 걷기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_haengsu.webp" alt=""></div><figcaption><b>말뚝 행수</b>서 있기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_eolle.webp" alt=""></div><figcaption><b>얼레</b>서 있기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_chick.webp" alt=""></div><figcaption><b>꺼병이</b>달려감</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_hero_otter.webp" alt=""></div><figcaption><b>변신 · 수달</b>걷기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_hero_goat.webp" alt=""></div><figcaption><b>변신 · 염소</b>걷기</figcaption></figure>
+      <figure><div class="ph checker"><img class="px" src="img/v2/npc_hero_squirrel.webp" alt=""></div><figcaption><b>변신 · 다람쥐</b>이동</figcaption></figure>
+    </div>
+    <p class="caption">54명의 인물에서 통과한 동작 101개 가운데 18개입니다. 모두 같은 순서(자세 그림, 영상, 배경 지우기, 도트, 다듬기, 14항목 검사)를 거쳤습니다.</p>
+
+    <figure class="fig" id="setsfig" style="margin-top:28px">
+      <div class="ptabs" id="setTabs">
+        <button type="button" aria-pressed="true" data-src="portraits" data-cap="대화창에 쓰는 도트 초상입니다. 인물마다 표정을 네 가지까지 같은 얼굴로 맞췄습니다.">대화 초상</button>
+        <button type="button" data-src="transforms" data-cap="같은 인물의 다른 모습(겨울옷, 짐을 진 모습, 둔갑한 모습)입니다. 옷이나 모습이 바뀌어도 얼굴과 색은 그대로 둡니다.">변형 도트</button>
+        <button type="button" data-src="notebook" data-cap="게임 속 수첩에 붙는 인물 그림입니다. 수첩 종이에 손으로 그린 듯한 한 벌로 맞췄습니다.">수첩 그림</button>
+        <button type="button" data-src="musoe_fist" data-cap="전투 화면에 나오는 1인칭 손 가운데 무쇠의 주먹입니다. 손목을 감은 천과 오소리의 굵은 털, 발톱 하나가 보입니다.">1인칭 손 · 무쇠 주먹</button>
+      </div>
+      <div class="sets-stage"><img id="setImg" src="img/v2/portraits.webp" alt="대화 초상"></div>
+      <figcaption id="setCap">대화창에 쓰는 도트 초상입니다. 인물마다 표정을 네 가지까지 같은 얼굴로 맞췄습니다.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter" id="to3d">
+  <div class="ch-head">
+    <div class="ch-num"><b>09</b>3D로 옮기기</div>
+    <div>
+      <h2>원화를 3D로 옮기고, 빛과 색은 게임 엔진 안에서 맞춥니다.</h2>
+      <p class="muted">3D 모델은 원화 한 장에서 시작합니다. 받은 모델에는 생성할 때의 햇빛이 구워져 있어서, 그대로 쓰면 게임의 노을과 밤에서 한쪽만 밝게 보입니다. Asset Studio는 그 빛을 고르게 펴고, 게임 엔진에서 낮·노을·밤으로 비춰 본 뒤 확정합니다.</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="house4" aria-label="원화에서 게임까지 같은 집">
+      <figure><img src="img/v2/home_concept.webp" alt="초가집 원화"><figcaption>1 · 원화</figcaption></figure>
+      <figure><div style="position:relative"><span class="picked">★ 사람이 고른 것</span><img src="img/v2/home_front.webp" alt="3D로 옮긴 초가집 앞면"></div><figcaption>2 · 3D 모델(앞)</figcaption></figure>
+      <figure><img src="img/v2/home_game.webp" alt="게임 카메라로 본 초가집"><figcaption>3 · 게임 카메라</figcaption></figure>
+      <figure><img src="img/v2/home_grey.webp" alt="색을 뺀 초가집 모양"><figcaption>4 · 색을 뺀 모양 검사</figcaption></figure>
+    </div>
+    <p class="caption">사람이 Tripo 웹에서 만든 집(크레딧은 사람이 누를 때만 나갑니다)을 받아 면 수를 정하고, 앞면을 게임의 앞쪽으로 돌리고, 구워진 햇빛을 방향별로 골랐습니다. 옆과 뒤 지붕의 밝기가 앞면의 14~21%에서 62~77%로 올라왔습니다. 소품은 내 GPU의 TRELLIS로 같은 순서를 거칩니다.</p>
+    <div class="show">
+      <figure class="wide" id="lightfig3d">
+        <div class="stage3d" id="stage3d">
+          <img src="img/v2/g3_bld_day_1_front.webp" alt="낮의 초가집" data-k="day">
+          <img src="img/v2/g3_bld_dusk_1_front.webp" alt="노을의 초가집" data-k="dusk" style="opacity:0">
+          <img src="img/v2/g3_bld_night_1_front.webp" alt="밤의 초가집" data-k="night" style="opacity:0">
+          <span class="lbl">Godot · 게임 조명</span>
+        </div>
+        <div class="ptabs" id="tabs3d">
+          <button type="button" aria-pressed="true" data-k="day">낮</button>
+          <button type="button" data-k="dusk">노을</button>
+          <button type="button" data-k="night">밤</button>
+        </div>
+        <figcaption><b>같은 모델, 세 가지 빛</b> · 게임 엔진의 조명만 바꾼 장면입니다. 구워진 햇빛을 걷어 냈기 때문에 노을과 밤에도 지붕의 한쪽만 튀지 않습니다.</figcaption>
+      </figure>
+      <figure>
+        <div class="stage3d"><span class="picked">★ 사람이 고른 것</span><img src="img/v2/g3_ab_dusk_near_l.webp" alt="장작더미와 그루터기의 색 보정 전후"><span class="lbl" style="top:auto; bottom:8px">왼쪽 보정 전 · 오른쪽 색만 맞춤</span></div>
+        <figcaption><b>색 보정</b> · 장작더미와 그루터기를 집의 색에 맞춘 비교입니다. 모양은 그대로 두고 색만 집과 같은 계열로 옮깁니다.</figcaption>
+      </figure>
+      <figure>
+        <div class="stage3d"><img src="img/v2/g3_room_dusk_front_1.webp" alt="문이 열린 집 안에 이불이 보이는 노을 장면"><span class="lbl">문을 열면 방이 보이는 집</span></div>
+        <figcaption><b>들어갈 수 있는 집</b> · 문을 열면 방 안이 보이도록 만든 집입니다. 노을빛에서도 방 안의 이불과 벽지 색이 그대로 읽힙니다.</figcaption>
+      </figure>
+      <figure class="wide">
+        <div class="stage3d"><img src="img/v2/g3_bb_home_0.webp" alt="3D 마을 길 위에 선 너구리 주인공"><span class="lbl">3D 마을에 주인공을 세워 크기를 맞춤</span></div>
+        <figcaption><b>게임 안에서 맞춰 보기</b> · 3D 마을 위에 주인공을 세워 집, 장독, 길의 크기가 주인공에게 맞는지 봅니다.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <section class="chapter" id="order">
   <div class="ch-head">
-    <div class="ch-num"><b>07</b>주문과 확정</div>
+    <div class="ch-num"><b>10</b>주문과 확정</div>
     <div>
       <h2>에이전트는 키로 주문하고, 사람이 확정하고, 게임은 매니페스트만 읽습니다.</h2>
       <p class="muted">두 Claude(게임 쪽, Asset Studio 쪽)와 사람이 같은 에셋을 가리키게 하는 규칙입니다.</p>
@@ -698,7 +943,7 @@ img { max-width: 100%; }
 
 <section class="chapter" id="caps">
   <div class="ch-head">
-    <div class="ch-num"><b>08</b>만들 수 있는 것</div>
+    <div class="ch-num"><b>11</b>만들 수 있는 것</div>
     <div>
       <h2>게임이 무엇을 쓸지는 게임이 정하고, 어떤 모양이든 만들어낼 수 있게 했습니다.</h2>
       <p class="muted">구역이 화면 몇 장인지, 레이어가 몇 겹인지는 주문에 담깁니다. Asset Studio는 그 값을 받아 만드는 능력만 갖춥니다.</p>
@@ -768,7 +1013,7 @@ img { max-width: 100%; }
 
 <section class="chapter" id="roles">
   <div class="ch-head">
-    <div class="ch-num"><b>09</b>역할 나누기</div>
+    <div class="ch-num"><b>12</b>역할 나누기</div>
     <div>
       <h2>Claude는 손이 많은 일을, 사람은 눈이 필요한 일을 합니다.</h2>
       <p class="muted">Claude는 두 군데서 일합니다. 화면 안에서는 프롬프트·캡션·추천을 쓰고, 밖에서는 Claude CLI가 같은 기능을 MCP로 씁니다. 모든 행동은 누가 했는지 기록됩니다.</p>
@@ -802,7 +1047,7 @@ img { max-width: 100%; }
 
 <section class="chapter" id="start">
   <div class="ch-head">
-    <div class="ch-num"><b>10</b>시작하기</div>
+    <div class="ch-num"><b>13</b>시작하기</div>
     <div>
       <h2>내 PC 한 대에 설치하고, 원본 두 장으로 시작합니다.</h2>
       <p class="muted">설치는 Claude Code가 하고, 사람은 그림체의 기준이 될 원본을 고릅니다. 그다음부터는 주문하고 확정하는 일만 남습니다.</p>
@@ -1025,6 +1270,125 @@ img { max-width: 100%; }
     }
     d.onload = ready; n.onload = ready; d.src = 'img/raccoon.webp'; n.src = 'img/raccoon_n.webp';
   })();
+})();
+</script>
+<script>
+
+/* 11-20 보충: 프레임 재생기, 주인공 동작, 3D 빛, 그림 모음 */
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function press(tabs, b){ tabs.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); }
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 프레임 재생기: 49프레임 시트(가로 10장)
+  (function(){
+    var cv = $('plCv'); if (!cv) return;
+    var ctx = cv.getContext('2d'), sheet = new Image(), FW = 114, FH = 146, COLS = 10, N = 48, f = 0, timer = null;
+    var no = $('plNo'), range = $('plRange'), play = $('plPlay');
+    function draw(){
+      ctx.imageSmoothingEnabled = false; ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.drawImage(sheet, (f % COLS) * FW, Math.floor(f / COLS) * FH, FW, FH, 0, 0, cv.width, cv.height);
+      no.textContent = f + ' / ' + (N - 1); range.value = f;
+    }
+    function stop(){ if (timer) { clearInterval(timer); timer = null; } play.textContent = '재생'; }
+    function start(){ if (timer) return; timer = setInterval(function(){ f = (f + 1) % N; draw(); }, 1000 / 24); play.textContent = '멈춤'; }
+    sheet.onload = function(){
+      draw();
+      if (still) stop();
+      var user = false;
+      if (!still && 'IntersectionObserver' in window) new IntersectionObserver(function(es){ if (user) return; if (es[0].isIntersecting) start(); else stop(); }, { threshold: 0.35 }).observe($('playerfig'));
+      play.addEventListener('click', function(){ user = true; if (timer) stop(); else start(); });
+      $('plPrev').addEventListener('click', function(){ user = true; stop(); f = (f + N - 1) % N; draw(); });
+      $('plNext').addEventListener('click', function(){ user = true; stop(); f = (f + 1) % N; draw(); });
+      range.addEventListener('input', function(){ user = true; stop(); f = +range.value; draw(); });
+    };
+    stop();
+    sheet.src = 'img/v2/player_musoe.png';
+  })();
+
+  // 주인공 동작 탭
+  (function(){
+    var t = $('heroTabs'); if (!t) return;
+    t.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return; press(t, b);
+      var m = $('heroImg'); m.src = 'img/v2/' + b.dataset.src + '.webp'; m.alt = '주인공 ' + b.dataset.name;
+      $('heroLbl').textContent = '주인공 · ' + b.dataset.name;
+      $('heroPicked').hidden = !b.dataset.pick;
+    });
+  })();
+
+  // 3D 빛 바꾸기
+  (function(){
+    var t = $('tabs3d'), stage = $('stage3d'); if (!t) return;
+    t.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return; press(t, b);
+      stage.querySelectorAll('img').forEach(function(m){ m.style.opacity = m.dataset.k === b.dataset.k ? '1' : '0'; });
+    });
+  })();
+
+  // 그림 모음 탭
+  (function(){
+    var t = $('setTabs'); if (!t) return;
+    t.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return; press(t, b);
+      var m = $('setImg'); m.src = 'img/v2/' + b.dataset.src + '.webp'; m.alt = b.textContent;
+      $('setCap').textContent = b.dataset.cap;
+    });
+  })();
+})();
+
+</script>
+<dialog class="dot-animation-dialog" id="dot-animation-dialog" aria-labelledby="dot-animation-title">
+  <header class="dot-animation-header">
+    <h2 id="dot-animation-title">도트 애니메이션</h2>
+    <button class="ghost dot-animation-close" type="button" aria-label="도트 애니메이션 확대 닫기" autofocus>닫기 ×</button>
+  </header>
+  <div class="dot-animation-stage checker"><img id="dot-animation-image" alt=""></div>
+</dialog>
+<script>
+(function(){
+  var dialog = document.getElementById('dot-animation-dialog');
+  var image = document.getElementById('dot-animation-image');
+  var title = document.getElementById('dot-animation-title');
+  var trigger, previousOverflow;
+  document.querySelectorAll('#made .hero-stage, #made .cast .ph').forEach(function(stage){
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'dot-animation-open';
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.setAttribute('aria-controls', dialog.id);
+    function label(){
+      if (stage.classList.contains('hero-stage')) return document.getElementById('heroLbl').textContent;
+      var caption = stage.closest('figure').querySelector('figcaption');
+      var name = caption.querySelector('b').textContent;
+      return name + ' · ' + caption.textContent.slice(name.length).trim();
+    }
+    button.setAttribute('aria-label', label() + ' 크게 보기');
+    button.addEventListener('click', function(){
+      trigger = button;
+      title.textContent = label();
+      image.alt = label();
+      image.src = stage.querySelector('img').currentSrc || stage.querySelector('img').src;
+      previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      dialog.showModal();
+    });
+    stage.appendChild(button);
+  });
+  document.getElementById('heroTabs').addEventListener('click', function(){
+    document.querySelector('#made .hero-stage .dot-animation-open').setAttribute('aria-label', document.getElementById('heroLbl').textContent + ' 크게 보기');
+  });
+  dialog.querySelector('.dot-animation-close').addEventListener('click', function(){ dialog.close(); });
+  dialog.addEventListener('click', function(event){
+    if (event.target !== dialog) return;
+    var rect = dialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+  });
+  dialog.addEventListener('close', function(){
+    document.body.style.overflow = previousOverflow;
+    image.removeAttribute('src');
+    if (trigger) trigger.focus({ preventScroll: true });
+  });
 })();
 </script>
 </body>
